@@ -8,7 +8,7 @@ const { Result } = require('express-validator');
 
 let userModel = {};
 
-//ListDomiciliarys   - obtenemos lista de usuarios segun el rol
+//ListUsers  - obtenemos lista de usuarios segun el rol
 userModel.getUsersRole = (role,callback) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
@@ -34,7 +34,7 @@ userModel.getUsersRole = (role,callback) => {
 })
 };
 
-//ListDomiciliary
+//List Usuario por id
 userModel.getUser = (iduser) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
@@ -74,6 +74,63 @@ userModel.createUser = (userData, callback) => {
                     } else {
                         resolve({
                             'result': resut
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+//LoginUser
+userModel.loginUser = (userData, callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'SELECT * FROM users where `id`=? AND `password`=? AND email=?', [
+                    userData.id,                   
+                    userData.password,
+                    userData.email
+                ],
+                (err, resut) => {                    
+                    if (resut && Object.entries(resut).length != 0)  {
+                        resolve({
+                            'result': resut
+                        })
+                    } else{
+                        resolve({
+                            'error': err
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+//GloginUser
+userModel.GloginUser = (userData, callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'SELECT * FROM users where `id`=? AND email=?', [
+                    userData.id,       
+                    userData.email
+                ],
+                (err, resut) => {                    
+                    if (resut && Object.entries(resut).length != 0)  {
+                        resolve({
+                            'result': resut
+                        })
+                    } else{
+                        resolve({
+                            'error': err
                         })
                     }
 

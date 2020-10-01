@@ -11,7 +11,7 @@ router.get('/doc',(req,res)=>{
 
 router.get('/test',(req,res)=>{
     console.log(req.body);
-    res.send({'string':'Anailys','number':1,'boolean':true});
+    res.send({'string':'Anailys','proyecto':'TAKAS','number':1,'boolean':true});
 })
 
 module.exports = router; 

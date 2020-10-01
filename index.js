@@ -1,8 +1,4 @@
 const express = require('express');
-//const config = require('src/config/config');
-//config = require('./src/config/config');
-
-
 const morgan = require('morgan');
  const path = require('path');
 
@@ -24,19 +20,6 @@ const port = 1111;
 
 //initialization
 const app = express();
-
-
-
-///AUTENTICACION JWT
-
-// //1
-// app.set('llave', config.llave);
-// // 2
-// app.use(bodyParser.urlencoded({ extended: true }));
-// // 3
-// app.use(bodyParser.json());
-
-
 
 //settings
  app.set('port', process.env.PORT || port);
@@ -60,7 +43,7 @@ app.use(express.json());
  app.use('/user',require('./src/routes/user/usersroutes'));
 
 
-//Public
+////Public
 app.use(express.static(path.join(__dirname,'doc')))
 
 
