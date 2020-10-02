@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "apidoc": {
     "title": "Custom apiDoc browser title",
-    "url": "https://api.github.com/v1"
+    "url": "https://takas-291016.ue.r.appspot.com"
+  },
+  "engines": {
+    "node": "12.x.x"
   },
   "main": "index.js",
   "scripts": {
