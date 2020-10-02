@@ -47,11 +47,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AmagicSoft/merkarapid.git"
+    "url": "git+https://github.com/AmagicSoft/takas.git"
   },
   "bugs": {
-    "url": "https://github.com/AmagicSoft/merkarapid/issues"
+    "url": "https://github.com/AmagicSoft/takas/issues"
   },
-  "homepage": "https://github.com/AmagicSoft/merkarapid#readme",
+  "homepage": "https://github.com/AmagicSoft/takas#readme",
   "description": ""
 }
