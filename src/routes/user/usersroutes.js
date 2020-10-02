@@ -198,7 +198,70 @@ router.post('/gautenticar', [
     return res.status(response.data.status).json(response.data)
 
 })
+/**
+ * @api {post} /user/LisTypePublication 1 LisTypePublication
+ * @apiName LisTypePublication - Listar Categorias filtrado por tipo de publicación
+ * @apiGroup TypePublication
+ * 
+ *
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ *
+ * @apiSuccess {boolean} success of the TypePublication.
+ * @apiSuccess {int} status 200 of the TypePublication.
+ * @apiSuccess {string} msg   of the TypePublication.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "name": "Takastear",
+            "description": "Publicar Productos",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "name": "ServiTakastear",
+            "description": "Publicar Servicios",
+            "status": 1
+        },
+        {
+            "id": 3,
+            "name": "SubasTakear",
+            "description": "Publicar Subastas",
+            "status": 1
+        }
+    ],
+    "msg": "Lista de Tipo de Publicación"
+}
+ *
+ * @apiError UserNotFound The id of the Category was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar Categoría"
+}
+ */
+router.get('/listypepublication', rutasProtegidas, async (req, res) => {
 
+
+    let response = await userController.LisTypePublication();
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 /**
  * @api {post} /user/listcategory 1 listcategory
@@ -209,8 +272,7 @@ router.post('/gautenticar', [
  * @apiHeaderExample {varchar} access-token:
  *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
  *
- * @apiParam {smallint}  typepublicCategory  required.
- 
+ * @apiParam {smallint}  typepublicCategory  required. 
  *
  * @apiSuccess {boolean} success of the Category.
  * @apiSuccess {int} status 200 of the Category.
@@ -224,24 +286,64 @@ router.post('/gautenticar', [
     "data": [
         {
             "id": 1,
-            "name": "Bebés",
-            "description": null,
-            "typepublication": 1,
-            "iconurl": "https://n9.cl/c1z78"
+            "namec": "Bebés",
+            "iconc": "https://n9.cl/c1z78",
+            "SubCategory": [
+                {
+                    "idsc": 1,
+                    "name": "Ropa de bebes",
+                    "icon": "",
+                    "category": 1,
+                    "status": 1
+                }
+            ]
         },
         {
             "id": 2,
-            "name": "Arte",
-            "description": null,
-            "typepublication": 1,
-            "iconurl": "https://n9.cl/pbmd1"
+            "namec": "Arte",
+            "iconc": "https://n9.cl/pbmd1",
+            "SubCategory": []
         },
         {
             "id": 3,
-            "name": "Música",
-            "description": null,
-            "typepublication": 1,
-            "iconurl": "https://n9.cl/hgan"
+            "namec": "Música",
+            "iconc": "https://n9.cl/hgan",
+            "SubCategory": []
+        },
+        {
+            "id": 4,
+            "namec": "indefinidas",
+            "iconc": null,
+            "SubCategory": [
+                {
+                    "idsc": 2,
+                    "name": "Accesorios para Vehículos",
+                    "icon": "wheel",
+                    "category": 4,
+                    "status": 1
+                },
+                {
+                    "idsc": 3,
+                    "name": "Vehículos",
+                    "icon": "car",
+                    "category": 4,
+                    "status": 1
+                },
+                {
+                    "idsc": 4,
+                    "name": "Alimentos y Bebidas",
+                    "icon": "eat",
+                    "category": 4,
+                    "status": 1
+                },
+                {
+                    "idsc": 5,
+                    "name": "Mascotas",
+                    "icon": "dog",
+                    "category": 4,
+                    "status": 1
+                }
+            ]
         }
     ],
     "msg": "Lista de Categoría"

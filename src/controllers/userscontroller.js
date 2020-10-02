@@ -1,18 +1,19 @@
 //models
 const User = require('../models/users.js');
 const MasterCategory = require('../models/mastercategory.js');
+const MasterTypePublication = require('../models/mastertypepublication.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const sha1    = require ( 'sha1' ) ; 
+const sha1 = require('sha1');
 
 
 
-let userController = {}; 
+let userController = {};
 
 //newUser - REGISTRAR USUARIO
-userController.newUser= async (req) => {
+userController.newUser = async (req) => {
     //existe este usuario? 
     try {
         const userData = {
@@ -23,7 +24,7 @@ userController.newUser= async (req) => {
             imgurl: req.urlimgUser,
             role: 2,
             password: sha1(req.passwordUser),
-            tyc:req.tycUser
+            tyc: req.tycUser
         };
         ///console.log(userData.password);
         let response = await User.createUser(userData);
@@ -67,12 +68,12 @@ userController.Autenticar = async (req) => {
             role: 2
         };
         //console.log(userData.password);
-        let response = await User.loginUser(userData,1);
+        let response = await User.loginUser(userData, 1);
 
         let data = {};
         if (response && response.result) {
-            let r={};
-            r=response.result;
+            let r = {};
+            r = response.result;
 
             const payload = {
                 ignoreExpiration: true
@@ -114,12 +115,12 @@ userController.GAutenticar = async (req) => {
             email: req.emailUser
         };
         //console.log(userData.password);
-        let response = await User.GloginUser(userData,1);
+        let response = await User.GloginUser(userData, 1);
 
         let data = {};
         if (response && response.result) {
-            let r={};
-            r=response.result;
+            let r = {};
+            r = response.result;
 
             const payload = {
                 ignoreExpiration: true
@@ -152,6 +153,46 @@ userController.GAutenticar = async (req) => {
 
 };
 
+//Listar Categorías según publicación 
+userController.LisTypePublication = async () => {
+    //existe este usuario? 
+    try {
+
+        //console.log(userData.password);
+        let response = await MasterTypePublication.LisTypePublication();
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Tipo de Publicación'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Tipo de Publicación'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 //Listar Categorías según publicación 
@@ -162,12 +203,14 @@ userController.ListCategory = async (req) => {
             typepublication: req.typepublicCategory
         };
         //console.log(userData.password);
-        let response = await MasterCategory.ListCategory(userData,1);
+        let response = await MasterCategory.ListCategory(userData);
+
+        console.log(response);
 
         let data = {};
         if (response && response.result) {
-            let r={};
-            r=response.result;
+            let r = {};
+            r = response.result;
 
             data = {
                 success: true,
