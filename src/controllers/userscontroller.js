@@ -4,6 +4,8 @@ const MasterCategory = require('../models/mastercategory.js');
 const MasterTypePublication = require('../models/mastertypepublication.js');
 const MasterTypePreferences = require('../models/masterpreferences.js');
 const MasterMoney = require('../models/mastermoney.js');
+const MasterSubCategory = require('../models/mastersubcategory.js');
+const Product = require('../models/product.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
@@ -365,6 +367,119 @@ userController.ListMoney = async () => {
                 success: false,
                 status: '500',
                 msg: 'Error al Listar Tipo de Monedas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Listar SubCategorías 
+userController.ListSubCategory = async () => {
+    //existe este usuario? 
+    try {
+
+        //console.log(userData.password);
+        let response = await MasterSubCategory.ListSubCategory();
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Subcategorías'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Subcategorías'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Nuevo Producto (TAKASTEAR)
+userController.NewProduct = async (req) => {
+    //existe este usuario? 
+    try {
+        let dt = new Date();
+
+        let hoy=(`${
+            (dt.getMonth()+1).toString().padStart(2, '0')}-${
+            dt.getDate().toString().padStart(2, '0')}-${
+            dt.getFullYear().toString().padStart(4, '0')} ${
+            dt.getHours().toString().padStart(2, '0')}:${
+            dt.getMinutes().toString().padStart(2, '0')}:${
+            dt.getSeconds().toString().padStart(2, '0')}`
+        );
+            const ProductData = {
+                iduser: req.iduserProduct,
+                datepublication: hoy,
+                name: req.nameProduct,
+                details: req.detailsProduct,
+                typemoney: req.typemoneyProduct,
+                marketvalue: req.marketvalueProduct,
+                subcategory:req.subcategoryProduct,
+                datecreated: hoy,
+                typepublication:1,
+                status:1
+            };
+            const topeimg=10;      
+            const ImagesProduct = {};
+            console.log(req.ImagesProduct.length);
+            for(var atr1 in req.ImagesProduct){
+                ImagesProduct[atr1] = req.ImagesProduct[atr1];     
+            };
+       
+        let response ="";
+        if(req.ImagesProduct.length<=topeimg){
+             response = await Product.NewProduct(ProductData,ImagesProduct);
+        }else{
+             response ={
+                'error': "Ha superdo el límite de imagenes"
+            };
+        }
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Producto registrado con éxito'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                data: response.error,
+                msg: 'Error al registrar producto'
             }
         }
         //validar si esta llegado vacio

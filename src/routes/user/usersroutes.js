@@ -271,6 +271,7 @@ router.post('/gautenticar', [
     "msg": "Error al Listar Categoría"
 }
  */
+//MASTER TYPE PUBLICATION
 router.get('/listypepublication', rutasProtegidas, async (req, res) => {
 
 
@@ -382,6 +383,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
     "msg": "Error al Listar Categoría"
 }
  */
+//MASTER CATEGORY
 router.get('/listcategory', rutasProtegidas, [
     check('typepublicCategory', 'Se requiere el tipo de publicación').not().isEmpty().exists()
 ], async (req, res) => {
@@ -503,6 +505,7 @@ router.put('/tokenpush', rutasProtegidas, [
     "msg": "Error al Listar los tipos de preferencias"
 }
  */
+//MASTER PREFERENCES
 router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
 
 
@@ -561,9 +564,10 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
  *     {
     "success": false,
     "status": "500",
-    "msg": "Error al Listar los tipos de Moneda"s
+    "msg": "Error al Listar los tipos de Monedas"
 }
- */
+ **/
+//MASTERMONEY
 router.get('/listmoney', rutasProtegidas, async (req, res) => {
 
 
@@ -573,6 +577,167 @@ router.get('/listmoney', rutasProtegidas, async (req, res) => {
         return res.status(500).json({ error: 'Error' })
     }
     //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+ * @api {get} /user/listsubcategory 1 listsubcategory
+ * @apiName listsubcategory - Listar Preferencias de negociación que puede tener una publicación
+ * @apiGroup SubCategory
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * 
+ * @apiSuccess {boolean} success of the SubCategory.
+ * @apiSuccess {int} status 200 of the SubCategory.
+ * @apiSuccess {string} msg   of the SubCategory.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "NAME": "Ropa de bebes",
+            "icon": "",
+            "category": 1,
+            "STATUS": 1,
+            "typepublication": 1
+        },
+        {
+            "id": 2,
+            "NAME": "Accesorios para Vehículos",
+            "icon": "wheel",
+            "category": 4,
+            "STATUS": 1,
+            "typepublication": 1
+        },
+        {
+            "id": 3,
+            "NAME": "Vehículos",
+            "icon": "car",
+            "category": 4,
+            "STATUS": 1,
+            "typepublication": 1
+        },
+        {
+            "id": 4,
+            "NAME": "Alimentos y Bebidas",
+            "icon": "eat",
+            "category": 4,
+            "STATUS": 1,
+            "typepublication": 1
+        }
+    ],
+    "msg": "Lista de Subcategorías"
+}
+ *
+ * @apiError UserNotFound The id of the SubCategory was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar Subcategorías"
+}
+ **/
+//MASTER SUBCATEGORY
+router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
+
+
+    let response = await userController.ListSubCategory();
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+
+
+
+/**
+ * @api {post} /user/newproduct  1 newproduct
+ * @apiName  newproduct - Registro De Producto TAKASTEAR
+ * @apiGroup Product
+ * 
+ *      
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * 
+ * 
+ * @apiParam {varchar} nameProduct required.
+ * @apiParam {varchar} detailsProduct  unique required.
+ * @apiParam {varchar} typemoneyProduct   required.
+ * @apiParam {varchar} marketvalueProduct  required .
+ * @apiParam {varchar} subcategoryProduct  required .
+ * @apiParam {varchar} ImagesProduct  optional .
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "msg": "Producto registrado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "data": "Ha superdo el límite de imagenes",
+    "msg": "Error al registrar producto"
+}
+ *
+ *
+ **/
+
+//Crear newproduct
+router.post('/newproduct', rutasProtegidas,[
+    check('iduserProduct', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('nameProduct', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
+    check('detailsProduct', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
+    check('typemoneyProduct', 'El email no puede estra vacio y debe corresponder al formato').not().isEmpty().exists(),
+    check('marketvalueProduct', ' La contraseña es obligatoria').not().isEmpty().exists(),
+    check('subcategoryProduct', ' Es requerido aceptar términos y condisiones').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.NewProduct(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    console.log(response);
     return res.status(response.data.status).json(response.data)
 
 })
