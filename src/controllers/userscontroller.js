@@ -422,12 +422,12 @@ userController.ListSubCategory = async () => {
 userController.NewProduct = async (req) => {
     //existe este usuario? 
     try {
-        let dt = new Date();
+        let dt = new Date();//getMonth   getDate
 
         let hoy=(`${
-            (dt.getMonth()+1).toString().padStart(2, '0')}-${
-            dt.getDate().toString().padStart(2, '0')}-${
-            dt.getFullYear().toString().padStart(4, '0')} ${
+            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
+            dt.getMonth().toString().padStart(2, '0')}-${
+            dt.getDate().toString().padStart(4, '0')} ${
             dt.getHours().toString().padStart(2, '0')}:${
             dt.getMinutes().toString().padStart(2, '0')}:${
             dt.getSeconds().toString().padStart(2, '0')}`
