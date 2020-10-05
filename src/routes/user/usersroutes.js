@@ -395,5 +395,57 @@ router.get('/listcategory', rutasProtegidas, [
 })
 
 
+/**
+ * @api {put} /user/tokenpush 4 tokenpush
+ * @apiName tokenpush - Registar o Actualizar TokenPushs
+ * @apiGroup User
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * @apiParam {smallint}  idfirebaseUser  required. 
+ * @apiParam {smallint}  tokenpushUser  required. 
+ *
+ * @apiSuccess {boolean} success of the User.
+ * @apiSuccess {int} status 200 of the User.
+ * @apiSuccess {string} msg   of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "msg": "Token Push Actualizado"
+}
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar Categoría"
+}
+ */
+///tokenpush
+router.put('/tokenpush', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists(),
+    check('tokenpushUser', 'El tokenpush el obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+
+    let response = await userController.Updatetokenpush(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 module.exports = router;

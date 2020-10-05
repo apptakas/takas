@@ -241,4 +241,45 @@ userController.ListCategory = async (req) => {
 };
 
 
+///tokenpush
+userController.Updatetokenpush = async (req) => {
+    //console.log('response');
+    try {
+        const userData = {
+            id: req.idfirebaseUser,
+            tokenpush: req.tokenpushUser
+        };
+
+
+        let resp = await User.updatetokenpush(userData);
+        console.log('resultado ', resp);
+        let data = {};
+        if (resp && resp.result) {
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Token Push Actualizado'
+            }
+
+        } else {
+            data = {
+                success: false,
+                status: '500',
+                msgerr: resp.error.sqlMessage,
+                codeerr: resp.error.code,
+                noerr: resp.error.errno
+            }
+
+        }
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+
+
+};
+
+
 module.exports = userController;

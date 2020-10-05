@@ -180,6 +180,36 @@ userModel.GloginUser = (userData, callback) => {
 };
 
 
+//updatetokenpush
+userModel.updatetokenpush = (userData, callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'UPDATE `users` SET tokenpush= ? where id= ?', [
+                    userData.tokenpush,
+                    userData.id
+                ],
+                (err, resut) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
 
 
 module.exports = userModel;
