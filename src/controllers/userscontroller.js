@@ -112,7 +112,10 @@ userController.GAutenticar = async (req) => {
     try {
         const userData = {
             id: req.idfirebaseUser,
-            email: req.emailUser
+            email: req.emailUser,
+            fullname: req.fullnameUser,
+            tyc: req.tycUser,
+            role: 2
         };
         //console.log(userData.password);
         let response = await User.GloginUser(userData, 1);
@@ -141,7 +144,7 @@ userController.GAutenticar = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: 'Error al Autenticar'
+                msg: response
             }
         }
         //validar si esta llegado vacio

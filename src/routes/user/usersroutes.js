@@ -22,7 +22,12 @@ router.get('/prueba', function (req, res) {
  * @apiName  newUser - Registro De Usuario
  * @apiGroup User
  * 
- *        
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
  * @apiParam {varchar} idfirebaseUser unique required.
  * @apiParam {varchar} fullnameUser required.
  * @apiParam {varchar} phonenumberUser  unique required.
@@ -41,7 +46,7 @@ router.get('/prueba', function (req, res) {
  *     {
     "success": true,
     "status": "200",
-    "msg": "Domiciliario registrado con éxito"
+    "msg": "Usuario registrado con éxito"
 }
  *
  * @apiError UserNotFound The id of the User was not found.
@@ -97,6 +102,10 @@ router.get('/datos', rutasProtegidas, (req, res) => {
  * @api {post} /user/autenticar 2 autenticar
  * @apiName autenticar - Login User
  * @apiGroup User
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
  * 
  *
  * @apiParam {varchar}  idfirebase  required.
@@ -154,8 +163,15 @@ router.post('/autenticar', [
  * @apiGroup User
  * 
  *
+* @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ *
+ * 
+ * 
  * @apiParam {varchar}  idfirebase  required.
  * @apiParam {varchar} emailuser  required.
+ * @apiParam {varchar} fullnameUser  optional.
+ * @apiParam {varchar} tycUser  optional.
  
  *
  * @apiSuccess {boolean} success of the User.
@@ -203,7 +219,9 @@ router.post('/gautenticar', [
  * @apiName LisTypePublication - Listar Categorias filtrado por tipo de publicación
  * @apiGroup TypePublication
  * 
- *
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
  * @apiHeaderExample {varchar} access-token:
  *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
  *
@@ -268,7 +286,9 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
  * @apiName listcategory - Listar Categorias filtrado por tipo de publicación
  * @apiGroup Category
  * 
- *
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
  * @apiHeaderExample {varchar} access-token:
  *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
  *

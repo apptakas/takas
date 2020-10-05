@@ -9,61 +9,62 @@ const { Result } = require('express-validator');
 let userModel = {};
 
 //ListUsers  - obtenemos lista de usuarios segun el rol
-userModel.getUsersRole = (role,callback) => {
+userModel.getUsersRole = (role, callback) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
-    if (pool) {
-        pool.query(
-            'SELECT * FROM users where role= ?',[role], 
-            (err, resut) => {
-               //console.log(resut);
-                if (err) {
-                    resolve({
-                        'error': err
-                    })
-                } else {
-                    resolve({
-                        'result': resut
-                    })
-                }
+        if (pool) {
+            pool.query(
+                'SELECT * FROM users where role= ?', [role],
+                (err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
 
-            }
-        )
-        //return resultado;
-    }
-})
+                }
+            )
+            //return resultado;
+        }
+    })
 };
 
 //List Usuario por id
 userModel.getUser = (iduser) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
-    if (pool) {
-        pool.query(
-            'SELECT * FROM users where ?', iduser,
-            (err, resut) => {
-               console.log(resut);
-                if (err) {
-                    resolve({
-                        'error': err
-                    })
-                } else {
-                    resolve({
-                        'result': resut
-                    })
-                }
+        if (pool) {
+            pool.query(
+                'SELECT * FROM users where ?', iduser,
+                (err, resut) => {
+                    console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
 
-            }
-        )
-        //return resultado;
-    }
-})
+                }
+            )
+            //return resultado;
+        }
+    })
 };
 
 //CreateUser
 userModel.createUser = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
+        if(userData.tyc==true){
             pool.query(
                 'INSERT INTO users SET ?', userData,
                 (err, resut) => {
@@ -79,6 +80,11 @@ userModel.createUser = (userData, callback) => {
 
                 }
             )
+        }else {
+            resolve({
+                'result': "Debe aceptar términos y condiciones"
+            })
+        }
     }
     )
 
@@ -91,16 +97,16 @@ userModel.loginUser = (userData, callback) => {
         if (pool)
             pool.query(
                 'SELECT * FROM users where `id`=? AND `password`=? AND email=?', [
-                    userData.id,                   
-                    userData.password,
-                    userData.email
-                ],
-                (err, resut) => {                    
-                    if (resut && Object.entries(resut).length != 0)  {
+                userData.id,
+                userData.password,
+                userData.email
+            ],
+                (err, resut) => {
+                    if (resut && Object.entries(resut).length != 0) {
                         resolve({
                             'result': resut
                         })
-                    } else{
+                    } else {
                         resolve({
                             'error': err
                         })
@@ -117,25 +123,56 @@ userModel.loginUser = (userData, callback) => {
 //GloginUser
 userModel.GloginUser = (userData, callback) => {
     return new Promise((resolve, reject) => {
-        if (pool)
+        if (pool){
+
+             //Verificar si un usuario existe
+
             pool.query(
                 'SELECT * FROM users where `id`=? AND email=?', [
-                    userData.id,       
-                    userData.email
-                ],
-                (err, resut) => {                    
-                    if (resut && Object.entries(resut).length != 0)  {
+                userData.id,
+                userData.email
+            ],
+                (err, resut) => {
+
+                    //
+                    if (resut && Object.entries(resut).length != 0) {
                         resolve({
                             'result': resut
                         })
-                    } else{
-                        resolve({
-                            'error': err
-                        })
+                    } else {
+                        
+                        // resolve({
+                        //     'error': err
+                        // })
+                        //Ragistrar nuevo usuario
+                        if(userData.tyc==true){
+                            //console.log(userData.tyc);
+                        pool.query(
+                            'INSERT INTO users SET ?', userData,
+                            (err, resut) => {
+            
+                                //
+                                if (err) {
+                                    resolve({
+                                        'error': err
+                                    })
+                                } else {
+                                    resolve({
+                                        'result': resut
+                                    })
+                                }
+                            })
+                        } //if para verificar si aceptó terminos y condiciones
+                        else{
+                            resolve({
+                                'error': "Debe aceptar terminos y condiciones"
+                            })
+                        }
                     }
 
                 }
             )
+        }//fin if
     }
     )
 
