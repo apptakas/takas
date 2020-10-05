@@ -31,10 +31,20 @@ userController.newUser = async (req) => {
 
         let data = {};
         if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            const payload = {
+                ignoreExpiration: true
+            };
+            const token = jwt.sign(payload, config.llave, {
+                expiresIn: 60 * 60 * 24
+            });
             data = {
                 success: true,
                 status: '200',
-                msg: 'Domiciliario registrado con éxito'
+                token: token,
+                msg: 'Usuario Registrado con éxito'
                 //data: response
             }
         } else {

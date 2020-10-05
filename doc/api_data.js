@@ -470,7 +470,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Usuario registrado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0\",\n    \"msg\": \"Usuario Registrado con éxito\"\n}",
           "type": "json"
         }
       ]

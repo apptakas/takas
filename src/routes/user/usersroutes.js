@@ -43,10 +43,11 @@ router.get('/prueba', function (req, res) {
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
+ {
     "success": true,
     "status": "200",
-    "msg": "Usuario registrado con éxito"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0",
+    "msg": "Usuario Registrado con éxito"
 }
  *
  * @apiError UserNotFound The id of the User was not found.
