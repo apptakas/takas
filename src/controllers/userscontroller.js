@@ -2,6 +2,8 @@
 const User = require('../models/users.js');
 const MasterCategory = require('../models/mastercategory.js');
 const MasterTypePublication = require('../models/mastertypepublication.js');
+const MasterTypePreferences = require('../models/masterpreferences.js');
+const MasterMoney = require('../models/mastermoney.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
@@ -144,7 +146,8 @@ userController.GAutenticar = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                token: token,
+                token: token,                
+                newUser: response.newUser,
                 msg: 'Usuario Autenticado con éxito'
                 //data: response
             }
@@ -154,7 +157,8 @@ userController.GAutenticar = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: response
+                newUser: response.newUser,
+                msg: response.error
             }
         }
         //validar si esta llegado vacio
@@ -288,6 +292,87 @@ userController.Updatetokenpush = async (req) => {
     }
 
 
+
+};
+
+//Listar tipo de preferencias que puede tener una publicación según publicación 
+userController.LisTypePreference = async () => {
+    //existe este usuario? 
+    try {
+
+        //console.log(userData.password);
+        let response = await MasterTypePreferences.LisTypePreference();
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Tipo de Preferencias'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Tipo de Prefencias'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Listar tipo de Monedas 
+userController.ListMoney = async () => {
+    //existe este usuario? 
+    try {
+
+        //console.log(userData.password);
+        let response = await MasterMoney.ListMoney();
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Tipo de Monedas'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Tipo de Monedas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
 
 };
 

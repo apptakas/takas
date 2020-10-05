@@ -137,6 +137,7 @@ userModel.GloginUser = (userData, callback) => {
                     //
                     if (resut && Object.entries(resut).length != 0) {
                         resolve({
+                            'newUser':false,
                             'result': resut
                         })
                     } else {
@@ -154,10 +155,12 @@ userModel.GloginUser = (userData, callback) => {
                                 //
                                 if (err) {
                                     resolve({
+                                        'newUser':true,
                                         'error': err
                                     })
                                 } else {
                                     resolve({
+                                        'newUser':true,
                                         'result': resut
                                     })
                                 }
@@ -165,6 +168,7 @@ userModel.GloginUser = (userData, callback) => {
                         } //if para verificar si aceptó terminos y condiciones
                         else{
                             resolve({
+                                'newUser':true,
                                 'error': "Debe aceptar terminos y condiciones"
                             })
                         }

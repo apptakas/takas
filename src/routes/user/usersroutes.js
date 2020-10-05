@@ -181,23 +181,23 @@ router.post('/autenticar', [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
-    "{
+ *    {
     "success": true,
     "status": "200",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU",
+    "newUser": true,
     "msg": "Usuario Autenticado con éxito"
 }
-}
  *
- * @apiError UserNotFound The id of the Domiciliary was not found.
+ * @apiError UserNotFound The id of the Users was not found.
  *
  * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
+ * HTTP/1.1 500 Not Found
  *     {
     "success": false,
     "status": "500",
-    "msg": "Error al Autenticar"
+    "newUser": true,
+    "msg": "Debe aceptar terminos y condiciones"
 }
  */
 router.post('/gautenticar', [
@@ -215,6 +215,8 @@ router.post('/gautenticar', [
     return res.status(response.data.status).json(response.data)
 
 })
+
+
 /**
  * @api {post} /user/LisTypePublication 1 LisTypePublication
  * @apiName LisTypePublication - Listar Categorias filtrado por tipo de publicación
@@ -448,5 +450,133 @@ router.put('/tokenpush', rutasProtegidas, [
     return res.status(response.data.status).json(response.data)
 
 })
+
+
+/**
+ * @api {post} /user/listypepreferences 1 Listypepreferences
+ * @apiName Listypepreferences - Listar Preferencias de negociación que puede tener una publicación
+ * @apiGroup Preferences
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ *
+ * 
+ * @apiParam {smallint}  typePublicarion  optional. 
+ * 
+ * @apiSuccess {boolean} success of the Preferences.
+ * @apiSuccess {int} status 200 of the Preferences.
+ * @apiSuccess {string} msg   of the Preferences.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "name": "Efectivo",
+            "typepublication": null,
+            "status": 1
+        },
+        {
+            "id": 2,
+            "name": "Takasteo",
+            "typepublication": null,
+            "status": 1
+        }
+    ],
+    "msg": "Lista de Tipo de Preferencias"
+}
+ *
+ * @apiError UserNotFound The id of the Category was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar los tipos de preferencias"
+}
+ */
+router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
+
+
+    let response = await userController.LisTypePreference();
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+ * @api {post} /user/listmoney 1 listmoney
+ * @apiName listmoney - Listar Preferencias de negociación que puede tener una publicación
+ * @apiGroup Money
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ *
+ * 
+ * @apiSuccess {boolean} success of the Money.
+ * @apiSuccess {int} status 200 of the Money.
+ * @apiSuccess {string} msg   of the Money.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 2,
+            "name": "Dólar USD",
+            "status": 1
+        },
+        {
+            "id": 3,
+            "name": "Pesos COP",
+            "status": 1
+        }
+    ],
+    "msg": "Lista de Tipo de Monedas"
+}
+ *
+ * @apiError UserNotFound The id of the Money was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar los tipos de Moneda"s
+}
+ */
+router.get('/listmoney', rutasProtegidas, async (req, res) => {
+
+
+    let response = await userController.ListMoney();
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
 
 module.exports = router;
