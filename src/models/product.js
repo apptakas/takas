@@ -102,4 +102,32 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
     })
 };
 
+//LISTAR LOS PRODUCTOS PUBLICADOS POR OTROS USUARIOS - TAKASTEAR 
+ProductModel.ListProductos = (UserData,ProductData,callback) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND STATUS='+ProductData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                "SELECT p.id,SUBSTRING_INDEX(GROUP_CONCAT(idproduct ORDER BY RAND()), ',', 1) AS idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,NAME,details,typemoney,marketvalue,subcategory,typepublication,STATUS,i.id, url FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND STATUS="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
+                (err, result) => {
+                    //console.log(result);
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {     
+                        resolve({
+                            'result': result
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
 module.exports = ProductModel;

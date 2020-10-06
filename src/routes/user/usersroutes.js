@@ -483,12 +483,14 @@ router.put('/tokenpush', rutasProtegidas, [
             "id": 1,
             "name": "Efectivo",
             "typepublication": null,
+            "icon": "money",
             "status": 1
         },
         {
             "id": 2,
             "name": "Takasteo",
             "typepublication": null,
+            "icon": "takas",
             "status": 1
         }
     ],
@@ -869,51 +871,22 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
-    "success": true,
-    "status": "200",
-    "data": [
-        {
-            "idproduct": 1,
-            "datecreated": "05/10/2020 13:46:27",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
-            "NAME": "Mameluco para bebé",
-            "details": "Producto disponible de 0 a 24 meses",
-            "typemoney": 2,
-            "marketvalue": 30000,
-            "subcategory": 1,
-            "typepublication": 1,
-            "STATUS": 1,
-            "url": "https://n9.cl/vt0n"
-        },
-        {
-            "idproduct": 5,
-            "datecreated": "06/10/2020 13:24:41",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
+ *             {
+            "id": 72,
+            "idproduct": "18",
+            "datecreated": "06/09/2021 18:06:43",
+            "iduser": "idfirebaseU4534dsaxgg",
             "NAME": "Gorros para bebés",
-            "details": "Gorros termicos y confortables",
+            "details": "Gorros termicos 2",
             "typemoney": 1,
             "marketvalue": 10000,
             "subcategory": 1,
             "typepublication": 1,
             "STATUS": 1,
-            "url": "https://n9.cl/fy8l"
-        },
-        {
-            "idproduct": 6,
-            "datecreated": "06/10/2020 13:24:45",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
-            "NAME": "Gorros para bebés",
-            "details": "Gorros termicos y confortables",
-            "typemoney": 1,
-            "marketvalue": 10000,
-            "subcategory": 1,
-            "typepublication": 1,
-            "STATUS": 1,
-            "url": "https://n9.cl/fy8l"
+            "url": "https://n9.cl/rbsa"
         }
     ],
-    "msg": "Lista de mis productos"
+    "msg": "Lista de productos"
 }
  *
  * @apiError UserNotFound The id of the Product was not found.
@@ -923,7 +896,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
  *     {
     "success": false,
     "status": "500",
-    "msg": "Error al Listar Mis Productos"
+    "msg": "Error al Listar Productos"
 }
  **/
 //LISTAR MIS PUBLICACIONES

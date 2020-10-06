@@ -571,7 +571,7 @@ userController.ListProductos = async (req) => {
                 success: true,
                 status: '200',
                 data: response.result,
-                msg: 'Lista de mis productos'
+                msg: 'Lista de productos'
                 //data: response
             }
         } else {
@@ -580,7 +580,7 @@ userController.ListProductos = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: 'Error al Listar mis productos'
+                msg: 'Error al Listar productos'
             }
         }
         //validar si esta llegado vacio
@@ -591,6 +591,8 @@ userController.ListProductos = async (req) => {
     }
 
 };
+
+
 
 
 module.exports = userController;
