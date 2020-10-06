@@ -447,14 +447,25 @@ userController.NewProduct = async (req) => {
             };
             const topeimg=10;      
             const ImagesProduct = {};
-            console.log(req.ImagesProduct.length);
-            for(var atr1 in req.ImagesProduct){
-                ImagesProduct[atr1] = req.ImagesProduct[atr1];     
-            };
+            //console.log(req.ImagesProduct.length);
+            if(req.ImagesProduct.length!=0){
+                for(var atr1 in req.ImagesProduct){
+                    ImagesProduct[atr1] = req.ImagesProduct[atr1];     
+                };
+            }
+
+            const PreferecesProduct = {};
+            console.log(req.PreferecesProduct.length);
+            if(req.PreferecesProduct.length!=0){
+                for(var atr2 in req.PreferecesProduct){
+                    PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
+                };
+            }
        
         let response ="";
+        
         if(req.ImagesProduct.length<=topeimg){
-             response = await Product.NewProduct(ProductData,ImagesProduct);
+             response = await Product.NewProduct(ProductData,PreferecesProduct,ImagesProduct);
         }else{
              response ={
                 'error': "Ha superdo el límite de imagenes"
@@ -504,6 +515,50 @@ userController.ListMisProductos = async (req) => {
         };
         //console.log(userData.password);
         let response = await Product.ListMisProductos(UserData,ProductData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de mis productos'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar mis productos'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Listar las publicaciones  de otros usuarios- TAKASTEAR 
+userController.ListProductos = async (req) => {
+    try {
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const ProductData = {
+            status: req.statusProduct
+        };
+        //console.log(userData.password);
+        let response = await Product.ListProductos(UserData,ProductData);
 
        //console.log(response);
 

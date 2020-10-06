@@ -354,6 +354,103 @@
     "groupTitle": "Product"
   },
   {
+    "type": "get",
+    "url": "/user/listproductos",
+    "title": "3 listproductos",
+    "name": "listproductos_-_Listar_Los_productos_pubicados_por_otros_usuarios",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "statusProduct",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"05/10/2020 13:46:27\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"NAME\": \"Mameluco para bebé\",\n            \"details\": \"Producto disponible de 0 a 24 meses\",\n            \"typemoney\": 2,\n            \"marketvalue\": 30000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/vt0n\"\n        },\n        {\n            \"idproduct\": 5,\n            \"datecreated\": \"06/10/2020 13:24:41\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"NAME\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        },\n        {\n            \"idproduct\": 6,\n            \"datecreated\": \"06/10/2020 13:24:45\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"NAME\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        }\n    ],\n    \"msg\": \"Lista de mis productos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Mis Productos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
     "type": "post",
     "url": "/user/newproduct",
     "title": "1 newproduct",
@@ -392,31 +489,38 @@
           },
           {
             "group": "Parameter",
-            "type": "varchar",
+            "type": "smallint",
             "optional": false,
             "field": "typemoneyProduct",
             "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
-            "type": "varchar",
+            "type": "decimal",
             "optional": false,
             "field": "marketvalueProduct",
             "description": "<p>required .</p>"
           },
           {
             "group": "Parameter",
-            "type": "varchar",
+            "type": "int",
             "optional": false,
             "field": "subcategoryProduct",
             "description": "<p>required .</p>"
           },
           {
             "group": "Parameter",
-            "type": "varchar",
+            "type": "array",
+            "optional": false,
+            "field": "PreferecesProduct",
+            "description": "<p>optional array de enteros .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
             "optional": false,
             "field": "ImagesProduct",
-            "description": "<p>optional .</p>"
+            "description": "<p>optional arrays de varchar .</p>"
           }
         ]
       }

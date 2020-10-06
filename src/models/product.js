@@ -3,7 +3,7 @@ let ProductModel = {};
 
 
 //ListUsers  - obtenemos lista de usuarios segun el rol
-ProductModel.NewProduct = (ProductData,ImagesProduct,callback) => {
+ProductModel.NewProduct = (ProductData,PreferecesProduct,ImagesProduct,callback) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
@@ -16,6 +16,7 @@ ProductModel.NewProduct = (ProductData,ImagesProduct,callback) => {
                             'error': err
                         })
                     } else {
+                        if(ImagesProduct.length!=0){
                         for(var atr2 in ImagesProduct){  
                             pool.query(
                                 'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
@@ -29,8 +30,30 @@ ProductModel.NewProduct = (ProductData,ImagesProduct,callback) => {
                                             'error': err
                                         })
                                     } else {
-                                        //console.log("////");
-                                        //console.log(resut.insertId);
+                                        resolve({
+                                            'result': resut
+                                        })                                       
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido imagenes
+                    }//fin if ImagesProduct.length!=0
+                    if(PreferecesProduct.length!=0){
+                        for(var atr3 in PreferecesProduct){  
+                            pool.query(
+                                'INSERT INTO preferences_product (preference,idproduct) value( ?, ?) ', [
+                                    PreferecesProduct[atr3],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
                                         resolve({
                                             'result': resut
                                         })
@@ -39,7 +62,8 @@ ProductModel.NewProduct = (ProductData,ImagesProduct,callback) => {
                                 }
                             )
                             
-                        }
+                        }//fin for reforrido Preferencias
+                    }//fin if PreferecesProduct.length!=0
                     }//
 
                 }

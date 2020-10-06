@@ -683,10 +683,11 @@ router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
  * 
  * @apiParam {varchar} nameProduct required.
  * @apiParam {varchar} detailsProduct  unique required.
- * @apiParam {varchar} typemoneyProduct   required.
- * @apiParam {varchar} marketvalueProduct  required .
- * @apiParam {varchar} subcategoryProduct  required .
- * @apiParam {varchar} ImagesProduct  optional .
+ * @apiParam {smallint} typemoneyProduct   required.
+ * @apiParam {decimal} marketvalueProduct  required .
+ * @apiParam {int} subcategoryProduct  required .
+ * @apiParam {array} PreferecesProduct  optional array de enteros .
+ * @apiParam {array} ImagesProduct  optional arrays de varchar .
  * 
  * 
  * 
@@ -719,13 +720,18 @@ router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
 //Crear newproduct
 router.post('/newproduct', rutasProtegidas,[
     check('iduserProduct', 'El idfirebase es obligatorio').not().isEmpty().exists(),
-    check('nameProduct', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
-    check('detailsProduct', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
-    check('typemoneyProduct', 'El email no puede estra vacio y debe corresponder al formato').not().isEmpty().exists(),
-    check('marketvalueProduct', ' La contraseña es obligatoria').not().isEmpty().exists(),
-    check('subcategoryProduct', ' Es requerido aceptar términos y condisiones').not().isEmpty().exists()
+    check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
+    check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
+    check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
+    check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
+    check('subcategoryProduct', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
+    check('ImagesProduct', 'Debes cargar al menos 1 Foto').not().isEmpty().exists()
 ], async (req, res) => {
 
+    /*,
+    check('PreferecesProduct', ' Las Preferencias son requerido aceptar términos y condisiones').not().isEmpty().exists(),
+    check('ImagesProduct', ' Es requerido aceptar términos y condisiones').not().isEmpty().exists() */
     const error = validationResult(req);
 
     if (error.array().length != 0) {
@@ -839,6 +845,104 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
     return res.status(response.data.status).json(response.data)
 
 })
+
+/**
+ * @api {get} /user/listproductos 3 listproductos
+ * @apiName listproductos - Listar Los productos pubicados por otros usuarios
+ * @apiGroup Product
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idfirebaseUser required.
+ * @apiParam {varchar} statusProduct required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idproduct": 1,
+            "datecreated": "05/10/2020 13:46:27",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "NAME": "Mameluco para bebé",
+            "details": "Producto disponible de 0 a 24 meses",
+            "typemoney": 2,
+            "marketvalue": 30000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "STATUS": 1,
+            "url": "https://n9.cl/vt0n"
+        },
+        {
+            "idproduct": 5,
+            "datecreated": "06/10/2020 13:24:41",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "NAME": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "STATUS": 1,
+            "url": "https://n9.cl/fy8l"
+        },
+        {
+            "idproduct": 6,
+            "datecreated": "06/10/2020 13:24:45",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "NAME": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "STATUS": 1,
+            "url": "https://n9.cl/fy8l"
+        }
+    ],
+    "msg": "Lista de mis productos"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar Mis Productos"
+}
+ **/
+//LISTAR MIS PUBLICACIONES
+router.get('/listproductos', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+    
+        let response = await userController.ListProductos(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
+    
 
 
 
