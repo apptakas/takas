@@ -11,6 +11,7 @@ const Product = require('../models/product.js');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const sha1 = require('sha1');
+const { resolveInclude } = require('ejs');
 
 
 
@@ -459,7 +460,7 @@ userController.NewProduct = async (req) => {
                 'error': "Ha superdo el límite de imagenes"
             };
         }
-        console.log(response);
+       // console.log(response);
 
         let data = {};
         if (response && response.result) {
@@ -474,12 +475,57 @@ userController.NewProduct = async (req) => {
             }
         } else {
 
-            console.log(response);
+            //console.log(response);
             data = {
                 success: false,
                 status: '500',
                 data: response.error,
                 msg: 'Error al registrar producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Listar Mis publicaciones  - TAKASTEAR 
+userController.ListMisProductos = async (req) => {
+    try {
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const ProductData = {
+            status: req.statusProduct
+        };
+        //console.log(userData.password);
+        let response = await Product.ListMisProductos(UserData,ProductData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de mis productos'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar mis productos'
             }
         }
         //validar si esta llegado vacio

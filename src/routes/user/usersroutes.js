@@ -522,7 +522,8 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
 
 /**
  * @api {post} /user/listmoney 1 listmoney
- * @apiName listmoney - Listar Preferencias de negociación que puede tener una publicación
+ * @apiName listmoney - Listar tipos de monedas
+ * 
  * @apiGroup Money
  * 
  * 
@@ -664,8 +665,7 @@ router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
 
 })
 
-
-
+/// TAKASTEAR 
 
 
 /**
@@ -738,6 +738,104 @@ router.post('/newproduct', rutasProtegidas,[
         return res.status(500).json({ error: 'Error' })
     }
     console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+ * @api {get} /user/listmisproductos 2 listmisproductos
+ * @apiName listmisproductos - Listar Las plublicaciones de un usuario
+ * @apiGroup Product
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idfirebaseUser required.
+ * @apiParam {varchar} statusProduct required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idproduct": 1,
+            "datecreated": "05/10/2020 13:46:27",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "NAME": "Mameluco para bebé",
+            "details": "Producto disponible de 0 a 24 meses",
+            "typemoney": 2,
+            "marketvalue": 30000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "STATUS": 1,
+            "url": "https://n9.cl/vt0n"
+        },
+        {
+            "idproduct": 5,
+            "datecreated": "06/10/2020 13:24:41",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "NAME": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "STATUS": 1,
+            "url": "https://n9.cl/fy8l"
+        },
+        {
+            "idproduct": 6,
+            "datecreated": "06/10/2020 13:24:45",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "NAME": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "STATUS": 1,
+            "url": "https://n9.cl/fy8l"
+        }
+    ],
+    "msg": "Lista de mis productos"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al Listar Mis Productos"
+}
+ **/
+//LISTAR MIS PUBLICACIONES
+router.get('/listmisproductos', rutasProtegidas, [
+check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
+],async (req, res) => {
+
+
+    let response = await userController.ListMisProductos(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
     return res.status(response.data.status).json(response.data)
 
 })
