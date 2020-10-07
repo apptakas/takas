@@ -761,6 +761,7 @@ router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
  *
  * 
  * 
+ * @apiParam {varchar} iduserProduct required.
  * @apiParam {varchar} nameProduct required.
  * @apiParam {varchar} detailsProduct  unique required.
  * @apiParam {smallint} typemoneyProduct   required.

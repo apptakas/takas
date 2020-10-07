@@ -664,6 +664,13 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
+            "field": "iduserProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
             "field": "nameProduct",
             "description": "<p>required.</p>"
           },
