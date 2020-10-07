@@ -45,7 +45,7 @@ router.get('/prueba', function (req, res) {
  *     HTTP/1.1 200 OK
  {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0",
     "msg": "Usuario Registrado con éxito"
 }
@@ -123,7 +123,7 @@ router.get('/datos', rutasProtegidas, (req, res) => {
  *     {
     "{
     "success": true,
-    "status": "200",
+    "status":: "200",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U",
     "msg": "Usuario Autenticado con éxito"
 }
@@ -135,7 +135,7 @@ router.get('/datos', rutasProtegidas, (req, res) => {
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Autenticar"
 }
  */
@@ -183,7 +183,7 @@ router.post('/autenticar', [
  *     HTTP/1.1 200 OK
  *    {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU",
     "newUser": true,
     "msg": "Usuario Autenticado con éxito"
@@ -195,7 +195,7 @@ router.post('/autenticar', [
  * HTTP/1.1 500 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "newUser": true,
     "msg": "Debe aceptar terminos y condiciones"
 }
@@ -237,25 +237,25 @@ router.post('/gautenticar', [
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "data": [
         {
             "id": 1,
             "name": "Takastear",
             "description": "Publicar Productos",
-            "status": 1
+            "status":: 1
         },
         {
             "id": 2,
             "name": "ServiTakastear",
             "description": "Publicar Servicios",
-            "status": 1
+            "status":: 1
         },
         {
             "id": 3,
             "name": "SubasTakear",
             "description": "Publicar Subastas",
-            "status": 1
+            "status":: 1
         }
     ],
     "msg": "Lista de Tipo de Publicación"
@@ -267,7 +267,7 @@ router.post('/gautenticar', [
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar Categoría"
 }
  */
@@ -306,7 +306,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "data": [
         {
             "id": 1,
@@ -318,7 +318,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
                     "name": "Ropa de bebes",
                     "icon": "",
                     "category": 1,
-                    "status": 1
+                    "status":: 1
                 }
             ]
         },
@@ -344,28 +344,28 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
                     "name": "Accesorios para Vehículos",
                     "icon": "wheel",
                     "category": 4,
-                    "status": 1
+                    "status":: 1
                 },
                 {
                     "idsc": 3,
                     "name": "Vehículos",
                     "icon": "car",
                     "category": 4,
-                    "status": 1
+                    "status":: 1
                 },
                 {
                     "idsc": 4,
                     "name": "Alimentos y Bebidas",
                     "icon": "eat",
                     "category": 4,
-                    "status": 1
+                    "status":: 1
                 },
                 {
                     "idsc": 5,
                     "name": "Mascotas",
                     "icon": "dog",
                     "category": 4,
-                    "status": 1
+                    "status":: 1
                 }
             ]
         }
@@ -379,7 +379,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar Categoría"
 }
  */
@@ -422,7 +422,7 @@ router.get('/listcategory', rutasProtegidas, [
  *     HTTP/1.1 200 OK
 {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "msg": "Token Push Actualizado"
 }
  *
@@ -432,7 +432,7 @@ router.get('/listcategory', rutasProtegidas, [
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar Categoría"
 }
  */
@@ -477,21 +477,21 @@ router.put('/tokenpush', rutasProtegidas, [
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "data": [
         {
             "id": 1,
             "name": "Efectivo",
             "typepublication": null,
             "icon": "money",
-            "status": 1
+            "status":: 1
         },
         {
             "id": 2,
             "name": "Takasteo",
             "typepublication": null,
             "icon": "takas",
-            "status": 1
+            "status":: 1
         }
     ],
     "msg": "Lista de Tipo de Preferencias"
@@ -503,7 +503,7 @@ router.put('/tokenpush', rutasProtegidas, [
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar los tipos de preferencias"
 }
  */
@@ -544,17 +544,17 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "data": [
         {
             "id": 2,
             "name": "Dólar USD",
-            "status": 1
+            "status":: 1
         },
         {
             "id": 3,
             "name": "Pesos COP",
-            "status": 1
+            "status":: 1
         }
     ],
     "msg": "Lista de Tipo de Monedas"
@@ -566,7 +566,7 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar los tipos de Monedas"
 }
  **/
@@ -605,38 +605,38 @@ router.get('/listmoney', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "data": [
         {
             "id": 1,
-            "NAME": "Ropa de bebes",
+            "name": "Ropa de bebes",
             "icon": "",
             "category": 1,
-            "STATUS": 1,
+            "status":: 1,
             "typepublication": 1
         },
         {
             "id": 2,
-            "NAME": "Accesorios para Vehículos",
+            "name": "Accesorios para Vehículos",
             "icon": "wheel",
             "category": 4,
-            "STATUS": 1,
+            "status":: 1,
             "typepublication": 1
         },
         {
             "id": 3,
-            "NAME": "Vehículos",
+            "name": "Vehículos",
             "icon": "car",
             "category": 4,
-            "STATUS": 1,
+            "status":: 1,
             "typepublication": 1
         },
         {
             "id": 4,
-            "NAME": "Alimentos y Bebidas",
+            "name": "Alimentos y Bebidas",
             "icon": "eat",
             "category": 4,
-            "STATUS": 1,
+            "status":: 1,
             "typepublication": 1
         }
     ],
@@ -649,7 +649,7 @@ router.get('/listmoney', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar Subcategorías"
 }
  **/
@@ -701,7 +701,7 @@ router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 200 OK
  *    {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "msg": "Producto registrado con éxito"
 }
  *
@@ -711,7 +711,7 @@ router.get('/listsubcategory', rutasProtegidas, async (req, res) => {
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "data": "Ha superdo el límite de imagenes",
     "msg": "Error al registrar producto"
 }
@@ -776,45 +776,45 @@ router.post('/newproduct', rutasProtegidas,[
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status": "200",
+    "status":: "200",
     "data": [
         {
             "idproduct": 1,
             "datecreated": "05/10/2020 13:46:27",
             "iduser": "idfirebaseUsers77wqedsaxgg",
-            "NAME": "Mameluco para bebé",
+            "name": "Mameluco para bebé",
             "details": "Producto disponible de 0 a 24 meses",
             "typemoney": 2,
             "marketvalue": 30000,
             "subcategory": 1,
             "typepublication": 1,
-            "STATUS": 1,
+            "status":: 1,
             "url": "https://n9.cl/vt0n"
         },
         {
             "idproduct": 5,
             "datecreated": "06/10/2020 13:24:41",
             "iduser": "idfirebaseUsers77wqedsaxgg",
-            "NAME": "Gorros para bebés",
+            "name": "Gorros para bebés",
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
             "marketvalue": 10000,
             "subcategory": 1,
             "typepublication": 1,
-            "STATUS": 1,
+            "status":: 1,
             "url": "https://n9.cl/fy8l"
         },
         {
             "idproduct": 6,
             "datecreated": "06/10/2020 13:24:45",
             "iduser": "idfirebaseUsers77wqedsaxgg",
-            "NAME": "Gorros para bebés",
+            "name": "Gorros para bebés",
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
             "marketvalue": 10000,
             "subcategory": 1,
             "typepublication": 1,
-            "STATUS": 1,
+            "status":: 1,
             "url": "https://n9.cl/fy8l"
         }
     ],
@@ -827,7 +827,7 @@ router.post('/newproduct', rutasProtegidas,[
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar Mis Productos"
 }
  **/
@@ -876,13 +876,13 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "idproduct": "18",
             "datecreated": "06/09/2021 18:06:43",
             "iduser": "idfirebaseU4534dsaxgg",
-            "NAME": "Gorros para bebés",
+            "name": "Gorros para bebés",
             "details": "Gorros termicos 2",
             "typemoney": 1,
             "marketvalue": 10000,
             "subcategory": 1,
             "typepublication": 1,
-            "STATUS": 1,
+            "status":: 1,
             "url": "https://n9.cl/rbsa"
         }
     ],
@@ -895,7 +895,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
  *     HTTP/1.1 404 Not Found
  *     {
     "success": false,
-    "status": "500",
+    "status":: "500",
     "msg": "Error al Listar Productos"
 }
  **/
@@ -917,6 +917,94 @@ router.get('/listproductos', rutasProtegidas, [
     })
     
 
+/**
+ * @api {get} /user/listproductsubcategory 4 listproductsubcategory
+ * @apiName listproductsubcategory - Listar Los productos pubicados por otros usuarios
+ * @apiGroup Product
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} SubCategoriaProduct required.
+ * @apiParam {varchar} statusProduct required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "idproduct": "1",
+            "datecreated": "05/10/2020 13:46:27",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "name": "Mameluco para bebé",
+            "details": "Producto disponible de 0 a 24 meses",
+            "typemoney": 2,
+            "marketvalue": 30000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "status": 1,
+            "url": "https://n9.cl/vt0n"
+        },
+        {
+            "id": 3,
+            "idproduct": "5",
+            "datecreated": "06/10/2020 13:24:41",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "name": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "status": 1,
+            "url": "https://n9.cl/fy8l"
+        }
+    ],
+    "msg": "Lista de productos filtrados por subcategorías"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar Productos filtrados por subcategoría"
+}
+ **/
+//LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA
+router.get('/listproductsubcategory', rutasProtegidas, [
+    check('SubCategoriaProduct', 'El SubCategoriaProduct es obligatorio').not().isEmpty().exists(),
+    check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+    
+        let response = await userController.ListProductSubCategory(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })    
 
 
+
+
+    
 module.exports = router;

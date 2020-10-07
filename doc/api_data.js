@@ -61,7 +61,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"namec\": \"Bebés\",\n            \"iconc\": \"https://n9.cl/c1z78\",\n            \"SubCategory\": [\n                {\n                    \"idsc\": 1,\n                    \"name\": \"Ropa de bebes\",\n                    \"icon\": \"\",\n                    \"category\": 1,\n                    \"status\": 1\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"namec\": \"Arte\",\n            \"iconc\": \"https://n9.cl/pbmd1\",\n            \"SubCategory\": []\n        },\n        {\n            \"id\": 3,\n            \"namec\": \"Música\",\n            \"iconc\": \"https://n9.cl/hgan\",\n            \"SubCategory\": []\n        },\n        {\n            \"id\": 4,\n            \"namec\": \"indefinidas\",\n            \"iconc\": null,\n            \"SubCategory\": [\n                {\n                    \"idsc\": 2,\n                    \"name\": \"Accesorios para Vehículos\",\n                    \"icon\": \"wheel\",\n                    \"category\": 4,\n                    \"status\": 1\n                },\n                {\n                    \"idsc\": 3,\n                    \"name\": \"Vehículos\",\n                    \"icon\": \"car\",\n                    \"category\": 4,\n                    \"status\": 1\n                },\n                {\n                    \"idsc\": 4,\n                    \"name\": \"Alimentos y Bebidas\",\n                    \"icon\": \"eat\",\n                    \"category\": 4,\n                    \"status\": 1\n                },\n                {\n                    \"idsc\": 5,\n                    \"name\": \"Mascotas\",\n                    \"icon\": \"dog\",\n                    \"category\": 4,\n                    \"status\": 1\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Categoría\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"namec\": \"Bebés\",\n            \"iconc\": \"https://n9.cl/c1z78\",\n            \"SubCategory\": [\n                {\n                    \"idsc\": 1,\n                    \"name\": \"Ropa de bebes\",\n                    \"icon\": \"\",\n                    \"category\": 1,\n                    \"status\":: 1\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"namec\": \"Arte\",\n            \"iconc\": \"https://n9.cl/pbmd1\",\n            \"SubCategory\": []\n        },\n        {\n            \"id\": 3,\n            \"namec\": \"Música\",\n            \"iconc\": \"https://n9.cl/hgan\",\n            \"SubCategory\": []\n        },\n        {\n            \"id\": 4,\n            \"namec\": \"indefinidas\",\n            \"iconc\": null,\n            \"SubCategory\": [\n                {\n                    \"idsc\": 2,\n                    \"name\": \"Accesorios para Vehículos\",\n                    \"icon\": \"wheel\",\n                    \"category\": 4,\n                    \"status\":: 1\n                },\n                {\n                    \"idsc\": 3,\n                    \"name\": \"Vehículos\",\n                    \"icon\": \"car\",\n                    \"category\": 4,\n                    \"status\":: 1\n                },\n                {\n                    \"idsc\": 4,\n                    \"name\": \"Alimentos y Bebidas\",\n                    \"icon\": \"eat\",\n                    \"category\": 4,\n                    \"status\":: 1\n                },\n                {\n                    \"idsc\": 5,\n                    \"name\": \"Mascotas\",\n                    \"icon\": \"dog\",\n                    \"category\": 4,\n                    \"status\":: 1\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Categoría\"\n}",
           "type": "json"
         }
       ]
@@ -80,7 +80,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
           "type": "json"
         }
       ]
@@ -138,7 +138,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dólar USD\",\n            \"status\": 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Pesos COP\",\n            \"status\": 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Monedas\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dólar USD\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Pesos COP\",\n            \"status\":: 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Monedas\"\n}",
           "type": "json"
         }
       ]
@@ -157,7 +157,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar los tipos de Monedas\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar los tipos de Monedas\"\n}",
           "type": "json"
         }
       ]
@@ -228,7 +228,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Efectivo\",\n            \"typepublication\": null,\n            \"icon\": \"money\",\n            \"status\": 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Takasteo\",\n            \"typepublication\": null,\n            \"icon\": \"takas\",\n            \"status\": 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Preferencias\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Efectivo\",\n            \"typepublication\": null,\n            \"icon\": \"money\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Takasteo\",\n            \"typepublication\": null,\n            \"icon\": \"takas\",\n            \"status\":: 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Preferencias\"\n}",
           "type": "json"
         }
       ]
@@ -247,7 +247,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar los tipos de preferencias\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar los tipos de preferencias\"\n}",
           "type": "json"
         }
       ]
@@ -325,7 +325,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"05/10/2020 13:46:27\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"NAME\": \"Mameluco para bebé\",\n            \"details\": \"Producto disponible de 0 a 24 meses\",\n            \"typemoney\": 2,\n            \"marketvalue\": 30000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/vt0n\"\n        },\n        {\n            \"idproduct\": 5,\n            \"datecreated\": \"06/10/2020 13:24:41\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"NAME\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        },\n        {\n            \"idproduct\": 6,\n            \"datecreated\": \"06/10/2020 13:24:45\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"NAME\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        }\n    ],\n    \"msg\": \"Lista de mis productos\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"05/10/2020 13:46:27\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"name\": \"Mameluco para bebé\",\n            \"details\": \"Producto disponible de 0 a 24 meses\",\n            \"typemoney\": 2,\n            \"marketvalue\": 30000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"status\":: 1,\n            \"url\": \"https://n9.cl/vt0n\"\n        },\n        {\n            \"idproduct\": 5,\n            \"datecreated\": \"06/10/2020 13:24:41\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"name\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"status\":: 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        },\n        {\n            \"idproduct\": 6,\n            \"datecreated\": \"06/10/2020 13:24:45\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"name\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"status\":: 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        }\n    ],\n    \"msg\": \"Lista de mis productos\"\n}",
           "type": "json"
         }
       ]
@@ -344,7 +344,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Mis Productos\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Mis Productos\"\n}",
           "type": "json"
         }
       ]
@@ -422,7 +422,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n            \"id\": 72,\n            \"idproduct\": \"18\",\n            \"datecreated\": \"06/09/2021 18:06:43\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"NAME\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos 2\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"STATUS\": 1,\n            \"url\": \"https://n9.cl/rbsa\"\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
+          "content": "    HTTP/1.1 200 OK\n            {\n            \"id\": 72,\n            \"idproduct\": \"18\",\n            \"datecreated\": \"06/09/2021 18:06:43\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"name\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos 2\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"status\":: 1,\n            \"url\": \"https://n9.cl/rbsa\"\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
           "type": "json"
         }
       ]
@@ -441,7 +441,104 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Productos\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Productos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "get",
+    "url": "/user/listproductsubcategory",
+    "title": "4 listproductsubcategory",
+    "name": "listproductsubcategory_-_Listar_Los_productos_pubicados_por_otros_usuarios",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "SubCategoriaProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "statusProduct",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"idproduct\": \"1\",\n            \"datecreated\": \"05/10/2020 13:46:27\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"name\": \"Mameluco para bebé\",\n            \"details\": \"Producto disponible de 0 a 24 meses\",\n            \"typemoney\": 2,\n            \"marketvalue\": 30000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"status\": 1,\n            \"url\": \"https://n9.cl/vt0n\"\n        },\n        {\n            \"id\": 3,\n            \"idproduct\": \"5\",\n            \"datecreated\": \"06/10/2020 13:24:41\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"name\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"subcategory\": 1,\n            \"typepublication\": 1,\n            \"status\": 1,\n            \"url\": \"https://n9.cl/fy8l\"\n        }\n    ],\n    \"msg\": \"Lista de productos filtrados por subcategorías\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Productos filtrados por subcategoría\"\n}",
           "type": "json"
         }
       ]
@@ -554,7 +651,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Producto registrado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Producto registrado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -573,7 +670,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"data\": \"Ha superdo el límite de imagenes\",\n    \"msg\": \"Error al registrar producto\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"data\": \"Ha superdo el límite de imagenes\",\n    \"msg\": \"Error al registrar producto\"\n}",
           "type": "json"
         }
       ]
@@ -631,7 +728,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"NAME\": \"Ropa de bebes\",\n            \"icon\": \"\",\n            \"category\": 1,\n            \"STATUS\": 1,\n            \"typepublication\": 1\n        },\n        {\n            \"id\": 2,\n            \"NAME\": \"Accesorios para Vehículos\",\n            \"icon\": \"wheel\",\n            \"category\": 4,\n            \"STATUS\": 1,\n            \"typepublication\": 1\n        },\n        {\n            \"id\": 3,\n            \"NAME\": \"Vehículos\",\n            \"icon\": \"car\",\n            \"category\": 4,\n            \"STATUS\": 1,\n            \"typepublication\": 1\n        },\n        {\n            \"id\": 4,\n            \"NAME\": \"Alimentos y Bebidas\",\n            \"icon\": \"eat\",\n            \"category\": 4,\n            \"STATUS\": 1,\n            \"typepublication\": 1\n        }\n    ],\n    \"msg\": \"Lista de Subcategorías\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Ropa de bebes\",\n            \"icon\": \"\",\n            \"category\": 1,\n            \"status\":: 1,\n            \"typepublication\": 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Accesorios para Vehículos\",\n            \"icon\": \"wheel\",\n            \"category\": 4,\n            \"status\":: 1,\n            \"typepublication\": 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Vehículos\",\n            \"icon\": \"car\",\n            \"category\": 4,\n            \"status\":: 1,\n            \"typepublication\": 1\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Alimentos y Bebidas\",\n            \"icon\": \"eat\",\n            \"category\": 4,\n            \"status\":: 1,\n            \"typepublication\": 1\n        }\n    ],\n    \"msg\": \"Lista de Subcategorías\"\n}",
           "type": "json"
         }
       ]
@@ -650,7 +747,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Subcategorías\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Subcategorías\"\n}",
           "type": "json"
         }
       ]
@@ -708,7 +805,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Takastear\",\n            \"description\": \"Publicar Productos\",\n            \"status\": 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"ServiTakastear\",\n            \"description\": \"Publicar Servicios\",\n            \"status\": 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"SubasTakear\",\n            \"description\": \"Publicar Subastas\",\n            \"status\": 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Publicación\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Takastear\",\n            \"description\": \"Publicar Productos\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"ServiTakastear\",\n            \"description\": \"Publicar Servicios\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"SubasTakear\",\n            \"description\": \"Publicar Subastas\",\n            \"status\":: 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Publicación\"\n}",
           "type": "json"
         }
       ]
@@ -727,7 +824,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
           "type": "json"
         }
       ]
@@ -807,7 +904,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"{\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U\",\n    \"msg\": \"Usuario Autenticado con éxito\"\n}\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"{\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U\",\n    \"msg\": \"Usuario Autenticado con éxito\"\n}\n}",
           "type": "json"
         }
       ]
@@ -826,7 +923,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Autenticar\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Autenticar\"\n}",
           "type": "json"
         }
       ]
@@ -913,7 +1010,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU\",\n    \"newUser\": true,\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU\",\n    \"newUser\": true,\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -932,7 +1029,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 500 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"newUser\": true,\n    \"msg\": \"Debe aceptar terminos y condiciones\"\n}",
+          "content": "HTTP/1.1 500 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"newUser\": true,\n    \"msg\": \"Debe aceptar terminos y condiciones\"\n}",
           "type": "json"
         }
       ]
@@ -1040,7 +1137,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0\",\n    \"msg\": \"Usuario Registrado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0\",\n    \"msg\": \"Usuario Registrado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -1137,7 +1234,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Token Push Actualizado\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Token Push Actualizado\"\n}",
           "type": "json"
         }
       ]
@@ -1156,7 +1253,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
           "type": "json"
         }
       ]

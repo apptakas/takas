@@ -592,7 +592,47 @@ userController.ListProductos = async (req) => {
 
 };
 
+//LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA - TAKASTEAR 
+userController.ListProductSubCategory = async (req) => {
+    try {
+        const ProductData = {
+            subcategory: req.SubCategoriaProduct,
+            status: req.statusProduct
+        };
+        //console.log(userData.password);
+        let response = await Product.ListProductSubCategory(ProductData);
 
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de productos filtrados por subcategorías'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar productos filtrados por subcategorías'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
 module.exports = userController;
