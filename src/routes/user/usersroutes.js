@@ -228,7 +228,7 @@ router.post('/gautenticar', [
 
 
 /**
- * @api {post} /user/LisTypePublication 1 LisTypePublication
+ * @api {get} /user/LisTypePublication 1 LisTypePublication
  * @apiName LisTypePublication - Listar Categorias filtrado por tipo de publicación
  * @apiGroup TypePublication
  * 
@@ -296,7 +296,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
 })
 
 /**
- * @api {post} /user/listcategory 1 listcategory
+ * @api {get} /user/listcategory 1 listcategory
  * @apiName listcategory - Listar Categorias filtrado por tipo de publicación
  * @apiGroup Category
  * 
@@ -474,7 +474,7 @@ router.put('/tokenpush', rutasProtegidas, [
 
 
 /**
- * @api {put} /user/userexist 5 userexist
+ * @api {get} /user/userexist 5 userexist
  * @apiName userexist - Verficación si un usuario existe en la DB del Backend
  * @apiGroup User
  * 
@@ -531,7 +531,7 @@ router.get('/userexist', rutasProtegidas, [
 
 
 /**
- * @api {post} /user/listypepreferences 1 Listypepreferences
+ * @api {get} /user/listypepreferences 1 Listypepreferences
  * @apiName Listypepreferences - Listar Preferencias de negociación que puede tener una publicación
  * @apiGroup Preferences
  * 
@@ -573,7 +573,7 @@ router.get('/userexist', rutasProtegidas, [
     "msg": "Lista de Tipo de Preferencias"
 }
  *
- * @apiError UserNotFound The id of the Category was not found.
+ * @apiError UserNotFound The id of the Preferences was not found.
  *
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 404 Not Found
@@ -599,7 +599,7 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
 
 
 /**
- * @api {post} /user/listmoney 1 listmoney
+ * @api {get} /user/listmoney 1 listmoney
  * @apiName listmoney - Listar tipos de monedas
  * 
  * @apiGroup Money
@@ -624,13 +624,15 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
     "data": [
         {
             "id": 2,
-            "name": "Dólar USD",
-            "status":: 1
+            "name": "Dólar Americano",
+            "shortname": "USD",
+            "status": 1
         },
         {
             "id": 3,
-            "name": "Pesos COP",
-            "status":: 1
+            "name": "Pesos Colombianos",
+            "shortname": "COP",
+            "status": 1
         }
     ],
     "msg": "Lista de Tipo de Monedas"
@@ -1190,7 +1192,7 @@ router.get('/detailsproduct', rutasProtegidas, [
 
 /**
  * @api {post} /user/newquestion 1 newquestion
- * @apiName newquestion - Detalle del producto
+ * @apiName newquestion - Pregunta de un producto
  * @apiGroup Questions
  * 
  * 
@@ -1252,6 +1254,71 @@ router.post('/newquestion', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)
     
     }) 
+
+/**
+ * @api {post} /user/answerquestion 2 answerquestion
+ * @apiName answerquestion - Respuesta del una pregunta de unproducto
+ * @apiGroup Questions
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idQuestion required.
+ * @apiParam {int} idPublication required.
+ * @apiParam {varchar} descriptionAnswer required.
+ * @apiParam {int} typeQuestion required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "msg": "Respuesta creada exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar crear una Respuesta"
+}
+ **/
+
+//CREAR UNA RESPUESTA A UNA PREGUNTA - PUBLICACIÓN
+router.post('/answerquestion', rutasProtegidas, [
+    check('idQuestion', 'El idQuestion es obligatorio').not().isEmpty().exists(),
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('descriptionAnswer', 'El descriptionAnswer es obligatorio').not().isEmpty().exists(),
+    check('typeQuestion', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.AnswerQuestion(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
 
 
 

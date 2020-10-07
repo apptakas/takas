@@ -799,4 +799,89 @@ userController.NewQuestion = async (req) => {
 
 
 
+//CREAR RESPUESTA A UNA PUBLICACIÓ - GENERAL 
+userController.AnswerQuestion = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let hoy=(`${
+            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
+            dt.getMonth().toString().padStart(2, '0')}-${
+            dt.getDate().toString().padStart(4, '0')} ${
+            dt.getHours().toString().padStart(2, '0')}:${
+            dt.getMinutes().toString().padStart(2, '0')}:${
+            dt.getSeconds().toString().padStart(2, '0')}`
+        );
+
+        let QuestionData ={};
+       // console.log(req.typeQuestion);
+        if(req.typeQuestion==1){
+            QuestionData = {
+                questions: req.idQuestion,
+                idproduct: req.idPublication,
+                description: req.descriptionAnswer,
+                datecreated:hoy,
+                publication:1,
+                status: 1,
+                isquestions: false
+            };
+        }if(req.typeQuestion==2){
+            QuestionData = {
+                questions: req.idQuestion,
+                idservice: req.idPublication,
+                description: req.descriptionAnswer,
+                datecreated:hoy,
+                publication:2,
+                status: 1,
+                isquestions: false
+            };
+        }if(req.typeQuestion==3){
+            QuestionData = {
+                questions: req.idQuestion,
+                idauction: req.idPublication,
+                description: req.descriptionAnswer,
+                datecreated:hoy,
+                publication:3,
+                status: 1,
+                isquestions: false
+            };
+        }
+        //console.log(userData.password);
+        let response = await Question.NewQuestion(QuestionData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Respuesta creada exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar crear una Respuesta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+
 module.exports = userController;

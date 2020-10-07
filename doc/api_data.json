@@ -1,6 +1,6 @@
 [
   {
-    "type": "post",
+    "type": "get",
     "url": "/user/listcategory",
     "title": "1 listcategory",
     "name": "listcategory_-_Listar_Categorias_filtrado_por_tipo_de_publicación",
@@ -90,7 +90,7 @@
     "groupTitle": "Category"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/user/listmoney",
     "title": "1 listmoney",
     "name": "listmoney_-_Listar_tipos_de_monedas",
@@ -138,7 +138,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dólar USD\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Pesos COP\",\n            \"status\":: 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Monedas\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Dólar Americano\",\n            \"shortname\": \"USD\",\n            \"status\": 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Pesos Colombianos\",\n            \"shortname\": \"COP\",\n            \"status\": 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Monedas\"\n}",
           "type": "json"
         }
       ]
@@ -167,7 +167,7 @@
     "groupTitle": "Money"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/user/listypepreferences",
     "title": "1 Listypepreferences",
     "name": "Listypepreferences_-_Listar_Preferencias_de_negociación_que_puede_tener_una_publicación",
@@ -240,7 +240,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "UserNotFound",
-            "description": "<p>The id of the Category was not found.</p>"
+            "description": "<p>The id of the Preferences was not found.</p>"
           }
         ]
       },
@@ -771,9 +771,120 @@
   },
   {
     "type": "post",
+    "url": "/user/answerquestion",
+    "title": "2 answerquestion",
+    "name": "answerquestion_-_Respuesta_del_una_pregunta_de_unproducto",
+    "group": "Questions",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idQuestion",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idPublication",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "descriptionAnswer",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "typeQuestion",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Respuesta creada exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar crear una Respuesta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Questions"
+  },
+  {
+    "type": "post",
     "url": "/user/newquestion",
     "title": "1 newquestion",
-    "name": "newquestion_-_Detalle_del_producto",
+    "name": "newquestion_-_Pregunta_de_un_producto",
     "group": "Questions",
     "header": {
       "examples": [
@@ -958,7 +1069,7 @@
     "groupTitle": "SubCategory"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/user/LisTypePublication",
     "title": "1 LisTypePublication",
     "name": "LisTypePublication_-_Listar_Categorias_filtrado_por_tipo_de_publicación",
@@ -1464,7 +1575,7 @@
     "groupTitle": "User"
   },
   {
-    "type": "put",
+    "type": "get",
     "url": "/user/userexist",
     "title": "5 userexist",
     "name": "userexist_-_Verficación_si_un_usuario_existe_en_la_DB_del_Backend",
