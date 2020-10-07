@@ -80,18 +80,20 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
+            let ProductPreferences1={};
             pool.query(
                 "SELECT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status, url  FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY p.id",
-                (err, result) => {
+                async(err, result) => {
                     //console.log(result);
-                   
+                    ProductPreferences1 = await ProductModel.recorridoProductPreferences(result);
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {     
+                    } else {  
+                        
                         resolve({
-                            'result': result
+                            'result': ProductPreferences1
                         })
                     }
 
@@ -108,10 +110,13 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
+
+            let ProductPreferences={};
             pool.query(
                 "SELECT p.id,SUBSTRING_INDEX(GROUP_CONCAT(idproduct ORDER BY RAND()), ',', 1) AS idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status,i.id, url FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
-                (err, result) => {
+                async(err, result) => {
                     //console.log(result);
+                    ProductPreferences = await ProductModel.recorridoProductPreferences(result);
                    
                     if (err) {
                         resolve({
@@ -119,7 +124,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
                         })
                     } else {     
                         resolve({
-                            'result': result
+                            'result': ProductPreferences
                         })
                     }
 
@@ -129,6 +134,58 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
         }
     })
 };
+
+ProductModel.recorridoProductPreferences = (result) => {
+
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+
+        for (const element of result) {
+            arr.push(await ProductModel.ListPrefrencesProduct(element));
+        }
+        resolve(arr)
+    }
+    )
+
+} 
+
+ProductModel.ListPrefrencesProduct = (element) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            'SELECT preference FROM `preferences_product` WHERE idproduct= ?', [element.idproduct],
+            (err2, result2) => {
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);  
+                console.log(result2); 
+                console.log(result2.length);
+                let preferences= []; 
+                for(var atr2 in result2){
+                preferences.push(result2[atr2].preference); 
+                };  
+                console.log(preferences);
+                resolve({
+                    "id": element.idproduct,
+                    "idproduct": element.idproduct,
+                    "datecreated": element.datecreated,
+                    "iduser": element.iduser,
+                    "name": element.name,
+                    "details": element.details,
+                    "typemoney": element.typemoney,
+                    "marketvalue": element.marketvalue,
+                    "typepublication": element.typepublication,
+                    "status": element.status,
+                    "url": element.url,
+                    "Preferences": preferences,
+                });
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
 
 //LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA- TAKASTEAR 
 ProductModel.ListProductSubCategory = (ProductData,callback) => {

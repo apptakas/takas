@@ -867,7 +867,11 @@ router.post('/newproduct', rutasProtegidas,[
             "subcategory": 1,
             "typepublication": 1,
             "status":: 1,
-            "url": "https://n9.cl/vt0n"
+            "url": "https://n9.cl/vt0n",
+            "Preferences": [
+                1,
+                2
+            ]
         },
         {
             "idproduct": 5,
@@ -880,7 +884,11 @@ router.post('/newproduct', rutasProtegidas,[
             "subcategory": 1,
             "typepublication": 1,
             "status":: 1,
-            "url": "https://n9.cl/fy8l"
+            "url": "https://n9.cl/fy8l",
+            "Preferences": [
+                1,
+                2
+            ]
         },
         {
             "idproduct": 6,
@@ -893,7 +901,11 @@ router.post('/newproduct', rutasProtegidas,[
             "subcategory": 1,
             "typepublication": 1,
             "status":: 1,
-            "url": "https://n9.cl/fy8l"
+            "url": "https://n9.cl/fy8l",
+            "Preferences": [
+                1,
+                2
+            ]
         }
     ],
     "msg": "Lista de mis productos"
@@ -966,7 +978,11 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "subcategory": 1,
             "typepublication": 1,
             "status":: 1,
-            "url": "https://n9.cl/rbsa"
+            "url": "https://n9.cl/rbsa",
+            "Preferences": [
+                1,
+                2
+            ]
         }
     ],
     "msg": "Lista de productos"
