@@ -6,6 +6,7 @@ const MasterTypePreferences = require('../models/masterpreferences.js');
 const MasterMoney = require('../models/mastermoney.js');
 const MasterSubCategory = require('../models/mastersubcategory.js');
 const Product = require('../models/product.js');
+const Question = require('../models/questions.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
@@ -294,9 +295,46 @@ userController.Updatetokenpush = async (req) => {
         return { status: 'ko' };
     }
 
-
-
 };
+
+///VERIFICAR SI UN USUARIO SE ENCUENTRA REGISTRADO EN LA BASE DE DATOS EL BACKEND
+userController.UserExist = async (req) => {
+    //console.log('response');
+    try {
+        const userData = {
+            id: req.idfirebaseUser
+        };
+
+
+        let resp = await User.UserExist(userData);
+        console.log('resultado ', resp);
+        let data = {};
+        if (resp && resp.UserExist) {
+            data = {
+                success: true,
+                status: '200',
+                UserExist:resp.UserExist,
+                msg: 'El Usuario si existe'
+            }
+
+        } else {
+            data = {
+                success: false,
+                status: '500',
+                msgerr: resp.error.sqlMessage,
+                codeerr: resp.error.code,
+                noerr: resp.error.errno
+            }
+
+        }
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+    
+};
+
 
 //Listar tipo de preferencias que puede tener una publicación según publicación 
 userController.LisTypePreference = async () => {
@@ -633,6 +671,132 @@ userController.ListProductSubCategory = async (req) => {
     }
 
 };
+
+
+//LISTAR DETTALLES DE UN PRODUCTO - TAKASTEAR 
+userController.DetailsProduct = async (req) => {
+    try {
+        const ProductData = {
+            id: req.IdProduct
+        };
+        //console.log(userData.password);
+        let response = await Product.DetailsProduct(ProductData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                images: response.images,
+                msg: 'Listar detalles de un producto'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar detalles de un producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//CREAR PREGUNTA A UNA PUBLICACIÓ - GENERAL 
+userController.NewQuestion = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let hoy=(`${
+            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
+            dt.getMonth().toString().padStart(2, '0')}-${
+            dt.getDate().toString().padStart(4, '0')} ${
+            dt.getHours().toString().padStart(2, '0')}:${
+            dt.getMinutes().toString().padStart(2, '0')}:${
+            dt.getSeconds().toString().padStart(2, '0')}`
+        );
+
+        let QuestionData ={};
+       // console.log(req.typeQuestion);
+        if(req.typeQuestion==1){
+            QuestionData = {
+                iduser: req.idFirebaseUser,
+                idproduct: req.idPublication,
+                description: req.descriptionQuestion,
+                datecreated:hoy,
+                publication:1,
+                status: 1,
+                isquestions: true
+            };
+        }if(req.typeQuestion==2){
+            QuestionData = {
+                iduser: req.idFirebaseUser,
+                idservice: req.idPublication,
+                description: req.descriptionQuestion,
+                datecreated:hoy,
+                publication:2,
+                status: 1,
+                isquestions: true
+            };
+        }if(req.typeQuestion==3){
+            QuestionData = {
+                iduser: req.idFirebaseUser,
+                idauction: req.idPublication,
+                description: req.descriptionQuestion,
+                datecreated:hoy,
+                publication:3,
+                status: 1,
+                isquestions: true
+            };
+        }
+        //console.log(userData.password);
+        let response = await Question.NewQuestion(QuestionData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Pregunta creada exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar crear una pregunta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 module.exports = userController;

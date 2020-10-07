@@ -145,6 +145,11 @@ router.post('/autenticar', [
     check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
 ], async (req, res) => {
 
+    const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
 
     let response = await userController.Autenticar(req.body);
 
@@ -205,6 +210,11 @@ router.post('/gautenticar', [
     check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
 ], async (req, res) => {
 
+    const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
 
     let response = await userController.GAutenticar(req.body);
 
@@ -388,6 +398,11 @@ router.get('/listcategory', rutasProtegidas, [
     check('typepublicCategory', 'Se requiere el tipo de publicación').not().isEmpty().exists()
 ], async (req, res) => {
 
+    const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
 
     let response = await userController.ListCategory(req.body);
 
@@ -441,7 +456,11 @@ router.put('/tokenpush', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists(),
     check('tokenpushUser', 'El tokenpush el obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
+    const error = validationResult(req);
 
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
 
     let response = await userController.Updatetokenpush(req.body);
 
@@ -452,6 +471,63 @@ router.put('/tokenpush', rutasProtegidas, [
     return res.status(response.data.status).json(response.data)
 
 })
+
+
+/**
+ * @api {put} /user/userexist 5 userexist
+ * @apiName userexist - Verficación si un usuario existe en la DB del Backend
+ * @apiGroup User
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * @apiParam {smallint}  idfirebaseUser  required. 
+ *
+ * @apiSuccess {boolean} success of the User.
+ * @apiSuccess {int} status 200 of the User.
+ * @apiSuccess {string} msg   of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status":: "200",
+    "msg": "Token Push Actualizado"
+}
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar Categoría"
+}
+ */
+///tokenpush
+router.get('/userexist', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebaseUser el obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+    const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+
+    let response = await userController.UserExist(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
 
 
 /**
@@ -837,6 +913,11 @@ check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exis
 check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
 ],async (req, res) => {
 
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
 
     let response = await userController.ListMisProductos(req.body);
 
@@ -904,7 +985,12 @@ router.get('/listproductos', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
     check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
-    
+        
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
     
         let response = await userController.ListProductos(req.body);
     
@@ -991,7 +1077,12 @@ router.get('/listproductsubcategory', rutasProtegidas, [
     check('SubCategoriaProduct', 'El SubCategoriaProduct es obligatorio').not().isEmpty().exists(),
     check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
-    
+
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
     
         let response = await userController.ListProductSubCategory(req.body);
     
@@ -1003,8 +1094,166 @@ router.get('/listproductsubcategory', rutasProtegidas, [
     
     })    
 
+/**
+ * @api {get} /user/detailsproduct 5 detailsproduct
+ * @apiName detailsproduct - Detalle del producto
+ * @apiGroup Product
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} IdProduct required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 7,
+            "datecreated": "05/10/2020 13:25:07",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "nombre": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "subcategory": 1,
+            "typepublication": 1,
+            "estado": 1
+        }
+    ],
+    "images": [
+        {
+            "url": "https://n9.cl/fy8l"
+        },
+        {
+            "url": "https://n9.cl/2vy3"
+        },
+        {
+            "url": "https://n9.cl/xr43h"
+        },
+        {
+            "url": "https://n9.cl/9n16"
+        },
+        {
+            "url": "https://n9.cl/rbsa"
+        },
+        {
+            "url": "https://vsdrgdgfg"
+        }
+    ],
+    "msg": "Listar detalles de un producto"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar detalles del producto"
+}
+ **/
 
-
-
+//LISTAR DE DETALLES DEL PRODUCTO
+router.get('/detailsproduct', rutasProtegidas, [
+    check('IdProduct', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
     
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.DetailsProduct(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })    
+
+
+/**
+ * @api {post} /user/newquestion 1 newquestion
+ * @apiName newquestion - Detalle del producto
+ * @apiGroup Questions
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idFirebaseUser required.
+ * @apiParam {int} idPublication required.
+ * @apiParam {varchar} descriptionQuestion required.
+ * @apiParam {int} typeQuestion required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "msg": "Pregunta creada con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar crear pregunta"
+}
+ **/
+
+//CREAR UNA PREGUNTA - PUBLICACIÓN
+router.post('/newquestion', rutasProtegidas, [
+    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('descriptionQuestion', 'El IdProduct es obligatorio').not().isEmpty().exists(),
+    check('typeQuestion', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.NewQuestion(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
+
+
 module.exports = router;

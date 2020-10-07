@@ -158,4 +158,62 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
     })
 };
 
+
+//LISTAR DETALLE DE UN PRODRUCTO - TAKASTEAR 
+ProductModel.DetailsProduct = (ProductData,callback) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                "SELECT id,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,NAME AS nombre,details,typemoney,marketvalue,subcategory,typepublication,STATUS AS estado FROM  product  WHERE id="+ProductData.id,
+                (err, result) => {
+                    //console.log(result);
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {     
+                        // resolve({
+                        //     'result': result
+                        // })
+                        //Listar Imagenes
+                        pool.query(
+                            "SELECT url FROM  imgproduct WHERE idproduct="+ProductData.id,
+                            (err, result2) => {
+                                //console.log(result);
+                               
+                                if (err) {
+                                    resolve({
+                                        'error': err
+                                    })
+                                } else {   
+                                    // const images = {}; 
+                                    // console.log(result2.length);
+                                    // if(result2.length!=0){
+                                    //     for(var atr2 in result2){
+                                    //         images[atr2] = result2[atr2]; 
+                                    //     };
+                                    // }
+                                    
+                                    resolve({
+                                        'result': result,
+                                        'images': result2
+                                    })
+                                }
+            
+                            }
+                        )
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+
 module.exports = ProductModel;

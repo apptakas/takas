@@ -213,6 +213,32 @@ userModel.updatetokenpush = (userData, callback) => {
 
 };
 
+///VERIFICAR SI UN USUARIO SE ENCUENTRA REGISTRADO EN LA BASE DE DATOS EL BACKEND
+userModel.UserExist = (userData, callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'SELECT * FROM `users`  where id= ?', [userData.id],
+                (err, resut) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'UserExist': true
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
 
 
 
