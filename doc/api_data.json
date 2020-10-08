@@ -1,6 +1,6 @@
 [
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/listcategory",
     "title": "1 listcategory",
     "name": "listcategory_-_Listar_Categorias_filtrado_por_tipo_de_publicación",
@@ -257,7 +257,7 @@
     "groupTitle": "Preferences"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/detailsproduct",
     "title": "5 detailsproduct",
     "name": "detailsproduct_-_Detalle_del_producto",
@@ -541,7 +541,7 @@
     "groupTitle": "Product"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/listproductsubcategory",
     "title": "4 listproductsubcategory",
     "name": "listproductsubcategory_-_Listar_Los_productos_pubicados_por_otros_usuarios",
@@ -1582,7 +1582,7 @@
     "groupTitle": "User"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/userexist",
     "title": "5 userexist",
     "name": "userexist_-_Verficación_si_un_usuario_existe_en_la_DB_del_Backend",

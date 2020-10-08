@@ -296,7 +296,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
 })
 
 /**
- * @api {get} /user/listcategory 1 listcategory
+ * @api {post} /user/listcategory 1 listcategory
  * @apiName listcategory - Listar Categorias filtrado por tipo de publicación
  * @apiGroup Category
  * 
@@ -394,7 +394,7 @@ router.get('/listypepublication', rutasProtegidas, async (req, res) => {
 }
  */
 //MASTER CATEGORY
-router.get('/listcategory', rutasProtegidas, [
+router.post('/listcategory', rutasProtegidas, [
     check('typepublicCategory', 'Se requiere el tipo de publicación').not().isEmpty().exists()
 ], async (req, res) => {
 
@@ -474,7 +474,7 @@ router.put('/tokenpush', rutasProtegidas, [
 
 
 /**
- * @api {get} /user/userexist 5 userexist
+ * @api {post} /user/userexist 5 userexist
  * @apiName userexist - Verficación si un usuario existe en la DB del Backend
  * @apiGroup User
  * 
@@ -509,7 +509,7 @@ router.put('/tokenpush', rutasProtegidas, [
 }
  */
 ///tokenpush
-router.get('/userexist', rutasProtegidas, [
+router.post('/userexist', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser el obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
     const error = validationResult(req);
@@ -1023,7 +1023,7 @@ router.post('/listproductos', rutasProtegidas, [
     
 
 /**
- * @api {get} /user/listproductsubcategory 4 listproductsubcategory
+ * @api {post} /user/listproductsubcategory 4 listproductsubcategory
  * @apiName listproductsubcategory - Listar Los productos pubicados por otros usuarios
  * @apiGroup Product
  * 
@@ -1092,7 +1092,7 @@ router.post('/listproductos', rutasProtegidas, [
 }
  **/
 //LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA
-router.get('/listproductsubcategory', rutasProtegidas, [
+router.post('/listproductsubcategory', rutasProtegidas, [
     check('SubCategoriaProduct', 'El SubCategoriaProduct es obligatorio').not().isEmpty().exists(),
     check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
@@ -1114,7 +1114,7 @@ router.get('/listproductsubcategory', rutasProtegidas, [
     })    
 
 /**
- * @api {get} /user/detailsproduct 5 detailsproduct
+ * @api {post} /user/detailsproduct 5 detailsproduct
  * @apiName detailsproduct - Detalle del producto
  * @apiGroup Product
  * 
@@ -1187,7 +1187,7 @@ router.get('/listproductsubcategory', rutasProtegidas, [
  **/
 
 //LISTAR DE DETALLES DEL PRODUCTO
-router.get('/detailsproduct', rutasProtegidas, [
+router.post('/detailsproduct', rutasProtegidas, [
     check('IdProduct', 'El IdProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
