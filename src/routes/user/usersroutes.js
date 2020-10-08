@@ -945,7 +945,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
 })
 
 /**
- * @api {get} /user/listproductos 3 listproductos
+ * @api {post} /user/listproductos 3 listproductos
  * @apiName listproductos - Listar Los productos pubicados por otros usuarios
  * @apiGroup Product
  * 
@@ -1000,7 +1000,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
 }
  **/
 //LISTAR MIS PUBLICACIONES
-router.get('/listproductos', rutasProtegidas, [
+router.post('/listproductos', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
     check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {

@@ -444,7 +444,7 @@
     "groupTitle": "Product"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/listproductos",
     "title": "3 listproductos",
     "name": "listproductos_-_Listar_Los_productos_pubicados_por_otros_usuarios",
