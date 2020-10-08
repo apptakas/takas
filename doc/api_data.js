@@ -347,7 +347,7 @@ define({ "api": [
     "groupTitle": "Product"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/listmisproductos",
     "title": "2 listmisproductos",
     "name": "listmisproductos_-_Listar_Las_plublicaciones_de_un_usuario",

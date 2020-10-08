@@ -831,7 +831,7 @@ router.post('/newproduct', rutasProtegidas,[
 
 
 /**
- * @api {get} /user/listmisproductos 2 listmisproductos
+ * @api {post} /user/listmisproductos 2 listmisproductos
  * @apiName listmisproductos - Listar Las plublicaciones de un usuario
  * @apiGroup Product
  * 
@@ -923,7 +923,7 @@ router.post('/newproduct', rutasProtegidas,[
 }
  **/
 //LISTAR MIS PUBLICACIONES
-router.get('/listmisproductos', rutasProtegidas, [
+router.post('/listmisproductos', rutasProtegidas, [
 check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
 check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
 ],async (req, res) => {
