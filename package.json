@@ -33,6 +33,7 @@
     "express-validator": "^6.6.1",
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
+    "jwt-redis": "^6.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "node-datetime": "^2.1.2",

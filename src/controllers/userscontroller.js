@@ -43,13 +43,21 @@ userController.newUser = async (req) => {
             const payload = {
                 ignoreExpiration: true
             };
-            const token = jwt.sign(payload, config.llave, {
+
+            var token = jwt.sign(payload, config.llave, {
                 expiresIn: 60 * 60 * 24
             });
+            // var refreshToken = randtoken.uid(256) ;
+            // refreshTokens[refreshToken] = {token: 'JWT ' + token, refreshToken: refreshToken};
+
+            // const token = jwt.sign(payload, config.llave, {
+            //     expiresIn: 60 * 60 * 24
+            // });
             data = {
                 success: true,
                 status: '200',
                 token: token,
+                refreshTokens: refreshTokens,
                 msg: 'Usuario Registrado con éxito'
                 //data: response
             }

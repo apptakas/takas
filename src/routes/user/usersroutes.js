@@ -858,7 +858,6 @@ router.post('/newproduct', rutasProtegidas,[
     "status": "200",
     "data": [
         {
-            "id": 17,
             "idproduct": 17,
             "datecreated": "06/09/2021 18:06:37",
             "iduser": "idfirebaseU4534dsaxgg",
@@ -940,7 +939,6 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
     "status": "200",
     "data": [
         {
-            "id": 1,
             "idproduct": 1,
             "datecreated": "05/10/2020 13:46:27",
             "iduser": "idfirebaseUsers77wqedsaxgg",
@@ -956,7 +954,6 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "Preferences": []
         },
         {
-            "id": 7,
             "idproduct": 7,
             "datecreated": "05/10/2020 13:25:07",
             "iduser": "idfirebaseUsers77wqedsaxgg",
@@ -972,7 +969,6 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "Preferences": []
         },
         {
-            "id": 11,
             "idproduct": 11,
             "datecreated": "06/09/2021 17:27:47",
             "iduser": "idfirebaseUsers77wqedsaxgg",
@@ -1052,7 +1048,6 @@ router.post('/listproductos', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "id": 1,
             "idproduct": 1,
             "datecreated": "05/10/2020 13:46:27",
             "iduser": "idfirebaseUsers77wqedsaxgg",
@@ -1068,7 +1063,6 @@ router.post('/listproductos', rutasProtegidas, [
             "Preferences": []
         },
         {
-            "id": 7,
             "idproduct": 7,
             "datecreated": "05/10/2020 13:25:07",
             "iduser": "idfirebaseUsers77wqedsaxgg",
@@ -1084,7 +1078,6 @@ router.post('/listproductos', rutasProtegidas, [
             "Preferences": []
         },
         {
-            "id": 11,
             "idproduct": 11,
             "datecreated": "06/09/2021 17:27:47",
             "iduser": "idfirebaseUsers77wqedsaxgg",
@@ -1100,7 +1093,6 @@ router.post('/listproductos', rutasProtegidas, [
             "Preferences": []
         },
         {
-            "id": 17,
             "idproduct": 17,
             "datecreated": "06/09/2021 18:06:37",
             "iduser": "idfirebaseU4534dsaxgg",

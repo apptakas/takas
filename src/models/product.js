@@ -84,7 +84,7 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
             pool.query(
                 "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
                 async(err, result) => {
-                    //console.log(result);                 
+                   // console.log(err);                 
                     
                     if (err) {
                         resolve({
@@ -142,18 +142,19 @@ ProductModel.armaresult = (result) => {
         try{
             let img={};
             let prefe={};
+            //console.log(result);
             for (const element of result) {
                 img=await ProductModel.ListImagesProduct(element);
                 prefe=await ProductModel.ListPrefrencesProduct(element);
+                let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
                 arr.push({
-                    "id": element.idproduct,
                     "idproduct": element.idproduct,
                     "datecreated": element.datecreated,
                     "iduser": element.iduser,
                     "name": element.name,
                     "details": element.details,
                     "typemoney": element.typemoney,
-                    "marketvalue": element.marketvalue,
+                    "marketvalue": Precio,
                     "typepublication": element.typepublication,
                     "status": element.status,
                     "ProductImages":img.ImagesProduct,
@@ -176,9 +177,9 @@ ProductModel.armaresult = (result) => {
 ProductModel.ListImagesProduct = (element) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            'SELECT  url FROM imgproduct WHERE  ? LIMIT 1', [element.idproduct],
+            'SELECT  url FROM imgproduct WHERE idproduct=? ',[element.idproduct],
             (err2, result2) => {
-                //console.log(element.idproduct);   
+                 
                 //console.log(element.id);   
                 //console.log(element.namec);   
                 //console.log(result2[1].preference);
@@ -187,13 +188,14 @@ ProductModel.ListImagesProduct = (element) => {
                         'error': err2
                     })
                 } else {     
-                    console.log(result2); 
+                    //console.log(result2); 
                     // console.log(result2.length);
                     let ImagesProduct= []; 
                     for(var atr2 in result2){
                     ImagesProduct.push(result2[atr2].url); 
                     };  
-                    console.log(ImagesProduct);
+                    console.log(element.idproduct);  
+                   // console.log(ImagesProduct);
                     resolve({
                         
                         "ImagesProduct": ImagesProduct
@@ -227,7 +229,6 @@ ProductModel.ListPrefrencesProduct = (element) => {
                     // console.log(result2); 
                     // console.log(result2.length);
                     let preferences= []; 
-                    let ImagesProduct=[];
                     for(var atr2 in result2){
                     preferences.push(result2[atr2].preference);
                     };  
