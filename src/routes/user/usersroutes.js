@@ -1523,7 +1523,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
 }
  **/
 
-//CREAR UNA PREGUNTA - PUBLICACIÓN
+//CREAR UNA OFERTA - PUBLICACIÓN
 router.post('/newoffer', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
