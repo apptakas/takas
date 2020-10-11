@@ -958,6 +958,87 @@ userController.ListQuestionAnswer = async (req) => {
 };
 
 
+//
+//CREAR OFERTAS A UNA PUBLICACIÓ - GENERAL 
+userController.NewOffer = async (req) => {
+    try {
 
+        let dt = new Date();//getMonth   getDate
+
+        let hoy=(`${
+            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
+            dt.getMonth().toString().padStart(2, '0')}-${
+            dt.getDate().toString().padStart(4, '0')} ${
+            dt.getHours().toString().padStart(2, '0')}:${
+            dt.getMinutes().toString().padStart(2, '0')}:${
+            dt.getSeconds().toString().padStart(2, '0')}`
+        );
+
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+        if(req.typeQuestion==1){
+            OfferData = {
+                iduser: req.idFirebaseUser,
+                idproduct: req.idPublication,
+                description: req.descriptionQuestion,
+                datecreated:hoy,
+                publication:1,
+                status: 1,
+                isquestions: true
+            };
+        }if(req.typeQuestion==2){
+            OfferData = {
+                iduser: req.idFirebaseUser,
+                idservice: req.idPublication,
+                description: req.descriptionQuestion,
+                datecreated:hoy,
+                publication:2,
+                status: 1,
+                isquestions: true
+            };
+        }if(req.typeQuestion==3){
+            OfferData = {
+                iduser: req.idFirebaseUser,
+                idauction: req.idPublication,
+                description: req.descriptionQuestion,
+                datecreated:hoy,
+                publication:3,
+                status: 1,
+                isquestions: true
+            };
+        }
+        //console.log(userData.password);
+        let response = await Question.NewOffer(OfferData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Pregunta creada exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar crear una pregunta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 module.exports = userController;
