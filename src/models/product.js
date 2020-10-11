@@ -80,9 +80,9 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
-            let ProductPreferences1={};
+            let armaresult={};
             pool.query(
-                "SELECT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status, url  FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY p.id",
+                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
                 async(err, result) => {
                     //console.log(result);                 
                     
@@ -91,9 +91,9 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
                             'error': err
                         })
                     } else {  
-                        ProductPreferences1 = await ProductModel.recorridoProductPreferences(result);
+                        armaresult = await ProductModel.armaresult(result);  
                         resolve({
-                            'result': ProductPreferences1
+                            'result': armaresult
                         })
                     }
 
@@ -111,9 +111,9 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
     return new Promise((resolve, reject) => {
         if (pool) {
 
-            let ProductPreferences={};
+            let armaresult={};
             pool.query(
-                "SELECT p.id,SUBSTRING_INDEX(GROUP_CONCAT(idproduct ORDER BY RAND()), ',', 1) AS idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status,i.id, url FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -122,9 +122,9 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
                             'error': err
                         })
                     } else {   
-                        ProductPreferences = await ProductModel.recorridoProductPreferences(result);  
+                        armaresult = await ProductModel.armaresult(result);  
                         resolve({
-                            'result': ProductPreferences
+                            'result': armaresult
                         })
                     }
 
@@ -134,14 +134,33 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
         }
     })
 };
-
-ProductModel.recorridoProductPreferences = (result) => {
+///
+ProductModel.armaresult = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
         try{
+            let img={};
+            let prefe={};
             for (const element of result) {
-                arr.push(await ProductModel.ListPrefrencesProduct(element));
+                img=await ProductModel.ListImagesProduct(element);
+                prefe=await ProductModel.ListPrefrencesProduct(element);
+                arr.push({
+                    "id": element.idproduct,
+                    "idproduct": element.idproduct,
+                    "datecreated": element.datecreated,
+                    "iduser": element.iduser,
+                    "name": element.name,
+                    "details": element.details,
+                    "typemoney": element.typemoney,
+                    "marketvalue": element.marketvalue,
+                    "typepublication": element.typepublication,
+                    "status": element.status,
+                    "ProductImages":img.ImagesProduct,
+                     "Preferences":prefe.Preferences
+                    
+                });
+                
             }
             resolve(arr)
         }
@@ -152,6 +171,45 @@ ProductModel.recorridoProductPreferences = (result) => {
     )
 
 } 
+
+
+ProductModel.ListImagesProduct = (element) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            'SELECT  url FROM imgproduct WHERE  ? LIMIT 1', [element.idproduct],
+            (err2, result2) => {
+                //console.log(element.idproduct);   
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    console.log(result2); 
+                    // console.log(result2.length);
+                    let ImagesProduct= []; 
+                    for(var atr2 in result2){
+                    ImagesProduct.push(result2[atr2].url); 
+                    };  
+                    console.log(ImagesProduct);
+                    resolve({
+                        
+                        "ImagesProduct": ImagesProduct
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
+////////
+
 
 ProductModel.ListPrefrencesProduct = (element) => {
     return new Promise((resolve, reject) => {
@@ -166,26 +224,16 @@ ProductModel.ListPrefrencesProduct = (element) => {
                         'error': err2
                     })
                 } else {     
-                    console.log(result2); 
-                    console.log(result2.length);
+                    // console.log(result2); 
+                    // console.log(result2.length);
                     let preferences= []; 
+                    let ImagesProduct=[];
                     for(var atr2 in result2){
-                    preferences.push(result2[atr2].preference); 
+                    preferences.push(result2[atr2].preference);
                     };  
-                    console.log(preferences);
-                    resolve({
-                        "id": element.idproduct,
-                        "idproduct": element.idproduct,
-                        "datecreated": element.datecreated,
-                        "iduser": element.iduser,
-                        "name": element.name,
-                        "details": element.details,
-                        "typemoney": element.typemoney,
-                        "marketvalue": element.marketvalue,
-                        "typepublication": element.typepublication,
-                        "status": element.status,
-                        "url": element.url,
-                        "Preferences": preferences,
+                    //console.log(preferences);
+                    resolve({                        
+                        "Preferences": preferences
                     });
                 }  
                 
@@ -204,9 +252,10 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
+            let armaresult={};
             pool.query(
-                "SELECT p.id,SUBSTRING_INDEX(GROUP_CONCAT(idproduct ORDER BY RAND()), ',', 1) AS idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status,i.id, url FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
-                (err, result) => {
+                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
+                async(err, result) => {
                     //console.log(result);
                    
                     if (err) {
@@ -214,8 +263,9 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
                             'error': err
                         })
                     } else {     
+                        armaresult = await ProductModel.armaresult(result);  
                         resolve({
-                            'result': result
+                            'result': armaresult
                         })
                     }
 

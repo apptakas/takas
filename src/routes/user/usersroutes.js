@@ -855,54 +855,22 @@ router.post('/newproduct', rutasProtegidas,[
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status":: "200",
+    "status": "200",
     "data": [
         {
-            "idproduct": 1,
-            "datecreated": "05/10/2020 13:46:27",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
-            "name": "Mameluco para bebé",
-            "details": "Producto disponible de 0 a 24 meses",
-            "typemoney": 2,
-            "marketvalue": 30000,
-            "subcategory": 1,
-            "typepublication": 1,
-            "status":: 1,
-            "url": "https://n9.cl/vt0n",
-            "Preferences": [
-                1,
-                2
-            ]
-        },
-        {
-            "idproduct": 5,
-            "datecreated": "06/10/2020 13:24:41",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "id": 17,
+            "idproduct": 17,
+            "datecreated": "06/09/2021 18:06:37",
+            "iduser": "idfirebaseU4534dsaxgg",
             "name": "Gorros para bebés",
-            "details": "Gorros termicos y confortables",
+            "details": "Gorros termicos 1",
             "typemoney": 1,
             "marketvalue": 10000,
-            "subcategory": 1,
             "typepublication": 1,
-            "status":: 1,
-            "url": "https://n9.cl/fy8l",
-            "Preferences": [
-                1,
-                2
-            ]
-        },
-        {
-            "idproduct": 6,
-            "datecreated": "06/10/2020 13:24:45",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
-            "name": "Gorros para bebés",
-            "details": "Gorros termicos y confortables",
-            "typemoney": 1,
-            "marketvalue": 10000,
-            "subcategory": 1,
-            "typepublication": 1,
-            "status":: 1,
-            "url": "https://n9.cl/fy8l",
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
             "Preferences": [
                 1,
                 2
@@ -967,23 +935,57 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
-            "id": 72,
-            "idproduct": "18",
-            "datecreated": "06/09/2021 18:06:43",
-            "iduser": "idfirebaseU4534dsaxgg",
+ *             {{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "idproduct": 1,
+            "datecreated": "05/10/2020 13:46:27",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "name": "Mameluco para bebé",
+            "details": "Producto disponible de 0 a 24 meses",
+            "typemoney": 2,
+            "marketvalue": 30000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        },
+        {
+            "id": 7,
+            "idproduct": 7,
+            "datecreated": "05/10/2020 13:25:07",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
             "name": "Gorros para bebés",
-            "details": "Gorros termicos 2",
+            "details": "Gorros termicos y confortables",
             "typemoney": 1,
             "marketvalue": 10000,
-            "subcategory": 1,
             "typepublication": 1,
-            "status":: 1,
-            "url": "https://n9.cl/rbsa",
-            "Preferences": [
-                1,
-                2
-            ]
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        },
+        {
+            "id": 11,
+            "idproduct": 11,
+            "datecreated": "06/09/2021 17:27:47",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "name": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
         }
     ],
     "msg": "Lista de productos"
@@ -1051,31 +1053,70 @@ router.post('/listproductos', rutasProtegidas, [
     "data": [
         {
             "id": 1,
-            "idproduct": "1",
+            "idproduct": 1,
             "datecreated": "05/10/2020 13:46:27",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "name": "Mameluco para bebé",
             "details": "Producto disponible de 0 a 24 meses",
             "typemoney": 2,
             "marketvalue": 30000,
-            "subcategory": 1,
             "typepublication": 1,
             "status": 1,
-            "url": "https://n9.cl/vt0n"
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
         },
         {
-            "id": 3,
-            "idproduct": "5",
-            "datecreated": "06/10/2020 13:24:41",
+            "id": 7,
+            "idproduct": 7,
+            "datecreated": "05/10/2020 13:25:07",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "name": "Gorros para bebés",
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
             "marketvalue": 10000,
-            "subcategory": 1,
             "typepublication": 1,
             "status": 1,
-            "url": "https://n9.cl/fy8l"
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        },
+        {
+            "id": 11,
+            "idproduct": 11,
+            "datecreated": "06/09/2021 17:27:47",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "name": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        },
+        {
+            "id": 17,
+            "idproduct": 17,
+            "datecreated": "06/09/2021 18:06:37",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "name": "Gorros para bebés",
+            "details": "Gorros termicos 1",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": [
+                1,
+                2
+            ]
         }
     ],
     "msg": "Lista de productos filtrados por subcategorías"
