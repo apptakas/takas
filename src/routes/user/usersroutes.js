@@ -1168,41 +1168,31 @@ router.post('/listproductsubcategory', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *      {
     "success": true,
     "status": "200",
     "data": [
         {
-            "id": 7,
-            "datecreated": "05/10/2020 13:25:07",
-            "iduser": "idfirebaseUsers77wqedsaxgg",
-            "nombre": "Gorros para bebés",
-            "details": "Gorros termicos y confortables",
+            "idproduct": 17,
+            "datecreated": "06/09/2021 18:06:37",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "name": "Gorros para bebés",
+            "details": "Gorros termicos 1",
             "typemoney": 1,
-            "marketvalue": 10000,
-            "subcategory": 1,
+            "marketvalue": "10000.0000",
             "typepublication": 1,
-            "estado": 1
-        }
-    ],
-    "images": [
-        {
-            "url": "https://n9.cl/fy8l"
-        },
-        {
-            "url": "https://n9.cl/2vy3"
-        },
-        {
-            "url": "https://n9.cl/xr43h"
-        },
-        {
-            "url": "https://n9.cl/9n16"
-        },
-        {
-            "url": "https://n9.cl/rbsa"
-        },
-        {
-            "url": "https://vsdrgdgfg"
+            "status": 1,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv21-2020-10-11%2014%3A34%3A34.853337.jpg?alt=media&token=d7008372-6929-4d5b-83cc-9fc344b97395",
+                "https://n9.cl/2vy3",
+                "https://n9.cl/xr43h",
+                "https://n9.cl/9n16",
+                "https://n9.cl/rbsa"
+            ],
+            "Preferences": [
+                1,
+                2
+            ]
         }
     ],
     "msg": "Listar detalles de un producto"

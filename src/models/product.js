@@ -284,9 +284,10 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
+            let armaresult={};
             pool.query(
-                "SELECT id,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,NAME AS nombre,details,typemoney,marketvalue,subcategory,typepublication,STATUS AS estado FROM  product  WHERE id="+ProductData.id,
-                (err, result) => {
+                "SELECT id as idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id,
+                async(err, result) => {
                     //console.log(result);
                    
                     if (err) {
@@ -294,36 +295,11 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
                             'error': err
                         })
                     } else {     
-                        // resolve({
-                        //     'result': result
-                        // })
-                        //Listar Imagenes
-                        pool.query(
-                            "SELECT url FROM  imgproduct WHERE idproduct="+ProductData.id,
-                            (err, result2) => {
-                                //console.log(result);
-                               
-                                if (err) {
-                                    resolve({
-                                        'error': err
-                                    })
-                                } else {   
-                                    // const images = {}; 
-                                    // console.log(result2.length);
-                                    // if(result2.length!=0){
-                                    //     for(var atr2 in result2){
-                                    //         images[atr2] = result2[atr2]; 
-                                    //     };
-                                    // }
-                                    
-                                    resolve({
-                                        'result': result,
-                                        'images': result2
-                                    })
-                                }
-            
-                            }
-                        )
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                        
                     }
 
                 }
