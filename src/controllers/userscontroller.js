@@ -819,6 +819,7 @@ userController.AnswerQuestion = async (req) => {
         if(req.typeQuestion==1){
             QuestionData = {
                 questions: req.idQuestion,
+                iduser: req.idfirebaseUser,
                 idproduct: req.idPublication,
                 description: req.descriptionAnswer,
                 datecreated:hoy,
@@ -829,6 +830,7 @@ userController.AnswerQuestion = async (req) => {
         }if(req.typeQuestion==2){
             QuestionData = {
                 questions: req.idQuestion,
+                iduser: req.idfirebaseUser,
                 idservice: req.idPublication,
                 description: req.descriptionAnswer,
                 datecreated:hoy,
@@ -839,6 +841,7 @@ userController.AnswerQuestion = async (req) => {
         }if(req.typeQuestion==3){
             QuestionData = {
                 questions: req.idQuestion,
+                iduser: req.idfirebaseUser,
                 idauction: req.idPublication,
                 description: req.descriptionAnswer,
                 datecreated:hoy,
@@ -870,6 +873,71 @@ userController.AnswerQuestion = async (req) => {
                 success: false,
                 status: '500',
                 msg: 'Error al intentar crear una Respuesta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//LISTAR PREGUNTAS Y RESPUESTA DE UNA PUBLICACIÓN - GENERAL 
+userController.ListQuestionAnswer = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let hoy=(`${
+            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
+            dt.getMonth().toString().padStart(2, '0')}-${
+            dt.getDate().toString().padStart(4, '0')} ${
+            dt.getHours().toString().padStart(2, '0')}:${
+            dt.getMinutes().toString().padStart(2, '0')}:${
+            dt.getSeconds().toString().padStart(2, '0')}`
+        );
+
+        let QuestionData ={};
+       // console.log(req.typeQuestion);
+        if(req.idtypePublicationQA==1){
+            QuestionData = {
+                idproduct: req.idPublicationQA
+            };
+        }if(req.idtypePublicationQA==2){
+            QuestionData = {
+                idservice: req.idPublicationQA
+            };
+        }if(req.idtypePublicationQA==3){
+            QuestionData = {
+                idauction: req.idPublicationQA
+            };
+        }
+        //console.log(userData.password);
+        let response = await Question.ListQuestionAnswer(QuestionData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msg: 'Lista de preguntas y respuestas de un producto'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar Listar de preguntas y respuestas de un producto'
             }
         }
         //validar si esta llegado vacio

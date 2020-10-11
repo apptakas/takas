@@ -1316,6 +1316,7 @@ router.post('/newquestion', rutasProtegidas, [
 
 //CREAR UNA RESPUESTA A UNA PREGUNTA - PUBLICACIÓN
 router.post('/answerquestion', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
     check('idQuestion', 'El idQuestion es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
     check('descriptionAnswer', 'El descriptionAnswer es obligatorio').not().isEmpty().exists(),
@@ -1337,6 +1338,115 @@ router.post('/answerquestion', rutasProtegidas, [
     
     })
 
+
+    /**
+ * @api {post} /user/listquestionanswer 3 listquestionanswer
+ * @apiName listquestionanswer - Preguntas y Respuestaa de un producto
+ * @apiGroup Questions
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idtypePublicationQA required.
+ * @apiParam {int} idPublicationQA required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Questions.
+ * @apiSuccess {int} status 200 of the Questions.
+ * @apiSuccess {string} msg   of the Questions.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idquiestions": 1,
+            "questions": null,
+            "iduser": "idfirebaseUser2374687234t8t2348t8",
+            "Pregunta": "Son modelos Unisex?",
+            "isquestions": 1,
+            "publication": null,
+            "idproduct": 7,
+            "idservice": null,
+            "idauction": null,
+            "status": null,
+            "Answers": {
+                "0": {
+                    "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
+                    "publication": 1,
+                    "idproduct": 7,
+                    "idservice": null,
+                    "idauction": null,
+                    "datecreated": "2021-09-07T18:59:37.000Z",
+                    "iduser": null
+                }
+            }
+        },
+        {
+            "idquiestions": 2,
+            "questions": null,
+            "iduser": "idfirebaseUser2374687234t8t2348t8",
+            "Pregunta": "Son modelos Unisex?",
+            "isquestions": 1,
+            "publication": null,
+            "idproduct": 7,
+            "idservice": null,
+            "idauction": null,
+            "status": 1,
+            "Answers": {
+                "0": {
+                    "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
+                    "publication": 1,
+                    "idproduct": 7,
+                    "idservice": null,
+                    "idauction": null,
+                    "datecreated": "2021-09-07T18:57:03.000Z",
+                    "iduser": null
+                }
+            }
+        }
+    ],
+    "msg": "Lista de preguntas y respuestas de un producto"
+}
+ *
+ * @apiError UserNotFound The id of the Questions was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar de pregunta y respuestas de un producto"
+}
+ **/
+
+//LISTAR PREGUNTAS Y RESPUESTAS DE UN PRODUCTO- PUBLICACIÓN
+router.post('/listquestionanswer', rutasProtegidas, [
+    check('idtypePublicationQA', 'El idtypePublicationQA es obligatorio').not().isEmpty().exists(),
+    check('idPublicationQA', 'El idPublicationQA es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.ListQuestionAnswer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
 
 
 

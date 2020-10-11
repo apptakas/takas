@@ -889,6 +889,103 @@
   },
   {
     "type": "post",
+    "url": "/user/listquestionanswer",
+    "title": "3 listquestionanswer",
+    "name": "listquestionanswer_-_Preguntas_y_Respuestaa_de_un_producto",
+    "group": "Questions",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idtypePublicationQA",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idPublicationQA",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Questions.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Questions.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Questions.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idquiestions\": 1,\n            \"questions\": null,\n            \"iduser\": \"idfirebaseUser2374687234t8t2348t8\",\n            \"Pregunta\": \"Son modelos Unisex?\",\n            \"isquestions\": 1,\n            \"publication\": null,\n            \"idproduct\": 7,\n            \"idservice\": null,\n            \"idauction\": null,\n            \"status\": null,\n            \"Answers\": {\n                \"0\": {\n                    \"Respuesta\": \"Si Nuestra línea de bebé en su mayoría son Unisexs\",\n                    \"publication\": 1,\n                    \"idproduct\": 7,\n                    \"idservice\": null,\n                    \"idauction\": null,\n                    \"datecreated\": \"2021-09-07T18:59:37.000Z\",\n                    \"iduser\": null\n                }\n            }\n        },\n        {\n            \"idquiestions\": 2,\n            \"questions\": null,\n            \"iduser\": \"idfirebaseUser2374687234t8t2348t8\",\n            \"Pregunta\": \"Son modelos Unisex?\",\n            \"isquestions\": 1,\n            \"publication\": null,\n            \"idproduct\": 7,\n            \"idservice\": null,\n            \"idauction\": null,\n            \"status\": 1,\n            \"Answers\": {\n                \"0\": {\n                    \"Respuesta\": \"Si Nuestra línea de bebé en su mayoría son Unisexs\",\n                    \"publication\": 1,\n                    \"idproduct\": 7,\n                    \"idservice\": null,\n                    \"idauction\": null,\n                    \"datecreated\": \"2021-09-07T18:57:03.000Z\",\n                    \"iduser\": null\n                }\n            }\n        }\n    ],\n    \"msg\": \"Lista de preguntas y respuestas de un producto\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Questions was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar de pregunta y respuestas de un producto\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Questions"
+  },
+  {
+    "type": "post",
     "url": "/user/newquestion",
     "title": "1 newquestion",
     "name": "newquestion_-_Pregunta_de_un_producto",
