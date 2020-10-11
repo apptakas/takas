@@ -84,19 +84,14 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
             pool.query(
                 "SELECT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status, url  FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY p.id",
                 async(err, result) => {
-                    //console.log(result);
-                    try{
-                    ProductPreferences1 = await ProductModel.recorridoProductPreferences(result);
-                    }
-                    catch(e){
-                        console.log(e);
-                    }
+                    //console.log(result);                 
+                    
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {  
-                        
+                        ProductPreferences1 = await ProductModel.recorridoProductPreferences(result);
                         resolve({
                             'result': ProductPreferences1
                         })
@@ -120,14 +115,14 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
             pool.query(
                 "SELECT p.id,SUBSTRING_INDEX(GROUP_CONCAT(idproduct ORDER BY RAND()), ',', 1) AS idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status,i.id, url FROM  product AS p INNER JOIN imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
                 async(err, result) => {
-                    //console.log(result);
-                    ProductPreferences = await ProductModel.recorridoProductPreferences(result);
+                    //console.log(result);                  
                    
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {     
+                    } else {   
+                        ProductPreferences = await ProductModel.recorridoProductPreferences(result);  
                         resolve({
                             'result': ProductPreferences
                         })
@@ -144,11 +139,15 @@ ProductModel.recorridoProductPreferences = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
-
-        for (const element of result) {
-            arr.push(await ProductModel.ListPrefrencesProduct(element));
+        try{
+            for (const element of result) {
+                arr.push(await ProductModel.ListPrefrencesProduct(element));
+            }
+            resolve(arr)
         }
-        resolve(arr)
+        catch(e){
+            console.log(e);
+        }
     }
     )
 
