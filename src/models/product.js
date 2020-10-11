@@ -82,7 +82,7 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
+                "SELECT DISTINCT idproduct,now()as horaservidor,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
                 async(err, result) => {
                    // console.log(err);                 
                     
@@ -113,7 +113,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct,now()as horaservidor,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -147,10 +147,24 @@ ProductModel.armaresult = (result) => {
                 img=await ProductModel.ListImagesProduct(element);
                 prefe=await ProductModel.ListPrefrencesProduct(element);
                 let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+
+                let fecha= new Date();
+                //let hora_actual = fecha.getHours();
+                let now= new Date();
+               // console.log(now);
+                // console.log(element.datecreated);
+                // console.log(now);
+                // console.log("//////");
+                let nuevo=false;
+                if (now == element.datecreated){
+                    let nuevo=true;
+                }
+
                 arr.push({
                     "idproduct": element.idproduct,
                     "datecreated": element.datecreated,
                     "iduser": element.iduser,
+                    "Nuevo": nuevo,
                     "subcategory": element.subcategory,
                     "name": element.name,
                     "details": element.details,
@@ -195,7 +209,7 @@ ProductModel.ListImagesProduct = (element) => {
                     for(var atr2 in result2){
                     ImagesProduct.push(result2[atr2].url); 
                     };  
-                    console.log(element.idproduct);  
+                    //console.log(element.idproduct);  
                    // console.log(ImagesProduct);
                     resolve({
                         
