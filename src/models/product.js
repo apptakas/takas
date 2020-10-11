@@ -164,7 +164,7 @@ ProductModel.armaresult = (result) => {
                     "idproduct": element.idproduct,
                     "datecreated": element.datecreated,
                     "iduser": element.iduser,
-                    "Nuevo": nuevo,
+                    "nuevo": nuevo,
                     "subcategory": element.subcategory,
                     "name": element.name,
                     "details": element.details,
