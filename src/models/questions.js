@@ -1,4 +1,5 @@
 const pool = require('../config/database');
+const date = require('date-and-time');
 let QuestionsModel = {};
 
 
@@ -73,26 +74,31 @@ QuestionsModel.recorridoQuestionsAnswer = (result) => {
 QuestionsModel.ListQuestionsAnswer = (element) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            'SELECT * FROM `questions` WHERE questions='+element.id+' AND isquestions=FALSE LIMIT 1;',
+            'SELECT * FROM `questions` WHERE questions='+element.id+' AND isquestions=FALSE LIMIT 1',
             (err2, result2) => {
-            //console.log(element.id);   
-                //console.log(element.namec);   
-                //console.log(result2[1].preference);  
-                // console.log(result2); 
-                // console.log(result2.length);
-                let Answers= {}; 
+                if (err2) {
+                    resolve({
+                        'error': err
+                    })
+                } else { 
+                 console.log(result2); 
+                 console.log(result2.length);
+                 let Answers= {}; 
                 //for(var atr2 in result2){
-                    Answers={
-                        "idPregunta": result2.idPregunta,
-                        "Respuesta": result2.description,
-                        "publication": result2.publication,
-                        "idproduct": result2.idproduct,
-                        "idservice": result2.idservice,
-                        "idauction": result2.idauction,
-                        "datecreated": result2.datecreated,
-                        "iduser": result2.iduser
-                    }; 
-                //};  
+                    if(result2.length>0){
+                         Answers={
+                            "idPregunta": result2[0].questions,
+                            "Respuesta": result2[0].description,
+                            "publication": result2[0].publication,
+                            "idproduct": result2[0].idproduct,
+                            "idservice": result2[0].idservice,
+                            "idauction": result2[0].idauction,
+                            "datecreated": date.format(result2[0].datecreated, 'DD/MM/YYYY HH:MM:SS'),
+                            "iduser": result2[0].iduser,
+                            "status":result2[0].status
+                        };
+                    }  
+                //}; 
                 console.log(Answers);
                 resolve({                    
                     "idquiestions": element.id,
@@ -104,10 +110,12 @@ QuestionsModel.ListQuestionsAnswer = (element) => {
                     "idproduct": element.idproduct,
                     "idservice": element.publication,
                     "idauction": element.publication,
-                    "datecreated": element.typepublication,
+                    "datecreated": date.format(element.datecreated, 'DD/MM/YYYY HH:MM:SS'),
+                    "typepublication": element.typepublication,
                     "status": element.status,
-                    "Answers": Answers,
+                    "Answers": Answers
                 });
+            }
                 //console.log(CatgySubCatg);
                 //CatgySubCatg.Subcategory=result2;
                 //console.log("//////SUBCATEGORÍA///////");

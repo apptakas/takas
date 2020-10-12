@@ -1405,7 +1405,7 @@ router.post('/answerquestion', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *            {
     "success": true,
     "status": "200",
     "data": [
@@ -1419,17 +1419,18 @@ router.post('/answerquestion', rutasProtegidas, [
             "idproduct": 7,
             "idservice": null,
             "idauction": null,
+            "datecreated": "12/10/2020 16:10:00",
             "status": null,
             "Answers": {
-                "0": {
-                    "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
-                    "publication": 1,
-                    "idproduct": 7,
-                    "idservice": null,
-                    "idauction": null,
-                    "datecreated": "2021-09-07T18:59:37.000Z",
-                    "iduser": null
-                }
+                "idPregunta": 1,
+                "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
+                "publication": 1,
+                "idproduct": 7,
+                "idservice": null,
+                "idauction": null,
+                "datecreated": "30/09/2020 13:09:00",
+                "iduser": null,
+                "status": 1
             }
         },
         {
@@ -1442,17 +1443,18 @@ router.post('/answerquestion', rutasProtegidas, [
             "idproduct": 7,
             "idservice": null,
             "idauction": null,
+            "datecreated": "30/09/2020 13:09:00",
             "status": 1,
             "Answers": {
-                "0": {
-                    "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
-                    "publication": 1,
-                    "idproduct": 7,
-                    "idservice": null,
-                    "idauction": null,
-                    "datecreated": "2021-09-07T18:57:03.000Z",
-                    "iduser": null
-                }
+                "idPregunta": 2,
+                "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
+                "publication": 1,
+                "idproduct": 7,
+                "idservice": null,
+                "idauction": null,
+                "datecreated": "30/09/2020 13:09:00",
+                "iduser": null,
+                "status": 1
             }
         }
     ],
