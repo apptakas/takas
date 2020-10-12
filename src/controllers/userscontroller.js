@@ -7,6 +7,7 @@ const MasterMoney = require('../models/mastermoney.js');
 const MasterSubCategory = require('../models/mastersubcategory.js');
 const Product = require('../models/product.js');
 const Question = require('../models/questions.js');
+const Offer = require('../models/offers.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
@@ -643,6 +644,7 @@ userController.ListProductSubCategory = async (req) => {
     try {
         const ProductData = {
             subcategory: req.SubCategoriaProduct,
+            iduser: req.idFirebaseUser,
             status: req.statusProduct
         };
         //console.log(userData.password);
@@ -976,39 +978,52 @@ userController.NewOffer = async (req) => {
 
         let OfferData ={};
        // console.log(req.typeQuestion);
-        if(req.typeQuestion==1){
+        if(req.typePublication==1){
             OfferData = {
                 iduser: req.idFirebaseUser,
                 idproduct: req.idPublication,
-                description: req.descriptionQuestion,
-                datecreated:hoy,
+                observation: req.descriptionOffer,
+                dateoffers:hoy,
                 publication:1,
                 status: 1,
-                isquestions: true
+                isoffer: true
             };
-        }if(req.typeQuestion==2){
+        }if(req.typePublication==2){
             OfferData = {
                 iduser: req.idFirebaseUser,
                 idservice: req.idPublication,
-                description: req.descriptionQuestion,
-                datecreated:hoy,
+                observation: req.descriptionOffer,
+                dateoffers:hoy,
                 publication:2,
                 status: 1,
-                isquestions: true
+                isoffer: true
             };
-        }if(req.typeQuestion==3){
+        }if(req.typePublication==3){
             OfferData = {
                 iduser: req.idFirebaseUser,
                 idauction: req.idPublication,
-                description: req.descriptionQuestion,
-                datecreated:hoy,
+                observation: req.descriptionOffer,
+                dateoffers:hoy,
                 publication:3,
                 status: 1,
-                isquestions: true
+                isoffer: true
             };
         }
+
+        const IdOfferData = {};
+            //console.log(req.IdOfferData.length);
+            if(req.IdOfferData.length!=0){
+                for(var atr1 in req.idsPublications){
+                    
+                    IdOfferData[atr1] = req.IdOfferData[atr1]; 
+                    //IdOfferData[atr1] = req.IdOfferData[atr1]; 
+                    
+                };
+            }
+
+        console.log(IdOfferData);
         //console.log(userData.password);
-        let response = await Question.NewOffer(OfferData);
+        let response = await Offer.NewOffer(OfferData,IdOfferData);
 
        //console.log(response);
 
@@ -1020,7 +1035,7 @@ userController.NewOffer = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                msg: 'Pregunta creada exitosamente'
+                msg: 'Oferta creada exitosamente'
                 //data: response
             }
         } else {
@@ -1029,7 +1044,7 @@ userController.NewOffer = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: 'Error al intentar crear una pregunta'
+                msg: 'Error al intentar crear una Oferta'
             }
         }
         //validar si esta llegado vacio

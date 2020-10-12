@@ -862,6 +862,7 @@ router.post('/newproduct', rutasProtegidas,[
             "datecreated": "06/09/2021 18:06:37",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Gorros para bebés",
             "details": "Gorros termicos 1",
             "typemoney": 1,
@@ -944,6 +945,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "datecreated": "05/10/2020 13:46:27",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Mameluco para bebé",
             "details": "Producto disponible de 0 a 24 meses",
             "typemoney": 2,
@@ -961,6 +963,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "name": "Gorros para bebés",
             "nuevo": false,
+            "subcategory": 1,
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
             "marketvalue": 10000,
@@ -976,6 +979,7 @@ check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists
             "datecreated": "06/09/2021 17:27:47",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Gorros para bebés",
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
@@ -1037,6 +1041,7 @@ router.post('/listproductos', rutasProtegidas, [
  *
  *
  * @apiParam {varchar} SubCategoriaProduct required.
+ * @apiParam {varchar} idFirebaseUser required.
  * @apiParam {varchar} statusProduct required.
  * 
  * 
@@ -1056,6 +1061,7 @@ router.post('/listproductos', rutasProtegidas, [
             "datecreated": "05/10/2020 13:46:27",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Mameluco para bebé",
             "details": "Producto disponible de 0 a 24 meses",
             "typemoney": 2,
@@ -1072,6 +1078,7 @@ router.post('/listproductos', rutasProtegidas, [
             "datecreated": "05/10/2020 13:25:07",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Gorros para bebés",
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
@@ -1088,6 +1095,7 @@ router.post('/listproductos', rutasProtegidas, [
             "datecreated": "06/09/2021 17:27:47",
             "iduser": "idfirebaseUsers77wqedsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Gorros para bebés",
             "details": "Gorros termicos y confortables",
             "typemoney": 1,
@@ -1104,6 +1112,7 @@ router.post('/listproductos', rutasProtegidas, [
             "datecreated": "06/09/2021 18:06:37",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Gorros para bebés",
             "details": "Gorros termicos 1",
             "typemoney": 1,
@@ -1135,6 +1144,7 @@ router.post('/listproductos', rutasProtegidas, [
 //LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA
 router.post('/listproductsubcategory', rutasProtegidas, [
     check('SubCategoriaProduct', 'El SubCategoriaProduct es obligatorio').not().isEmpty().exists(),
+    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
 
@@ -1185,6 +1195,7 @@ router.post('/listproductsubcategory', rutasProtegidas, [
             "datecreated": "06/09/2021 18:06:37",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": false,
+            "subcategory": 1,
             "name": "Gorros para bebés",
             "details": "Gorros termicos 1",
             "typemoney": 1,

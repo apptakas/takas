@@ -1,5 +1,6 @@
 const pool = require('../config/database');
 let ProductModel = {};
+const date = require('date-and-time');
 
 
 //ListUsers  - obtenemos lista de usuarios segun el rol
@@ -82,7 +83,7 @@ ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,now()as horaservidor,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
+                "SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
                 async(err, result) => {
                    // console.log(err);                 
                     
@@ -113,7 +114,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,now()as horaservidor,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -148,23 +149,28 @@ ProductModel.armaresult = (result) => {
                 prefe=await ProductModel.ListPrefrencesProduct(element);
                 let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
 
-                let fecha= new Date();
-                //let hora_actual = fecha.getHours();
-                let now= new Date();
-               // console.log(now);
-                // console.log(element.datecreated);
-                // console.log(now);
+                let now = new Date();
+                let servidor=date.format(now, 'DD/MM/YYYY');
+                //let registro=element.registro;
+                let registro = new Date(element.datepublication);
+                let regis = date.format(registro, 'DD/MM/YYYY');
+
+                //console.log(now+" - "+registro);
+
+                let comprobar_fecha=date.isSameDay(now, registro); 
+                // console.log(comprobar_fecha+" - ");
                 // console.log("//////");
                 let nuevo=false;
-                if (now == element.datecreated){
+                if (registro == servidor){
                     let nuevo=true;
+                }else{
+                    let nuevo=false;
                 }
-
                 arr.push({
                     "idproduct": element.idproduct,
-                    "datecreated": element.datecreated,
+                    "datecreated":regis,
                     "iduser": element.iduser,
-                    "nuevo": nuevo,
+                    "nuevo": comprobar_fecha,
                     "subcategory": element.subcategory,
                     "name": element.name,
                     "details": element.details,
@@ -270,7 +276,7 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct GROUP BY idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct AND iduser<>'"+ProductData.iduser+"' GROUP BY idproduct  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);
                    
@@ -301,7 +307,7 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT id as idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id,
+                "SELECT id as idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id,
                 async(err, result) => {
                     //console.log(result);
                    
