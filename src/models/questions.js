@@ -73,7 +73,7 @@ QuestionsModel.recorridoQuestionsAnswer = (result) => {
 QuestionsModel.ListQuestionsAnswer = (element) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            'SELECT * FROM `questions` WHERE questions='+element.id+' AND isquestions=FALSE;',
+            'SELECT * FROM `questions` WHERE questions='+element.id+' AND isquestions=FALSE LIMIT 1;',
             (err2, result2) => {
             //console.log(element.id);   
                 //console.log(element.namec);   
@@ -81,18 +81,18 @@ QuestionsModel.ListQuestionsAnswer = (element) => {
                 // console.log(result2); 
                 // console.log(result2.length);
                 let Answers= {}; 
-                for(var atr2 in result2){
-                    Answers[atr2]={
-                        "idPregunta": result2[atr2].idPregunta,
-                        "Respuesta": result2[atr2].description,
-                        "publication": result2[atr2].publication,
-                        "idproduct": result2[atr2].idproduct,
-                        "idservice": result2[atr2].idservice,
-                        "idauction": result2[atr2].idauction,
-                        "datecreated": result2[atr2].datecreated,
-                        "iduser": result2[atr2].iduser
+                //for(var atr2 in result2){
+                    Answers={
+                        "idPregunta": result2.idPregunta,
+                        "Respuesta": result2.description,
+                        "publication": result2.publication,
+                        "idproduct": result2.idproduct,
+                        "idservice": result2.idservice,
+                        "idauction": result2.idauction,
+                        "datecreated": result2.datecreated,
+                        "iduser": result2.iduser
                     }; 
-                };  
+                //};  
                 console.log(Answers);
                 resolve({                    
                     "idquiestions": element.id,

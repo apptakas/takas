@@ -15,9 +15,31 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                             'error': err
                         })
                     } else {
-                        resolve({
-                            'result': resut
-                        })
+                        if(IdOfferData.length!=0){
+                            for(var atr2 in IdOfferData){  
+                                pool.query(
+                                    'INSERT INTO offersproductservices (idpublication,idoffers) value( ?, ?) ', [
+                                        IdOfferData[atr2],
+                                        resut.insertId
+                                    ],
+                                    (err, resut) => {
+                                        //console.log(resut);
+                                        if (err) {
+                                            resolve({
+                                                'error': err
+                                            })
+                                        } else {
+                                            resolve({
+                                                'result': resut
+                                            })                                       
+                                        }
+                    
+                                    }
+                                )
+                                
+                            }
+                        }
+                       
                     }
 
                 }

@@ -1297,7 +1297,7 @@ router.post('/newquestion', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
     check('descriptionQuestion', 'El IdProduct es obligatorio').not().isEmpty().exists(),
-    check('typeQuestion', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    check('typeQuestion', 'El typeQuestion es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -1504,7 +1504,6 @@ router.post('/listquestionanswer', rutasProtegidas, [
  *
  *
  * @apiParam {varchar} idFirebaseUser required.
- * @apiParam {int} idPublication required.
  * @apiParam {int} typePublication required.
  * @apiParam {varchar} descriptionOffer required.
  * @apiParam {array} Int idsPublications required.
@@ -1520,7 +1519,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
  *             {
     "success": true,
     "status": "200",
-    "msg": "Pregunta creada con éxito"
+    "msg": "Oferta creada exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -1537,7 +1536,72 @@ router.post('/listquestionanswer', rutasProtegidas, [
 //CREAR UNA OFERTA - PUBLICACIÓN
 router.post('/newoffer', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
+    check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
+    check('idsPublications', 'El idsPublications es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.NewOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
+    /**
+ * @api {post} /user/newoffer 1 newoffer
+ * @apiName newoffer - Crear Oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idFirebaseUser required.
+ * @apiParam {int} typePublication required.
+ * @apiParam {varchar} descriptionOffer required.
+ * @apiParam {array} Int idsPublications required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "msg": "Oferta creada exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar crear Oferta"
+}
+ **/
+
+//CREAR UNA OFERTA - PUBLICACIÓN
+router.post('/listoffer', rutasProtegidas, [
+    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
     check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
     check('idsPublications', 'El IdProduct es obligatorio').not().isEmpty().exists()
@@ -1548,7 +1612,7 @@ router.post('/newoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }
-        let response = await userController.NewOffer(req.body);
+        let response = await userController.ListOffer(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })

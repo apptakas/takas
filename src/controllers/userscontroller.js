@@ -13,6 +13,8 @@ const Offer = require('../models/offers.js');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const sha1 = require('sha1');
+const date = require('date-and-time');
+//var redis = require('redis');
 const { resolveInclude } = require('ejs');
 
 
@@ -23,6 +25,8 @@ let userController = {};
 userController.newUser = async (req) => {
     //existe este usuario? 
     try {
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
         const userData = {
             id: req.idfirebaseUser,
             fullname: req.fullnameUser,
@@ -31,6 +35,7 @@ userController.newUser = async (req) => {
             imgurl: req.urlimgUser,
             role: 2,
             password: sha1(req.passwordUser),
+            datecreated: hoy,
             tyc: req.tycUser
         };
         ///console.log(userData.password);
@@ -58,7 +63,7 @@ userController.newUser = async (req) => {
                 success: true,
                 status: '200',
                 token: token,
-                refreshTokens: refreshTokens,
+                //refreshTokens: refreshTokens,
                 msg: 'Usuario Registrado con éxito'
                 //data: response
             }
@@ -470,16 +475,10 @@ userController.ListSubCategory = async () => {
 userController.NewProduct = async (req) => {
     //existe este usuario? 
     try {
-        let dt = new Date();//getMonth   getDate
 
-        let hoy=(`${
-            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
-            dt.getMonth().toString().padStart(2, '0')}-${
-            dt.getDate().toString().padStart(4, '0')} ${
-            dt.getHours().toString().padStart(2, '0')}:${
-            dt.getMinutes().toString().padStart(2, '0')}:${
-            dt.getSeconds().toString().padStart(2, '0')}`
-        );
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            console.log(now+" - "+hoy);
             const ProductData = {
                 iduser: req.iduserProduct,
                 datepublication: hoy,
@@ -729,16 +728,9 @@ userController.DetailsProduct = async (req) => {
 userController.NewQuestion = async (req) => {
     try {
 
-        let dt = new Date();//getMonth   getDate
 
-        let hoy=(`${
-            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
-            dt.getMonth().toString().padStart(2, '0')}-${
-            dt.getDate().toString().padStart(4, '0')} ${
-            dt.getHours().toString().padStart(2, '0')}:${
-            dt.getMinutes().toString().padStart(2, '0')}:${
-            dt.getSeconds().toString().padStart(2, '0')}`
-        );
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
 
         let QuestionData ={};
        // console.log(req.typeQuestion);
@@ -749,7 +741,7 @@ userController.NewQuestion = async (req) => {
                 description: req.descriptionQuestion,
                 datecreated:hoy,
                 publication:1,
-                status: 1,
+                status: 3,
                 isquestions: true
             };
         }if(req.typeQuestion==2){
@@ -759,7 +751,7 @@ userController.NewQuestion = async (req) => {
                 description: req.descriptionQuestion,
                 datecreated:hoy,
                 publication:2,
-                status: 1,
+                status: 3,
                 isquestions: true
             };
         }if(req.typeQuestion==3){
@@ -769,7 +761,7 @@ userController.NewQuestion = async (req) => {
                 description: req.descriptionQuestion,
                 datecreated:hoy,
                 publication:3,
-                status: 1,
+                status: 3,
                 isquestions: true
             };
         }
@@ -813,16 +805,8 @@ userController.NewQuestion = async (req) => {
 userController.AnswerQuestion = async (req) => {
     try {
 
-        let dt = new Date();//getMonth   getDate
-
-        let hoy=(`${
-            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
-            dt.getMonth().toString().padStart(2, '0')}-${
-            dt.getDate().toString().padStart(4, '0')} ${
-            dt.getHours().toString().padStart(2, '0')}:${
-            dt.getMinutes().toString().padStart(2, '0')}:${
-            dt.getSeconds().toString().padStart(2, '0')}`
-        );
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
 
         let QuestionData ={};
        // console.log(req.typeQuestion);
@@ -898,16 +882,8 @@ userController.AnswerQuestion = async (req) => {
 userController.ListQuestionAnswer = async (req) => {
     try {
 
-        let dt = new Date();//getMonth   getDate
-
-        let hoy=(`${
-            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
-            dt.getMonth().toString().padStart(2, '0')}-${
-            dt.getDate().toString().padStart(4, '0')} ${
-            dt.getHours().toString().padStart(2, '0')}:${
-            dt.getMinutes().toString().padStart(2, '0')}:${
-            dt.getSeconds().toString().padStart(2, '0')}`
-        );
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
 
         let QuestionData ={};
        // console.log(req.typeQuestion);
@@ -967,14 +943,8 @@ userController.NewOffer = async (req) => {
 
         let dt = new Date();//getMonth   getDate
 
-        let hoy=(`${
-            (dt.getFullYear()+1).toString().padStart(2, '0')}-${
-            dt.getMonth().toString().padStart(2, '0')}-${
-            dt.getDate().toString().padStart(4, '0')} ${
-            dt.getHours().toString().padStart(2, '0')}:${
-            dt.getMinutes().toString().padStart(2, '0')}:${
-            dt.getSeconds().toString().padStart(2, '0')}`
-        );
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
 
         let OfferData ={};
        // console.log(req.typeQuestion);
@@ -985,8 +955,7 @@ userController.NewOffer = async (req) => {
                 observation: req.descriptionOffer,
                 dateoffers:hoy,
                 publication:1,
-                status: 1,
-                isoffer: true
+                status:3,
             };
         }if(req.typePublication==2){
             OfferData = {
@@ -995,8 +964,7 @@ userController.NewOffer = async (req) => {
                 observation: req.descriptionOffer,
                 dateoffers:hoy,
                 publication:2,
-                status: 1,
-                isoffer: true
+                status:3,
             };
         }if(req.typePublication==3){
             OfferData = {
@@ -1005,17 +973,16 @@ userController.NewOffer = async (req) => {
                 observation: req.descriptionOffer,
                 dateoffers:hoy,
                 publication:3,
-                status: 1,
-                isoffer: true
+                status:3,
             };
         }
 
         const IdOfferData = {};
-            //console.log(req.IdOfferData.length);
-            if(req.IdOfferData.length!=0){
+            console.log(req.idsPublications.length);
+            if(req.idsPublications.length!=0){
                 for(var atr1 in req.idsPublications){
                     
-                    IdOfferData[atr1] = req.IdOfferData[atr1]; 
+                    IdOfferData[atr1] = req.idsPublications[atr1]; 
                     //IdOfferData[atr1] = req.IdOfferData[atr1]; 
                     
                 };
