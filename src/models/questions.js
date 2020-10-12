@@ -85,24 +85,45 @@ QuestionsModel.ListQuestionsAnswer = (element) => {
                  console.log(result2.length);
                  let Answers= {}; 
                 //for(var atr2 in result2){
+                    // "iduser": result2[0].iduser,
                     if(result2.length>0){
-                         Answers={
-                            "idPregunta": result2[0].questions,
-                            "Respuesta": result2[0].description,
-                            "publication": result2[0].publication,
-                            "idproduct": result2[0].idproduct,
-                            "idservice": result2[0].idservice,
-                            "idauction": result2[0].idauction,
-                            "datecreated": date.format(result2[0].datecreated, 'DD/MM/YYYY HH:MM:SS'),
-                            "iduser": result2[0].iduser,
-                            "status":result2[0].status
-                        };
+                        if(element.publication==1){
+                            Answers={
+                                "idPregunta": result2[0].questions,
+                                "Respuesta": result2[0].description,
+                                "publication": result2[0].publication,
+                                "idproduct": result2[0].idproduct,
+                                "datecreated": date.format(result2[0].datecreated, 'DD/MM/YYYY HH:MM:SS'),
+                                "status":result2[0].status
+                            };
+                        }
+                        if(element.publication==2){
+                            Answers={
+                                "idPregunta": result2[0].questions,
+                                "Respuesta": result2[0].description,
+                                "publication": result2[0].publication,
+                                "idservice": result2[0].idservice,
+                                "datecreated": date.format(result2[0].datecreated, 'DD/MM/YYYY HH:MM:SS'),
+                                "status":result2[0].status
+                            };
+                        }
+                        if(element.publication==3){
+                            Answers={
+                                "idPregunta": result2[0].questions,
+                                "Respuesta": result2[0].description,
+                                "publication": result2[0].publication,
+                                "idproduct": result2[0].idproduct,
+                                "datecreated": date.format(result2[0].datecreated, 'DD/MM/YYYY HH:MM:SS'),
+                                "status":result2[0].status
+                            };
+                        }
                     }  
+
+                    
                 //}; 
-                console.log(Answers);
+                //console.log(Answers);
                 resolve({                    
                     "idquiestions": element.id,
-                    "questions": element.questions,
                     "iduser": element.iduser,
                     "Pregunta": element.description,
                     "isquestions": element.isquestions,

@@ -1405,44 +1405,39 @@ router.post('/answerquestion', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *            {
+ *           {
     "success": true,
     "status": "200",
     "data": [
         {
             "idquiestions": 1,
-            "questions": null,
             "iduser": "idfirebaseUser2374687234t8t2348t8",
             "Pregunta": "Son modelos Unisex?",
             "isquestions": 1,
-            "publication": null,
+            "publication": 1,
             "idproduct": 7,
-            "idservice": null,
-            "idauction": null,
+            "idservice": 1,
+            "idauction": 1,
             "datecreated": "12/10/2020 16:10:00",
-            "status": null,
+            "status": 1,
             "Answers": {
                 "idPregunta": 1,
                 "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
                 "publication": 1,
                 "idproduct": 7,
-                "idservice": null,
-                "idauction": null,
                 "datecreated": "30/09/2020 13:09:00",
-                "iduser": null,
                 "status": 1
             }
         },
         {
             "idquiestions": 2,
-            "questions": null,
             "iduser": "idfirebaseUser2374687234t8t2348t8",
             "Pregunta": "Son modelos Unisex?",
             "isquestions": 1,
-            "publication": null,
+            "publication": 1,
             "idproduct": 7,
-            "idservice": null,
-            "idauction": null,
+            "idservice": 1,
+            "idauction": 1,
             "datecreated": "30/09/2020 13:09:00",
             "status": 1,
             "Answers": {
@@ -1450,10 +1445,7 @@ router.post('/answerquestion', rutasProtegidas, [
                 "Respuesta": "Si Nuestra línea de bebé en su mayoría son Unisexs",
                 "publication": 1,
                 "idproduct": 7,
-                "idservice": null,
-                "idauction": null,
                 "datecreated": "30/09/2020 13:09:00",
-                "iduser": null,
                 "status": 1
             }
         }
