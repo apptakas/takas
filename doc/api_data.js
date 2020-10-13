@@ -408,8 +408,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "array",
             "optional": false,
-            "field": "Int",
-            "description": "<p>idsPublications required.</p>"
+            "field": "idsPublications",
+            "description": "<p>array Int required.</p>"
           }
         ]
       }

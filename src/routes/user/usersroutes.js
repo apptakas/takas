@@ -1500,7 +1500,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
  * @apiParam {varchar} idFirebaseUser required.
  * @apiParam {int} typePublication required.
  * @apiParam {varchar} descriptionOffer required.
- * @apiParam {array} Int idsPublications required.
+ * @apiParam {array}  idsPublications array Int required.
  * 
  * 
  * 
