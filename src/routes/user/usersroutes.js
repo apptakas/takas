@@ -1952,7 +1952,7 @@ router.post('/listmyoffer', rutasProtegidas, [
 
 
     /**
- * @api {post} /user/changestatusoffer 6 changestatusoffer
+ * @api {put} /user/changestatusoffer 6 changestatusoffer
  * @apiName changestatusoffer - Cambio de estado de una oferta
  * @apiGroup Offers
  * 
@@ -1963,10 +1963,8 @@ router.post('/listmyoffer', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * @apiParam {varchar} idFirebaseUser required.
- * @apiParam {int} typePublication required.
- * @apiParam {varchar} descriptionOffer required.
- * @apiParam {array}  idsPublications array Int required.
+ * @apiParam {int} idOffer required.
+ * @apiParam {int} statusOffer required.
  * 
  * 
  * 
@@ -1976,10 +1974,10 @@ router.post('/listmyoffer', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *    {
     "success": true,
     "status": "200",
-    "msg": "Oferta creada exitosamente"
+    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -1989,16 +1987,14 @@ router.post('/listmyoffer', rutasProtegidas, [
  *     {
     "success": false,
     "status":: "500",
-    "msg": "Error al intentar crear Oferta"
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
 }
  **/
 
 //CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
 router.put('/changestatusoffer', rutasProtegidas, [
-    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
-    check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
-    check('idsPublications', 'El idsPublications es obligatorio').not().isEmpty().exists()
+    check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('statusOffer', 'El statusOffer es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -2006,7 +2002,7 @@ router.put('/changestatusoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }
-        let response = await userController.NewOffer(req.body);
+        let response = await userController.ChangeStatusOffer(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })

@@ -1295,6 +1295,51 @@ userController.ListMyOffer = async (req) => {
 
 };
 
+//
+//CAMBIAR EL ESTADO DE UNA OFERTA- OFFERS 
+userController.ChangeStatusOffer = async (req) => {
+    try {
 
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+        
+            OfferData = {
+                id: req.idOffer,
+                status:req.statusOffer
+            };
+       
+        console.log(OfferData);
+        let response = await Offer.ChangeStatusOffer(OfferData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Cambio de estatus de una oferta ejecutdos exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar cambiar el estatus de una Oferta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 module.exports = userController;

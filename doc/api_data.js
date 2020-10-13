@@ -271,7 +271,7 @@ define({ "api": [
     "groupTitle": "Offers"
   },
   {
-    "type": "post",
+    "type": "put",
     "url": "/user/changestatusoffer",
     "title": "6 changestatusoffer",
     "name": "changestatusoffer_-_Cambio_de_estado_de_una_oferta",
@@ -295,31 +295,17 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "varchar",
+            "type": "int",
             "optional": false,
-            "field": "idFirebaseUser",
+            "field": "idOffer",
             "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "typePublication",
+            "field": "statusOffer",
             "description": "<p>required.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "descriptionOffer",
-            "description": "<p>required.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "idsPublications",
-            "description": "<p>array Int required.</p>"
           }
         ]
       }
@@ -353,7 +339,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Oferta creada exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Cambio de estatus de una oferta ejecutdos exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -372,7 +358,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar crear Oferta\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
           "type": "json"
         }
       ]
