@@ -1023,4 +1023,127 @@ userController.NewOffer = async (req) => {
 
 };
 
+
+//LISTAR OFERTAS - GENERAL 
+userController.ListOffer = async (req) => {
+    try {
+
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+        if(req.typePublication==1){
+            OfferData = {
+                idproduct: req.idPublication,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==2){
+            OfferData = {
+                idproduct: req.idPublication,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==3){
+            OfferData = {
+                idauction: req.idPublication,
+                publication: req.typePublication
+            };
+        }
+        //console.log(userData.password);
+        let response = await Offer.ListOffer(OfferData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: r,
+                msg: 'Listar Ofertas exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar listar ofertas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//DETALLES DE LA OFERTA - GENERAL 
+userController.DetailsOffer = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+        if(req.typePublication==1){
+            OfferData = {
+                id: req.idPublication,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==2){
+            OfferData = {
+                id: req.idPublication,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==3){
+            OfferData = {
+                id: req.idPublication,
+                publication: req.typePublication
+            };
+        }
+        //console.log(userData.password);
+        let response = await Offer.DetailsOffer(OfferData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: r,
+                msg: 'Detalles de la oferta listado exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar listar detalles de la oferta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
 module.exports = userController;

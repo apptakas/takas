@@ -1552,8 +1552,8 @@ router.post('/newoffer', rutasProtegidas, [
 
 
     /**
- * @api {post} /user/newoffer 1 newoffer
- * @apiName newoffer - Crear Oferta
+ * @api {post} /user/listoffer 2listoffer
+ * @apiName listoffer - Listar Oferta
  * @apiGroup Offers
  * 
  * 
@@ -1563,10 +1563,9 @@ router.post('/newoffer', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * @apiParam {varchar} idFirebaseUser required.
+ * 
  * @apiParam {int} typePublication required.
- * @apiParam {varchar} descriptionOffer required.
- * @apiParam {array} Int idsPublications required.
+ * @apiParam {int} Int idPublication required.
  * 
  * 
  * 
@@ -1579,7 +1578,66 @@ router.post('/newoffer', rutasProtegidas, [
  *             {
     "success": true,
     "status": "200",
-    "msg": "Oferta creada exitosamente"
+    "data": [
+        {
+            "idoffer": 4,
+            "idproduct": 22,
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "40000.0000",
+            "sumitemsoffer": "20000.0000",
+            "differenceoffer": "20000.0000",
+            "infavor": true,
+            "itemsoffer": [
+                {
+                    "idpublication": 17,
+                    "status": 17,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 15,
+                    "status": 15,
+                    "marketvalue": "10000.0000"
+                }
+            ]
+        },
+        {
+            "idoffer": 5,
+            "idproduct": 22,
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "40000.0000",
+            "sumitemsoffer": "50000.0000",
+            "differenceoffer": "10000.0000",
+            "infavor": false,
+            "itemsoffer": [
+                {
+                    "idpublication": 13,
+                    "status": 13,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 4,
+                    "status": 4,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 16,
+                    "status": 16,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 11,
+                    "status": 11,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 10,
+                    "status": 10,
+                    "marketvalue": "10000.0000"
+                }
+            ]
+        }
+    ],
+    "msg": "Listar Ofertas exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -1589,16 +1647,14 @@ router.post('/newoffer', rutasProtegidas, [
  *     {
     "success": false,
     "status":: "500",
-    "msg": "Error al intentar crear Oferta"
+    "msg": "Error al intentar listar Oferta"
 }
  **/
 
 //CREAR UNA OFERTA - PUBLICACIÓN
 router.post('/listoffer', rutasProtegidas, [
-    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
-    check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
-    check('idsPublications', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    check('idPublication', 'El IdProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -1607,6 +1663,93 @@ router.post('/listoffer', rutasProtegidas, [
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }
         let response = await userController.ListOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
+      /**
+ * @api {post} /user/detailsoffer 3 detailsoffer
+ * @apiName detailsoffer - Listar Oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * 
+ * @apiParam {int} typePublication required.
+ * @apiParam {int} Int idPublication required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idoffer": 4,
+            "idproduct": 22,
+            "nameoffer": "gusuario12",
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "40000.0000",
+            "sumitemsoffer": "20000.0000",
+            "differenceoffer": "20000.0000",
+            "infavor": true,
+            "itemsoffer": [
+                {
+                    "idpublication": 17,
+                    "status": 1,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 15,
+                    "status": 1,
+                    "marketvalue": "10000.0000"
+                }
+            ]
+        }
+    ],
+    "msg": "Detalles de la oferta listado exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar listar detalles de la oferta"
+}
+ **/
+
+//DETALLE DE LA OFERTA - PUBLICACIÓN
+router.post('/detailsoffer', rutasProtegidas, [
+    check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('idPublication', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.DetailsOffer(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })

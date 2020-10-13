@@ -168,9 +168,9 @@
   },
   {
     "type": "post",
-    "url": "/user/newoffer",
-    "title": "1 newoffer",
-    "name": "newoffer_-_Crear_Oferta",
+    "url": "/user/detailsoffer",
+    "title": "3 detailsoffer",
+    "name": "detailsoffer_-_Listar_Oferta",
     "group": "Offers",
     "header": {
       "examples": [
@@ -191,13 +191,6 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "idFirebaseUser",
-            "description": "<p>required.</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "typePublication",
@@ -205,17 +198,10 @@
           },
           {
             "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "descriptionOffer",
-            "description": "<p>required.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
+            "type": "int",
             "optional": false,
             "field": "Int",
-            "description": "<p>idsPublications required.</p>"
+            "description": "<p>idPublication required.</p>"
           }
         ]
       }
@@ -249,7 +235,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Oferta creada exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 4,\n            \"idproduct\": 22,\n            \"nameoffer\": \"gusuario12\",\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"40000.0000\",\n            \"sumitemsoffer\": \"20000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 17,\n                    \"status\": 1,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 15,\n                    \"status\": 1,\n                    \"marketvalue\": \"10000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Detalles de la oferta listado exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -268,7 +254,104 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar crear Oferta\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar listar detalles de la oferta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Offers"
+  },
+  {
+    "type": "post",
+    "url": "/user/listoffer",
+    "title": "2listoffer",
+    "name": "listoffer_-_Listar_Oferta",
+    "group": "Offers",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "typePublication",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "Int",
+            "description": "<p>idPublication required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 4,\n            \"idproduct\": 22,\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"40000.0000\",\n            \"sumitemsoffer\": \"20000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 17,\n                    \"status\": 17,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 15,\n                    \"status\": 15,\n                    \"marketvalue\": \"10000.0000\"\n                }\n            ]\n        },\n        {\n            \"idoffer\": 5,\n            \"idproduct\": 22,\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"40000.0000\",\n            \"sumitemsoffer\": \"50000.0000\",\n            \"differenceoffer\": \"10000.0000\",\n            \"infavor\": false,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 13,\n                    \"status\": 13,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 4,\n                    \"status\": 4,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 16,\n                    \"status\": 16,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 11,\n                    \"status\": 11,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 10,\n                    \"status\": 10,\n                    \"marketvalue\": \"10000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Listar Ofertas exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar listar Oferta\"\n}",
           "type": "json"
         }
       ]
