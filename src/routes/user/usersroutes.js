@@ -1499,6 +1499,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
  *
  * @apiParam {varchar} idFirebaseUser required.
  * @apiParam {int} typePublication required.
+ * @apiParam {int} idPublication required.
  * @apiParam {varchar} descriptionOffer required.
  * @apiParam {array}  idsPublications array Int required.
  * 
@@ -1531,6 +1532,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
 router.post('/newoffer', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
     check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
     check('idsPublications', 'El idsPublications es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
@@ -1575,13 +1577,49 @@ router.post('/newoffer', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *          {
     "success": true,
     "status": "200",
     "data": [
         {
+            "idoffer": 2,
+            "idproduct": 21,
+             "namepublication": "Varidades",
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "10000.0000",
+            "sumitemsoffer": "0.0000",
+            "differenceoffer": "0.0000",
+            "infavor": false,
+            "itemsoffer": []
+        },
+        {
+            "idoffer": 3,
+            "idproduct": 21,
+             "namepublication": "Varidades",
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "10000.0000",
+            "sumitemsoffer": "20000.0000",
+            "differenceoffer": "10000.0000",
+            "infavor": false,
+            "itemsoffer": [
+                {
+                    "idpublication": 17,
+                    "nameproduct": "Gorros para bebés",
+                    "status": 17,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 15,
+                    "nameproduct": "Gorros para bebés",
+                    "status": 15,
+                    "marketvalue": "10000.0000"
+                }
+            ]
+        },
+        {
             "idoffer": 4,
             "idproduct": 22,
+             "namepublication": "Varidades",
             "observation": "Podemos hacer trato y la diferencia en efectivo",
             "valorpublication": "40000.0000",
             "sumitemsoffer": "20000.0000",
@@ -1590,54 +1628,20 @@ router.post('/newoffer', rutasProtegidas, [
             "itemsoffer": [
                 {
                     "idpublication": 17,
+                    "nameproduct": "Gorros para bebés",
                     "status": 17,
                     "marketvalue": "10000.0000"
                 },
                 {
                     "idpublication": 15,
+                    "nameproduct": "Gorros para bebés",
                     "status": 15,
-                    "marketvalue": "10000.0000"
-                }
-            ]
-        },
-        {
-            "idoffer": 5,
-            "idproduct": 22,
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "40000.0000",
-            "sumitemsoffer": "50000.0000",
-            "differenceoffer": "10000.0000",
-            "infavor": false,
-            "itemsoffer": [
-                {
-                    "idpublication": 13,
-                    "status": 13,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 4,
-                    "status": 4,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 16,
-                    "status": 16,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 11,
-                    "status": 11,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 10,
-                    "status": 10,
                     "marketvalue": "10000.0000"
                 }
             ]
         }
     ],
-    "msg": "Listar Ofertas exitosamente"
+    "msg": "Lista de mis Ofertas exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -1845,10 +1849,8 @@ router.post('/caldifference', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * 
+ * @apiParam {int} Int idFirebaseUser required.
  * @apiParam {int} typePublication required.
- * @apiParam {int} Int idPublication required.
- * 
  * 
  * 
  * @apiSuccess {boolean} success of the Offers.
@@ -1864,6 +1866,7 @@ router.post('/caldifference', rutasProtegidas, [
         {
             "idoffer": 2,
             "idproduct": 21,
+             "namepublication": "Varidades",
             "observation": "Podemos hacer trato y la diferencia en efectivo",
             "valorpublication": "10000.0000",
             "sumitemsoffer": "0.0000",
@@ -1874,6 +1877,7 @@ router.post('/caldifference', rutasProtegidas, [
         {
             "idoffer": 3,
             "idproduct": 21,
+             "namepublication": "Varidades",
             "observation": "Podemos hacer trato y la diferencia en efectivo",
             "valorpublication": "10000.0000",
             "sumitemsoffer": "20000.0000",
@@ -1882,11 +1886,13 @@ router.post('/caldifference', rutasProtegidas, [
             "itemsoffer": [
                 {
                     "idpublication": 17,
+                    "nameproduct": "Gorros para bebés",
                     "status": 17,
                     "marketvalue": "10000.0000"
                 },
                 {
                     "idpublication": 15,
+                    "nameproduct": "Gorros para bebés",
                     "status": 15,
                     "marketvalue": "10000.0000"
                 }
@@ -1895,6 +1901,7 @@ router.post('/caldifference', rutasProtegidas, [
         {
             "idoffer": 4,
             "idproduct": 22,
+             "namepublication": "Varidades",
             "observation": "Podemos hacer trato y la diferencia en efectivo",
             "valorpublication": "40000.0000",
             "sumitemsoffer": "20000.0000",
@@ -1903,11 +1910,13 @@ router.post('/caldifference', rutasProtegidas, [
             "itemsoffer": [
                 {
                     "idpublication": 17,
+                    "nameproduct": "Gorros para bebés",
                     "status": 17,
                     "marketvalue": "10000.0000"
                 },
                 {
                     "idpublication": 15,
+                    "nameproduct": "Gorros para bebés",
                     "status": 15,
                     "marketvalue": "10000.0000"
                 }

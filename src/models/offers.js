@@ -59,7 +59,7 @@ OffersModel.ListOffer = (OfferData,callback) => {
         if (pool) {
             let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.idproduct= ? AND o.publication= ?',[
+                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.idproduct= ? AND o.publication= ?',[
                     OfferData.idproduct,
                 OfferData.publication],
                 async(err, result) => {
@@ -104,9 +104,10 @@ OffersModel.ListItemsOffers = (element) => {
         let SumItemsOffer=0;
         let DiferenciaOffer=0;
         let Afavor=false;
+        let detalleProduct={};
         pool.query(
-            'SELECT ops.idoffers,ops.idpublication,ops.status,p.marketvalue FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id WHERE idoffers='+element.id,
-            (err2, result2) => {
+            'SELECT ops.idoffers,ops.idpublication AS idproduct,ops.status,p.name,p.marketvalue,p.datecreated as datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id WHERE idoffers='+element.id,
+            async(err2, result2) => {
                 if (err2) {
                     console.log(err2);
                     resolve({
@@ -121,8 +122,9 @@ OffersModel.ListItemsOffers = (element) => {
                     // "iduser": result2[0].iduser,
                             ListItemsOffers.push({
                                 "idoffer": result2[atr2].id,
-                                "idpublication": result2[atr2].idpublication,
-                                "status": result2[atr2].idpublication,
+                                "idpublication": result2[atr2].idproduct,
+                                "nameproduct": result2[atr2].name,
+                                "status": result2[atr2].status,
                                 "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
                             });
                             SumItemsOffer+=result2[atr2].marketvalue;
@@ -137,11 +139,17 @@ OffersModel.ListItemsOffers = (element) => {
                     }
                     
                 }; 
+                console.log("result2");
+                console.log(result2);
 
                 //console.log(ListItemsOffers);
+                detalleProduct = await ProductModel.armaresult(result2);  
+                console.log("detalleProduct");
+                console.log(detalleProduct);
                 resolve({                    
                     "idoffer": element.id,
                     "idproduct": element.idproduct,
+                    "namepublication": element.namePublication,
                     "observation": element.observation,
                     "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                     "sumitemsoffer":Number.parseFloat(SumItemsOffer).toFixed(4),
@@ -269,7 +277,7 @@ OffersModel.ListMyOffer = (OfferData,callback) => {
         if (pool) {
             let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.iduser= ? AND o.publication= ?',[
+                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.iduser= ? AND o.publication= ?',[
                     OfferData.iduser,
                 OfferData.publication],
                 async(err, result) => {
