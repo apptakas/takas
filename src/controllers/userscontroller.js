@@ -1037,6 +1037,7 @@ userController.ListOffer = async (req) => {
             };
         }if(req.typePublication==2){
             OfferData = {
+                iduser: req.idFirebaseUser,
                 idproduct: req.idPublication,
                 publication: req.typePublication
             };
@@ -1133,6 +1134,156 @@ userController.DetailsOffer = async (req) => {
                 success: false,
                 status: '500',
                 msg: 'Error al intentar listar detalles de la oferta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+//CALCULAR DIFERENCIAS- OFFERS 
+userController.CalDifference = async (req) => {
+    try {
+
+
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            OfferData = {
+                id: req.idPublication,
+                marketvalueP: req.marketvalueP
+            };
+                console.log(req.Publications.length);
+
+                //const IdOfferData = {};
+                let SumItemsOffer= 0; 
+                let Afavor=false;
+                if(req.Publications.length!=0){
+                    for(var atr1 in req.Publications){
+                        
+                        // IdOfferData={
+                        //    "idPublication": req.Publications[atr1].idPublication,
+                        //    "marketvalueO": req.Publications[atr1].marketvalueO,
+                        // } 
+                        //IdOfferData[atr1] = req.IdOfferData[atr1]; 
+                        SumItemsOffer+=req.Publications[atr1].marketvalueO;
+                        
+                    };
+                   
+                }
+
+                if(SumItemsOffer>OfferData.marketvalueP){
+                    DiferenciaOffer= SumItemsOffer-OfferData.marketvalueP;
+                    Afavor=true;
+               }else{
+                   DiferenciaOffer= OfferData.marketvalueP-SumItemsOffer;
+                   Afavor=false;
+               }
+
+                // console.log("IdOfferData");
+                // console.log(IdOfferData);
+        
+        //console.log(userData.password);
+        //let response = await Offer.DetailsOffer(OfferData);
+        let response ={
+            "result":{
+                "idPublication":OfferData.id,
+                "marketvalueP":Number.parseFloat(OfferData.marketvalueP).toFixed(4),
+                "SumItemsOffer":Number.parseFloat(SumItemsOffer).toFixed(4),
+                "differenceoffer":Number.parseFloat(DiferenciaOffer).toFixed(4),
+                "infavor":Afavor
+            }
+        };
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: r,
+                msg: 'Diferencia calculada exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Calcular diferencia'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+
+
+//LISTAR  MIS OFERTAS - GENERAL 
+userController.ListMyOffer = async (req) => {
+    try {
+
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+        if(req.typePublication==1){
+            OfferData = {
+                iduser: req.idFirebaseUser,
+                idproduct: req.idPublication,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==2){
+            OfferData = {
+                iduser: req.idFirebaseUser,
+                idproduct: req.idPublication,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==3){
+            OfferData = {
+                iduser: req.idFirebaseUser,
+                idauction: req.idPublication,
+                publication: req.typePublication
+            };
+        }
+        //console.log(userData.password);
+        let response = await Offer.ListMyOffer(OfferData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: r,
+                msg: 'Lista de mis Ofertas exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar listar mis ofertas'
             }
         }
         //validar si esta llegado vacio

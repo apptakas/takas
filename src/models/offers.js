@@ -1,4 +1,5 @@
 const pool = require('../config/database');
+const ProductModel = require('../models/product.js');
 let OffersModel = {};
 
 //CERAR UNA OFERTA SOBRE UNA PUBLICACIÓN
@@ -257,5 +258,41 @@ OffersModel.ListItemsOffer = (element) => {
             })
     })
 }
+
+
+
+
+//ListOfertas  - Obtenemos lista de ofertas sobre una publicación
+OffersModel.ListMyOffer = (OfferData,callback) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let ListItemsOffer={};
+            pool.query(
+                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.iduser= ? AND o.publication= ?',[
+                    OfferData.iduser,
+                OfferData.publication],
+                async(err, result) => {
+                    
+                    if (err) {
+                        console.log(err);
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        //console.log(result);
+                        ListItemsOffer = await OffersModel.recorridOfertas(result);
+                        resolve({
+                            'result': ListItemsOffer
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
 
 module.exports = OffersModel;

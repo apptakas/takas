@@ -1759,4 +1759,264 @@ router.post('/detailsoffer', rutasProtegidas, [
     
     }) 
 
+
+
+
+          /**
+ * @api {post} /user/caldifference 4 caldifference
+ * @apiName caldifference - Listar Oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * 
+ * @apiParam {int} Int idPublication required.
+ * @apiParam {decimal} marketvalueP required.
+ * @apiParam {json} Publications required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      {
+    "success": true,
+    "status": "200",
+    "data": {
+        "idPublication": 4,
+        "marketvalueP": "50000.0000",
+        "SumItemsOffer": "20000.0000",
+        "differenceoffer": "30000.0000",
+        "infavor": false
+    },
+    "msg": "Diferencia calculada exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Calcular diferencia"
+}
+ **/
+
+//CARLCULAR DIFERENCIAS - OFFERS
+router.post('/caldifference', rutasProtegidas, [
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('marketvalueP', 'El marketvalueP es obligatorio').not().isEmpty().exists(),
+    check('Publications', 'El Publications es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.CalDifference(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+  /**
+ * @api {post} /user/listmyoffer 5 listmyoffer
+ * @apiName listmyoffer - Listar MIs Oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * 
+ * @apiParam {int} typePublication required.
+ * @apiParam {int} Int idPublication required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *       {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idoffer": 2,
+            "idproduct": 21,
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "10000.0000",
+            "sumitemsoffer": "0.0000",
+            "differenceoffer": "0.0000",
+            "infavor": false,
+            "itemsoffer": []
+        },
+        {
+            "idoffer": 3,
+            "idproduct": 21,
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "10000.0000",
+            "sumitemsoffer": "20000.0000",
+            "differenceoffer": "10000.0000",
+            "infavor": false,
+            "itemsoffer": [
+                {
+                    "idpublication": 17,
+                    "status": 17,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 15,
+                    "status": 15,
+                    "marketvalue": "10000.0000"
+                }
+            ]
+        },
+        {
+            "idoffer": 4,
+            "idproduct": 22,
+            "observation": "Podemos hacer trato y la diferencia en efectivo",
+            "valorpublication": "40000.0000",
+            "sumitemsoffer": "20000.0000",
+            "differenceoffer": "20000.0000",
+            "infavor": true,
+            "itemsoffer": [
+                {
+                    "idpublication": 17,
+                    "status": 17,
+                    "marketvalue": "10000.0000"
+                },
+                {
+                    "idpublication": 15,
+                    "status": 15,
+                    "marketvalue": "10000.0000"
+                }
+            ]
+        }
+    ],
+    "msg": "Lista de mis Ofertas exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar listar mis ofertas"
+}
+ **/
+
+//CREAR UNA OFERTA - PUBLICACIÓN
+router.post('/listmyoffer', rutasProtegidas, [
+    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.ListMyOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
+
+    /**
+ * @api {post} /user/changestatusoffer 6 changestatusoffer
+ * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idFirebaseUser required.
+ * @apiParam {int} typePublication required.
+ * @apiParam {varchar} descriptionOffer required.
+ * @apiParam {array}  idsPublications array Int required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "msg": "Oferta creada exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar crear Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
+router.put('/changestatusoffer', rutasProtegidas, [
+    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
+    check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
+    check('idsPublications', 'El idsPublications es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.NewOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
+
+
 module.exports = router;
