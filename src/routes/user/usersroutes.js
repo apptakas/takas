@@ -29,6 +29,7 @@ router.get('/prueba', function (req, res) {
  * 
  *   
  * @apiParam {varchar} idfirebaseUser unique required.
+ * @apiParam {int} codCity  required. 
  * @apiParam {varchar} fullnameUser required.
  * @apiParam {varchar} phonenumberUser  unique required.
  * @apiParam {varchar} emailUser   required.
@@ -65,6 +66,7 @@ router.get('/prueba', function (req, res) {
 //Crear newUser- 
 router.post('/newUser', [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('codCity', 'El usuario debe elgir una ciudad por defecto ').not().isEmpty().exists(),
     check('fullnameUser', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
     check('phonenumberUser', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El email no puede estra vacio y debe corresponder al formato').isEmail().exists(),
@@ -413,6 +415,178 @@ router.post('/listcategory', rutasProtegidas, [
     return res.status(response.data.status).json(response.data)
 
 })
+
+/**
+ * @api {post} /user/listcities 1 listcities
+ * @apiName listcities - Listar Ciudades
+ * @apiGroup Cities
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * 
+ * 
+ * @apiParam {varchar}  idfirebaseUser  required. 
+ *
+ * @apiSuccess {boolean} success of the Cities.
+ * @apiSuccess {int} status 200 of the Cities.
+ * @apiSuccess {string} msg   of the Cities.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status":: "200",
+    "data": [
+        {
+            "id": 1,
+            "name": "Takastear",
+            "description": "Publicar Productos",
+            "status":: 1
+        },
+        {
+            "id": 2,
+            "name": "ServiTakastear",
+            "description": "Publicar Servicios",
+            "status":: 1
+        },
+        {
+            "id": 3,
+            "name": "SubasTakear",
+            "description": "Publicar Subastas",
+            "status":: 1
+        }
+    ],
+    "msg": "Lista de Tipo de Publicación"
+}
+ *
+ * @apiError UserNotFound The id of the Cities was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar Categoría"
+}
+ */
+
+//MASTER LIST CITIES
+router.post('/listcities', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.ListCities(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+ * @api {post} /user/liststatusproduct 1 liststatusproduct
+ * @apiName liststatusproduct - Listar status ce características de Productos 
+ * @apiGroup Status
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * @apiParam {smallint}  idfilter  required. 
+ *
+ * @apiSuccess {boolean} success of the Status.
+ * @apiSuccess {int} status 200 of the Status.
+ * @apiSuccess {string} msg   of the Status.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 9,
+            "namestatus": "Nuevo ",
+            "filter": 4,
+            "namefilter": "Estado Producto "
+        },
+        {
+            "id": 10,
+            "namestatus": "Usado (Como nuevo)",
+            "filter": 4,
+            "namefilter": "Estado Producto "
+        },
+        {
+            "id": 11,
+            "namestatus": "Usado (Buen estado)",
+            "filter": 4,
+            "namefilter": "Estado Producto "
+        },
+        {
+            "id": 12,
+            "namestatus": "Usado (Funcional)",
+            "filter": 4,
+            "namefilter": "Estado Producto "
+        },
+        {
+            "id": 13,
+            "namestatus": "Usado (con detalles)",
+            "filter": 4,
+            "namefilter": "Estado Producto "
+        }
+    ],
+    "msg": "Lista de Tipo de Publicación"
+}
+ *
+ * @apiError UserNotFound The id of the Status was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar status de productos según filtros"
+}
+ */
+//MASTER STATUS DE PRODUCTOS 
+router.post('/liststatusproduct', rutasProtegidas, [
+    check('idfilter', 'Se requiere el idfilter de la publicación').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+
+    let response = await userController.listStatusProduct(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+
+
+
 
 
 /**
@@ -828,6 +1002,9 @@ router.post('/newproduct', rutasProtegidas,[
     return res.status(response.data.status).json(response.data)
 
 })
+
+
+
 
 
 /**
@@ -1250,6 +1427,89 @@ router.post('/detailsproduct', rutasProtegidas, [
     })    
 
 
+    /**
+ * @api {post} /user/newproductkw  6 newproductkw
+ * @apiName  newproductkw - Registro De Producto con keywords TAKASTEAR
+ * @apiGroup Product
+ * 
+ *      
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * 
+ * 
+ * @apiParam {varchar} iduserProduct required.
+ * @apiParam {varchar} nameProduct required.
+ * @apiParam {varchar} detailsProduct  unique required.
+ * @apiParam {smallint} typemoneyProduct   required.
+ * @apiParam {decimal} marketvalueProduct  required .
+ * @apiParam {int} subcategoryProduct  required .
+ * @apiParam {array} PreferecesProduct  required array de enteros .
+ * @apiParam {array} ImagesProduct  required arrays de varchar .
+ * @apiParam {array} KeyWordsProduct  optional array de varchar .
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status":: "200",
+    "msg": "Producto registrado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "data": "Ha superdo el límite de imagenes",
+    "msg": "Error al registrar producto"
+}
+ *
+ *
+ **/
+
+//Crear newproduct
+router.post('/newproductkw', rutasProtegidas,[
+    check('iduserProduct', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
+    check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
+    check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
+    check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
+    check('subcategoryProduct', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
+    check('ImagesProduct', 'Debes cargar al menos 1 Foto').not().isEmpty().exists()
+], async (req, res) => {
+
+    /*,
+    check('PreferecesProduct', ' Las Preferencias son requerido aceptar términos y condisiones').not().isEmpty().exists(),
+    check('ImagesProduct', ' Es requerido aceptar términos y condisiones').not().isEmpty().exists() */
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.NewProductKW(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
 /**
  * @api {post} /user/newquestion 1 newquestion
  * @apiName newquestion - Pregunta de un producto
@@ -1658,7 +1918,7 @@ router.post('/newoffer', rutasProtegidas, [
 //CREAR UNA OFERTA - PUBLICACIÓN
 router.post('/listoffer', rutasProtegidas, [
     check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
-    check('idPublication', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -1973,7 +2233,7 @@ router.post('/listmyoffer', rutasProtegidas, [
  *
  *
  * @apiParam {int} idOffer required.
- * @apiParam {int} statusOffer required.
+ * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
  * 
  * 
  * 
@@ -2003,14 +2263,14 @@ router.post('/listmyoffer', rutasProtegidas, [
 //CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
 router.put('/changestatusoffer', rutasProtegidas, [
     check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
-    check('statusOffer', 'El statusOffer es obligatorio').not().isEmpty().exists()
+    check('FlagStatusOffer', 'El FlagStatusOffer es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
 
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
-        }
+        }        
         let response = await userController.ChangeStatusOffer(req.body);
     
         if (response.status == 'ko') {

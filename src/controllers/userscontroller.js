@@ -8,6 +8,8 @@ const MasterSubCategory = require('../models/mastersubcategory.js');
 const Product = require('../models/product.js');
 const Question = require('../models/questions.js');
 const Offer = require('../models/offers.js');
+const MasterCities = require('../models/mastercities.js');
+const MasterStatus = require('../models/masterstatus.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
@@ -29,6 +31,7 @@ userController.newUser = async (req) => {
         let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
         const userData = {
             id: req.idfirebaseUser,
+            idcity: req.codCity,
             fullname: req.fullnameUser,
             email: req.emailUser,
             phonenumber: req.phonenumberUser,
@@ -51,13 +54,13 @@ userController.newUser = async (req) => {
             };
 
             var token = jwt.sign(payload, config.llave, {
-                expiresIn: 60 * 60 * 24
+                expiresIn: 60 * 60 * 720
             });
             // var refreshToken = randtoken.uid(256) ;
             // refreshTokens[refreshToken] = {token: 'JWT ' + token, refreshToken: refreshToken};
 
             // const token = jwt.sign(payload, config.llave, {
-            //     expiresIn: 60 * 60 * 24
+            //     expiresIn: 60 * 60 * 720
             // });
             data = {
                 success: true,
@@ -109,7 +112,7 @@ userController.Autenticar = async (req) => {
                 ignoreExpiration: true
             };
             const token = jwt.sign(payload, config.llave, {
-                expiresIn: 60 * 60 * 24
+                expiresIn: 60 * 60 * 720
             });
             data = {
                 success: true,
@@ -159,7 +162,7 @@ userController.GAutenticar = async (req) => {
                 ignoreExpiration: true
             };
             const token = jwt.sign(payload, config.llave, {
-                expiresIn: 60 * 60 * 24
+                expiresIn: 60 * 60 * 720
             });
             data = {
                 success: true,
@@ -471,6 +474,51 @@ userController.ListSubCategory = async () => {
 
 };
 
+//Listar Ciudades
+userController.ListCities = async (req) => {
+    //existe este usuario? 
+    try {
+        const citiesdata = {
+            id: req.idfirebaseUser,
+            status:1
+        };
+
+        console.log(citiesdata.id);
+        let response = await MasterCities.ListCities(citiesdata);
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Ciudades'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Ciudades'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 //Nuevo Producto (TAKASTEAR)
 userController.NewProduct = async (req) => {
     //existe este usuario? 
@@ -548,6 +596,138 @@ userController.NewProduct = async (req) => {
     }
 
 };
+
+
+
+
+//Nuevo Producto (TAKASTEAR)
+userController.NewProductKW = async (req) => {
+    //existe este usuario? 
+    try {
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            console.log(now+" - "+hoy);
+            const ProductData = {
+                iduser: req.iduserProduct,
+                datepublication: hoy,
+                name: req.nameProduct,
+                details: req.detailsProduct,
+                typemoney: req.typemoneyProduct,
+                marketvalue: req.marketvalueProduct,
+                subcategory:req.subcategoryProduct,
+                datecreated: hoy,
+                typepublication:1,
+                status:1
+            };
+            const topeimg=10;      
+            const ImagesProduct = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.ImagesProduct.length!=0){
+                for(var atr1 in req.ImagesProduct){
+                    ImagesProduct[atr1] = req.ImagesProduct[atr1];     
+                };
+            }
+
+            const PreferecesProduct = {};
+            console.log(req.PreferecesProduct.length);
+            if(req.PreferecesProduct.length!=0){
+                for(var atr2 in req.PreferecesProduct){
+                    PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
+                };
+            }
+
+            const topeKW=10;      
+            const KeyWordsProduct = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.KeyWordsProduct.length!=0){
+                for(var atr1 in req.KeyWordsProduct){
+                    KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
+                };
+            }
+            console.log(req.KeyWordsProduct.length);
+        let response ="";
+        
+        if(req.ImagesProduct.length<=topeimg && req.KeyWordsProduct.length<=topeKW){
+            // response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct);
+        }else{
+             response ={
+                'error': "Ha superdo el límite de imagenes o palabras claves"
+            };
+        }
+       // console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Producto registrado con éxito'
+                //data: response
+            }
+        } else {
+
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                data: response.error,
+                msg: 'Error al registrar producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Listar status de un producto
+userController.listStatusProduct = async (req) => {
+    //existe este usuario? 
+    try {
+        idfilter=req.idfilter;
+        //console.log(userData.password);
+        let response = await MasterStatus.listStatusProduct(idfilter);
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de sataus de productos según filtro'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar status de productos según filtros'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 //Listar Mis publicaciones  - TAKASTEAR 
@@ -1302,10 +1482,17 @@ userController.ChangeStatusOffer = async (req) => {
 
         let OfferData ={};
        // console.log(req.typeQuestion);
-        
+            let statusOffer=23;//ODERTA CANCELADA
+            if(req.FlagStatusOffer==1){
+                statusOffer=8;// OFERTA RECHAZADA
+            }
+            if(req.FlagStatusOffer==2){
+                statusOffer=7;// OFERTA ACEPTADA
+            }
+            
             OfferData = {
                 id: req.idOffer,
-                status:req.statusOffer
+                status:statusOffer
             };
        
         console.log(OfferData);

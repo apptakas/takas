@@ -90,6 +90,96 @@
     "groupTitle": "Category"
   },
   {
+    "type": "post",
+    "url": "/user/listcities",
+    "title": "1 listcities",
+    "name": "listcities_-_Listar_Ciudades",
+    "group": "Cities",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{ \"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Cities.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Cities.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Cities.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Takastear\",\n            \"description\": \"Publicar Productos\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"ServiTakastear\",\n            \"description\": \"Publicar Servicios\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"SubasTakear\",\n            \"description\": \"Publicar Subastas\",\n            \"status\":: 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Publicación\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Cities was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Cities"
+  },
+  {
     "type": "get",
     "url": "/user/listmoney",
     "title": "1 listmoney",
@@ -304,8 +394,8 @@
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "statusOffer",
-            "description": "<p>required.</p>"
+            "field": "FlagStatusOffer",
+            "description": "<p>required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2</p>"
           }
         ]
       }
@@ -1395,6 +1485,152 @@
   },
   {
     "type": "post",
+    "url": "/user/newproductkw",
+    "title": "6 newproductkw",
+    "name": "newproductkw_-_Registro_De_Producto_con_keywords_TAKASTEAR",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "iduserProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "nameProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "detailsProduct",
+            "description": "<p>unique required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "typemoneyProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "decimal",
+            "optional": false,
+            "field": "marketvalueProduct",
+            "description": "<p>required .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "subcategoryProduct",
+            "description": "<p>required .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "PreferecesProduct",
+            "description": "<p>required array de enteros .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "ImagesProduct",
+            "description": "<p>required arrays de varchar .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "KeyWordsProduct",
+            "description": "<p>optional array de varchar .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Producto registrado con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"data\": \"Ha superdo el límite de imagenes\",\n    \"msg\": \"Error al registrar producto\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
     "url": "/user/answerquestion",
     "title": "2 answerquestion",
     "name": "answerquestion_-_Respuesta_del_una_pregunta_de_unproducto",
@@ -1711,6 +1947,96 @@
     "version": "0.0.0",
     "filename": "src/routes/user/usersroutes.js",
     "groupTitle": "Questions"
+  },
+  {
+    "type": "post",
+    "url": "/user/liststatusproduct",
+    "title": "1 liststatusproduct",
+    "name": "liststatusproduct_-_Listar_status_ce_características_de_Productos",
+    "group": "Status",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{ \"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "idfilter",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Status.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 9,\n            \"namestatus\": \"Nuevo \",\n            \"filter\": 4,\n            \"namefilter\": \"Estado Producto \"\n        },\n        {\n            \"id\": 10,\n            \"namestatus\": \"Usado (Como nuevo)\",\n            \"filter\": 4,\n            \"namefilter\": \"Estado Producto \"\n        },\n        {\n            \"id\": 11,\n            \"namestatus\": \"Usado (Buen estado)\",\n            \"filter\": 4,\n            \"namefilter\": \"Estado Producto \"\n        },\n        {\n            \"id\": 12,\n            \"namestatus\": \"Usado (Funcional)\",\n            \"filter\": 4,\n            \"namefilter\": \"Estado Producto \"\n        },\n        {\n            \"id\": 13,\n            \"namestatus\": \"Usado (con detalles)\",\n            \"filter\": 4,\n            \"namefilter\": \"Estado Producto \"\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Publicación\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Status was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar status de productos según filtros\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Status"
   },
   {
     "type": "get",
@@ -2095,6 +2421,13 @@
             "optional": false,
             "field": "idfirebaseUser",
             "description": "<p>unique required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "codCity",
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
