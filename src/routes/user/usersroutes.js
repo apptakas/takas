@@ -29,7 +29,7 @@ router.get('/prueba', function (req, res) {
  * 
  *   
  * @apiParam {varchar} idfirebaseUser unique required.
- * @apiParam {int} codCity  required. 
+ * @apiParam {int} codCity  optional. 
  * @apiParam {varchar} fullnameUser required.
  * @apiParam {varchar} phonenumberUser  unique required.
  * @apiParam {varchar} emailUser   required.

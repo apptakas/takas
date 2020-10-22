@@ -2427,7 +2427,7 @@ define({ "api": [
             "type": "int",
             "optional": false,
             "field": "codCity",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           },
           {
             "group": "Parameter",
