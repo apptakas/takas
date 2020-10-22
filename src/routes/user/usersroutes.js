@@ -66,7 +66,6 @@ router.get('/prueba', function (req, res) {
 //Crear newUser- 
 router.post('/newUser', [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
-    check('codCity', 'El usuario debe elgir una ciudad por defecto ').not().isEmpty().exists(),
     check('fullnameUser', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
     check('phonenumberUser', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El email no puede estra vacio y debe corresponder al formato').isEmail().exists(),
