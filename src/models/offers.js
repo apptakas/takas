@@ -286,7 +286,7 @@ OffersModel.ListMyOffer = (OfferData,callback) => {
         if (pool) {
             let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct  WHERE o.iduser= ? AND o.publication= ?',[
+                'SELECT o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct  WHERE o.iduser= ? AND o.publication= ? GROUP BY o.id HAVING COUNT(*) > 1',[
                     OfferData.iduser,
                 OfferData.publication],
                 async(err, result) => {
