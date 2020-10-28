@@ -59,7 +59,7 @@ OffersModel.ListOffer = (OfferData,callback) => {
         if (pool) {
             let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.idproduct= ? AND o.publication= ?',[
+                'SELECT o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name AS namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE o.idproduct= ? AND o.publication= ?',[
                     OfferData.idproduct,
                 OfferData.publication],
                 async(err, result) => {
@@ -106,7 +106,7 @@ OffersModel.ListItemsOffers = (element) => {
         let Afavor=false;
         let detalleProduct={};
         pool.query(
-            'SELECT ops.idoffers,ops.idpublication AS idproduct,ops.status,p.name,p.marketvalue,p.datecreated as datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id WHERE idoffers='+element.id,
+            'SELECT ops.idoffers,ops.idpublication AS idproduct,ip.url,ops.status,p.name,p.marketvalue,p.datecreated AS datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE idoffers='+element.id,
             async(err2, result2) => {
                 if (err2) {
                     console.log(err2);
@@ -125,6 +125,7 @@ OffersModel.ListItemsOffers = (element) => {
                                 "idpublication": result2[atr2].idproduct,
                                 "nameproduct": result2[atr2].name,
                                 "status": result2[atr2].status,
+                                "img": result2[atr2].url,
                                 "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
                             });
                             SumItemsOffer+=result2[atr2].marketvalue;
@@ -150,6 +151,7 @@ OffersModel.ListItemsOffers = (element) => {
                     "idoffer": element.id,
                     "idproduct": element.idproduct,
                     "namepublication": element.namePublication,
+                    "img": element.url,
                     "observation": element.observation,
                     "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                     "sumitemsoffer":Number.parseFloat(SumItemsOffer).toFixed(4),

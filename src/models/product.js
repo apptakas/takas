@@ -74,6 +74,130 @@ ProductModel.NewProduct = (ProductData,PreferecesProduct,ImagesProduct,callback)
     })
 };
 
+//ListUsers  - obtenemos lista de usuarios segun el rol
+ProductModel.NewProductKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,callback) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                'INSERT INTO product SET ?', ProductData,
+                (err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        if(ImagesProduct.length!=0){
+                        for(var atr2 in ImagesProduct){  
+                            pool.query(
+                                'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
+                                    ImagesProduct[atr2],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'result': resut
+                                        })                                       
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido imagenes
+                    }//fin if ImagesProduct.length!=0
+                    if(PreferecesProduct.length!=0){
+                        for(var atr3 in PreferecesProduct){  
+                            pool.query(
+                                'INSERT INTO preferences_product (preference,idproduct) value( ?, ?) ', [
+                                    PreferecesProduct[atr3],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'result': resut
+                                        })
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido Preferencias
+                    }//fin if PreferecesProduct.length!=0
+                    if(KeyWordsProduct.length!=0){
+                        for(var atr3 in KeyWordsProduct){  
+
+                            console.log(KeyWordsProduct[atr3]);
+                            // pool.query(
+                            //     'INSERT INTO  keywords_product (idwords,idproduct) value( ?, ?) ', [
+                            //         KeyWordsProduct[atr3],
+                            //         resut.insertId
+                            //     ],
+                            //     (err, resut) => {
+                            //         //console.log(resut);
+                            //         if (err) {
+                            //             resolve({
+                            //                 'error': err
+                            //             })
+                            //         } else {
+                            //             resolve({
+                            //                 'result': resut
+                            //             })
+                            //         }
+                
+                            //     }
+                            // )
+                            
+                        }//fin for reforrido KeyWords
+                    }//fin if KeyWords.length!=0
+
+                    }//
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+ProductModel.ExistKeyWords = (KW,callback) => {
+
+    if (pool) {
+        let armaresult={};
+        pool.query(
+            "SELECT * keywords where word='"+KW+"'",
+            (err, result) => {
+               // console.log(err);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {  
+                    //armaresult = await ProductModel.armaresult(result);  
+                    resolve({
+                        'result': armaresult
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+
+}
 
 //LISTAR LOS PRODUCTOS PUBLICADOS POR UN USUARIO - TAKASTEAR 
 ProductModel.ListMisProductos = (UserData,ProductData,callback) => {

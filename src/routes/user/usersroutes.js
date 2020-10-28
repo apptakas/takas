@@ -438,28 +438,67 @@ router.post('/listcategory', rutasProtegidas, [
  *     HTTP/1.1 200 OK
  *     {
     "success": true,
-    "status":: "200",
+    "status": "200",
     "data": [
         {
-            "id": 1,
-            "name": "Takastear",
-            "description": "Publicar Productos",
-            "status":: 1
-        },
-        {
-            "id": 2,
-            "name": "ServiTakastear",
-            "description": "Publicar Servicios",
-            "status":: 1
-        },
-        {
-            "id": 3,
-            "name": "SubasTakear",
-            "description": "Publicar Subastas",
-            "status":: 1
+            "idfirebase": "idfirebaseUsers77wqedsaxgg",
+            "city": "Bogotá DC",
+            "idcity": 1,
+            "ListCities": [
+                {
+                    "id": 1,
+                    "name": "Bogotá DC",
+                    "status": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Medellín",
+                    "status": 1
+                },
+                {
+                    "id": 3,
+                    "name": "Cali",
+                    "status": 1
+                },
+                {
+                    "id": 4,
+                    "name": "Barranquilla",
+                    "status": 1
+                },
+                {
+                    "id": 5,
+                    "name": "Cartagena",
+                    "status": 1
+                },
+                {
+                    "id": 6,
+                    "name": "Bucaramanga",
+                    "status": 1
+                },
+                {
+                    "id": 7,
+                    "name": "Manizales",
+                    "status": 1
+                },
+                {
+                    "id": 8,
+                    "name": "Santa Marta",
+                    "status": 1
+                },
+                {
+                    "id": 9,
+                    "name": "Pereira",
+                    "status": 1
+                },
+                {
+                    "id": 10,
+                    "name": "Cúcuta",
+                    "status": 1
+                }
+            ]
         }
     ],
-    "msg": "Lista de Tipo de Publicación"
+    "msg": "Lista de Ciudades"
 }
  *
  * @apiError UserNotFound The id of the Cities was not found.
@@ -1441,6 +1480,7 @@ router.post('/detailsproduct', rutasProtegidas, [
  * 
  * @apiParam {varchar} iduserProduct required.
  * @apiParam {varchar} nameProduct required.
+ * @apiParam {boolean} NewProduct required.
  * @apiParam {varchar} detailsProduct  unique required.
  * @apiParam {smallint} typemoneyProduct   required.
  * @apiParam {decimal} marketvalueProduct  required .
@@ -1448,6 +1488,8 @@ router.post('/detailsproduct', rutasProtegidas, [
  * @apiParam {array} PreferecesProduct  required array de enteros .
  * @apiParam {array} ImagesProduct  required arrays de varchar .
  * @apiParam {array} KeyWordsProduct  optional array de varchar .
+ * @apiParam {int} SizePoduct  optional.
+ * @apiParam {int} WeightProduct  optional.
  * 
  * 
  * 
@@ -1480,6 +1522,7 @@ router.post('/detailsproduct', rutasProtegidas, [
 //Crear newproduct
 router.post('/newproductkw', rutasProtegidas,[
     check('iduserProduct', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('NewProduct', 'El NewProduct es obligatorio').not().isEmpty().exists(),
     check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
     check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
     check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
@@ -1759,7 +1802,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
  * @apiParam {varchar} idFirebaseUser required.
  * @apiParam {int} typePublication required.
  * @apiParam {int} idPublication required.
- * @apiParam {varchar} descriptionOffer required.
+ * @apiParam {varchar} descriptionOffer optional.
  * @apiParam {array}  idsPublications array Int required.
  * 
  * 
@@ -1792,7 +1835,6 @@ router.post('/newoffer', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
-    check('descriptionOffer', 'El descriptionOffer es obligatorio').not().isEmpty().exists(),
     check('idsPublications', 'El idsPublications es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
@@ -1836,71 +1878,80 @@ router.post('/newoffer', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *          {
+ *         {
     "success": true,
     "status": "200",
     "data": [
         {
-            "idoffer": 2,
-            "idproduct": 21,
-             "namepublication": "Varidades",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "10000.0000",
-            "sumitemsoffer": "0.0000",
-            "differenceoffer": "0.0000",
-            "infavor": false,
-            "itemsoffer": []
-        },
-        {
-            "idoffer": 3,
-            "idproduct": 21,
-             "namepublication": "Varidades",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "10000.0000",
-            "sumitemsoffer": "20000.0000",
-            "differenceoffer": "10000.0000",
-            "infavor": false,
-            "itemsoffer": [
-                {
-                    "idpublication": 17,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 17,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 15,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 15,
-                    "marketvalue": "10000.0000"
-                }
-            ]
-        },
-        {
-            "idoffer": 4,
-            "idproduct": 22,
-             "namepublication": "Varidades",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "40000.0000",
-            "sumitemsoffer": "20000.0000",
+            "idoffer": 7,
+            "idproduct": 1,
+            "namepublication": "Estufa de 4 hornillas",
+            "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722",
+            "observation": "-",
+            "valorpublication": "200000.0000",
+            "sumitemsoffer": "180000.0000",
             "differenceoffer": "20000.0000",
             "infavor": true,
             "itemsoffer": [
                 {
-                    "idpublication": 17,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 17,
-                    "marketvalue": "10000.0000"
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                    "marketvalue": "50000.0000"
                 },
                 {
-                    "idpublication": 15,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 15,
-                    "marketvalue": "10000.0000"
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 6,
+                    "nameproduct": "Plancha para el pelo",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                    "marketvalue": "80000.0000"
+                }
+            ]
+        },
+        {
+            "idoffer": 7,
+            "idproduct": 1,
+            "namepublication": "Estufa de 4 hornillas",
+            "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c",
+            "observation": "-",
+            "valorpublication": "200000.0000",
+            "sumitemsoffer": "180000.0000",
+            "differenceoffer": "20000.0000",
+            "infavor": true,
+            "itemsoffer": [
+                {
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 6,
+                    "nameproduct": "Plancha para el pelo",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                    "marketvalue": "80000.0000"
                 }
             ]
         }
     ],
-    "msg": "Lista de mis Ofertas exitosamente"
+    "msg": "Listar Ofertas exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.

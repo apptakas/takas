@@ -151,7 +151,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Takastear\",\n            \"description\": \"Publicar Productos\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"ServiTakastear\",\n            \"description\": \"Publicar Servicios\",\n            \"status\":: 1\n        },\n        {\n            \"id\": 3,\n            \"name\": \"SubasTakear\",\n            \"description\": \"Publicar Subastas\",\n            \"status\":: 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Publicación\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idfirebase\": \"idfirebaseUsers77wqedsaxgg\",\n            \"city\": \"Bogotá DC\",\n            \"idcity\": 1,\n            \"ListCities\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Bogotá DC\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Medellín\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Cali\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Barranquilla\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 5,\n                    \"name\": \"Cartagena\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 6,\n                    \"name\": \"Bucaramanga\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 7,\n                    \"name\": \"Manizales\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 8,\n                    \"name\": \"Santa Marta\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 9,\n                    \"name\": \"Pereira\",\n                    \"status\": 1\n                },\n                {\n                    \"id\": 10,\n                    \"name\": \"Cúcuta\",\n                    \"status\": 1\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Ciudades\"\n}",
           "type": "json"
         }
       ]
@@ -720,7 +720,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n         {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 2,\n            \"idproduct\": 21,\n             \"namepublication\": \"Varidades\",\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"10000.0000\",\n            \"sumitemsoffer\": \"0.0000\",\n            \"differenceoffer\": \"0.0000\",\n            \"infavor\": false,\n            \"itemsoffer\": []\n        },\n        {\n            \"idoffer\": 3,\n            \"idproduct\": 21,\n             \"namepublication\": \"Varidades\",\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"10000.0000\",\n            \"sumitemsoffer\": \"20000.0000\",\n            \"differenceoffer\": \"10000.0000\",\n            \"infavor\": false,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 17,\n                    \"nameproduct\": \"Gorros para bebés\",\n                    \"status\": 17,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 15,\n                    \"nameproduct\": \"Gorros para bebés\",\n                    \"status\": 15,\n                    \"marketvalue\": \"10000.0000\"\n                }\n            ]\n        },\n        {\n            \"idoffer\": 4,\n            \"idproduct\": 22,\n             \"namepublication\": \"Varidades\",\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"40000.0000\",\n            \"sumitemsoffer\": \"20000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 17,\n                    \"nameproduct\": \"Gorros para bebés\",\n                    \"status\": 17,\n                    \"marketvalue\": \"10000.0000\"\n                },\n                {\n                    \"idpublication\": 15,\n                    \"nameproduct\": \"Gorros para bebés\",\n                    \"status\": 15,\n                    \"marketvalue\": \"10000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de mis Ofertas exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n        {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 7,\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"180000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        },\n        {\n            \"idoffer\": 7,\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\",\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"180000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Listar Ofertas exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -797,7 +797,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "descriptionOffer",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           },
           {
             "group": "Parameter",
@@ -1522,6 +1522,13 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "NewProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "detailsProduct",
@@ -1568,6 +1575,20 @@ define({ "api": [
             "optional": false,
             "field": "KeyWordsProduct",
             "description": "<p>optional array de varchar .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "SizePoduct",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "WeightProduct",
+            "description": "<p>optional.</p>"
           }
         ]
       }

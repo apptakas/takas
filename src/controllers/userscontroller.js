@@ -611,6 +611,9 @@ userController.NewProductKW = async (req) => {
             const ProductData = {
                 iduser: req.iduserProduct,
                 datepublication: hoy,
+                new: req.NewProduct,
+                size: req.SizePoduct,
+                weight: req.WeightProduct,
                 name: req.nameProduct,
                 details: req.detailsProduct,
                 typemoney: req.typemoneyProduct,
@@ -630,7 +633,7 @@ userController.NewProductKW = async (req) => {
             }
 
             const PreferecesProduct = {};
-            console.log(req.PreferecesProduct.length);
+            //console.log(req.PreferecesProduct.length);
             if(req.PreferecesProduct.length!=0){
                 for(var atr2 in req.PreferecesProduct){
                     PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
@@ -644,12 +647,14 @@ userController.NewProductKW = async (req) => {
                 for(var atr1 in req.KeyWordsProduct){
                     KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
                 };
+                console.log(KeyWordsProduct);
             }
-            console.log(req.KeyWordsProduct.length);
+            
+
         let response ="";
         
         if(req.ImagesProduct.length<=topeimg && req.KeyWordsProduct.length<=topeKW){
-            // response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct);
+            //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct);
         }else{
              response ={
                 'error': "Ha superdo el límite de imagenes o palabras claves"
@@ -692,7 +697,13 @@ userController.NewProductKW = async (req) => {
 userController.listStatusProduct = async (req) => {
     //existe este usuario? 
     try {
-        idfilter=req.idfilter;
+        let idfilter=4;// ESTADO DEL PRODUCTO  NUEVO Ó USADO
+        if(req.idfilter=1){
+            idfilter=5;// TAMAÑO DEL PRODUCTO 
+        }
+        if(req.idfilter=2){
+            idfilter=6; //PESO DEL PRODUCTO
+        }
         //console.log(userData.password);
         let response = await MasterStatus.listStatusProduct(idfilter);
 
@@ -1489,7 +1500,7 @@ userController.ChangeStatusOffer = async (req) => {
             if(req.FlagStatusOffer==2){
                 statusOffer=7;// OFERTA ACEPTADA
             }
-            
+
             OfferData = {
                 id: req.idOffer,
                 status:statusOffer
