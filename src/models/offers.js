@@ -126,6 +126,7 @@ OffersModel.ListItemsOffers = (element) => {
                             ListItemsOffers.push({
                                 "idoffer": result2[atr2].id,
                                 "idpublication": result2[atr2].idproduct,
+                                "imgpublicacion": result2[atr2].url,
                                 "nameproduct": result2[atr2].name,
                                 "status": result2[atr2].status,
                                 "img": result2[atr2].url,
@@ -285,7 +286,7 @@ OffersModel.ListMyOffer = (OfferData,callback) => {
         if (pool) {
             let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id WHERE o.iduser= ? AND o.publication= ?',[
+                'SELECT o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct  WHERE o.iduser= ? AND o.publication= ?',[
                     OfferData.iduser,
                 OfferData.publication],
                 async(err, result) => {

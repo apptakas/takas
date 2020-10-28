@@ -2186,6 +2186,7 @@ router.post('/caldifference', rutasProtegidas, [
             "itemsoffer": [
                 {
                     "idpublication": 5,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                     "nameproduct": "Camisas de Among Us",
                     "status": 1,
                     "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
@@ -2193,6 +2194,7 @@ router.post('/caldifference', rutasProtegidas, [
                 },
                 {
                     "idpublication": 5,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
                     "nameproduct": "Camisas de Among Us",
                     "status": 1,
                     "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
@@ -2200,6 +2202,7 @@ router.post('/caldifference', rutasProtegidas, [
                 },
                 {
                     "idpublication": 6,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
                     "nameproduct": "Plancha para el pelo",
                     "status": 1,
                     "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
@@ -2220,6 +2223,7 @@ router.post('/caldifference', rutasProtegidas, [
             "itemsoffer": [
                 {
                     "idpublication": 5,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                     "nameproduct": "Camisas de Among Us",
                     "status": 1,
                     "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
@@ -2227,6 +2231,7 @@ router.post('/caldifference', rutasProtegidas, [
                 },
                 {
                     "idpublication": 5,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
                     "nameproduct": "Camisas de Among Us",
                     "status": 1,
                     "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
@@ -2234,6 +2239,7 @@ router.post('/caldifference', rutasProtegidas, [
                 },
                 {
                     "idpublication": 6,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
                     "nameproduct": "Plancha para el pelo",
                     "status": 1,
                     "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
@@ -2242,7 +2248,7 @@ router.post('/caldifference', rutasProtegidas, [
             ]
         }
     ],
-    "msg": "Listar Ofertas exitosamente"
+    "msg": "Lista de mis Ofertas exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
