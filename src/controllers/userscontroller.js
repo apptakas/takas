@@ -10,6 +10,7 @@ const Question = require('../models/questions.js');
 const Offer = require('../models/offers.js');
 const MasterCities = require('../models/mastercities.js');
 const MasterStatus = require('../models/masterstatus.js');
+const ChatRooms = require('../models/chatrooms.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const jwt = require('jsonwebtoken');
@@ -1490,7 +1491,7 @@ userController.ListMyOffer = async (req) => {
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFFERS 
 userController.ChangeStatusOffer = async (req) => {
     try {
-
+        let match=false;
         let OfferData ={};
        // console.log(req.typeQuestion);
             let statusOffer=23;//ODERTA CANCELADA
@@ -1499,6 +1500,9 @@ userController.ChangeStatusOffer = async (req) => {
             }
             if(req.FlagStatusOffer==2){
                 statusOffer=7;// OFERTA ACEPTADA
+                match=true;
+                //let response2 =  Offer.FindDatOffer(OfferData);
+                //console.log(response2);
             }
 
             OfferData = {
@@ -1506,19 +1510,27 @@ userController.ChangeStatusOffer = async (req) => {
                 status:statusOffer
             };
        
-        console.log(OfferData);
-        let response = await Offer.ChangeStatusOffer(OfferData);
+        //console.log(OfferData);
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
 
        //console.log(response);
+      // console.log(response.sala);
 
         let data = {};
         if (response && response.result) {
             let r = {};
+            let sala='';
             r = response.result;
-
+            if(response.sala){
+                sala=response.sala;
+            }
             data = {
                 success: true,
                 status: '200',
+                match:match,
+                sala:sala,
                 msg: 'Cambio de estatus de una oferta ejecutdos exitosamente'
                 //data: response
             }
@@ -1539,5 +1551,49 @@ userController.ChangeStatusOffer = async (req) => {
     }
 
 };
+
+//Listar los datos de la sala de chat- TAKASTEAR 
+userController.listDataChatRoom = async (req) => {
+    try {
+        
+            let idSala= req.idSalaChat;
+       
+        //console.log(userData.password);
+        let response = await ChatRooms.listDataChatRoom(idSala);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Data completa de la sala de chat'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar la data de la sala de Chat'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
 
 module.exports = userController;

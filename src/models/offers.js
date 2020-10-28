@@ -1,5 +1,8 @@
 const pool = require('../config/database');
 const ProductModel = require('../models/product.js');
+const chatroomsModel = require('../models/chatrooms.js');
+const sha1 = require('sha1');
+const date = require('date-and-time');
 let OffersModel = {};
 
 //CERAR UNA OFERTA SOBRE UNA PUBLICACIÓN
@@ -165,6 +168,9 @@ OffersModel.ListItemsOffers = (element) => {
     })
 }
 
+
+
+
 //DETALLES DE LA OFERTA  - Obtenemos lista de detalles de una oferta sobre una publicación
 OffersModel.DetailsOffer = (OfferData,callback) => {
     //let resultado = {};
@@ -305,25 +311,88 @@ OffersModel.ListMyOffer = (OfferData,callback) => {
 };
 
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
-OffersModel.ChangeStatusOffer = (OfferData,callback) => {
+OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
+            let FindDatOffer={};
             pool.query(
                 'UPDATE  offers SET  status= ? WHERE id= ?',[
                     OfferData.status,
                     OfferData.id
                 ],
-                (err, resut) => {
-                   // console.log(resut);
+                async(err, result) => {
+                   // console.log(result);
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {                        
+                    } else { 
+                        if(FlagStatusOffer==2) {
+                            //console.log("prueba");
+                            FindDatOffer=await OffersModel.FindDatOffer(OfferData);
+                            //console.log(FindDatOffer);
+                            //console.log(FindDatOffer.error);
+                            if(FindDatOffer.error){
+                                resolve({
+                                    'error': FindDatOffer.error
+                                })
+                            }
+
+                        } 
+                                             
                         resolve({
-                            'result': resut
+                            'result': result,
+                            'sala':FindDatOffer.idSala
                         })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+//CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
+OffersModel.FindDatOffer = (OfferData,callback) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let DataSalas={};
+            let IdSAla="";
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            pool.query(
+                'SELECT o.iduser AS userOffer,p.iduser AS userPublication,p.id AS idPublication FROM offers AS o INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers INNER JOIN product AS p ON o.idproduct=p.id WHERE o.id=? limit 1',[
+                    OfferData.id
+                ],
+                async(err, result) => {
+                    //console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else { 
+                        IdSAla=sha1(result[0].userOffer+result[0].userPublication+result[0].idPublication+hoy);
+                        // console.log("IdSAla");
+                        // console.log(IdSAla);
+                        // console.log(result[0].userOffer);
+                        // console.log(result[0].userPublication);
+                        DataSalas = await chatroomsModel.newChatRooms(IdSAla,result[0].userOffer,result[0].userPublication,result[0].idPublication,hoy,OfferData.id);                      
+                        //console.log("DataSalas");
+                        //console.log(DataSalas.error);
+                        if (DataSalas.error) {
+                            resolve({
+                                'error': DataSalas.error
+                            })
+                        }
+                        else{
+                            resolve({
+                                'result': result,
+                                'idSala':IdSAla
+                            }) 
+                        }                       
                     }
 
                 }

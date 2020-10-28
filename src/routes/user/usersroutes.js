@@ -2169,71 +2169,80 @@ router.post('/caldifference', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *       {
+ *    {
     "success": true,
     "status": "200",
     "data": [
         {
-            "idoffer": 2,
-            "idproduct": 21,
-             "namepublication": "Varidades",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "10000.0000",
-            "sumitemsoffer": "0.0000",
-            "differenceoffer": "0.0000",
-            "infavor": false,
-            "itemsoffer": []
-        },
-        {
-            "idoffer": 3,
-            "idproduct": 21,
-             "namepublication": "Varidades",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "10000.0000",
-            "sumitemsoffer": "20000.0000",
-            "differenceoffer": "10000.0000",
-            "infavor": false,
-            "itemsoffer": [
-                {
-                    "idpublication": 17,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 17,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 15,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 15,
-                    "marketvalue": "10000.0000"
-                }
-            ]
-        },
-        {
-            "idoffer": 4,
-            "idproduct": 22,
-             "namepublication": "Varidades",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "40000.0000",
-            "sumitemsoffer": "20000.0000",
+            "idoffer": 7,
+            "idproduct": 1,
+            "namepublication": "Estufa de 4 hornillas",
+            "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722",
+            "observation": "-",
+            "valorpublication": "200000.0000",
+            "sumitemsoffer": "180000.0000",
             "differenceoffer": "20000.0000",
             "infavor": true,
             "itemsoffer": [
                 {
-                    "idpublication": 17,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 17,
-                    "marketvalue": "10000.0000"
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                    "marketvalue": "50000.0000"
                 },
                 {
-                    "idpublication": 15,
-                    "nameproduct": "Gorros para bebés",
-                    "status": 15,
-                    "marketvalue": "10000.0000"
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 6,
+                    "nameproduct": "Plancha para el pelo",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                    "marketvalue": "80000.0000"
+                }
+            ]
+        },
+        {
+            "idoffer": 7,
+            "idproduct": 1,
+            "namepublication": "Estufa de 4 hornillas",
+            "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c",
+            "observation": "-",
+            "valorpublication": "200000.0000",
+            "sumitemsoffer": "180000.0000",
+            "differenceoffer": "20000.0000",
+            "infavor": true,
+            "itemsoffer": [
+                {
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 5,
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 6,
+                    "nameproduct": "Plancha para el pelo",
+                    "status": 1,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                    "marketvalue": "80000.0000"
                 }
             ]
         }
     ],
-    "msg": "Lista de mis Ofertas exitosamente"
+    "msg": "Listar Ofertas exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -2296,6 +2305,8 @@ router.post('/listmyoffer', rutasProtegidas, [
  *    {
     "success": true,
     "status": "200",
+    "match": true,
+    "sala": "6340c299f4d9eb3d797b6a54f779cf616d0b0cdb",
     "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
 }
  *
@@ -2330,6 +2341,116 @@ router.put('/changestatusoffer', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)
     
     }) 
+
+/**
+ * @api {post} /user/listdatachatroom 1 listdatachatroom
+ * @apiName listdatachatroom - Listar los datos de la sala de chat por idSala
+ * @apiGroup Chatrooms
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idSalaChat required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Chatrooms.
+ * @apiSuccess {int} status 200 of the Chatrooms.
+ * @apiSuccess {string} msg   of the Chatrooms.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idSala": "949bdc81078b49cd604b6622ddd762054ca8963a",
+            "datecreated": "28/10/2020",
+            "idPublicacion": 1,
+            "namePublication": "Estufa de 4 hornillas",
+            "valorComercial": 200000,
+            "Userpublication": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nameUserPublication": "Ana",
+            "imgUserPublication": "https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d",
+            "idoferta": 7,
+            "UserOferta": "EVln0Vj6DNOtTXQVS2fN9P68Gl13",
+            "nameUserOferta": "ronny",
+            "imgUserOferta": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499",
+            "ProductImagesPublicacion": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c"
+            ],
+            "PreferencesPublicacion": [
+                1,
+                2
+            ],
+            "ItemOfer": {
+                "itemsoffer": [
+                    {
+                        "idpublication": 5,
+                        "nameproduct": "Camisas de Among Us",
+                        "status": 1,
+                        "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                        "marketvalue": "50000.0000"
+                    },
+                    {
+                        "idpublication": 5,
+                        "nameproduct": "Camisas de Among Us",
+                        "status": 1,
+                        "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1",
+                        "marketvalue": "50000.0000"
+                    },
+                    {
+                        "idpublication": 6,
+                        "nameproduct": "Plancha para el pelo",
+                        "status": 1,
+                        "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                        "marketvalue": "80000.0000"
+                    }
+                ]
+            }
+        }
+    ],
+    "msg": "Data completa de la sala de chat"
+}
+ *
+ * @apiError UserNotFound The id of the Chatrooms was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar Productos"
+}
+ **/
+//LISTAR LOS DATOS DE LA SALA DE CHAT 
+router.post('/listdatachatroom', rutasProtegidas, [
+    check('idSalaChat', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+        
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+    
+        let response = await userController.listDataChatRoom(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
+
+
 
 
 
