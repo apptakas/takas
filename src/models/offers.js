@@ -158,7 +158,7 @@ OffersModel.ListItemsOffers = (element) => {
                     "idoffer": element.id,
                     "idproduct": element.idproduct,
                     "namepublication": element.namePublication,
-                    "img":img,
+                    "img":img.ImagesProduct,
                     "observation": element.observation,
                     "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                     "sumitemsoffer":Number.parseFloat(SumItemsOffer).toFixed(4),
