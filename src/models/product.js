@@ -267,10 +267,12 @@ ProductModel.armaresult = (result) => {
         try{
             let img={};
             let prefe={};
+            let CantidadOfertas=0;
             //console.log(result);
             for (const element of result) {
                 img=await ProductModel.ListImagesProduct(element);
                 prefe=await ProductModel.ListPrefrencesProduct(element);
+                CantidadOfertas=await ProductModel.CantidadOfertas(element);
                 let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
 
                 let now = new Date();
@@ -302,8 +304,9 @@ ProductModel.armaresult = (result) => {
                     "marketvalue": Precio,
                     "typepublication": element.typepublication,
                     "status": element.status,
+                    "CantidadOfertas":CantidadOfertas.CantOfertas,
                     "ProductImages":img.ImagesProduct,
-                     "Preferences":prefe.Preferences
+                    "Preferences":prefe.Preferences
                     
                 });
                 
@@ -392,6 +395,38 @@ ProductModel.ListPrefrencesProduct = (element) => {
     })
 }
 
+
+ProductModel.CantidadOfertas = (element) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            'SELECT COUNT(*) AS cantofertas FROM offers WHERE idproduct=? ',[element.idproduct],
+            (err2, result2) => {
+                 
+               
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    // console.log(result2.length);
+                   
+                    //console.log(element.idproduct);  
+                  // console.log(result2.cantofertas);
+                    resolve({
+                        
+                        "CantOfertas": result2[0].cantofertas
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
+////////
 //LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA- TAKASTEAR 
 ProductModel.ListProductSubCategory = (ProductData,callback) => {
     //let resultado = {};
