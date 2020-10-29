@@ -358,6 +358,8 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
     })
 };
 
+
+
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
 OffersModel.FindDatOffer = (OfferData,callback) => {
     //let resultado = {};

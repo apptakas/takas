@@ -1552,6 +1552,113 @@ userController.ChangeStatusOffer = async (req) => {
 
 };
 
+//Listar los datos de la sala de chat segú status- TAKASTEAR 
+userController.listChatRoomStatus = async (req) => {
+    try {
+        
+            let statuSala= req.statuSalaChat;
+       
+        //console.log(userData.password);
+        let response = await ChatRooms.listChatRoomStatus(statuSala);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de salas de chat según status'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar de  salas de Chat según status'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//
+//CAMBIAR EL ESTADO DE UNA SALA DE CHAT- TAKASTEAR 
+userController.changeStatusChatRoom = async (req) => {
+    try {
+        let takasteo=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let status=0;//ODERTA CANCELADA
+            if(req.FlagStatus==1){
+                status=1;// OFERTA ACTIVA
+            }
+            if(req.FlagStatus==2){
+                status=2;// OFERTA ACEPTADA
+                takasteo=true;
+                //let response2 =  Offer.FindDatOffer(OfferData);
+                //console.log(response2);
+            }
+
+            ChatRoomData = {
+                id: req.idSala,
+                status:status
+            };
+       
+        //console.log(OfferData);
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await ChatRooms.changeStatusChatRoom(ChatRoomData,req.FlagStatus);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                takasteo:takasteo,
+                msg: 'Cambio de estatus de la sala de chat ejecutdos exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar cambiar el estatus de la sala de chat'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 //Listar los datos de la sala de chat- TAKASTEAR 
 userController.listDataChatRoom = async (req) => {
     try {
