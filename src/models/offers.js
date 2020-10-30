@@ -62,7 +62,7 @@ OffersModel.ListOffer = (OfferData,callback) => {
         if (pool) {
             let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name AS namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE o.idproduct= ? AND o.publication= ?',[
+                'SELECT  o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name AS namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE o.idproduct= ? AND o.publication= ?',[
                     OfferData.idproduct,
                 OfferData.publication],
                 async(err, result) => {
@@ -92,28 +92,19 @@ OffersModel.recorridOfertas = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
-
+        let oferta=0;
         for (const element of result) {
-            arr.push(await OffersModel.ListItemsOffers(element));
+            if(oferta!=element.id){
+                arr.push(await OffersModel.ListItemsOffers(element));
+                oferta=element.id;
+            }
         }
         resolve(arr)
     }
     )
 
 } 
-OffersModel.recorridOfertas2 = (result) => {
 
-    return new Promise(async (resolve, reject) => {
-        let arr = [];
-
-        for (const element of result) {
-            arr.push(await OffersModel.ListItemsOffers2(element));
-        }
-        resolve(arr)
-    }
-    )
-
-} 
 
 OffersModel.ListItemsOffers = (element) => {
     return new Promise((resolve, reject) => {
@@ -131,24 +122,42 @@ OffersModel.ListItemsOffers = (element) => {
                         'error': err2
                     })
                 } else { 
-                 console.log(result2); 
-                 console.log(result2.length);
+                //  console.log(result2); 
+                //  console.log(result2.length);
                  let ListItemsOffers= []; 
+                 let idItems=0;
                 if(result2.length>0){
+
                     for(var atr2 in result2){
-                    // "iduser": result2[0].iduser,
-                            ListItemsOffers.push({
-                                "idoffer": result2[atr2].id,
-                                "idpublication": result2[atr2].idproduct,
-                                "imgpublicacion": result2[atr2].url,
-                                "nameproduct": result2[atr2].name,
-                                "status": result2[atr2].status,
-                                "img": result2[atr2].url,
-                                "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
-                            });
-                            SumItemsOffer+=result2[atr2].marketvalue;
+                        // "iduser": result2[0].iduser,
+
+                            if(idItems!=result2[atr2].idproduct){
+
+                                idoffer=result2[atr2].id;
+                                ListItemsOffers.push({
+                                    "idoffer": result2[atr2].id,
+                                    "idpublication": result2[atr2].idproduct,
+                                    "imgpublicacion": result2[atr2].url,
+                                    "nameproduct": result2[atr2].name,
+                                    "status": result2[atr2].status,
+                                    "img": result2[atr2].url,
+                                    "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
+                                });
+
+                                idItems=result2[atr2].idproduct; 
+                                                
+                            }            
+                        SumItemsOffer+=result2[atr2].marketvalue;
                         
-                    }; 
+                    }; // fin for
+                      
+                                // duplicadOferta=result2[atr2].id;    
+                                // console.log("element.id");                 
+                                // console.log(element.id);                 
+                                // console.log("result2[atr2].idoffers");                 
+                                // console.log(result2[atr2].idoffers); 
+
+
                     if(SumItemsOffer>element.ValorPublication){
                          DiferenciaOffer= SumItemsOffer-element.ValorPublication;
                          Afavor=false;
@@ -158,89 +167,13 @@ OffersModel.ListItemsOffers = (element) => {
                     }
                     
                 }; 
-                console.log("result2");
-                console.log(result2);
+                // console.log("result2");
+                // console.log(result2);
 
                 //console.log(ListItemsOffers);
                 detalleProduct = await ProductModel.armaresult(result2);  
-                console.log("detalleProduct");
-                console.log(detalleProduct);
-
-                img=await chatroomsModel.ListImagesProduct(element.idproduct);
-                resolve({                    
-                    "idoffer": element.id,
-                    "idproduct": element.idproduct,
-                    "namepublication": element.namePublication,
-                    "img":img.ImagesProduct,
-                    "observation": element.observation,
-                    "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
-                    "sumitemsoffer":Number.parseFloat(SumItemsOffer).toFixed(4),
-                    "differenceoffer":Number.parseFloat(DiferenciaOffer).toFixed(4),
-                    "infavor":Afavor,
-                    "itemsoffer": ListItemsOffers
-                });
-            }
-
-            })
-    })
-}
-
-//para que no se repinan las ofertas por la cantidad de imagenes, es decir que aparezca una oferta indistintamente de la candid de imagenes
-OffersModel.ListItemsOffers2 = (element) => {
-    return new Promise((resolve, reject) => {
-        let SumItemsOffer=0;
-        let DiferenciaOffer=0;
-        let Afavor=false;
-        let detalleProduct={};
-        let img={};
-        
-        pool.query(
-            'SELECT ops.idoffers,ops.idpublication AS idproduct,ip.url,ops.status,p.name,p.marketvalue,p.datecreated AS datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE idoffers='+element.id,
-            async(err2, result2) => {
-                if (err2) {
-                    console.log(err2);
-                    resolve({
-                        'error': err2
-                    })
-                } else { 
-                 //console.log(result2); 
-                 console.log(result2.length);
-                 let ListItemsOffers= []; 
-                let duplicado=0;
-                if(result2.length>0){
-                    for(var atr2 in result2){
-                    // "iduser": result2[0].iduser,
-                    if(duplicado!=result2[atr2].idproduct){
-                            ListItemsOffers.push({
-                                "idoffer": result2[atr2].id,
-                                "idpublication": result2[atr2].idproduct,
-                                "imgpublicacion": result2[atr2].url,
-                                "nameproduct": result2[atr2].name,
-                                "status": result2[atr2].status,
-                                "img": result2[atr2].url,
-                                "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
-                            });
-                            duplicado=result2[atr2].idproduct;
-                    }
-                            SumItemsOffer+=result2[atr2].marketvalue;
-                        
-                    }; 
-                    if(SumItemsOffer>element.ValorPublication){
-                         DiferenciaOffer= SumItemsOffer-element.ValorPublication;
-                         Afavor=false;
-                    }else{
-                        DiferenciaOffer= element.ValorPublication-SumItemsOffer;
-                        Afavor=true;
-                    }
-                    
-                }; 
-                console.log("result2");
-                console.log(result2);
-
-                //console.log(ListItemsOffers);
-                detalleProduct = await ProductModel.armaresult(result2);  
-                console.log("detalleProduct");
-                console.log(detalleProduct);
+                // console.log("detalleProduct");
+                // console.log(detalleProduct);
 
                 img=await chatroomsModel.ListImagesProduct(element.idproduct);
                 resolve({                    
@@ -390,7 +323,7 @@ OffersModel.ListMyOffer = (OfferData,callback) => {
                         })
                     } else {
                         //console.log(result);
-                        ListItemsOffer = await OffersModel.recorridOfertas2(result);
+                        ListItemsOffer = await OffersModel.recorridOfertas(result);
                         resolve({
                             'result': ListItemsOffer
                         })

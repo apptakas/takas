@@ -1262,7 +1262,7 @@ userController.ListOffer = async (req) => {
             }
         } else {
 
-           console.log(response);
+           //console.log(response);
             data = {
                 success: false,
                 status: '500',
