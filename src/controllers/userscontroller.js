@@ -745,14 +745,18 @@ userController.listStatusProduct = async (req) => {
 //Listar Mis publicaciones  - TAKASTEAR 
 userController.ListMisProductos = async (req) => {
     try {
+        let estatus=0;
         const UserData = {
             iduser: req.idfirebaseUser
         };
         const ProductData = {
             status: req.statusProduct
         };
+        if(req.statusProduct){
+            estatus=1;            
+        }
         //console.log(userData.password);
-        let response = await Product.ListMisProductos(UserData,ProductData);
+        let response = await Product.ListMisProductos(UserData,ProductData,estatus);
 
        //console.log(response);
 

@@ -124,7 +124,7 @@ define({ "api": [
             "type": "int",
             "optional": false,
             "field": "FlagStatus",
-            "description": "<p>required. CANCELAR = 0, ACTIVO = 1, CANCELAR = 2</p>"
+            "description": "<p>required. CANCELAR = 0, ACTIVO = 1, TAKASTEADO = 2</p>"
           }
         ]
       }
@@ -1358,7 +1358,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "statusProduct",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           }
         ]
       }

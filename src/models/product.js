@@ -200,14 +200,20 @@ ProductModel.ExistKeyWords = (KW,callback) => {
 }
 
 //LISTAR LOS PRODUCTOS PUBLICADOS POR UN USUARIO - TAKASTEAR 
-ProductModel.ListMisProductos = (UserData,ProductData,callback) => {
+ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
     //let resultado = {};
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
+
             let armaresult={};
-            pool.query(
-                "SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ",
+            let consulta="";
+            if(estatus==1){
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ";
+            }else{
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct ";
+            }
+            pool.query(consulta,
                 async(err, result) => {
                    // console.log(err);                 
                     

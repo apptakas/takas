@@ -1058,7 +1058,7 @@ router.post('/newproduct', rutasProtegidas,[
  *
  *
  * @apiParam {varchar} idfirebaseUser required.
- * @apiParam {varchar} statusProduct required.
+ * @apiParam {varchar} statusProduct optional.
  * 
  * 
  * 
@@ -1130,8 +1130,7 @@ router.post('/newproduct', rutasProtegidas,[
  **/
 //LISTAR MIS PUBLICACIONES
 router.post('/listmisproductos', rutasProtegidas, [
-check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
+check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
 ],async (req, res) => {
 
         const error = validationResult(req);
@@ -2541,7 +2540,7 @@ router.post('/listdatachatroom', rutasProtegidas, [
  *
  *
  * @apiParam {int} idSala required.
- * @apiParam {int} FlagStatus required. CANCELAR = 0, ACTIVO = 1, CANCELAR = 2
+ * @apiParam {int} FlagStatus required. CANCELAR = 0, ACTIVO = 1, TAKASTEADO = 2
  * 
  * 
  * 
