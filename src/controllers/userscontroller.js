@@ -13,6 +13,7 @@ const MasterStatus = require('../models/masterstatus.js');
 const ChatRooms = require('../models/chatrooms.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
+const notifications = require('../lib/notifications.js');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const sha1 = require('sha1');
@@ -383,6 +384,54 @@ userController.LisTypePreference = async () => {
                 success: false,
                 status: '500',
                 msg: 'Error al Listar Tipo de Prefencias'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Listar tipo de preferencias que puede tener una publicación según publicación 
+userController.CharacteristicPublication = async (req) => {
+    //existe este usuario? 
+    try {
+
+        let filter=4;
+        if(req.FlagCharacteristic==2){
+            filter=5;
+        }
+        if(req.FlagCharacteristic==3){
+            filter=6;
+        }
+        //console.log(userData.password);
+        let response = await MasterStatus.CharacteristicPublication(filter);
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Características para una publicación sengún bandera'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Características para una publicación sengún bandera'
             }
         }
         //validar si esta llegado vacio
@@ -1174,7 +1223,7 @@ userController.NewOffer = async (req) => {
         }
 
         const IdOfferData = {};
-            console.log(req.idsPublications.length);
+            //console.log(req.idsPublications.length);
             if(req.idsPublications.length!=0){
                 for(var atr1 in req.idsPublications){
                     
@@ -1188,7 +1237,8 @@ userController.NewOffer = async (req) => {
         //console.log(userData.password);
         let response = await Offer.NewOffer(OfferData,IdOfferData);
 
-       //console.log(response);
+    //    console.log(response);
+       console.log(response.OkPacket);
 
         let data = {};
         if (response && response.result) {
@@ -1201,6 +1251,31 @@ userController.NewOffer = async (req) => {
                 msg: 'Oferta creada exitosamente'
                 //data: response
             }
+            //Envío de notificaciones al dueño de la publicación a la que se le hizo la oferta
+            /****NOTIFICACIÓN NUEVA OFERTA****/
+            
+
+        let token="efTmlTE3uzA:APA91bFSLY9NlzIS0xeRjx0OoCsJdH3NQGI7E-yrU6OAx2VRqQeDd2WZR9CEzWg_BPlGf1H_nIO15L-GYmqHs3l4tc_8wgJf1l3RBTj7BxppuBQr8EYz43O6W3IPFCcRT4rUbV50UwFJ";
+        let titulo="Haz recibido un Takasteo en potencia";
+        let detalle="La publicación de 'Gorros de bebes' tiene un takasteo potencial, haz click para conocer los detalles";
+       //let descripción="Haz recibido una nueva oferta para la publicación de Gorrros de bebes.";
+        let datanoti={
+            "title": titulo,
+            "body": "mi descripcion",
+            "idNotification":1,
+            "idrelation":7,
+            "TipoNotificacion":2,
+            "type": 0,
+            "status": 0,
+            "id": "hello",
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+        };
+        
+        //notifications(token,titulo,detalle,datanoti);
+
+
+
+
         } else {
 
            console.log(response);

@@ -2247,6 +2247,96 @@
     "groupTitle": "Questions"
   },
   {
+    "type": "get",
+    "url": "/user/listcharacteristicpublication",
+    "title": "2 listcharacteristicpublication",
+    "name": "listcharacteristicpublication_-_Listar_Caracter´sticas_de_una_publicación_según_bandera",
+    "group": "Status",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{ \"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "FlagCharacteristic",
+            "description": "<p>requeride  1=Nuevo o Usado 2=Tamaño 3=Peso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Status.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 19,\n            \"namestatus\": \"Muy liviano (0-1kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 20,\n            \"namestatus\": \"Liviano (1-3kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 21,\n            \"namestatus\": \"Normal (3 a 7kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 22,\n            \"namestatus\": \"Pesado (7-15kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        }\n    ],\n    \"msg\": \"Lista de Características para una publicación sengún bandera\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Status was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar los tipos de preferencias\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Status"
+  },
+  {
     "type": "post",
     "url": "/user/liststatusproduct",
     "title": "1 liststatusproduct",

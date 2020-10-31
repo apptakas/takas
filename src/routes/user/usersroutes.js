@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const rutasProtegidas = require('../../lib/rutasprotegidas');
+const notifications = require('../../lib/notifications.js');
 const config = require('../../config/config');
 const { check, validationResult } = require('express-validator');
 const userController = require('../../controllers/userscontroller');
@@ -12,7 +13,22 @@ const userController = require('../../controllers/userscontroller');
 
 
 router.get('/prueba', function (req, res) {
+    //res.send('Inicio');
+    let data={
+        "title": "test",
+        "body": "mi descripcion",
+        "type": 0,
+        "status": 0,
+        "id": "hello",
+        "click_action": "FLUTTER_NOTIFICATION_CLICK"
+    };
+    let token="efTmlTE3uzA:APA91bFSLY9NlzIS0xeRjx0OoCsJdH3NQGI7E-yrU6OAx2VRqQeDd2WZR9CEzWg_BPlGf1H_nIO15L-GYmqHs3l4tc_8wgJf1l3RBTj7BxppuBQr8EYz43O6W3IPFCcRT4rUbV50UwFJ";
+    let titulo="Notificaciones Takas";
+    let detalle="Pruebas con primeras Notificaciones Takas";
+    notifications(token,titulo,detalle,data);
+    
     res.send('Inicio');
+
 });
 
 
@@ -809,6 +825,86 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
 
 })
 
+
+
+/**
+ * @api {get} /user/listcharacteristicpublication 2 listcharacteristicpublication
+ * @apiName listcharacteristicpublication - Listar Caracter´sticas de una publicación según bandera
+ * @apiGroup Status
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ *
+ * 
+ * @apiParam {smallint}  FlagCharacteristic  requeride  1=Nuevo o Usado 2=Tamaño 3=Peso. 
+ * 
+ * @apiSuccess {boolean} success of the Status.
+ * @apiSuccess {int} status 200 of the Status.
+ * @apiSuccess {string} msg   of the Status.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 19,
+            "namestatus": "Muy liviano (0-1kg)",
+            "filter": 6,
+            "namefilter": "Peso Producto"
+        },
+        {
+            "id": 20,
+            "namestatus": "Liviano (1-3kg)",
+            "filter": 6,
+            "namefilter": "Peso Producto"
+        },
+        {
+            "id": 21,
+            "namestatus": "Normal (3 a 7kg)",
+            "filter": 6,
+            "namefilter": "Peso Producto"
+        },
+        {
+            "id": 22,
+            "namestatus": "Pesado (7-15kg)",
+            "filter": 6,
+            "namefilter": "Peso Producto"
+        }
+    ],
+    "msg": "Lista de Características para una publicación sengún bandera"
+}
+ *
+ * @apiError UserNotFound The id of the Status was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar los tipos de preferencias"
+}
+ */
+//MASTER CARACTERÍSTICAS DE PESOS DE UNA PUBLICACIÓN
+router.post('/listcharacteristicpublication', rutasProtegidas, [
+    check('FlagCharacteristic', 'El FlagCharacteristic es obligatorio').not().isEmpty().exists()
+    ], async (req, res) => {
+
+
+    let response = await userController.CharacteristicPublication(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 /**
  * @api {get} /user/listmoney 1 listmoney
@@ -1870,6 +1966,10 @@ router.post('/newoffer', rutasProtegidas, [
             return res.status(500).json({ error: 'Error' })
         }
         //console.log(response);
+
+        
+
+
         return res.status(response.data.status).json(response.data)
     
     }) 
@@ -2588,6 +2688,8 @@ router.put('/changestatuschatroom', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)
     
     }) 
+
+
 
 
 

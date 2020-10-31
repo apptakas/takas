@@ -1,6 +1,7 @@
 const pool = require('../config/database');
 const ProductModel = require('../models/product.js');
 const chatroomsModel = require('../models/chatrooms.js');
+const notificationModel = require('../models/notifications.js');
 const sha1 = require('sha1');
 const date = require('date-and-time');
 let OffersModel = {};
@@ -10,21 +11,31 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
+            let respCrearPush={};
             pool.query(
                 'INSERT INTO offers SET ?',[OfferData],
-                (err, resut) => {
-                    console.log(resut);
+                async(err, result) => {
+                    console.log(result.insertId);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
+                        /////
+                        let idrelation=OfferData.idproduct;
+                        let TypeNotification=2;
+                        respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation);  
+
+
+
+
+                        ////////
                         if(IdOfferData.length!=0){
                             for(var atr2 in IdOfferData){  
                                 pool.query(
                                     'INSERT INTO offersproductservices (idpublication,idoffers) value( ?, ?) ', [
                                         IdOfferData[atr2],
-                                        resut.insertId
+                                        result.insertId
                                     ],
                                     (err, resut) => {
                                         //console.log(resut);
@@ -34,7 +45,7 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                                             })
                                         } else {
                                             resolve({
-                                                'result': resut
+                                                'result': result
                                             })                                       
                                         }
                     
@@ -53,6 +64,8 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
     })
 };
 
+
+///////
 
 
 //ListOfertas  - Obtenemos lista de ofertas sobre una publicación
