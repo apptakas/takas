@@ -2132,33 +2132,31 @@ router.post('/listoffer', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *     {
     "success": true,
     "status": "200",
-    "data": [
-        {
-            "idoffer": 4,
-            "idproduct": 22,
-            "nameoffer": "gusuario12",
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "40000.0000",
-            "sumitemsoffer": "20000.0000",
-            "differenceoffer": "20000.0000",
-            "infavor": true,
-            "itemsoffer": [
-                {
-                    "idpublication": 17,
-                    "status": 1,
-                    "marketvalue": "10000.0000"
-                },
-                {
-                    "idpublication": 15,
-                    "status": 1,
-                    "marketvalue": "10000.0000"
-                }
-            ]
-        }
-    ],
+    "data": {
+        "idoffer": 7,
+        "idproduct": 1,
+        "nameoffer": "Ana",
+        "observation": "-",
+        "valorpublication": "200000.0000",
+        "sumitemsoffer": "130000.0000",
+        "differenceoffer": "70000.0000",
+        "infavor": true,
+        "itemsoffer": [
+            {
+                "idpublication": 5,
+                "status": 1,
+                "marketvalue": "50000.0000"
+            },
+            {
+                "idpublication": 6,
+                "status": 1,
+                "marketvalue": "80000.0000"
+            }
+        ]
+    },
     "msg": "Detalles de la oferta listado exitosamente"
 }
  *

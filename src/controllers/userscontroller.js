@@ -1406,7 +1406,10 @@ userController.DetailsOffer = async (req) => {
         let data = {};
         if (response && response.result) {
             let r = {};
-            r = response.result;
+            r = response.result[0];
+            // console.log("response.result");
+            // console.log(response.result[0]);
+            // console.log("response.result");
 
             data = {
                 success: true,
