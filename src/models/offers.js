@@ -208,8 +208,9 @@ OffersModel.ListItemsOffers = (element) => {
                 //  console.log(result2.length);
                  let ListItemsOffers= []; 
                  let idItems=0;
+                 //let SumItemsOffer=0;
                 if(result2.length>0){
-
+                   // console.log(SumItemsOffer);
                     for(var atr2 in result2){
                         // "iduser": result2[0].iduser,
 
@@ -227,9 +228,10 @@ OffersModel.ListItemsOffers = (element) => {
                                 });
 
                                 idItems=result2[atr2].idproduct; 
-                                                
+                                SumItemsOffer=parseInt(SumItemsOffer)+parseInt(result2[atr2].marketvalue);
+                               // console.log(SumItemsOffer);
                             }            
-                        SumItemsOffer+=result2[atr2].marketvalue;
+                        
                         
                     }; // fin for
                       

@@ -266,6 +266,38 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
     })
 };
 ///
+
+////BURCAR PUBLICACUONES SEGÚN NOMBRE DEL ARTÍCULO
+ProductModel.findProductos = (nameProduct) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+
+            let armaresult={};
+            pool.query(
+                "SELECT * FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE NAME LIKE '%"+nameProduct+"%' AND STATUS=1",
+                async(err, result) => {
+                    //console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///
 ProductModel.armaresult = (result) => {
 
     return new Promise(async (resolve, reject) => {

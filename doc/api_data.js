@@ -561,7 +561,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "flagNotifications",
-            "description": "<p>Optional Sin leer=1 y Vista = 2.</p>"
+            "description": "<p>Optional Sin leer=1 y Vista = 0.</p>"
           }
         ]
       }
@@ -625,9 +625,9 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/user/changestatusNotifications",
-    "title": "3 changestatusNotifications",
-    "name": "changestatusNotifications_-_Cambio_de_estado_de_una_oferta",
+    "url": "/user/changestatusnotifications",
+    "title": "3 changestatusnotifications",
+    "name": "changestatusnotifications_-_Cambio_de_estado_de_una_oferta",
     "group": "Notifications",
     "header": {
       "examples": [
@@ -658,7 +658,7 @@ define({ "api": [
             "type": "int",
             "optional": false,
             "field": "FlagStatus",
-            "description": "<p>required. Sin leer = 1, vista = 2</p>"
+            "description": "<p>required. Sin leer = 1, vista = 0</p>"
           }
         ]
       }
@@ -692,7 +692,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"takasteo\": true,\n    \"msg\": \"Cambio de estatus de la sala de chat ejecutdos exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Cambio de la notificación exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -711,7 +711,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de la notificación\"\n}",
           "type": "json"
         }
       ]
@@ -1682,6 +1682,96 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar obtener Cantidad de notificaciones según bandera\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/user/findproductos",
+    "title": "7 findproductos",
+    "name": "findproductos_-_Buscar_articulos_por_nombre",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "nameProduct",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"05/10/2020 13:46:27\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 1,\n            \"name\": \"Mameluco para bebé\",\n            \"details\": \"Producto disponible de 0 a 24 meses\",\n            \"typemoney\": 2,\n            \"marketvalue\": 30000,\n            \"typepublication\": 1,\n            \"status\": 1,\n            \"ProductImages\": [\n                \"https://n9.cl/vt0n\"\n            ],\n            \"Preferences\": []\n        },\n        {\n            \"idproduct\": 7,\n            \"datecreated\": \"05/10/2020 13:25:07\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"name\": \"Gorros para bebés\",\n            \"nuevo\": false,\n            \"subcategory\": 1,\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"typepublication\": 1,\n            \"status\": 1,\n            \"ProductImages\": [\n                \"https://n9.cl/vt0n\"\n            ],\n            \"Preferences\": []\n        },\n        {\n            \"idproduct\": 11,\n            \"datecreated\": \"06/09/2021 17:27:47\",\n            \"iduser\": \"idfirebaseUsers77wqedsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 1,\n            \"name\": \"Gorros para bebés\",\n            \"details\": \"Gorros termicos y confortables\",\n            \"typemoney\": 1,\n            \"marketvalue\": 10000,\n            \"typepublication\": 1,\n            \"status\": 1,\n            \"ProductImages\": [\n                \"https://n9.cl/vt0n\"\n            ],\n            \"Preferences\": []\n        }\n    ],\n    \"msg\": \"Busqueda de productos éxitosa\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Buscar Productos\"\n}",
           "type": "json"
         }
       ]

@@ -1358,6 +1358,122 @@ router.post('/listproductos', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)
     
     })
+
+
+    ///////
+    
+/**
+ * @api {post} /user/findproductos 7 findproductos
+ * @apiName findproductos - Buscar articulos por nombre
+ * @apiGroup Product
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} nameProduct required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idproduct": 1,
+            "datecreated": "05/10/2020 13:46:27",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "nuevo": false,
+            "subcategory": 1,
+            "name": "Mameluco para bebé",
+            "details": "Producto disponible de 0 a 24 meses",
+            "typemoney": 2,
+            "marketvalue": 30000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        },
+        {
+            "idproduct": 7,
+            "datecreated": "05/10/2020 13:25:07",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "name": "Gorros para bebés",
+            "nuevo": false,
+            "subcategory": 1,
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        },
+        {
+            "idproduct": 11,
+            "datecreated": "06/09/2021 17:27:47",
+            "iduser": "idfirebaseUsers77wqedsaxgg",
+            "nuevo": false,
+            "subcategory": 1,
+            "name": "Gorros para bebés",
+            "details": "Gorros termicos y confortables",
+            "typemoney": 1,
+            "marketvalue": 10000,
+            "typepublication": 1,
+            "status": 1,
+            "ProductImages": [
+                "https://n9.cl/vt0n"
+            ],
+            "Preferences": []
+        }
+    ],
+    "msg": "Busqueda de productos éxitosa"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Buscar Productos"
+}
+ **/
+//BUSCAR PUBLICACUONES SEGÚN NOMBRE DEL ARTÍCULO
+router.post('/findproductos', rutasProtegidas, [
+    check('nameProduct', 'El nameProduct es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+        
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+    
+        let response = await userController.findProductos(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
+    //////
     
 
 /**
@@ -1663,6 +1779,94 @@ router.post('/newproductkw', rutasProtegidas,[
     return res.status(response.data.status).json(response.data)
 
 })
+/////
+ /**
+ * @api {post} /user/newproductckw  8 newproductckw
+ * @apiName  newproductckw - Registro De Producto con Características
+ * @apiGroup Product
+ * 
+ *      
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * 
+ * 
+ * @apiParam {varchar} iduserProduct required.
+ * @apiParam {varchar} nameProduct required.
+ * @apiParam {boolean} NewProduct required.
+ * @apiParam {varchar} detailsProduct  unique required.
+ * @apiParam {smallint} typemoneyProduct   required.
+ * @apiParam {decimal} marketvalueProduct  required .
+ * @apiParam {int} subcategoryProduct  required .
+ * @apiParam {array} PreferecesProduct  required array de enteros .
+ * @apiParam {array} ImagesProduct  required arrays de varchar .
+ * @apiParam {array} KeyWordsProduct  optional array de varchar .
+ * @apiParam {int} UsePoduct  optional.
+ * @apiParam {int} SizePoduct  optional.
+ * @apiParam {int} WeightProduct  optional.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status":: "200",
+    "msg": "Producto registrado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "data": "Ha superdo el límite de imagenes",
+    "msg": "Error al registrar producto"
+}
+ *
+ *
+ **/
+
+//Crear newproduct
+router.post('/newproductckw', rutasProtegidas,[
+    check('iduserProduct', 'El iduserProduct es obligatorio').not().isEmpty().exists(),
+    check('NewProduct', 'El Determinar si un producto es nuo o usado es obligatorio').not().isEmpty().exists(),
+    check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
+    check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
+    check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
+    check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
+    check('subcategoryProduct', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
+    check('ImagesProduct', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
+], async (req, res) => {
+
+    /*,
+    check('PreferecesProduct', ' Las Preferencias son requerido aceptar términos y condisiones').not().isEmpty().exists(),
+    check('ImagesProduct', ' Es requerido aceptar términos y condisiones').not().isEmpty().exists() */
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.NewProductKW(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+/////
 
 
 /**
@@ -2782,7 +2986,7 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * @apiParam {varchar} flagNotifications Optional Sin leer=1 y Vista = 2.
+ * @apiParam {varchar} flagNotifications Optional Sin leer=1 y Vista = 0.
  * 
  * 
  * 
@@ -2835,8 +3039,8 @@ router.post('/cantnotifications', [
 })
 
  /**
- * @api {put} /user/changestatusNotifications 3 changestatusNotifications
- * @apiName changestatusNotifications - Cambio de estado de una oferta
+ * @api {put} /user/changestatusnotifications 3 changestatusnotifications
+ * @apiName changestatusnotifications - Cambio de estado de una oferta
  * @apiGroup Notifications
  * 
  * 
@@ -2847,7 +3051,7 @@ router.post('/cantnotifications', [
  *
  *
  * @apiParam {int} idNotifications required.
- * @apiParam {int} FlagStatus required. Sin leer = 1, vista = 2
+ * @apiParam {int} FlagStatus required. Sin leer = 1, vista = 0
  * 
  * 
  * 
@@ -2860,8 +3064,7 @@ router.post('/cantnotifications', [
  *    {
     "success": true,
     "status": "200",
-    "takasteo": true,
-    "msg": "Cambio de estatus de la sala de chat ejecutdos exitosamente"
+    "msg": "Cambio de la notificación exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Chatrooms was not found.
@@ -2871,13 +3074,13 @@ router.post('/cantnotifications', [
  *     {
     "success": false,
     "status":: "500",
-    "msg": "Error al intentar cambiar el estatus de una Oferta"
+    "msg": "Error al intentar cambiar el estatus de la notificación"
 }
  **/
 
 //CAMBIO DE ESTATUS DE UNA NOTIFICACIÓN
-router.put('/changestatusNotifications', rutasProtegidas, [
-    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists(),
+router.put('/changestatusnotifications', rutasProtegidas, [
+    check('idNotifications', 'El idNotifications es obligatorio').not().isEmpty().exists(),
     check('FlagStatus', 'El FlagStatus es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
@@ -2886,7 +3089,7 @@ router.put('/changestatusNotifications', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }        
-        let response = await userController.changeStatusChatRoom(req.body);
+        let response = await userController.changeStatusNotifications(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })

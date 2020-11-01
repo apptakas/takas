@@ -11,7 +11,7 @@ const Offer = require('../models/offers.js');
 const MasterCities = require('../models/mastercities.js');
 const MasterStatus = require('../models/masterstatus.js');
 const ChatRooms = require('../models/chatrooms.js');
-const chatroomsModel = require('../models/notifications.js');
+const notificationModel = require('../models/notifications.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const notifications = require('../lib/notifications.js');
@@ -21,6 +21,7 @@ const sha1 = require('sha1');
 const date = require('date-and-time');
 //var redis = require('redis');
 const { resolveInclude } = require('ejs');
+const { report } = require('../routes/index.js');
 
 
 
@@ -883,6 +884,51 @@ userController.ListProductos = async (req) => {
     }
 
 };
+
+
+
+////BUSCAR PUBLICACUONES SEGÚN NOMBRE DEL ARTÍCULO
+userController.findProductos = async (req) => {
+    try {
+        
+          let nameProduct=req.nameProduct;
+        //console.log(userData.password);
+        let response = await Product.findProductos(nameProduct);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Busqueda de productos éxitosa'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Buscar Productos'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
 
 //LISTAR PRODRUCTOS FILTRADOS POR SUBCATEGORÍA - TAKASTEAR 
 userController.ListProductSubCategory = async (req) => {
@@ -1808,7 +1854,7 @@ userController.listNotifications = async () => {
           //  let idSala= req.idSalaChat;
        
         //console.log(userData.password);
-        let response = await chatroomsModel.listNotifications();
+        let response = await notificationModel.listNotifications();
 
        //console.log(response);
 
@@ -1852,7 +1898,7 @@ userController.cantNotifications = async (req) => {
           let status= req.flagNotifications;
        
         //console.log(userData.password);
-        let response = await chatroomsModel.cantNotifications(status);
+        let response = await notificationModel.cantNotifications(status);
 
        //console.log(response);
 
@@ -1885,6 +1931,64 @@ userController.cantNotifications = async (req) => {
     }
 
 };
+
+//CAMBIAR EL ESTADO DE UNA SALA DE CHAT- TAKASTEAR 
+userController.changeStatusNotifications = async (req) => {
+    try {
+        let takasteo=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let status=true;//ODERTA CANCELADA
+            if(req.FlagStatus==0){
+                status=false;// OFERTA ACTIVA
+            }
+
+            NotificationsData = {
+                id: req.idNotifications,
+                status:status
+            };
+       
+        //console.log(OfferData);
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await notificationModel.changeStatusNotifications(NotificationsData);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Cambio de la notificación exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar cambiar el estatus de la notificación'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 
 
 

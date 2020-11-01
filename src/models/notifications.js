@@ -117,4 +117,38 @@ notificationModel.cantNotifications = (status) => {
 
 
 
+//CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
+notificationModel.changeStatusNotifications = (NotificationsData) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let FindDatOffer={};
+            pool.query(
+                'UPDATE  notifications SET  status= ? WHERE id= ?',[
+                    NotificationsData.status,
+                    NotificationsData.id
+                ],
+                async(err, result) => {
+                   // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {                            
+                        resolve({
+                            'result': result
+                        })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+
+
+
 module.exports = notificationModel;
