@@ -184,9 +184,9 @@ chatroomsModel.idSala = (element) => {
                     // };  
                     //console.log(element.idproduct);  
                    // console.log(ImagesProduct);
-                   if(result2[0].id){
-                   idsala=result2[0].id;
-                   }
+                   //if(result2[0].id){
+                    idsala=result2[0].id;
+                   //}
                     resolve({
                         
                         "idSala": idsala
