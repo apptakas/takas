@@ -163,6 +163,7 @@ chatroomsModel.ListImagesProduct = (element) => {
 ////////
 chatroomsModel.idSala = (element) => {
     return new Promise((resolve, reject) => {
+        let idsala=null;
         pool.query(
             'SELECT  * FROM chatrooms WHERE idoffer=? ',[element],
             (err2, result2) => {
@@ -172,7 +173,7 @@ chatroomsModel.idSala = (element) => {
                 //console.log(result2[1].preference);
                 if (err2) {
                     resolve({
-                        'idSala': null
+                        'Error': err2
                     })
                 } else {     
                     //console.log(result2); 
@@ -183,9 +184,12 @@ chatroomsModel.idSala = (element) => {
                     // };  
                     //console.log(element.idproduct);  
                    // console.log(ImagesProduct);
+                   if(result2[0].id){
+                   idsala=result2[0].id;
+                   }
                     resolve({
                         
-                        "idSala": result2[0].id
+                        "idSala": idsala
                     });
                 }  
                 
