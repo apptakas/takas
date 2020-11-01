@@ -653,7 +653,7 @@ userController.NewProduct = async (req) => {
 
 
 //Nuevo Producto (TAKASTEAR)
-userController.NewProductKW = async (req) => {
+userController.NewProductCKW = async (req) => {
     //existe este usuario? 
     try {
 

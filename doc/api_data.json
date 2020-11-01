@@ -1267,7 +1267,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 7,\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\"\n            ],\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"180000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 5,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\",\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de mis Ofertas exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 7,\n            \"idSala\": \"949bdc81078b49cd604b6622ddd762054ca8963a\",\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\"\n            ],\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"130000.0000\",\n            \"differenceoffer\": \"70000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de mis Ofertas exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -1364,7 +1364,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n        {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 7,\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"180000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        },\n        {\n            \"idoffer\": 7,\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\",\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"180000.0000\",\n            \"differenceoffer\": \"20000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 5,\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Listar Ofertas exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 7,\n            \"idSala\": \"949bdc81078b49cd604b6622ddd762054ca8963a\",\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\"\n            ],\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"130000.0000\",\n            \"differenceoffer\": \"70000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 1,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Listar Ofertas exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -2156,6 +2156,180 @@
             "optional": false,
             "field": "ImagesProduct",
             "description": "<p>optional arrays de varchar .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Producto registrado con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"data\": \"Ha superdo el límite de imagenes\",\n    \"msg\": \"Error al registrar producto\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/user/newproductckw",
+    "title": "8 newproductckw",
+    "name": "newproductckw_-_Registro_De_Producto_con_Características",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "iduserProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "nameProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "NewProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "detailsProduct",
+            "description": "<p>unique required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "typemoneyProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "decimal",
+            "optional": false,
+            "field": "marketvalueProduct",
+            "description": "<p>required .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "subcategoryProduct",
+            "description": "<p>required .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "PreferecesProduct",
+            "description": "<p>required array de enteros .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "ImagesProduct",
+            "description": "<p>required arrays de varchar .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "KeyWordsProduct",
+            "description": "<p>optional array de varchar .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "UsePoduct",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "SizePoduct",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "WeightProduct",
+            "description": "<p>optional.</p>"
           }
         ]
       }

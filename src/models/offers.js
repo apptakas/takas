@@ -195,6 +195,7 @@ OffersModel.ListItemsOffers = (element) => {
         let Afavor=false;
         let detalleProduct={};
         let img={};
+        let sala={};
         pool.query(
             'SELECT ops.idoffers,ops.idpublication AS idproduct,ip.url,ops.status,p.name,p.marketvalue,p.datecreated AS datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE idoffers='+element.id,
             async(err2, result2) => {
@@ -258,10 +259,14 @@ OffersModel.ListItemsOffers = (element) => {
                 detalleProduct = await ProductModel.armaresult(result2);  
                 // console.log("detalleProduct");
                 // console.log(detalleProduct);
-
+                //let  idSala=null;
                 img=await chatroomsModel.ListImagesProduct(element.idproduct);
+                sala=await chatroomsModel.idSala(element.id);
+                idSala=sala.idSala
+                //console.log(sala);
                 resolve({                    
                     "idoffer": element.id,
+                    "idSala": idSala,
                     "idproduct": element.idproduct,
                     "namepublication": element.namePublication,
                     "img":img.ImagesProduct,

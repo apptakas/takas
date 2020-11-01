@@ -161,6 +161,43 @@ chatroomsModel.ListImagesProduct = (element) => {
     })
 }
 ////////
+chatroomsModel.idSala = (element) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            'SELECT  * FROM chatrooms WHERE idoffer=? ',[element],
+            (err2, result2) => {
+                 
+               // console.log(result2);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'idSala': null
+                    })
+                } else {     
+                    //console.log(result2); 
+                    // console.log(result2.length);
+                    // let ImagesProduct= []; 
+                    // for(var atr2 in result2){
+                    // ImagesProduct.push(result2[atr2].url); 
+                    // };  
+                    //console.log(element.idproduct);  
+                   // console.log(ImagesProduct);
+                    resolve({
+                        
+                        "idSala": result2[0].id
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
+////////
 
 //listChatRoomStatus - Listar salas de chat según status
 chatroomsModel.listChatRoomStatus = (statuSala,callback) => {
