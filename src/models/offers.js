@@ -2,6 +2,7 @@ const pool = require('../config/database');
 const ProductModel = require('../models/product.js');
 const chatroomsModel = require('../models/chatrooms.js');
 const notificationModel = require('../models/notifications.js');
+const UsersModel = require('../models/users.js');
 const sha1 = require('sha1');
 const date = require('date-and-time');
 let OffersModel = {};
@@ -11,25 +12,17 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
-            let respCrearPush={};
+            
             pool.query(
                 'INSERT INTO offers SET ?',[OfferData],
                 async(err, result) => {
-                    console.log(result.insertId);
+                    //console.log(result.insertId);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
-                        /////
-                        let idrelation=OfferData.idproduct;
-                        let TypeNotification=2;
-                        respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation);  
-
-
-
-
-                        ////////
+                        
                         if(IdOfferData.length!=0){
                             for(var atr2 in IdOfferData){  
                                 pool.query(
@@ -44,16 +37,64 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                                                 'error': err
                                             })
                                         } else {
-                                            resolve({
-                                                'result': result
-                                            })                                       
+                                             
+
                                         }
                     
                                     }
                                 )
                                 
-                            }
-                        }
+                            }//
+                            
+                        }//
+
+                        /////
+                        let respCrearPush={};
+                        let idUserPublication={};
+                        let ValorOferta={};
+                        let idrelation=OfferData.idproduct;
+                        let idOferta=result.insertId;
+                        let TypeNotification=2;
+
+                        ValorOferta= await OffersModel.CalculoValorOferta(idOferta);
+                        idUserPublication= await UsersModel.DataUserPublication(idrelation);
+                        //console.log(ValorOferta);
+                        let CalValorOferta=ValorOferta.result[0].cvalorOferta;
+                        let UserPublication=idUserPublication.result[0].UserPublication;
+                        let tokenpush=idUserPublication.result[0].tokenpush;
+                        let fullname=idUserPublication.result[0].NameUser;
+                        let nameProducto=idUserPublication.result[0].nameProducto;
+                        let marketvalue=idUserPublication.result[0].marketvalue;
+                        let titulo="Haz recibido un takasteo potencial";
+                        let detalles="¡En hora buena "+fullname+"! tú publicación  <<"+nameProducto+">> tiene un takasteo potencial con un valor comercial de "+CalValorOferta;
+                        // console.log("idUserPublication.tokenpush");
+                         console.log(detalles);
+                        // //console.log(idUserPublication);
+                        // console.log("idUserPublication.tokenpush");
+
+                        respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);  
+                        
+                         ////////
+
+                        if(respCrearPush.result){
+                            //console.log(respCrearPush.result.insertId);
+                        
+                            resolve({
+                                'result': result,
+                                'idOferta':idOferta,
+                                'idNotificacion':respCrearPush.result.insertId,
+                                'idrelation':idrelation,
+                                'TypeNotification':TypeNotification,
+                                'UserPublication':UserPublication,
+                                'tokenpush':tokenpush,
+                                'titulo':titulo,
+                                'detalles':detalles
+                            }) 
+                        }else{
+                            resolve({
+                                'error': 'Error! al crear la notificación'
+                            })
+                        }  ///s  
                        
                     }
 
@@ -64,6 +105,34 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
     })
 };
 
+
+
+///CALCULAR EL VALOR DE LA OFERTA
+OffersModel.CalculoValorOferta = (idOferta, callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'SELECT SUM(p.marketvalue) AS cvalorOferta FROM offers AS o INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers INNER JOIN product AS p ON ops.idpublication=p.id WHERE o.id='+idOferta+' GROUP BY o.id',
+                (err, result) => {
+                   // console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        //console.log(result);
+                        resolve({
+                            'result': result
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
 
 ///////
 

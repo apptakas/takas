@@ -11,6 +11,7 @@ const Offer = require('../models/offers.js');
 const MasterCities = require('../models/mastercities.js');
 const MasterStatus = require('../models/masterstatus.js');
 const ChatRooms = require('../models/chatrooms.js');
+const chatroomsModel = require('../models/notifications.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const notifications = require('../lib/notifications.js');
@@ -1247,38 +1248,54 @@ userController.NewOffer = async (req) => {
 
             data = {
                 success: true,
-                status: '200',
+                status: '200',                
+                // idoferta:response.idOferta,
+                // idnotification:response.idNotificacion,
+                // Typenotification:response.TypeNotification,
+                // titulo:response.titulo,
+                // detalles:response.detalles,
                 msg: 'Oferta creada exitosamente'
                 //data: response
             }
             //Envío de notificaciones al dueño de la publicación a la que se le hizo la oferta
             /****NOTIFICACIÓN NUEVA OFERTA****/
             
-
-        let token="efTmlTE3uzA:APA91bFSLY9NlzIS0xeRjx0OoCsJdH3NQGI7E-yrU6OAx2VRqQeDd2WZR9CEzWg_BPlGf1H_nIO15L-GYmqHs3l4tc_8wgJf1l3RBTj7BxppuBQr8EYz43O6W3IPFCcRT4rUbV50UwFJ";
-        let titulo="Haz recibido un Takasteo en potencia";
-        let detalle="La publicación de 'Gorros de bebes' tiene un takasteo potencial, haz click para conocer los detalles";
+            // 'idOferta':idOferta,
+            //                                         'idNotificacion':respCrearPush.result.insertId,
+            //                                         'idrelation':idrelation,
+            //                                         'TypeNotification':TypeNotification,
+            //                                         'tokenpush':tokenpush,
+            //                                         'titulo':titulo,
+            //                                         'detalles':detalles
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
        //let descripción="Haz recibido una nueva oferta para la publicación de Gorrros de bebes.";
-        let datanoti={
-            "title": titulo,
-            "body": "mi descripcion",
-            "idNotification":1,
-            "idrelation":7,
-            "TipoNotificacion":2,
-            "type": 0,
-            "status": 0,
-            "id": "hello",
-            "click_action": "FLUTTER_NOTIFICATION_CLICK"
-        };
+    //   console.log("response.tokenpush");
+    //   console.log(response.tokenpush);
+    //    console.log(response);
+       let datanoti={
+        "title": response.titulo,
+        "body": response.detalles,
+        "idOffer":response.idOferta,
+        "idNotification":response.idNotificacion,
+        "idrelation":response.idrelation,
+        "TypeNotification":response.TypeNotification,
+        "UserPublication":response.UserPublication,
+        "type": 0,
+        "status": 0,
+        "id": "hello",
+        "click_action": "FLUTTER_NOTIFICATION_CLICK"
+    };
         
-        //notifications(token,titulo,detalle,datanoti);
+      notifications(token,titulo,detalle,datanoti);
 
 
 
 
         } else {
 
-           console.log(response);
+           //console.log(response);
             data = {
                 success: false,
                 status: '500',
@@ -1768,6 +1785,49 @@ userController.listDataChatRoom = async (req) => {
                 success: false,
                 status: '500',
                 msg: 'Error al Listar la data de la sala de Chat'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+//Listar notificaciones detalladas
+userController.listNotifications = async (req) => {
+    try {
+        
+          //  let idSala= req.idSalaChat;
+       
+        //console.log(userData.password);
+        let response = await chatroomsModel.listNotifications();
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista detallada de notificaciones  con éxito'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar notificaciones'
             }
         }
         //validar si esta llegado vacio

@@ -241,6 +241,34 @@ userModel.UserExist = (userData, callback) => {
 
 
 
+///TOMAR LA INFORMACION DE UN USUARIO SEGÚN UNA PUBICACIÓN 
+userModel.DataUserPublication = (idproduct, callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'SELECT u.id AS UserPublication,u.tokenpush,u.email, u.fullname as NameUser,p.`name` AS nameProducto,p.`marketvalue`,p.status FROM `users` AS u INNER JOIN `product` AS p ON u.`id`=p.`iduser` WHERE p.`id`='+idproduct,
+                (err, result) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': result
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
+
 
 module.exports = userModel;
 
