@@ -1518,13 +1518,32 @@ router.post('/listproductsubcategory', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
     "status": "200",
     "data": {
-        "CantNoti": 11
+        "idproduct": 1,
+        "datecreated": "01/11/2020",
+        "iduser": "EVln0Vj6DNOtTXQVS2fN9P68Gl13",
+        "nuevo": false,
+        "subcategory": 4,
+        "name": "Estufa de 4 hornillas",
+        "details": "Estufa de 4 hornillas color blanco ",
+        "typemoney": 3,
+        "marketvalue": "200000.0000",
+        "typepublication": 1,
+        "status": 1,
+        "CantidadOfertas": 1,
+        "ProductImages": [
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c"
+        ],
+        "Preferences": [
+            1,
+            2
+        ]
     },
-    "msg": "Cantidad de notificaciones según bandera obtenida con éxito"
+    "msg": "Listar detalles de un producto"
 }
  *
  * @apiError UserNotFound The id of the Product was not found.
@@ -2763,7 +2782,7 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * @apiParam {varchar} flagNotifications Optional 1=Sin leer y 2 = Leida.
+ * @apiParam {varchar} flagNotifications Optional Sin leer=1 y Vista = 2.
  * 
  * 
  * 
@@ -2773,36 +2792,13 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *      {
+ *     {
     "success": true,
     "status": "200",
-    "data": [
-        {
-            "idNotifications": 11,
-            "dateNotifications": "31/10/2020",
-            "statusNotifications": 1,
-            "typenotifications": 2,
-            "title": "Haz recibido un takasteo potencial",
-            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
-            "idevento": 145,
-            "idrelation": 3,
-            "name": "Reloj Alarma",
-            "nameProducto": 12000
-        },
-        {
-            "idNotifications": 10,
-            "dateNotifications": "31/10/2020"",
-            "statusNotifications": 1,
-            "typenotifications": 2,
-            "title": "Haz recibido un takasteo potencial",
-            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
-            "idevento": 144,
-            "idrelation": 3,
-            "name": "Reloj Alarma",
-            "nameProducto": 12000
-        }
-    ],
-    "msg": "Lista detallada de notificaciones  con éxito"
+    "data": {
+        "CantNoti": 11
+    },
+    "msg": "Cantidad de notificaciones según bandera obtenida con éxito"
 }
  *
  * @apiError UserNotFound The id of the Notifications was not found.
@@ -2837,6 +2833,68 @@ router.post('/cantnotifications', [
     return res.status(response.data.status).json(response.data)
 
 })
+
+ /**
+ * @api {put} /user/changestatusNotifications 3 changestatusNotifications
+ * @apiName changestatusNotifications - Cambio de estado de una oferta
+ * @apiGroup Notifications
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idNotifications required.
+ * @apiParam {int} FlagStatus required. Sin leer = 1, vista = 2
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Chatrooms.
+ * @apiSuccess {int} status 200 of the Chatrooms.
+ * @apiSuccess {string} msg   of the Chatrooms.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "takasteo": true,
+    "msg": "Cambio de estatus de la sala de chat ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Chatrooms was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA NOTIFICACIÓN
+router.put('/changestatusNotifications', rutasProtegidas, [
+    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists(),
+    check('FlagStatus', 'El FlagStatus es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.changeStatusChatRoom(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
 
 
 

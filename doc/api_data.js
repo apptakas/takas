@@ -561,7 +561,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "flagNotifications",
-            "description": "<p>Optional 1=Sin leer y 2 = Leida.</p>"
+            "description": "<p>Optional Sin leer=1 y Vista = 2.</p>"
           }
         ]
       }
@@ -595,7 +595,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 11,\n            \"dateNotifications\": \"31/10/2020\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido un takasteo potencial\",\n            \"details\": \"¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000\",\n            \"idevento\": 145,\n            \"idrelation\": 3,\n            \"name\": \"Reloj Alarma\",\n            \"nameProducto\": 12000\n        },\n        {\n            \"idNotifications\": 10,\n            \"dateNotifications\": \"31/10/2020\"\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido un takasteo potencial\",\n            \"details\": \"¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000\",\n            \"idevento\": 144,\n            \"idrelation\": 3,\n            \"name\": \"Reloj Alarma\",\n            \"nameProducto\": 12000\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"CantNoti\": 11\n    },\n    \"msg\": \"Cantidad de notificaciones según bandera obtenida con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -615,6 +615,103 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar notificaciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Notifications"
+  },
+  {
+    "type": "put",
+    "url": "/user/changestatusNotifications",
+    "title": "3 changestatusNotifications",
+    "name": "changestatusNotifications_-_Cambio_de_estado_de_una_oferta",
+    "group": "Notifications",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idNotifications",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "FlagStatus",
+            "description": "<p>required. Sin leer = 1, vista = 2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Chatrooms.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"takasteo\": true,\n    \"msg\": \"Cambio de estatus de la sala de chat ejecutdos exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Chatrooms was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
           "type": "json"
         }
       ]
@@ -1565,7 +1662,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"CantNoti\": 11\n    },\n    \"msg\": \"Cantidad de notificaciones según bandera obtenida con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idproduct\": 1,\n        \"datecreated\": \"01/11/2020\",\n        \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n        \"nuevo\": false,\n        \"subcategory\": 4,\n        \"name\": \"Estufa de 4 hornillas\",\n        \"details\": \"Estufa de 4 hornillas color blanco \",\n        \"typemoney\": 3,\n        \"marketvalue\": \"200000.0000\",\n        \"typepublication\": 1,\n        \"status\": 1,\n        \"CantidadOfertas\": 1,\n        \"ProductImages\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\"\n        ],\n        \"Preferences\": [\n            1,\n            2\n        ]\n    },\n    \"msg\": \"Listar detalles de un producto\"\n}",
           "type": "json"
         }
       ]
