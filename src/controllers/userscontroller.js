@@ -947,7 +947,7 @@ userController.DetailsProduct = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data: response.result,
+                data: response.result[0],
                 images: response.images,
                 msg: 'Listar detalles de un producto'
                 //data: response
@@ -1384,17 +1384,17 @@ userController.DetailsOffer = async (req) => {
        // console.log(req.typeQuestion);
         if(req.typePublication==1){
             OfferData = {
-                id: req.idPublication,
+                id: req.idOferta,
                 publication: req.typePublication
             };
         }if(req.typePublication==2){
             OfferData = {
-                id: req.idPublication,
+                id: req.idOferta,
                 publication: req.typePublication
             };
         }if(req.typePublication==3){
             OfferData = {
-                id: req.idPublication,
+                id: req.idOferta,
                 publication: req.typePublication
             };
         }
@@ -1802,7 +1802,7 @@ userController.listDataChatRoom = async (req) => {
 
 
 //Listar notificaciones detalladas
-userController.listNotifications = async (req) => {
+userController.listNotifications = async () => {
     try {
         
           //  let idSala= req.idSalaChat;
@@ -1810,7 +1810,7 @@ userController.listNotifications = async (req) => {
         //console.log(userData.password);
         let response = await chatroomsModel.listNotifications();
 
-       console.log(response);
+       //console.log(response);
 
         let data = {};
         if (response && response.result) {
@@ -1841,7 +1841,50 @@ userController.listNotifications = async (req) => {
     }
 
 };
+///cantNotifications
 
+
+
+//Obtener la cantidad de notifaciación SEGÚN BANDERA
+userController.cantNotifications = async (req) => {
+    try {
+        
+          let status= req.flagNotifications;
+       
+        //console.log(userData.password);
+        let response = await chatroomsModel.cantNotifications(status);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result[0];
+
+            data = {
+                success: true,
+                status: '200',
+                data: r,
+                msg: 'Cantidad de notificaciones según bandera obtenida con éxito'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar obtener Cantidad de notificaciones según bandera'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
 

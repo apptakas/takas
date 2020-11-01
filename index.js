@@ -41,6 +41,7 @@ app.use(express.json());
  //app.use(require('./routes/delivery/usersdomiciliaryroutes'));
  app.use('/admin',require('./src/routes/admin/adminroutes'));
  app.use('/user',require('./src/routes/user/usersroutes'));
+ app.use('/notifications',require('./src/routes/notifications/notificationsroutes'));
 
 
 ////Public

@@ -369,7 +369,7 @@ OffersModel.ListItemsOffer = (element) => {
                 resolve({                    
                     "idoffer": element.id,
                     "idproduct": element.idproduct,
-                    "nameoffer": element.nameoffer,
+                    // "nameoffer": element.nameoffer,
                     "observation": element.observation,
                     "valorpublication": Number.parseFloat(element.marketvalue).toFixed(4),
                     "sumitemsoffer":Number.parseFloat(SumItemsOffer).toFixed(4),

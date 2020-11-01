@@ -1518,36 +1518,13 @@ router.post('/listproductsubcategory', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *      {
+ *    {
     "success": true,
     "status": "200",
-    "data": [
-        {
-            "idproduct": 17,
-            "datecreated": "06/09/2021 18:06:37",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 1,
-            "name": "Gorros para bebés",
-            "details": "Gorros termicos 1",
-            "typemoney": 1,
-            "marketvalue": "10000.0000",
-            "typepublication": 1,
-            "status": 1,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv21-2020-10-11%2014%3A34%3A34.853337.jpg?alt=media&token=d7008372-6929-4d5b-83cc-9fc344b97395",
-                "https://n9.cl/2vy3",
-                "https://n9.cl/xr43h",
-                "https://n9.cl/9n16",
-                "https://n9.cl/rbsa"
-            ],
-            "Preferences": [
-                1,
-                2
-            ]
-        }
-    ],
-    "msg": "Listar detalles de un producto"
+    "data": {
+        "CantNoti": 11
+    },
+    "msg": "Cantidad de notificaciones según bandera obtenida con éxito"
 }
  *
  * @apiError UserNotFound The id of the Product was not found.
@@ -1557,7 +1534,7 @@ router.post('/listproductsubcategory', rutasProtegidas, [
  *     {
     "success": false,
     "status":: "500",
-    "msg": "Error al Listar detalles del producto"
+    "msg": "Error al intentar obtener Cantidad de notificaciones según bandera"
 }
  **/
 
@@ -2122,7 +2099,7 @@ router.post('/listoffer', rutasProtegidas, [
  *
  * 
  * @apiParam {int} typePublication required.
- * @apiParam {int} Int idPublication required.
+ * @apiParam {int} Int idOferta required.
  * 
  * 
  * 
@@ -2173,8 +2150,8 @@ router.post('/listoffer', rutasProtegidas, [
 
 //DETALLE DE LA OFERTA - PUBLICACIÓN
 router.post('/detailsoffer', rutasProtegidas, [
-    check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
-    check('idPublication', 'El IdProduct es obligatorio').not().isEmpty().exists()
+    check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
+    check('idOferta', 'El idOferta es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -2772,6 +2749,94 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
         return res.status(response.data.status).json(response.data)
     
     })
+
+
+     /**
+ * @api {post} /user/cantnotifications 2 cantnotifications
+ * @apiName cantnotifications - Obtener la cantidad de notificaciones según bandera
+ * @apiGroup Notifications
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} flagNotifications Optional 1=Sin leer y 2 = Leida.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Notifications.
+ * @apiSuccess {int} status 200 of the Notifications.
+ * @apiSuccess {string} msg   of the Notifications.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idNotifications": 11,
+            "dateNotifications": "31/10/2020",
+            "statusNotifications": 1,
+            "typenotifications": 2,
+            "title": "Haz recibido un takasteo potencial",
+            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
+            "idevento": 145,
+            "idrelation": 3,
+            "name": "Reloj Alarma",
+            "nameProducto": 12000
+        },
+        {
+            "idNotifications": 10,
+            "dateNotifications": "31/10/2020"",
+            "statusNotifications": 1,
+            "typenotifications": 2,
+            "title": "Haz recibido un takasteo potencial",
+            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
+            "idevento": 144,
+            "idrelation": 3,
+            "name": "Reloj Alarma",
+            "nameProducto": 12000
+        }
+    ],
+    "msg": "Lista detallada de notificaciones  con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Notifications was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar notificaciones"
+}
+ **/
+
+// Obtener la cantidad de notificaciones según bandera
+router.post('/cantnotifications', [
+    check('flagNotifications', 'El statusNotifications es obligatorio').not().isEmpty().exists()
+    ], rutasProtegidas,async (req, res) => {
+        
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    //let response = await userController.listNotifications(req.body);
+    let response = await userController.cantNotifications(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 
 

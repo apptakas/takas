@@ -78,5 +78,43 @@ notificationModel.listNotifications = (idOferta) => {
 }
 
 
+//OBTENER CATIDAD  NOTIFICACIONES SEGÚN BANDERA 
+notificationModel.cantNotifications = (status) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            "SELECT COUNT(*) AS CantNoti FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE n.status="+status+" ORDER BY n.datecreated DESC",
+            (err2, result2) => {
+                 
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    //console.log(result2); 
+                    // console.log(result2.length);
+                    // let ImagesProduct= []; 
+                    // for(var atr2 in result2){
+                    // ImagesProduct.push(result2[atr2].url); 
+                    // };  
+                    //console.log(element.idproduct);  
+                   // console.log(ImagesProduct);
+                    resolve({                        
+                        'result': result2
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
+
+
 
 module.exports = notificationModel;
