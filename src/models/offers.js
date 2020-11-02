@@ -300,7 +300,7 @@ OffersModel.DetailsOffer = (OfferData,callback) => {
         if (pool) {
             //let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.dateoffers,o.idproduct,p.name,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?',[
+                'SELECT o.id,o.dateoffers,o.idproduct,p.name,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue,p.marketvalue as ValorPublication FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?',[
                     OfferData.id,
                 OfferData.publication],
                 async(err, result) => {

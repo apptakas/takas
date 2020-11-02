@@ -1933,7 +1933,7 @@ userController.CloseChatRoom = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                takasteo:takasteo,
+                takasteo:false,
                 msg: 'sala de chat cerrada exitosamente'
                 //data: response
             }
