@@ -2079,6 +2079,50 @@ userController.cantNotifications = async (req) => {
 
 };
 
+
+// Obtener la cantidad de ofertas realizada a una publicación
+userController.cantnOfertasPublications = async (req) => {
+    try {
+        
+          let idPublication= req.idPublication;
+       
+        //console.log(userData.password);
+        let response = await notificationModel.cantnOfertasPublications(idPublication);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+
+            data = {
+                success: true,
+                status: '200',
+                CantOfertas: response.CantOfertas,
+                msg: 'Cantidad de Ofertas a una publicación obtenidas con éxito'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar obtener Cantidad de Ofertas a una publicación'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 //CAMBIAR EL ESTADO DE UNA SALA DE CHAT- TAKASTEAR 
 userController.changeStatusNotifications = async (req) => {
     try {

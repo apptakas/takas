@@ -3043,7 +3043,67 @@ router.put('/changestatusnotifications', rutasProtegidas, [
     
     }) 
 
+     /**
+ * @api {post} /user/cantnofertaspublications 7 cantnofertaspublications
+ * @apiName cantnofertaspublications - Obtener la cantidad de notificaciones según bandera
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idPublication requeride .
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "CantOfertas": 13,
+    "msg": "Cantidad de Ofertas a una publicación obtenidas con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar obtener Cantidad de Ofertas a una publicación"
+}
+ **/
 
+// Obtener la cantidad de ofertas realizadas a una publicación
+router.post('/cantnofertaspublications', [
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists()
+    ], rutasProtegidas,async (req, res) => {
+        
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    //let response = await userController.listNotifications(req.body);
+    let response = await userController.cantnOfertasPublications(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 
 

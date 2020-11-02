@@ -533,4 +533,41 @@ OffersModel.FindDatOffer = (OfferData,callback) => {
 };
 
 
+
+//OBTENER CATIDAD  NOTIFICACIONES SEGÚN BANDERA 
+notificationModel.cantnOfertasPublications = (idPublication) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            "SELECT COUNT(*) AS CantOfertas FROM product AS p INNER JOIN offers AS o ON p.id=o.idproduct WHERE p.id="+idPublication+" AND o.status<>23 AND o.status<>8",
+            (err2, result2) => {
+                 
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                  
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {  
+                    console.log(result2[0].CantOfertas);
+                    // let CantOfertas=0;  
+                    // if(result2[0]!=undefined){
+                    //     if(result2[0].id){
+                    //         CantOfertas=result2[0].CantOfertas;
+                    //     }
+                    // }
+                    CantOfertas=result2[0].CantOfertas;
+                    resolve({                        
+                        'result': 'Ok',
+                        'CantOfertas':CantOfertas
+                    });
+                }  
+                
+
+            })
+    })
+}
+
+
 module.exports = OffersModel;
