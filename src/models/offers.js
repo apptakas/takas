@@ -138,15 +138,20 @@ OffersModel.CalculoValorOferta = (idOferta, callback) => {
 
 
 //ListOfertas  - Obtenemos lista de ofertas sobre una publicación
-OffersModel.ListOffer = (OfferData,callback) => {
+OffersModel.ListOffer = (OfferData,status) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
             let ListItemsOffer={};
+            let consulta="";
+            if(status!=null){
+                consulta="SELECT  o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name AS namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE o.idproduct="+OfferData.idproduct+" AND o.publication="+OfferData.publication+" AND o.status="+status;
+            }
+            else{
+                consulta="SELECT  o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name AS namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE o.idproduct="+OfferData.idproduct+" AND o.publication="+OfferData.publication;
+            }
             pool.query(
-                'SELECT  o.id,o.iduser,o.publication,o.idproduct,ip.url,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name AS namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE o.idproduct= ? AND o.publication= ?',[
-                    OfferData.idproduct,
-                OfferData.publication],
+                consulta,
                 async(err, result) => {
                     
                     if (err) {
@@ -266,6 +271,7 @@ OffersModel.ListItemsOffers = (element) => {
                 //console.log(sala);
                 resolve({                    
                     "idoffer": element.id,
+                    "statusoffer": element.status,
                     "idSala": idSala,
                     "idproduct": element.idproduct,
                     "namepublication": element.namePublication,
@@ -394,15 +400,22 @@ OffersModel.ListItemsOffer = (element) => {
 
 
 //ListOfertas  - Obtenemos lista de ofertas sobre una publicación
-OffersModel.ListMyOffer = (OfferData,callback) => {
+OffersModel.ListMyOffer = (OfferData,status) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
+
             let ListItemsOffer={};
-            pool.query(
-                'SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id  WHERE o.iduser= ? AND o.publication= ? ',[
-                    OfferData.iduser,
-                OfferData.publication],
+            let consulta="";
+            if(status!=null){
+                consulta="SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id  WHERE o.iduser='"+OfferData.iduser+"' AND o.publication="+OfferData.publication+" AND o.status="+status;
+            }
+            else{
+                consulta="SELECT o.id,o.iduser,o.publication,o.idproduct,o.idservice,o.idauction,o.observation,o.status,o.dateoffers,p.datepublication,p.marketvalue AS ValorPublication,p.name as namePublication FROM offers AS o INNER JOIN product AS p ON o.idproduct=p.id  WHERE o.iduser='"+OfferData.iduser+"' AND o.publication="+OfferData.publication;
+
+            }
+            
+            pool.query(consulta,
                 async(err, result) => {
                     
                     if (err) {

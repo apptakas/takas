@@ -650,10 +650,8 @@ userController.NewProduct = async (req) => {
 };
 
 
-
-
 //Nuevo Producto (TAKASTEAR)
-userController.NewProductCKW = async (req) => {
+userController.NewProductKW = async (req) => {
     //existe este usuario? 
     try {
 
@@ -707,6 +705,127 @@ userController.NewProductCKW = async (req) => {
         
         if(req.ImagesProduct.length<=topeimg && req.KeyWordsProduct.length<=topeKW){
             //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct);
+        }else{
+             response ={
+                'error': "Ha superdo el límite de imagenes o palabras claves"
+            };
+        }
+       // console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Producto registrado con éxito'
+                //data: response
+            }
+        } else {
+
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                data: response.error,
+                msg: 'Error al registrar producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Nuevo Producto (TAKASTEAR)
+userController.NewProductCKW = async (req) => {
+    //existe este usuario? 
+    try {
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            console.log(now+" - "+hoy);
+            const ProductData = {
+                iduser: req.iduserProduct,
+                datepublication: hoy,
+                new: req.NewProduct,
+                size: req.SizePoduct,
+                weight: req.WeightProduct,
+                name: req.nameProduct,
+                details: req.detailsProduct,
+                typemoney: req.typemoneyProduct,
+                marketvalue: req.marketvalueProduct,
+                subcategory:req.subcategoryProduct,
+                datecreated: hoy,
+                typepublication:1,
+                status:1
+            };
+            const topeimg=10;      
+            const ImagesProduct = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.ImagesProduct.length!=0){
+                for(var atr1 in req.ImagesProduct){
+                    ImagesProduct[atr1] = req.ImagesProduct[atr1];     
+                };
+            }
+
+            const PreferecesProduct = {};
+            //console.log(req.PreferecesProduct.length);
+            if(req.PreferecesProduct.length!=0){
+                for(var atr2 in req.PreferecesProduct){
+                    PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
+                };
+            }
+
+            const topeKW=10;      
+            const KeyWordsProduct = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.KeyWordsProduct.length!=0){
+                for(var atr1 in req.KeyWordsProduct){
+                    KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
+                };
+                console.log(KeyWordsProduct);
+            }
+
+            const UsePoduct = {};
+            if(req.UsePoduct.length!=0){
+                for(var atr1 in req.UsePoduct){
+                    UsePoduct[atr1] = req.UsePoduct[atr1];     
+                };
+                console.log("UsePoduct");
+                console.log(UsePoduct);
+            }
+
+            const SizePoduct = {};
+            if(req.SizePoduct.length!=0){
+                for(var atr1 in req.SizePoduct){
+                    SizePoduct[atr1] = req.SizePoduct[atr1];     
+                };
+                console.log("SizePoduct");
+                console.log(SizePoduct);
+            }
+
+            const WeightProduct = {};
+            if(req.WeightProduct.length!=0){
+                for(var atr1 in req.WeightProduct){
+                    WeightProduct[atr1] = req.WeightProduct[atr1];     
+                };
+                console.log("WeightProduct");
+                console.log(WeightProduct);
+            }
+            
+
+        let response ="";
+        
+        if(req.ImagesProduct.length<=topeimg && req.KeyWordsProduct.length<=topeKW){
+            //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,UsePoduct,WeightProduct,SizePoduct);
+            //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,UsePoduct,WeightProduct,SizePoduct);
         }else{
              response ={
                 'error': "Ha superdo el límite de imagenes o palabras claves"
@@ -1361,7 +1480,20 @@ userController.NewOffer = async (req) => {
 //LISTAR OFERTAS - GENERAL 
 userController.ListOffer = async (req) => {
     try {
-
+        let status=null;
+        if(req.flagstatus!=null){
+            if(req.flagstatus==0){
+                status=23;  //  OFERTA CANCELADA
+            }
+            if(req.flagstatus==1){
+                status=8;  //  OFERTA RECHAZADA
+            }
+            if(req.flagstatus==2){
+                status=7;  //  OFERTA ACAPTADA
+            }
+            //status=req.flagstatus;
+        }
+        //console.log(status);
         let OfferData ={};
        // console.log(req.typeQuestion);
         if(req.typePublication==1){
@@ -1382,7 +1514,7 @@ userController.ListOffer = async (req) => {
             };
         }
         //console.log(userData.password);
-        let response = await Offer.ListOffer(OfferData);
+        let response = await Offer.ListOffer(OfferData,status);
 
        //console.log(response);
 
@@ -1577,6 +1709,21 @@ userController.ListMyOffer = async (req) => {
     try {
 
         let OfferData ={};
+
+        let status=null;
+        
+        if(req.flagstatus!=null){
+            if(req.flagstatus==0){
+                status=23;  //  OFERTA CANCELADA
+            }
+            if(req.flagstatus==1){
+                status=8;  //  OFERTA RECHAZADA
+            }
+            if(req.flagstatus==2){
+                status=7;  //  OFERTA ACAPTADA
+            }
+            //status=req.flagstatus;
+        }
        // console.log(req.typeQuestion);
         if(req.typePublication==1){
             OfferData = {
@@ -1598,7 +1745,7 @@ userController.ListMyOffer = async (req) => {
             };
         }
         //console.log(userData.password);
-        let response = await Offer.ListMyOffer(OfferData);
+        let response = await Offer.ListMyOffer(OfferData,status);
 
        //console.log(response);
 
