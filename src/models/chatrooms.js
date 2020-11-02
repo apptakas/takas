@@ -11,7 +11,7 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
        return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
-                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) values("'+IdSAla+'","'+userOffer+'","'+userPublication+'",'+idPublication+','+OfferData+',"'+hoy+'",24)',
+                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) values("'+IdSAla+'","'+userPublication+'","'+userOffer+'",'+idPublication+','+OfferData+',"'+hoy+'",24)',
                 (err, result) => {
                     //console.log(err);
                    // console.log(result);

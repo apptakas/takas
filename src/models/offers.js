@@ -16,6 +16,7 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
             pool.query(
                 'INSERT INTO offers SET ?',[OfferData],
                 async(err, result) => {
+                    console.log(result);
                     //console.log(result.insertId);
                     if (err) {
                         resolve({
@@ -31,30 +32,22 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                                         IdOfferData[atr2],
                                         result.insertId
                                     ],
-                                    (err, resut) => {
+                                    async(err, resut) => {
                                         //console.log(resut);
                                         if (err) {
                                             resolve({
                                                 'error': err
                                             })
                                         } else {
-                                             
+                                            
 
-                                        }
-                    
-                                    }
-                                )
-                                
-                            }//
-                            
-                        }//
-
-                        /////
+                                            /////
                         let respCrearPush={};
                         let idUserPublication={};
                         let ValorOferta={};
                         let idrelation=OfferData.idproduct;
                         let idOferta=result.insertId;
+                        console.log(idOferta);
                         let TypeNotification=2;
 
                         ValorOferta= await OffersModel.CalculoValorOferta(idOferta);
@@ -96,6 +89,25 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                                 'error': 'Error! al crear la notificación'
                             })
                         }  ///s  
+                        
+
+
+
+
+                                            resolve({
+                                                'result': result
+                                            })
+
+                                        }
+                    
+                                    }
+                                )
+                                
+                            }//
+                            
+                        }//
+
+                        
                        
                     }
 
@@ -121,7 +133,7 @@ OffersModel.CalculoValorOferta = (idOferta, callback) => {
                             'error': err
                         })
                     } else {
-                        //console.log(result);
+                        console.log(result);
                         resolve({
                             'result': result
                         })

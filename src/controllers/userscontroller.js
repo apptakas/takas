@@ -2016,7 +2016,7 @@ userController.listNotifications = async (req) => {
             if(response.result!=undefined){
                 r = response.result;
             }
-            
+            console.log(r);
             data = {
                 success: true,
                 status: '200',

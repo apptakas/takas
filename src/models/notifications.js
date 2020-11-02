@@ -55,7 +55,7 @@ notificationModel.listNotifications = (idUser) => {
                         'error': err2
                     })
                 } else {     
-                    //console.log(result2); 
+                    console.log(result2); 
                     // console.log(result2.length);
                     // let ImagesProduct= []; 
                     // for(var atr2 in result2){
