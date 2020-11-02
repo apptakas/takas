@@ -1461,7 +1461,6 @@ userController.NewOffer = async (req) => {
         "UserPublication":response.UserPublication,
         "type": 0,
         "status": 0,
-        "id": "hello",
         "click_action": "FLUTTER_NOTIFICATION_CLICK"
     };
         
