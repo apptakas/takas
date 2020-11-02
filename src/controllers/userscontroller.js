@@ -2018,7 +2018,7 @@ userController.listNotifications = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data: response.result,
+                data: r,
                 msg: 'Lista detallada de notificaciones  con éxito'
                 //data: response
             }
