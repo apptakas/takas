@@ -2013,7 +2013,10 @@ userController.listNotifications = async (req) => {
         let data = {};
         if (response && response.result) {
             let r = {};
-            r = response.result;
+            if(response.result){
+                r = response.result;
+            }
+            
 
             data = {
                 success: true,
