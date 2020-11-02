@@ -2284,7 +2284,7 @@ router.post('/listoffer', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
+ *    {
     "success": true,
     "status": "200",
     "data": {
@@ -2292,6 +2292,7 @@ router.post('/listoffer', rutasProtegidas, [
         "statusoffer": 7,
         "idSala": "949bdc81078b49cd604b6622ddd762054ca8963a",
         "idproduct": 1,
+        "namepublication": "Estufa de 4 hornillas",
         "img": [
             "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722"
         ],
