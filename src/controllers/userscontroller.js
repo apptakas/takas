@@ -2013,18 +2013,33 @@ userController.listNotifications = async (req) => {
         let data = {};
         if (response && response.result) {
             let r = {};
+            let dat=[];
             if(response.result){
                 r = response.result;
+                data = {
+                    success: true,
+                    status: '200',
+                    data: r,
+                    msg: 'Lista detallada de notificaciones  con éxito'
+                    //data: response
+                }
             }
-            
+            else{
+                data = {
+                    success: true,
+                    status: '200',
+                    data: [],
+                    msg: 'Lista detallada de notificaciones  con éxito'
+                    //data: response
+                }
 
-            data = {
-                success: true,
-                status: '200',
-                data: r,
-                msg: 'Lista detallada de notificaciones  con éxito'
-                //data: response
             }
+            if(response.result!=undefined){
+                dat=response.result;
+            }
+            console.log(response.result)
+
+           
         } else {
 
            // console.log(response);
