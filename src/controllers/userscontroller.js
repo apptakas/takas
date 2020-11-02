@@ -146,11 +146,12 @@ userController.Autenticar = async (req) => {
 //Login Google
 userController.GAutenticar = async (req) => {
     //existe este usuario? 
-    try {
+    try {  
         const userData = {
             id: req.idfirebaseUser,
             email: req.emailUser,
             fullname: req.fullnameUser,
+            imgurl: req.imgUser,
             tyc: req.tycUser,
             role: 2
         };
@@ -1403,7 +1404,16 @@ userController.NewOffer = async (req) => {
 
         console.log(IdOfferData);
         //console.log(userData.password);
-        let response = await Offer.NewOffer(OfferData,IdOfferData);
+        let response={};
+        if(req.idsPublications.length!=0){
+            response = await Offer.NewOffer(OfferData,IdOfferData);
+        }
+        else{
+            response = resolve({
+                'error': "Publicaciones vacias.",
+                'msg':"Debe ofertar con al menos una publicación"
+            })
+        }
 
     //    console.log(response);
        console.log(response.OkPacket);
@@ -1466,6 +1476,7 @@ userController.NewOffer = async (req) => {
             data = {
                 success: false,
                 status: '500',
+                error:response.msg,
                 msg: 'Error al intentar crear una Oferta'
             }
         }
@@ -1851,9 +1862,10 @@ userController.listChatRoomStatus = async (req) => {
     try {
         
             let statuSala= req.statuSalaChat;
+            let idUder= req.idUder;
        
         //console.log(userData.password);
-        let response = await ChatRooms.listChatRoomStatus(statuSala);
+        let response = await ChatRooms.listChatRoomStatus(statuSala,idUder);
 
        //console.log(response);
 
@@ -1890,22 +1902,13 @@ userController.listChatRoomStatus = async (req) => {
 
 //
 //CAMBIAR EL ESTADO DE UNA SALA DE CHAT- TAKASTEAR 
-userController.changeStatusChatRoom = async (req) => {
+userController.CloseChatRoom = async (req) => {
     try {
         let takasteo=false;
         let OfferData ={};
        // console.log(req.typeQuestion);
-            let status=0;//ODERTA CANCELADA
-            if(req.FlagStatus==1){
-                status=1;// OFERTA ACTIVA
-            }
-            if(req.FlagStatus==2){
-                status=2;// OFERTA ACEPTADA
-                takasteo=true;
-                //let response2 =  Offer.FindDatOffer(OfferData);
-                //console.log(response2);
-            }
-
+            let status=25//SALA ACTIVA = 24 SALA CERRADA = 25
+            
             ChatRoomData = {
                 id: req.idSala,
                 status:status
@@ -1914,7 +1917,7 @@ userController.changeStatusChatRoom = async (req) => {
         //console.log(OfferData);
         
         //let response = await Offer.FindDatOffer(OfferData);
-       let response = await ChatRooms.changeStatusChatRoom(ChatRoomData,req.FlagStatus);
+       let response = await ChatRooms.CloseChatRoom(ChatRoomData);
 
        //console.log(response);
       // console.log(response.sala);
@@ -1931,7 +1934,7 @@ userController.changeStatusChatRoom = async (req) => {
                 success: true,
                 status: '200',
                 takasteo:takasteo,
-                msg: 'Cambio de estatus de la sala de chat ejecutdos exitosamente'
+                msg: 'sala de chat cerrada exitosamente'
                 //data: response
             }
         } else {
@@ -1940,7 +1943,7 @@ userController.changeStatusChatRoom = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: 'Error al intentar cambiar el estatus de la sala de chat'
+                msg: 'Error al intentar cerrar sala de chat'
             }
         }
         //validar si esta llegado vacio
@@ -1967,12 +1970,12 @@ userController.listDataChatRoom = async (req) => {
         let data = {};
         if (response && response.result) {
             let r = {};
-            r = response.result;
+            r = response.result[0];
 
             data = {
                 success: true,
                 status: '200',
-                data: response.result,
+                data: response.result[0],
                 msg: 'Data completa de la sala de chat'
                 //data: response
             }
@@ -1997,13 +2000,13 @@ userController.listDataChatRoom = async (req) => {
 
 
 //Listar notificaciones detalladas
-userController.listNotifications = async () => {
+userController.listNotifications = async (req) => {
     try {
         
-          //  let idSala= req.idSalaChat;
+          let idUser= req.idUser;
        
         //console.log(userData.password);
-        let response = await notificationModel.listNotifications();
+        let response = await notificationModel.listNotifications(idUser);
 
        //console.log(response);
 
@@ -2045,9 +2048,11 @@ userController.cantNotifications = async (req) => {
     try {
         
           let status= req.flagNotifications;
+          let idUder= req.idUder;
+          status=1;
        
         //console.log(userData.password);
-        let response = await notificationModel.cantNotifications(status);
+        let response = await notificationModel.cantNotifications(status,idUder);
 
        //console.log(response);
 

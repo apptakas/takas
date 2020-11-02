@@ -45,6 +45,7 @@ router.get('/prueba', function (req, res) {
  * 
  *   
  * @apiParam {varchar} idfirebaseUser unique required.
+ * @apiParam {varchar} imgUser unique required.
  * @apiParam {int} codCity  optional. 
  * @apiParam {varchar} fullnameUser required.
  * @apiParam {varchar} phonenumberUser  unique required.
@@ -82,6 +83,7 @@ router.get('/prueba', function (req, res) {
 //Crear newUser- 
 router.post('/newUser', [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('imgUser', 'El imgUser es obligatorio').not().isEmpty().exists(),
     check('fullnameUser', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
     check('phonenumberUser', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El email no puede estra vacio y debe corresponder al formato').isEmail().exists(),
@@ -193,7 +195,8 @@ router.post('/autenticar', [
  * 
  * @apiParam {varchar}  idfirebase  required.
  * @apiParam {varchar} emailuser  required.
- * @apiParam {varchar} fullnameUser  optional.
+ * @apiParam {varchar} fullnameUser  required.
+ * @apiParam {varchar} imgUser  optional.
  * @apiParam {varchar} tycUser  optional.
  
  *
@@ -224,6 +227,7 @@ router.post('/autenticar', [
  */
 router.post('/gautenticar', [
     check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists(),
+    check('fullnameUser', 'El fullnameUser el obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
 ], async (req, res) => {
 
@@ -2165,9 +2169,7 @@ router.post('/newoffer', rutasProtegidas, [
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
         }
-        //console.log(response);
-
-        
+        //console.log(response);   
 
 
         return res.status(response.data.status).json(response.data)
@@ -2589,7 +2591,8 @@ router.put('/changestatusoffer', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * @apiParam {varchar} statuSalaChat required.
+ * @apiParam {varchar} statuSalaChat required Sala cativa = 24 Sala cerrada = 25. 
+ * @apiParam {varchar} idUder required. 
  * 
  * 
  * 
@@ -2640,7 +2643,9 @@ router.put('/changestatusoffer', rutasProtegidas, [
 }
  **/
 //LISTAR LOS DATOS DE LA SALA DE CHAT 
+
 router.post('/listchatroomstatus', rutasProtegidas, [
+    check('idUder', 'El idUder es obligatorio').not().isEmpty().exists(),
     check('statuSalaChat', 'El statuSalaChat es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
@@ -2770,8 +2775,8 @@ router.post('/listdatachatroom', rutasProtegidas, [
     })
 
  /**
- * @api {put} /user/changestatusoffer 3 changestatusoffer
- * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @api {put} /user/closechatroom 3 closechatroom
+ * @apiName closechatroom - Cambio de estado de una oferta
  * @apiGroup Chatrooms
  * 
  * 
@@ -2782,7 +2787,6 @@ router.post('/listdatachatroom', rutasProtegidas, [
  *
  *
  * @apiParam {int} idSala required.
- * @apiParam {int} FlagStatus required. CANCELAR = 0, ACTIVO = 1, TAKASTEADO = 2
  * 
  * 
  * 
@@ -2811,9 +2815,8 @@ router.post('/listdatachatroom', rutasProtegidas, [
  **/
 
 //CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
-router.put('/changestatuschatroom', rutasProtegidas, [
-    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists(),
-    check('FlagStatus', 'El FlagStatus es obligatorio').not().isEmpty().exists()
+router.put('/closechatroom', rutasProtegidas, [
+    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -2821,7 +2824,7 @@ router.put('/changestatuschatroom', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }        
-        let response = await userController.changeStatusChatRoom(req.body);
+        let response = await userController.CloseChatRoom(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
@@ -2844,7 +2847,7 @@ router.put('/changestatuschatroom', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * @apiParam {varchar} status Optional.
+ * @apiParam {varchar} idUser required.
  * 
  * 
  * 
@@ -2898,7 +2901,9 @@ router.put('/changestatuschatroom', rutasProtegidas, [
  **/
 
 //LISTAR NOTIFICACIONES DETALLADAS
-router.post('/listnotifications', rutasProtegidas,async (req, res) => {
+router.post('/listnotifications', [
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists()
+    ], rutasProtegidas,async (req, res) => {
         
         const error = validationResult(req);
 
@@ -2906,8 +2911,8 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }
     
-        //let response = await userController.listNotifications(req.body);
-        let response = await userController.listNotifications();
+        let response = await userController.listNotifications(req.body);
+        //let response = await userController.listNotifications();
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
@@ -2930,6 +2935,7 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
+ * @apiParam {varchar} idUder Optional Sin leer=1 y Vista = 0.
  * @apiParam {varchar} flagNotifications Optional Sin leer=1 y Vista = 0.
  * 
  * 
@@ -2962,7 +2968,7 @@ router.post('/listnotifications', rutasProtegidas,async (req, res) => {
 
 // Obtener la cantidad de notificaciones según bandera
 router.post('/cantnotifications', [
-    check('flagNotifications', 'El statusNotifications es obligatorio').not().isEmpty().exists()
+    check('idUder', 'El idUder es obligatorio').not().isEmpty().exists()
     ], rutasProtegidas,async (req, res) => {
         
     const error = validationResult(req);
@@ -2995,6 +3001,7 @@ router.post('/cantnotifications', [
  *
  *
  * @apiParam {int} idNotifications required.
+ * @apiParam {int} idUder required.
  * @apiParam {int} FlagStatus required. Sin leer = 1, vista = 0
  * 
  * 
@@ -3025,6 +3032,7 @@ router.post('/cantnotifications', [
 //CAMBIO DE ESTATUS DE UNA NOTIFICACIÓN
 router.put('/changestatusnotifications', rutasProtegidas, [
     check('idNotifications', 'El idNotifications es obligatorio').not().isEmpty().exists(),
+    check('idUder', 'El idUder es obligatorio').not().isEmpty().exists(),
     check('FlagStatus', 'El FlagStatus es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     

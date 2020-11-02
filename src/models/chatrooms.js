@@ -1,5 +1,6 @@
 const pool = require('../config/database');
 const ProductModel = require('../models/product.js');
+const OffersModel = require('../models/offers.js');
 
 const date = require('date-and-time');
 
@@ -10,7 +11,7 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
        return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
-                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) values("'+IdSAla+'","'+userOffer+'","'+userPublication+'",'+idPublication+','+OfferData+',"'+hoy+'",1)',
+                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) values("'+IdSAla+'","'+userOffer+'","'+userPublication+'",'+idPublication+','+OfferData+',"'+hoy+'",24)',
                 (err, result) => {
                     //console.log(err);
                    // console.log(result);
@@ -32,13 +33,13 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
 };
 
 
-//listDataChatRoom - Listar doda la información de la sala de chat
+//listDataChatRoom - Listar toda la información de la sala de chat
 chatroomsModel.listDataChatRoom = (idSala,callback) => {
     return new Promise((resolve, reject) => {
      if (pool) {
         let armaresult={};
          pool.query(
-             'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS valorComercial,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
+             'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
@@ -70,10 +71,10 @@ chatroomsModel.armaresult = (result) => {
             let prefe={};
             //console.log(result);
             for (const element of result) {
-                img=await chatroomsModel.ListImagesProduct(element.idpubliction);
+                img=await chatroomsModel.ListItemsOffers(element.idpubliction,element.ValorPublication);
                 prefe=await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
-                ItemOfer=await chatroomsModel.ListItemsOffers(element.idoffer)
-                let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+                ItemOfer=await chatroomsModel.ListItemsOffers(element.idoffer,element.ValorPublication)
+                let Precio=Number.parseFloat(element.ValorPublication).toFixed(4);
 
                 let now = new Date();
                 let servidor=date.format(now, 'DD/MM/YYYY');
@@ -97,7 +98,7 @@ chatroomsModel.armaresult = (result) => {
                     "datecreated":regis,
                     "idPublicacion": element.idpubliction,                    
                     "namePublication": element.namePublication,
-                    "valorComercial": element.valorComercial,
+                    "ValorPublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                     "Userpublication": element.iduserpublication,
                     "nameUserPublication": element.nameUserPublication,
                     "imgUserPublication": element.imgUserPublication,
@@ -108,8 +109,10 @@ chatroomsModel.armaresult = (result) => {
                     "imgUserOferta": element.imgUserOferta,
                     "ProductImagesPublicacion":img.ImagesProduct,
                     "PreferencesPublicacion":prefe.Preferences,
-                    "ItemOfer":ItemOfer
-                    
+                    "aFavor":ItemOfer.aFavor,
+                    "Valorferta":Number.parseFloat(ItemOfer.Valorferta).toFixed(4),
+                    "dieferencia": Number.parseFloat(ItemOfer.DiferenciaOffer).toFixed(4),
+                    "ItemOfer":ItemOfer.itemsoffer                    
                 });
                 
             }
@@ -207,12 +210,12 @@ chatroomsModel.idSala = (element) => {
 ////////
 
 //listChatRoomStatus - Listar salas de chat según status
-chatroomsModel.listChatRoomStatus = (statuSala,callback) => {
+chatroomsModel.listChatRoomStatus = (statuSala,idUder) => {
     return new Promise((resolve, reject) => {
      if (pool) {
         let armaresult={};
          pool.query(
-             'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS valorComercial,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.status="'+statuSala+'"',
+             'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS valorComercial,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.status="'+statuSala+'" OR cr.iduserpublication="'+idUder+'" OR cr.idoffer="'+idUder+'"',
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
@@ -272,7 +275,7 @@ chatroomsModel.armaresultStatus = (result) => {
                     "datecreated":regis,
                     "idPublicacion": element.idpubliction,                    
                     "namePublication": element.namePublication,
-                    "valorComercial": element.valorComercial,
+                    "valorComercial": Number.parseFloat(element.valorComercial).toFixed(4),
                     "Userpublication": element.iduserpublication,
                     "nameUserPublication": element.nameUserPublication,
                     "imgUserPublication": element.imgUserPublication,
@@ -337,7 +340,7 @@ chatroomsModel.ListPrefrencesProduct = (element) => {
 
 
 
-chatroomsModel.ListItemsOffers = (element) => {
+chatroomsModel.ListItemsOffers = (element,ValorPublication) => {
     return new Promise((resolve, reject) => {
         let SumItemsOffer=0;
         let DiferenciaOffer=0;
@@ -355,9 +358,11 @@ chatroomsModel.ListItemsOffers = (element) => {
                  console.log(result2); 
                  console.log(result2.length);
                  let ListItemsOffers= []; 
+                 let idItems=0;
                 if(result2.length>0){
                     for(var atr2 in result2){
                     // "iduser": result2[0].iduser,
+                        if(idItems!=result2[atr2].idproduct){
                             ListItemsOffers.push({
                                 "idoffer": result2[atr2].id,
                                 "idpublication": result2[atr2].idproduct,
@@ -366,14 +371,17 @@ chatroomsModel.ListItemsOffers = (element) => {
                                 "img": result2[atr2].url,
                                 "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
                             });
-                            SumItemsOffer+=result2[atr2].marketvalue;
+                        
+                            idItems=result2[atr2].idproduct; 
+                            SumItemsOffer=parseInt(SumItemsOffer)+parseInt(result2[atr2].marketvalue);
+                        }                        
                         
                     }; 
-                    if(SumItemsOffer>element.ValorPublication){
-                         DiferenciaOffer= SumItemsOffer-element.ValorPublication;
+                    if(SumItemsOffer>ValorPublication){
+                         DiferenciaOffer= SumItemsOffer-ValorPublication;
                          Afavor=false;
                     }else{
-                        DiferenciaOffer= element.ValorPublication-SumItemsOffer;
+                        DiferenciaOffer= ValorPublication-SumItemsOffer;
                         Afavor=true;
                     }
                     
@@ -385,7 +393,10 @@ chatroomsModel.ListItemsOffers = (element) => {
                 detalleProduct = await ProductModel.armaresult(result2);  
                 console.log("detalleProduct");
                 console.log(detalleProduct);
-                resolve({    
+                resolve({ 
+                    "aFavor":Afavor,
+                    "Valorferta":SumItemsOffer,
+                    "DiferenciaOffer":DiferenciaOffer,   
                     "itemsoffer": ListItemsOffers
                 });
             }
@@ -396,11 +407,11 @@ chatroomsModel.ListItemsOffers = (element) => {
 
 
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
-chatroomsModel.changeStatusChatRoom = (ChatRoomData,FlagStatus,callback) => {
+chatroomsModel.CloseChatRoom = (ChatRoomData) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
-            let FindDatOffer={};
+            //let FindDatOffer={};
             pool.query(
                 'UPDATE  chatrooms SET  status= ? WHERE id= ?',[
                     ChatRoomData.status,
@@ -412,19 +423,7 @@ chatroomsModel.changeStatusChatRoom = (ChatRoomData,FlagStatus,callback) => {
                         resolve({
                             'error': err
                         })
-                    } else { 
-                        // if(FlagStatus==2) {
-                        //     //console.log("prueba");
-                        //     // FindDatOffer=await chatroomsModel.FindDatOffer(OfferData);
-                        //     //console.log(FindDatOffer);
-                        //     //console.log(FindDatOffer.error);
-                        //     // if(FindDatOffer.error){
-                        //         resolve({
-                        //             'error': err
-                        //          })
-                        //     //}
-
-                        // } 
+                    } else {                         
                                              
                         resolve({
                             'result': result

@@ -91,9 +91,9 @@
   },
   {
     "type": "put",
-    "url": "/user/changestatusoffer",
-    "title": "3 changestatusoffer",
-    "name": "changestatusoffer_-_Cambio_de_estado_de_una_oferta",
+    "url": "/user/closechatroom",
+    "title": "3 closechatroom",
+    "name": "closechatroom_-_Cambio_de_estado_de_una_oferta",
     "group": "Chatrooms",
     "header": {
       "examples": [
@@ -118,13 +118,6 @@
             "optional": false,
             "field": "idSala",
             "description": "<p>required.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "FlagStatus",
-            "description": "<p>required. CANCELAR = 0, ACTIVO = 1, TAKASTEADO = 2</p>"
           }
         ]
       }
@@ -214,6 +207,13 @@
             "type": "varchar",
             "optional": false,
             "field": "statuSalaChat",
+            "description": "<p>required Sala cativa = 24 Sala cerrada = 25.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idUder",
             "description": "<p>required.</p>"
           }
         ]
@@ -560,6 +560,13 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
+            "field": "idUder",
+            "description": "<p>Optional Sin leer=1 y Vista = 0.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
             "field": "flagNotifications",
             "description": "<p>Optional Sin leer=1 y Vista = 0.</p>"
           }
@@ -651,6 +658,13 @@
             "type": "int",
             "optional": false,
             "field": "idNotifications",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUder",
             "description": "<p>required.</p>"
           },
           {
@@ -837,8 +851,8 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "status",
-            "description": "<p>Optional.</p>"
+            "field": "idUser",
+            "description": "<p>required.</p>"
           }
         ]
       }
@@ -3437,6 +3451,13 @@
             "type": "varchar",
             "optional": false,
             "field": "fullnameUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "imgUser",
             "description": "<p>optional.</p>"
           },
           {
@@ -3529,6 +3550,13 @@
             "type": "varchar",
             "optional": false,
             "field": "idfirebaseUser",
+            "description": "<p>unique required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "imgUser",
             "description": "<p>unique required.</p>"
           },
           {

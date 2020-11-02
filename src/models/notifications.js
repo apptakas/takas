@@ -41,10 +41,10 @@ notificationModel.cearnotificacion = (TypeNotification,idrelation,UserPublicatio
 }
 
 //LISTAR  NOTIFICACIONES DETALLADAS 
-notificationModel.listNotifications = (idOferta) => {
+notificationModel.listNotifications = (idUser) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            "SELECT n.id AS idNotifications,DATE_FORMAT(n.datecreated, '%d/%m/%Y') AS dateNotifications,n.status AS statusNotifications,n.typenotifications, n.title,n.details,n.idevento,n.idrelation,p.name,p.marketvalue AS nameProducto FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id ORDER BY n.datecreated DESC",
+            "SELECT n.id AS idNotifications,DATE_FORMAT(n.datecreated, '%d/%m/%Y') AS dateNotifications,n.status AS statusNotifications,n.typenotifications, n.title,n.details,n.idevento,n.idrelation,p.name,p.marketvalue AS nameProducto FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE p.iduser ='"+idUser+"' ORDER BY n.datecreated DESC",
             (err2, result2) => {
                  
                 //console.log(element.id);   
@@ -79,13 +79,13 @@ notificationModel.listNotifications = (idOferta) => {
 
 
 //OBTENER CATIDAD  NOTIFICACIONES SEGÚN BANDERA 
-notificationModel.cantNotifications = (status) => {
+notificationModel.cantNotifications = (status,idUder) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            "SELECT COUNT(*) AS CantNoti FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE n.status="+status+" ORDER BY n.datecreated DESC",
+            "SELECT COUNT(*) AS CantNoti FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE n.status="+status+" AND n.iduser='"+idUder+"' ORDER BY n.datecreated DESC",
             (err2, result2) => {
                  
-                //console.log(element.id);   
+                console.log(err2);   
                 //console.log(element.namec);   
                 //console.log(result2[1].preference);
                 if (err2) {

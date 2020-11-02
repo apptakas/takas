@@ -19,7 +19,8 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                     //console.log(result.insertId);
                     if (err) {
                         resolve({
-                            'error': err
+                            'error': err,
+                            'msg':"Error en la consulta"
                         })
                     } else {
                         
@@ -58,7 +59,7 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
 
                         ValorOferta= await OffersModel.CalculoValorOferta(idOferta);
                         idUserPublication= await UsersModel.DataUserPublication(idrelation);
-                        //console.log(ValorOferta);
+                        console.log(ValorOferta);
                         let CalValorOferta=ValorOferta.result[0].cvalorOferta;
                         let UserPublication=idUserPublication.result[0].UserPublication;
                         let tokenpush=idUserPublication.result[0].tokenpush;
@@ -299,7 +300,7 @@ OffersModel.DetailsOffer = (OfferData,callback) => {
         if (pool) {
             //let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.dateoffers,o.idproduct,o.idproduct,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?',[
+                'SELECT o.id,o.dateoffers,o.idproduct,p.name,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?',[
                     OfferData.id,
                 OfferData.publication],
                 async(err, result) => {
@@ -311,7 +312,7 @@ OffersModel.DetailsOffer = (OfferData,callback) => {
                         })
                     } else {
                         //console.log(result);
-                        ListItemsOffer = await OffersModel.recorridOferta(result);
+                        ListItemsOffer = await OffersModel.recorridOfertas(result);
                         resolve({
                             'result': ListItemsOffer
                         })
@@ -345,7 +346,7 @@ OffersModel.ListItemsOffer = (element) => {
         let DiferenciaOffer=0;
         let Afavor=false;
         pool.query(
-            'SELECT ops.idoffers,ops.idpublication,ops.status,p.marketvalue FROM `offersproductservices` AS ops  INNER JOIN product AS p ON ops.idpublication=p.id WHERE idoffers='+element.id,
+            'SELECT ops.idoffers,ops.idpublication,p.name,ops.status,p.marketvalue FROM `offersproductservices` AS ops  INNER JOIN product AS p ON ops.idpublication=p.id WHERE idoffers='+element.id,
             (err2, result2) => {
                 if (err2) {
                     console.log(err2);
@@ -360,8 +361,9 @@ OffersModel.ListItemsOffer = (element) => {
                     for(var atr2 in result2){
                     // "iduser": result2[0].iduser,
                             ListItemsOffers.push({
-                                "idoffer": result2[atr2].idoffer,
                                 "idpublication": result2[atr2].idpublication,
+                                "nameproduct":result2[atr2].name,
+                                "nameproduct":result2[atr2].name,
                                 "status": 1, //result2[atr2].status,
                                 "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
                             });
@@ -381,8 +383,9 @@ OffersModel.ListItemsOffer = (element) => {
                 //console.log(ListItemsOffers);
                 resolve({                    
                     "idoffer": element.id,
+                    "statusoffer": element.status,
                     "idproduct": element.idproduct,
-                    // "nameoffer": element.nameoffer,
+                    "namepublication": element.name,
                     "observation": element.observation,
                     "valorpublication": Number.parseFloat(element.marketvalue).toFixed(4),
                     "sumitemsoffer":Number.parseFloat(SumItemsOffer).toFixed(4),
