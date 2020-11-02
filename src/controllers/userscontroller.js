@@ -750,13 +750,36 @@ userController.NewProductCKW = async (req) => {
 
             let now = new Date();
             let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
-            console.log(now+" - "+hoy);
-            const ProductData = {
+           // console.log(now+" - "+hoy);
+            let UsePoduct = null;
+            if(req.UsePoduct!=null){               
+                 UsePoduct= req.UsePoduct;  
+                 console.log("UsePoduct");
+                 console.log(UsePoduct);                
+            }
+
+            let SizePoduct = null;
+            if(req.SizePoduct!=null){               
+                SizePoduct= req.SizePoduct;  
+                console.log("SizePoduct");
+                console.log(SizePoduct);                
+            }
+
+            let WeightProduct = null;
+            if(req.WeightProduct!=null){
+                if(req.WeightProduct!=null){               
+                    WeightProduct= req.WeightProduct;  
+                    console.log("WeightProduct");
+                    console.log(WeightProduct);                
+                }
+            }
+            let ProductData = {
                 iduser: req.iduserProduct,
                 datepublication: hoy,
                 new: req.NewProduct,
-                size: req.SizePoduct,
-                weight: req.WeightProduct,
+                condition:UsePoduct,
+                size: SizePoduct,
+                weight: WeightProduct,
                 name: req.nameProduct,
                 details: req.detailsProduct,
                 typemoney: req.typemoneyProduct,
@@ -785,47 +808,26 @@ userController.NewProductCKW = async (req) => {
 
             const topeKW=10;      
             const KeyWordsProduct = {};
+            let lengthkw=0;
             //console.log(req.ImagesProduct.length);
-            if(req.KeyWordsProduct.length!=0){
-                for(var atr1 in req.KeyWordsProduct){
-                    KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
-                };
-                console.log(KeyWordsProduct);
+            if(req.KeyWordsProduct!=null){
+                lengthkw=req.KeyWordsProduct.length;
+                if(req.KeyWordsProduct.length!=0){
+                    for(var atr1 in req.KeyWordsProduct){
+                        KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
+                    };
+                    console.log(KeyWordsProduct);
+                }
             }
 
-            const UsePoduct = {};
-            if(req.UsePoduct.length!=0){
-                for(var atr1 in req.UsePoduct){
-                    UsePoduct[atr1] = req.UsePoduct[atr1];     
-                };
-                console.log("UsePoduct");
-                console.log(UsePoduct);
-            }
-
-            const SizePoduct = {};
-            if(req.SizePoduct.length!=0){
-                for(var atr1 in req.SizePoduct){
-                    SizePoduct[atr1] = req.SizePoduct[atr1];     
-                };
-                console.log("SizePoduct");
-                console.log(SizePoduct);
-            }
-
-            const WeightProduct = {};
-            if(req.WeightProduct.length!=0){
-                for(var atr1 in req.WeightProduct){
-                    WeightProduct[atr1] = req.WeightProduct[atr1];     
-                };
-                console.log("WeightProduct");
-                console.log(WeightProduct);
-            }
+            
             
 
         let response ="";
         
-        if(req.ImagesProduct.length<=topeimg && req.KeyWordsProduct.length<=topeKW){
+        if(req.ImagesProduct.length<=topeimg && lengthkw<=topeKW){
             //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,UsePoduct,WeightProduct,SizePoduct);
-            //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,UsePoduct,WeightProduct,SizePoduct);
+            response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
         }else{
              response ={
                 'error': "Ha superdo el límite de imagenes o palabras claves"

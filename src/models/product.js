@@ -199,6 +199,83 @@ ProductModel.ExistKeyWords = (KW,callback) => {
 
 }
 
+
+
+//ListUsers  - obtenemos lista de usuarios segun el rol
+ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                'INSERT INTO product SET ?', ProductData,
+                (err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        if(ImagesProduct.length!=0){
+                        for(var atr2 in ImagesProduct){  
+                            pool.query(
+                                'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
+                                    ImagesProduct[atr2],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'result': resut
+                                        })                                       
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido imagenes
+                    }//fin if ImagesProduct.length!=0
+                    if(PreferecesProduct.length!=0){
+                        for(var atr3 in PreferecesProduct){  
+                            pool.query(
+                                'INSERT INTO preferences_product (preference,idproduct) value( ?, ?) ', [
+                                    PreferecesProduct[atr3],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'result': resut
+                                        })
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido Preferencias
+                    }//fin if PreferecesProduct.length!=0     
+                    
+
+                    }//
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+
 //LISTAR LOS PRODUCTOS PUBLICADOS POR UN USUARIO - TAKASTEAR 
 ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
     //let resultado = {};

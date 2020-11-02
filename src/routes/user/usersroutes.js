@@ -1857,7 +1857,7 @@ router.post('/newproductckw', rutasProtegidas,[
         return res.status(422).json({ errores: error.array(), msg: 'Error' });
     }
 
-    let response = await userController.NewProductKW(req.body);
+    let response = await userController.NewProductCKW(req.body);
 
     if (response.status == 'ko') {
         return res.status(500).json({ error: 'Error' })
