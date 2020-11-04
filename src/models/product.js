@@ -353,7 +353,7 @@ ProductModel.findProductos = (nameProduct,IdUserProduct) => {
 
             let armaresult={};
             pool.query(
-                "SELECT * FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE NAME LIKE '%"+nameProduct+"%' AND STATUS=1 AND iduser='"+IdUserProduct+"'",
+                "SELECT * FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE NAME LIKE '%"+nameProduct+"%' AND STATUS=1 AND iduser<>'"+IdUserProduct+"'",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -581,7 +581,7 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id+" AND iduser='"+ProductData.iduser+"'",
+                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id+" AND iduser='",
                 async(err, result) => {
                     //console.log(result);
                    
