@@ -1378,6 +1378,7 @@ router.post('/listproductos', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
+ * @apiParam {varchar} IdUserProduct required.
  * @apiParam {varchar} nameProduct required.
  * 
  * 
@@ -1459,6 +1460,7 @@ router.post('/listproductos', rutasProtegidas, [
  **/
 //BUSCAR PUBLICACUONES SEGÚN NOMBRE DEL ARTÍCULO
 router.post('/findproductos', rutasProtegidas, [
+    check('IdUserProduct', 'El IdUserProduct es obligatorio').not().isEmpty().exists(),
     check('nameProduct', 'El nameProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
@@ -1628,6 +1630,7 @@ router.post('/listproductsubcategory', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
+ * @apiParam {int} IdUserProduct required.
  * @apiParam {int} IdProduct required.
  * 
  * 
@@ -1679,6 +1682,7 @@ router.post('/listproductsubcategory', rutasProtegidas, [
 
 //LISTAR DE DETALLES DEL PRODUCTO
 router.post('/detailsproduct', rutasProtegidas, [
+    check('IdUserProduct', 'El IdUserProduct es obligatorio').not().isEmpty().exists(),
     check('IdProduct', 'El IdProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
@@ -2289,8 +2293,9 @@ router.post('/listoffer', rutasProtegidas, [
     "status": "200",
     "data": {
         "idoffer": 7,
+        "iduseroffer": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
         "statusoffer": 7,
-        "idSala": "949bdc81078b49cd604b6622ddd762054ca8963a",
+        "idSala": null,
         "idproduct": 1,
         "namepublication": "Estufa de 4 hornillas",
         "img": [
@@ -2540,6 +2545,7 @@ router.post('/listmyoffer', rutasProtegidas, [
  *
  *
  * @apiParam {int} idOffer required.
+ * @apiParam {int} idUser required.
  * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
  * 
  * 
@@ -2572,6 +2578,7 @@ router.post('/listmyoffer', rutasProtegidas, [
 //CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
 router.put('/changestatusoffer', rutasProtegidas, [
     check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
     check('FlagStatusOffer', 'El FlagStatusOffer es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     

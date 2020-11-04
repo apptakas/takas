@@ -133,7 +133,7 @@ OffersModel.CalculoValorOferta = (idOferta, callback) => {
                             'error': err
                         })
                     } else {
-                        console.log(result);
+                        //console.log(result);
                         resolve({
                             'result': result
                         })
@@ -284,6 +284,7 @@ OffersModel.ListItemsOffers = (element) => {
                 //console.log(sala);
                 resolve({                    
                     "idoffer": element.id,
+                    "iduseroffer": element.iduser,
                     "statusoffer": element.status,
                     "idSala": idSala,
                     "idproduct": element.idproduct,
@@ -312,7 +313,7 @@ OffersModel.DetailsOffer = (OfferData,callback) => {
         if (pool) {
             //let ListItemsOffer={};
             pool.query(
-                'SELECT o.id,o.dateoffers,o.idproduct,p.name as namePublication,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue,p.marketvalue as ValorPublication FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?',[
+                'SELECT o.id,o.iduser,o.dateoffers,o.idproduct,p.name as namePublication,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue,p.marketvalue as ValorPublication FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?',[
                     OfferData.id,
                 OfferData.publication],
                 async(err, result) => {
@@ -459,6 +460,12 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             let FindDatOffer={};
+            let idUserPublication={};
+            let idUserOferta={};
+            let statusOffer=OfferData.status;
+            let idOferta=OfferData.id;
+            let idUser=OfferData.idUser;
+            let respCrearPush={};
             pool.query(
                 'UPDATE  offers SET  status= ? WHERE id= ?',[
                     OfferData.status,
@@ -471,9 +478,46 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                             'error': err
                         })
                     } else { 
-                        if(FlagStatusOffer==2) {
+                       
                             //console.log("prueba");
+                            /////**********creamos notificación y preparamos datos para notificación push************//////////////
+                            
+                            //idUserPublication= await UsersModel.DataUserPublication(idrelation);
+                            let TypeNotification=2;
+
+                            //TOMAMOS DATOS DE LA OFERTA
+                            idUserOferta= await UsersModel.DataUserOferta(idOferta);
+                            //CALCULAMOS VALOR DE LA OFERTA
+                            ValorOferta= await OffersModel.CalculoValorOferta(idOferta);
+                            //console.log(idUserOferta);
+                            //console.log(ValorOferta);
+                            //ID DE LA PUBLICACIÓN EN RELACIÓN 
+                            let idrelation=idUserOferta.idproduct;
+                            //console.log(idUserOferta.idproduct);
+                            //DATOS DE LA PUBICACIÓN
+                            idUserPublication= await UsersModel.DataUserPublication(idrelation);
+                            //DATOS EN GENERAL PARA MENSAJES
+                            //ARMAMOS EL MENSAJE
+                            let CalValorOferta=ValorOferta.result[0].cvalorOferta;
+                            let UserPublication=idUserPublication.result[0].UserPublication;
+                            let tokenpush=idUserPublication.result[0].tokenpush;
+                            let fullname=idUserPublication.result[0].NameUser;
+                            let nameProducto=idUserPublication.result[0].nameProducto;
+                            let marketvalue=idUserPublication.result[0].marketvalue;
+                            let titulo="";
+                            let detalles="";
+
+                        if(FlagStatusOffer==2) {                        
+                            
+                            if(statusOffer==7){
+                                titulo="POSIBLE TAKASTEO!";
+                                detalles="¡Falta sólo un paso "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido Aceptada, estamos y habilitamos un chat para que acuerden los últimos detalles antes del match";
+                            }
+                            respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);  
+                            //console.log(respCrearPush);
+                            ///////////////////////////////////////////
                             FindDatOffer=await OffersModel.FindDatOffer(OfferData);
+                           
                             //console.log(FindDatOffer);
                             //console.log(FindDatOffer.error);
                             if(FindDatOffer.error){
@@ -482,11 +526,29 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                                 })
                             }
 
-                        } 
+                        } // if si es aceptada la oferta
+                        //SI LA OFERTA ES RECHAZADA
+                        if(FlagStatusOffer==1) {
+
+                            if(statusOffer==8){
+                                titulo="Oferta rechazada, mejor suete a la proxima!";
+                                detalles="¡No te preocupes "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido rechazada, puedes intentar con otros productos deinterés para el dueño de la publicación";
+                            }
+                            respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);
+
+                        }
                                              
                         resolve({
                             'result': result,
-                            'sala':FindDatOffer.idSala
+                            'sala':FindDatOffer.idSala,
+                            'idNotificacion':respCrearPush.insertId,
+                            'TypeNotification':TypeNotification,
+                            'UserPublication':UserPublication,
+                            'idOferta':idOferta,
+                            'idrelation':idrelation,
+                            'tokenpush':tokenpush,
+                            'titulo':titulo,
+                            'detalles':detalles
                         })                        
                     }
 
@@ -520,7 +582,7 @@ OffersModel.FindDatOffer = (OfferData,callback) => {
                         })
                     } else { 
                         IdSAla=sha1(result[0].userOffer+result[0].userPublication+result[0].idPublication+hoy);
-                        // console.log("IdSAla");
+                        console.log("IdSAla");
                         // console.log(IdSAla);
                         // console.log(result[0].userOffer);
                         // console.log(result[0].userPublication);

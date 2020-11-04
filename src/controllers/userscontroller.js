@@ -1013,9 +1013,10 @@ userController.ListProductos = async (req) => {
 userController.findProductos = async (req) => {
     try {
         
+          let IdUserProduct=req.IdUserProduct;
           let nameProduct=req.nameProduct;
         //console.log(userData.password);
-        let response = await Product.findProductos(nameProduct);
+        let response = await Product.findProductos(nameProduct,IdUserProduct);
 
        console.log(response);
 
@@ -1100,7 +1101,9 @@ userController.ListProductSubCategory = async (req) => {
 userController.DetailsProduct = async (req) => {
     try {
         const ProductData = {
-            id: req.IdProduct
+            id: req.IdProduct,
+            iduser: req.IdUserProduct
+            
         };
         //console.log(userData.password);
         let response = await Product.DetailsProduct(ProductData);
@@ -1799,11 +1802,14 @@ userController.ChangeStatusOffer = async (req) => {
         let OfferData ={};
        // console.log(req.typeQuestion);
             let statusOffer=23;//ODERTA CANCELADA
+            let TitleNoti="cancelado una oferta";
             if(req.FlagStatusOffer==1){
                 statusOffer=8;// OFERTA RECHAZADA
+                let TitleNoti="Han rechazado una oferta";
             }
             if(req.FlagStatusOffer==2){
                 statusOffer=7;// OFERTA ACEPTADA
+                let TitleNoti="Han Aceptado una oferta";
                 match=true;
                 //let response2 =  Offer.FindDatOffer(OfferData);
                 //console.log(response2);
@@ -1811,6 +1817,7 @@ userController.ChangeStatusOffer = async (req) => {
 
             OfferData = {
                 id: req.idOffer,
+                idUser: req.idUser,
                 status:statusOffer
             };
        
@@ -1835,7 +1842,7 @@ userController.ChangeStatusOffer = async (req) => {
                 status: '200',
                 match:match,
                 sala:sala,
-                msg: 'Cambio de estatus de una oferta ejecutdos exitosamente'
+                msg: 'Cambio de estatus de una oferta ejecutdo exitosamente'
                 //data: response
             }
         } else {
@@ -1847,6 +1854,27 @@ userController.ChangeStatusOffer = async (req) => {
                 msg: 'Error al intentar cambiar el estatus de una Oferta'
             }
         }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+      notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
         //validar si esta llegado vacio
         return { status: 'ok', data: data };
     } catch (e) {

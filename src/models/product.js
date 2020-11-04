@@ -345,7 +345,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 ///
 
 ////BURCAR PUBLICACUONES SEGÚN NOMBRE DEL ARTÍCULO
-ProductModel.findProductos = (nameProduct) => {
+ProductModel.findProductos = (nameProduct,IdUserProduct) => {
     //let resultado = {};
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+ProductData.status);
     return new Promise((resolve, reject) => {
@@ -353,7 +353,7 @@ ProductModel.findProductos = (nameProduct) => {
 
             let armaresult={};
             pool.query(
-                "SELECT * FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE NAME LIKE '%"+nameProduct+"%' AND STATUS=1",
+                "SELECT * FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE NAME LIKE '%"+nameProduct+"%' AND STATUS=1 AND iduser='"+IdUserProduct+"'",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -581,7 +581,7 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT id as idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id,
+                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id+" AND iduser='"+ProductData.iduser+"'",
                 async(err, result) => {
                     //console.log(result);
                    
