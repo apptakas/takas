@@ -581,7 +581,7 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id+" AND iduser='",
+                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id,
                 async(err, result) => {
                     //console.log(result);
                    
