@@ -499,9 +499,10 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                             //DATOS EN GENERAL PARA MENSAJES
                             //ARMAMOS EL MENSAJE
                             let CalValorOferta=ValorOferta.result[0].cvalorOferta;
-                            let UserPublication=idUserPublication.result[0].UserPublication;
-                            let tokenpush=idUserPublication.result[0].tokenpush;
-                            let fullname=idUserPublication.result[0].NameUser;
+                            //let UserPublication=idUserPublication.result[0].UserPublication;
+                            let UserPublication=idUserOferta.result[0].UserOferta;
+                            let tokenpush=idUserOferta.result[0].tokenpush;
+                            let fullname=idUserOferta.result[0].NameUser;
                             let nameProducto=idUserPublication.result[0].nameProducto;
                             let marketvalue=idUserPublication.result[0].marketvalue;
                             let titulo="";

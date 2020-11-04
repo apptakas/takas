@@ -273,7 +273,7 @@ userModel.DataUserOferta= (idOferta) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT o.idproduct,u.id AS UserPublication,u.tokenpush,u.email, u.fullname AS NameUser FROM offers AS o INNER JOIN users AS u ON u.id=o.iduser WHERE o.id='+idOferta,
+                'SELECT o.idproduct,u.id AS UserOferta,u.tokenpush,u.email, u.fullname AS NameUser FROM offers AS o INNER JOIN users AS u ON u.id=o.iduser WHERE o.id='+idOferta,
                 (err, result) => {
                     console.log(err);
                     if (err) {
