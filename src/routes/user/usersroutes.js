@@ -2853,6 +2853,67 @@ router.put('/closechatroom', rutasProtegidas, [
     
     }) 
 
+    /**
+ * @api {put} /user/matchoffer 4 matchoffer
+ * @apiName matchoffer - Match de la oferta
+ * @apiGroup Chatrooms
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idSala required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Chatrooms.
+ * @apiSuccess {int} status 200 of the Chatrooms.
+ * @apiSuccess {string} msg   of the Chatrooms.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "takasteo": false,
+    "msg": "Cambio de estatus de la sala de chat ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Chatrooms was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
+router.put('/matchoffer', rutasProtegidas, [
+    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.CloseChatRoom(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+    
+
 
      /**
  * @api {post} /user/listnotifications 1 listnotifications
