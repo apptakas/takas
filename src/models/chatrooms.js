@@ -618,7 +618,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                                 id: result[0].id,
                                 status:25
                             };
-                            //let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
+                            let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
 
                             titulo="¡FELICIADES TIENES UN TAKASTEO!";
                             
