@@ -2706,11 +2706,12 @@ router.post('/listchatroomstatus', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
     "status": "200",
     "data": {
         "idSala": "13cd8cceaa9b25a4cfbf364c585f89639ebd1aae",
+        "status": 24,
         "datecreated": "03/11/2020",
         "idPublicacion": 3,
         "namePublication": "Reloj Alarma",

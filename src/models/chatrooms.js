@@ -40,7 +40,7 @@ chatroomsModel.listDataChatRoom = (idSala,idUser) => {
      if (pool) {
         let armaresult={};
          pool.query(
-             'SELECT cr.id AS idSala,cr.iduserpublication,cr.iduseroffer,cr.matchpublication,cr.matchoffer,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
+             'SELECT cr.id AS idSala,cr.status,cr.iduserpublication,cr.iduseroffer,cr.matchpublication,cr.matchoffer,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
@@ -153,6 +153,7 @@ chatroomsModel.armaresult = (result) => {
 
                 arr.push({
                     "idSala":element.idSala,
+                    "status":element.status,
                     "datecreated":regis,
                     "idPublicacion": element.idpubliction,                    
                     "namePublication": element.namePublication,
