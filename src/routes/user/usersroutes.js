@@ -2695,6 +2695,7 @@ router.post('/listchatroomstatus', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
+ * @apiParam {varchar} idUser required.
  * @apiParam {varchar} idSalaChat required.
  * 
  * 
@@ -2708,52 +2709,34 @@ router.post('/listchatroomstatus', rutasProtegidas, [
  *     {
     "success": true,
     "status": "200",
+    "isUserPubli": true,
+    "match": 3,
     "data": {
-        "idSala": "54119399a71cf6a3440db7f0f1c55bc1318e1917",
-        "datecreated": "02/11/2020",
-        "idPublicacion": 5,
-        "namePublication": "Camisas de Among Us",
-        "ValorPublication": "50000.0000",
-        "Userpublication": "EVln0Vj6DNOtTXQVS2fN9P68Gl13",
-        "nameUserPublication": "ronny",
-        "imgUserPublication": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499",
-        "idoferta": 8,
+        "idSala": "13cd8cceaa9b25a4cfbf364c585f89639ebd1aae",
+        "datecreated": "03/11/2020",
+        "idPublicacion": 3,
+        "namePublication": "Reloj Alarma",
+        "ValorPublication": "12000.0000",
+        "Userpublication": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
+        "nameUserPublication": "Anailys Rodríguez",
+        "imgUserPublication": null,
+        "idoferta": 180,
+        "iduseroferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
         "UserOferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
-        "nameUserOferta": "prueba nombre ",
-        "imgUserOferta": null,
+        "nameUserOferta": "Ana",
+        "imgUserOferta": "https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d",
         "PreferencesPublicacion": [
-            1,
-            2
+            2,
+            1
         ],
-        "aFavor": false,
-        "Valorferta": "272000.0000",
-        "dieferencia": "222000.0000",
+        "aFavor": true,
+        "Valorferta": "10000.0000",
+        "dieferencia": "2000.0000",
         "ItemOfer": [
-            {
-                "idpublication": 1,
-                "nameproduct": "Estufa de 4 hornillas",
-                "status": 1,
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722",
-                "marketvalue": "200000.0000"
-            },
-            {
-                "idpublication": 3,
-                "nameproduct": "Reloj Alarma",
-                "status": 1,
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A34%3A55.174523.jpg?alt=media&token=765ca040-df1f-4816-bdc0-a0f72403e113",
-                "marketvalue": "12000.0000"
-            },
-            {
-                "idpublication": 2,
-                "nameproduct": "Disfraz de unicornio",
-                "status": 1,
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A33%3A28.944193.jpg?alt=media&token=649bd9f3-0007-4b82-a0a9-71dfe3e6995b",
-                "marketvalue": "50000.0000"
-            },
             {
                 "idpublication": 4,
                 "nameproduct": "Blusas ",
-                "status": 1,
+                "status": 4,
                 "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A36%3A46.808593.jpg?alt=media&token=44c54278-2aae-451d-a307-d2f821b3286c",
                 "marketvalue": "10000.0000"
             }
@@ -2774,6 +2757,7 @@ router.post('/listchatroomstatus', rutasProtegidas, [
  **/
 //LISTAR LOS DATOS DE LA SALA DE CHAT 
 router.post('/listdatachatroom', rutasProtegidas, [
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
     check('idSalaChat', 'El idSalaChat es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
@@ -2879,6 +2863,10 @@ router.put('/closechatroom', rutasProtegidas, [
  *    {
     "success": true,
     "status": "200",
+    "idNotificacion": 79,
+    "idOferta": 180,
+    "TypeNotification": 2,
+    "UserPublication": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
     "takasteo": true,
     "msg": "¡TAKASTEO EXITOSO!"
 }
@@ -2895,7 +2883,7 @@ router.put('/closechatroom', rutasProtegidas, [
  **/
 
 //CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
-router.put('/matchofferchatroom', rutasProtegidas, [
+router.post('/matchofferchatroom', rutasProtegidas, [
     check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
     check('idSala', 'El idSala es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {

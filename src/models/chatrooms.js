@@ -35,12 +35,12 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
 
 
 //listDataChatRoom - Listar toda la información de la sala de chat
-chatroomsModel.listDataChatRoom = (idSala,callback) => {
+chatroomsModel.listDataChatRoom = (idSala,idUser) => {
     return new Promise((resolve, reject) => {
      if (pool) {
         let armaresult={};
          pool.query(
-             'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
+             'SELECT cr.id AS idSala,cr.iduserpublication,cr.iduseroffer,cr.matchpublication,cr.matchoffer,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
@@ -50,8 +50,59 @@ chatroomsModel.listDataChatRoom = (idSala,callback) => {
                      })
                  } else {
                     armaresult = await chatroomsModel.armaresult(result);  
+
+                    //console.log(element);
+                let isUserPubli=false;
+                let match=0;
+                let matchpublication=result[0].matchpublication;
+                let matchoffer=result[0].matchoffer;
+
+                if(result[0].iduserpublication==idUser){
+                    isUserPubli=true;
+                }
+                if(result[0].iduseroffer==idUser){
+                    isUserPubli=false;
+                }
+                    //NINGUN USUARIO HA HECHO MATCH
+                    if(matchpublication!=0 && matchoffer!=0){
+                        match=0;
+                    }
+                    //LOS DOS USUARIOS HAN HECHO MATCH
+                    if(matchpublication==1 && matchoffer==1){
+                        match=3;
+                    }
+                    
+                    if(isUserPubli==true){
+                        if(matchpublication==1 && matchoffer!=1){
+                            match=2; //EL USUARIO HIZO MATCH
+                        }
+                        else{
+                            if(matchoffer!=1 && matchoffer==1){
+                                match=3;//EL OTRO USUARIO HIZO MATCH
+                            }
+                        }
+                    }
+                    else{
+                        if(matchpublication!=1 && matchoffer==1){
+                            match=2; //EL USUARIO HIZO MATCH
+                        }
+                        else{
+                            if(matchoffer==1 && matchoffer!=1){
+                                match=3;//EL OTRO USUARIO HIZO MATCH
+                            }
+                        }
+                    }
+                    //match=false;
+
+                // console.log("match");
+                // console.log(match);
+                // console.log("match");
+
+                 
                      resolve({
-                         'result': armaresult
+                         'result': armaresult,
+                         'isUserPubli':isUserPubli,
+                         'match':match
                      })
                  }
 
@@ -94,6 +145,10 @@ chatroomsModel.armaresult = (result) => {
                 }else{
                     let nuevo=false;
                 }
+
+                  
+
+
                 arr.push({
                     "idSala":element.idSala,
                     "datecreated":regis,
@@ -356,8 +411,8 @@ chatroomsModel.ListItemsOffers = (element,ValorPublication) => {
                         'error': err2
                     })
                 } else { 
-                 console.log(result2); 
-                 console.log(result2.length);
+                //  console.log(result2); 
+                //  console.log(result2.length);
                  let ListItemsOffers= []; 
                  let idItems=0;
                 if(result2.length>0){
@@ -387,13 +442,13 @@ chatroomsModel.ListItemsOffers = (element,ValorPublication) => {
                     }
                     
                 }; 
-                console.log("result2");
-                console.log(result2);
+                // console.log("result2");
+                // console.log(result2);
 
                 //console.log(ListItemsOffers);
                 detalleProduct = await ProductModel.armaresult(result2);  
-                console.log("detalleProduct");
-                console.log(detalleProduct);
+                // console.log("detalleProduct");
+                // console.log(detalleProduct);
                 resolve({ 
                     "aFavor":Afavor,
                     "Valorferta":SumItemsOffer,
@@ -492,6 +547,8 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         })
                     } else {
                         //console.log(result);
+                        let TypeNotification=2;
+                        let idrelation=result[0].idpubliction;
 
                         let idOferta=result[0].idoffer;
 
@@ -512,7 +569,11 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let tokenPush="";
                         let userNotification="";
                         let iduserNoti="";
-                            
+                        let NameUser="";
+                        //DATOS DE LA PUBLICACIÓN    
+                        let  idUserPublication= await Users.DataUserPublication(idrelation);
+                        let nameProducto=idUserPublication.result[0].nameProducto;
+                        let UserPublication=idUserPublication.result[0].UserPublication;
 
                         // VERIFICAR QUE LOS DOS USUARIOS ESTEN DE ACUERO - CONFIRMAR MATCH
                         if(isUserPubli==true){
@@ -523,12 +584,11 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                             }
 
                             let  idUserOferta= await Users.DataUserOferta(idOferta);
-                            console.log(idUserOferta.result[0]);
+                            //console.log(idUserOferta.result[0]);
                             tokenPush=idUserOferta.result[0].tokenpush;
-                            userNotification=idUserOferta.result[0].NameUser;
+                            userNotification=idUserOferta.result[0].UserOferta;
+                            NameUser=idUserOferta.result[0].NameUser;
                             iduserNoti=idUserOferta.result[0].UserOferta;
-                            //console.log(tokenPush);
-                            //console.log(userNotification);
 
                         }else{
                             //VERIFICAMOS DE EL USUARIODE LA PUBLICACIÓN TA HALLA HECHO UN MATCH O SI ESPERAMOS LA CONFIRMACIÓN
@@ -536,6 +596,13 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                                 //CONFIRMADO POR EL USUARIO DE LA PUBLICACIÓN
                                 confirMatch=true;
                             }
+
+                           
+                            //console.log(idUserPublication.result[0]);
+                            tokenPush=idUserPublication.result[0].tokenpush;
+                            userNotification=idUserPublication.result[0].UserPublication;
+                            NameUser=idUserPublication.result[0].NameUser;
+                            iduserNoti=idUserPublication.result[0].UserPublication;
                         }
 
                         if(confirMatch==true){
@@ -549,29 +616,45 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                                 id: result[0].id,
                                 status:25
                             };
-                            let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
+                            //let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
 
-                            titulo="¡FELICIADES TIENE UN TAKASTEO!";
-                            UserNotification="";
+                            titulo="¡FELICIADES TIENES UN TAKASTEO!";
                             
-                            detalles="EN TAKAS, no alegra en Takasteo de producto << >>";
+                            detalles="En TAKAS, "+NameUser+" nos alegra el Takasteo del  producto <<"+nameProducto+">>";
 
                         }else
                         {
                             MsgMatch="¡ESPARAMOS LA CONFIRMACIÓN DEL MATCH PARA TAKASTEAR!";
+
+                            if(isUserPubli==true){
+                                titulo="ESTÁS A UN PASO PARA TAKASTEO!";                            
+                                detalles=NameUser+", la publicación  <<"+nameProducto+">>, el producto que deseabas espera sólo por ti para ser takasteado ";
+                            }else{
+
+                                titulo="ESTÁS A UN PASO PARA TAKASTEO!";                            
+                                detalles=NameUser+", Tú publicación <<"+nameProducto+">> espera sólo por ti para ser takasteado ";
+                            }
                             
                         }
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
-                        let TypeNotification=2;
-                        let idrelation=result[0].idpubliction;
-                        let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserNotification,titulo,detalles,idOferta);  
+                        
+                        let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,userNotification,titulo,detalles,idOferta);  
                         //console.log(respCrearPush);
+                        //console.log(respCrearPush.result.insertId);
                         ///////////////////////////////////////////
                                                 
                         resolve({
                             'result': result[0],
                             'isUserPubli':isUserPubli,
                             'confirMatch':confirMatch,
+                            'tokenPush':tokenPush,
+                            'titulo':titulo,
+                            'detalles':detalles,
+                            'idNotificacion':respCrearPush.result.insertId,
+                            'idOferta':idOferta,
+                            'TypeNotification':TypeNotification,
+                            'UserPublication':UserPublication,
+                            'idrelation':idrelation,
                             'MsgMatch':MsgMatch
                         })
 

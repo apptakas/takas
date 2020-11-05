@@ -2032,6 +2032,10 @@ userController.MatchOfferChatRoom = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                idNotificacion:response.idNotificacion,
+                idOferta:response.idOferta,
+                TypeNotification:response.TypeNotification,
+                UserPublication:response.UserPublication,
                 takasteo:response.confirMatch,
                 msg: response.MsgMatch
                 //data: response
@@ -2063,7 +2067,8 @@ userController.MatchOfferChatRoom = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-      //notifications(token,titulo,detalle,datanoti);
+         console.log(datanoti);
+     // notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
 
@@ -2082,11 +2087,12 @@ userController.listDataChatRoom = async (req) => {
     try {
         
             let idSala= req.idSalaChat;
+            let idUser=req.idUser;
        
         //console.log(userData.password);
-        let response = await ChatRooms.listDataChatRoom(idSala);
+        let response = await ChatRooms.listDataChatRoom(idSala,idUser);
 
-       console.log(response);
+       //console.log(response);
 
         let data = {};
         if (response && response.result) {
@@ -2096,6 +2102,8 @@ userController.listDataChatRoom = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                isUserPubli:response.isUserPubli,
+                match:response.match,
                 data: response.result[0],
                 msg: 'Data completa de la sala de chat'
                 //data: response
