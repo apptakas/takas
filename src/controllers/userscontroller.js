@@ -1983,6 +1983,100 @@ userController.CloseChatRoom = async (req) => {
 };
 
 
+// TAKASTEAR : 
+///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+// VERIFICAR QUE LOS DOS USUARIOS ESTEN DE ACUERO
+// CAMBIAR DE ESTATUS A LA SALA - CERRARLA
+// CAMBIAR DE ESTATUS LA PUBLICACIÓN
+//CAMBIAR DE ESTATUS LOS ITEMS DE LA OFERTA (LA PUBLICACIONES DE CONFORMAN LA OFERTA)
+userController.MatchOfferChatRoom = async (req) => {
+    try {
+        let takasteo=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let status=25//SALA ACTIVA = 24 SALA CERRADA = 25
+
+            ChatRoomData = {
+                id: req.idSala,
+                idUser:req.idUser,
+                status:status
+            };
+       
+        //console.log(OfferData);
+
+        //let response = await Offer.FindDatOffer(OfferData);
+        let isUserPubli=false; //si es usasuario de la publicación
+        let pertenece =false; 
+        let confirMatch =false; 
+        let MsgMatch="";
+        let titulo2="";
+        let UserNotification2="";
+        let detalles2="";
+
+        ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+        let response=await ChatRooms.MatchOfferChatRoom(ChatRoomData,isUserPubli,confirMatch,MsgMatch,titulo2,UserNotification2,detalles2);
+        //console.log(quien.result);        
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            
+            data = {
+                success: true,
+                status: '200',
+                takasteo:response.confirMatch,
+                msg: response.MsgMatch
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar hacer mach en la sala de chat'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+      //notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 //Listar los datos de la sala de chat- TAKASTEAR 
 userController.listDataChatRoom = async (req) => {
     try {

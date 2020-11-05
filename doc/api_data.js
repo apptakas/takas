@@ -367,6 +367,103 @@ define({ "api": [
     "groupTitle": "Chatrooms"
   },
   {
+    "type": "put",
+    "url": "/user/matchofferchatroom",
+    "title": "4 matchofferchatroom",
+    "name": "matchofferchatroom_-_Match_de_la_oferta_en_la_sala_de_chat",
+    "group": "Chatrooms",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idSala",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Chatrooms.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"takasteo\": true,\n    \"msg\": \"¡TAKASTEO EXITOSO!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Chatrooms was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Chatrooms"
+  },
+  {
     "type": "post",
     "url": "/user/listcities",
     "title": "1 listcities",

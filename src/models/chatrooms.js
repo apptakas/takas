@@ -1,6 +1,7 @@
 const pool = require('../config/database');
 const ProductModel = require('../models/product.js');
-const OffersModel = require('../models/offers.js');
+const Users = require('../models/users.js');
+const notificationModel = require('../models/notifications.js');
 
 const date = require('date-and-time');
 
@@ -437,5 +438,188 @@ chatroomsModel.CloseChatRoom = (ChatRoomData) => {
     })
 };
 
+
+
+//CAMBIAR ESTATUS SALA
+// chatroomsModel.MatchOfferChatRoom = (ChatRoomData) => {
+//     //let resultado = {};
+//     return new Promise((resolve, reject) => {
+//         if (pool) {
+//             //let FindDatOffer={};
+//             pool.query(
+//                 'UPDATE  chatrooms SET  status= ? WHERE id= ?',[
+//                     ChatRoomData.status,
+//                     ChatRoomData.id
+//                 ],
+//                 async(err, result) => {
+//                    // console.log(result);
+//                     if (err) {
+//                         resolve({
+//                             'error': err
+//                         })
+//                     } else {                         
+                                             
+//                         resolve({
+//                             'result': result
+//                         })                        
+//                     }
+
+//                 }
+//             )
+//             //return resultado;
+//         }
+//     })
+// };
+
+// TAKASTEAR : 
+// VERIFICAR QUE LOS DOS USUARIOS ESTEN DE ACUERO
+// CAMBIAR DE ESTATUS A LA SALA - CERRARLA
+// CAMBIAR DE ESTATUS LA PUBLICACIÓN
+//CAMBIAR DE ESTATUS LOS ITEMS DE LA OFERTA (LA PUBLICACIONES DE CONFORMAN LA OFERTA)
+///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatch,titulo,UserNotification,detalles) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            //let titulo="";
+            
+            pool.query(
+                'SELECT * FROM chatrooms WHERE (iduseroffer="'+ChatRoomData.idUser+'" OR iduserpublication="'+ChatRoomData.idUser+'") AND id="'+ChatRoomData.id+'" AND STATUS=24',
+                async(err, result) => {
+                    //console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        //console.log(result);
+
+                        let idOferta=result[0].idoffer;
+
+                        if(result[0].iduserpublication==ChatRoomData.idUser){
+                            isUserPubli=true;
+                            pertenece=true;
+                        }
+
+                        if(result[0].iduseroffer==ChatRoomData.idUser){
+                            isUserPubli=false;
+                            pertenece=true;
+                        }
+                        //console.log(isUserPubli);
+
+                        //ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
+                        let response=await chatroomsModel.UpdateMatchChatRoom(ChatRoomData,isUserPubli,confirMatch,MsgMatch);
+                       
+                        let tokenPush="";
+                        let userNotification="";
+                        let iduserNoti="";
+                            
+
+                        // VERIFICAR QUE LOS DOS USUARIOS ESTEN DE ACUERO - CONFIRMAR MATCH
+                        if(isUserPubli==true){
+                            //VERIFICAMOS DE EL USUARIODE LA OFERTA TA HALLA HECHO UN MATCH O SI ESPERAMOS LA CONFIRMACIÓN
+                            if(result[0].matchoffer==true){
+                                //CONFIRMADO POR EL USUARIO DE LA OFERTA
+                                confirMatch=true;
+                            }
+
+                            let  idUserOferta= await Users.DataUserOferta(idOferta);
+                            console.log(idUserOferta.result[0]);
+                            tokenPush=idUserOferta.result[0].tokenpush;
+                            userNotification=idUserOferta.result[0].NameUser;
+                            iduserNoti=idUserOferta.result[0].UserOferta;
+                            //console.log(tokenPush);
+                            //console.log(userNotification);
+
+                        }else{
+                            //VERIFICAMOS DE EL USUARIODE LA PUBLICACIÓN TA HALLA HECHO UN MATCH O SI ESPERAMOS LA CONFIRMACIÓN
+                            if(result[0].matchpublication==true){
+                                //CONFIRMADO POR EL USUARIO DE LA PUBLICACIÓN
+                                confirMatch=true;
+                            }
+                        }
+
+                        if(confirMatch==true){
+                            MsgMatch="¡TAKASTEO EXITOSO!";
+                            // CAMBIAR DE ESTATUS LA PUBLICACIÓN
+                            let response2=await ProductModel.UpdateStatusPublication(result[0].idpubliction);
+                            //CAMBIAR DE ESTATUS LAS PUBLICACIONES DE LA OFERTA - ITEMS
+                            let response3=await ProductModel.UpdateStatusPublicationOffer(result[0].idoffer);
+                            // CAMBIAR DE ESTATUS A LA SALA - CERRARLA  
+                            let ChatRoomData = {
+                                id: result[0].id,
+                                status:25
+                            };
+                            let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
+
+                            titulo="¡FELICIADES TIENE UN TAKASTEO!";
+                            UserNotification="";
+                            
+                            detalles="EN TAKAS, no alegra en Takasteo de producto << >>";
+
+                        }else
+                        {
+                            MsgMatch="¡ESPARAMOS LA CONFIRMACIÓN DEL MATCH PARA TAKASTEAR!";
+                            
+                        }
+                        ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
+                        let TypeNotification=2;
+                        let idrelation=result[0].idpubliction;
+                        //let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserNotification,titulo,detalles,idOferta);  
+                        //console.log(respCrearPush);
+                        ///////////////////////////////////////////
+                                                
+                        resolve({
+                            'result': result[0],
+                            'isUserPubli':isUserPubli,
+                            'confirMatch':confirMatch,
+                            'MsgMatch':MsgMatch
+                        })
+
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
+//ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
+chatroomsModel.UpdateMatchChatRoom = (ChatRoomData,isUserPubli) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let FindDatOffer={};
+            let consulta="";
+            if(isUserPubli==true){
+                consulta="UPDATE  chatrooms SET  matchpublication=true WHERE id= ?";
+            }else{
+                consulta="UPDATE  chatrooms SET  matchoffer=true WHERE id= ?";
+            }
+            pool.query(
+                consulta,[
+                    ChatRoomData.id
+                ],
+                async(err, result) => {
+                   // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {                         
+                                             
+                        resolve({
+                            'result': result
+                        })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
 
 module.exports = chatroomsModel;

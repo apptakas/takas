@@ -604,6 +604,83 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
     })
 };
 
+//ACTUALIZAMOS STATUS DE LA PUBLICACIÓN
+ProductModel.UpdateStatusPublication = (idPubli) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let FindDatOffer={};
+            let  consulta="UPDATE  product SET  status=4 WHERE id="+idPubli;
+        
+            pool.query(
+                consulta,
+                async(err, result) => {
+                    //console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {                         
+                                             
+                        resolve({
+                            'result': result
+                        })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+//ACTUALIZAMOS STATUS DE LAS PUBLICACIONES DE UNA OFERTA
+ProductModel.UpdateStatusPublicationOffer = (idOffer) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let FindDatOffer={};
+            let  consulta="SELECT o.id, ops.idpublication FROM offers AS o  INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers WHERE o.id="+idOffer;
+        
+            pool.query(
+                consulta,
+                async(err, result) => {
+                    //console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {    
+                        ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+                        let response=await ProductModel.RecorridoPublicationOffer(result);                     
+                                             
+                        resolve({
+                            'result': result
+                        })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+//UPDATE ITEMS DE PUBLICACIONES QUE PERTENECEN A UNA OFERTA 
+ProductModel.RecorridoPublicationOffer = async(element) => {
+
+    if(element.length>0){
+        // console.log(SumItemsOffer);
+        for(var atr2 in element){
+            // "iduser": element[0].iduser,
+            let response=await ProductModel.UpdateStatusPublication(element[atr2].idpublication);               
+            
+        }; // fin for                    
+    }; //fin if
+
+};
+
+
 
 
 module.exports = ProductModel;

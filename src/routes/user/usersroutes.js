@@ -2854,8 +2854,8 @@ router.put('/closechatroom', rutasProtegidas, [
     }) 
 
     /**
- * @api {put} /user/matchoffer 4 matchoffer
- * @apiName matchoffer - Match de la oferta
+ * @api {put} /user/matchofferchatroom 4 matchofferchatroom
+ * @apiName matchofferchatroom - Match de la oferta en la sala de chat
  * @apiGroup Chatrooms
  * 
  * 
@@ -2865,6 +2865,7 @@ router.put('/closechatroom', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
+ * @apiParam {int} idUser required.
  * @apiParam {int} idSala required.
  * 
  * 
@@ -2878,8 +2879,8 @@ router.put('/closechatroom', rutasProtegidas, [
  *    {
     "success": true,
     "status": "200",
-    "takasteo": false,
-    "msg": "Cambio de estatus de la sala de chat ejecutdos exitosamente"
+    "takasteo": true,
+    "msg": "¡TAKASTEO EXITOSO!"
 }
  *
  * @apiError UserNotFound The id of the Chatrooms was not found.
@@ -2894,7 +2895,8 @@ router.put('/closechatroom', rutasProtegidas, [
  **/
 
 //CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
-router.put('/matchoffer', rutasProtegidas, [
+router.put('/matchofferchatroom', rutasProtegidas, [
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
     check('idSala', 'El idSala es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
@@ -2903,16 +2905,15 @@ router.put('/matchoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }        
-        let response = await userController.CloseChatRoom(req.body);
+        let response = await userController.MatchOfferChatRoom(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
         }
         //console.log(response);
-        return res.status(response.data.status).json(response.data)
-    
+        return res.status(response.data.status).json(response.data)    
     }) 
-    
+
 
 
      /**
