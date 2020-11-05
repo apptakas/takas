@@ -564,7 +564,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
                         let TypeNotification=2;
                         let idrelation=result[0].idpubliction;
-                        //let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserNotification,titulo,detalles,idOferta);  
+                        let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserNotification,titulo,detalles,idOferta);  
                         //console.log(respCrearPush);
                         ///////////////////////////////////////////
                                                 
