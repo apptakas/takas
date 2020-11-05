@@ -74,21 +74,21 @@ chatroomsModel.listDataChatRoom = (idSala,idUser) => {
                     
                     if(isUserPubli==true){
                         if(matchpublication==1 && matchoffer!=1){
-                            match=2; //EL USUARIO HIZO MATCH
+                            match=1; //EL USUARIO HIZO MATCH
                         }
                         else{
                             if(matchoffer!=1 && matchoffer==1){
-                                match=3;//EL OTRO USUARIO HIZO MATCH
+                                match=2;//EL OTRO USUARIO HIZO MATCH
                             }
                         }
                     }
                     else{
                         if(matchpublication!=1 && matchoffer==1){
-                            match=2; //EL USUARIO HIZO MATCH
+                            match=1; //EL USUARIO HIZO MATCH
                         }
                         else{
                             if(matchoffer==1 && matchoffer!=1){
-                                match=3;//EL OTRO USUARIO HIZO MATCH
+                                match=2;//EL OTRO USUARIO HIZO MATCH
                             }
                         }
                     }
