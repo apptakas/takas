@@ -98,11 +98,13 @@ chatroomsModel.listDataChatRoom = (idSala,idUser) => {
                 // console.log(match);
                 // console.log("match");
 
-                 
+                 //armaresult['isUserPubli']=isUserPubli;
+                 //armaresult['match']=match;
+                 armaresult[0]['isUserPubli'] = isUserPubli;
+                 armaresult[0]['match'] = match;
+                // console.log(armaresult);
                      resolve({
-                         'result': armaresult,
-                         'isUserPubli':isUserPubli,
-                         'match':match
+                         'result': armaresult
                      })
                  }
 
@@ -641,6 +643,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,userNotification,titulo,detalles,idOferta);  
                         //console.log(respCrearPush);
                         //console.log(respCrearPush.result.insertId);
+                        console.log(tokenPush);
                         ///////////////////////////////////////////
                                                 
                         resolve({

@@ -2051,7 +2051,8 @@ userController.MatchOfferChatRoom = async (req) => {
         }
 
         //////////ENVIAMOS NOTIFICACIÓN////////////
-        let token=response.tokenpush;
+        let token=response.tokenPush;
+        //console.log(token);
         let titulo=response.titulo;
         let detalle=response.detalles;
         let datanoti={
@@ -2068,7 +2069,7 @@ userController.MatchOfferChatRoom = async (req) => {
          };
         
          console.log(datanoti);
-     // notifications(token,titulo,detalle,datanoti);
+      notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
 

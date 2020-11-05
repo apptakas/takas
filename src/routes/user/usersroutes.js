@@ -2706,11 +2706,9 @@ router.post('/listchatroomstatus', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
+ *    {
     "success": true,
     "status": "200",
-    "isUserPubli": true,
-    "match": 3,
     "data": {
         "idSala": "13cd8cceaa9b25a4cfbf364c585f89639ebd1aae",
         "datecreated": "03/11/2020",
@@ -2740,7 +2738,9 @@ router.post('/listchatroomstatus', rutasProtegidas, [
                 "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A36%3A46.808593.jpg?alt=media&token=44c54278-2aae-451d-a307-d2f821b3286c",
                 "marketvalue": "10000.0000"
             }
-        ]
+        ],
+        "isUserPubli": true,
+        "match": 3
     },
     "msg": "Data completa de la sala de chat"
 }
