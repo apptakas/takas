@@ -603,6 +603,10 @@ userController.NewProduct = async (req) => {
 
             const PreferecesProduct = {};
             console.log(req.PreferecesProduct.length);
+            let ValidarPreferencer=false;
+            if(req.PreferecesProduct.length>1){
+                ValidarPreferencer=true;
+            }
             if(req.PreferecesProduct.length!=0){
                 for(var atr2 in req.PreferecesProduct){
                     PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
@@ -611,12 +615,19 @@ userController.NewProduct = async (req) => {
        
         let response ="";
         
-        if(req.ImagesProduct.length<=topeimg){
+        if(req.ImagesProduct.length<=topeimg && ValidarPreferencer==false){
              response = await Product.NewProduct(ProductData,PreferecesProduct,ImagesProduct);
         }else{
-             response ={
-                'error': "Ha superdo el límite de imagenes"
-            };
+            if(req.ImagesProduct.length<=topeimg){
+                response ={
+                    'error': "Ha superdo el límite de imagenes"
+                };
+            }
+            if(ValidarPreferencer==false){
+                response ={
+                    'error': "Ha superdo el límite de Preferencias, sólo se permite una"
+                };
+            }
         }
        // console.log(response);
 
