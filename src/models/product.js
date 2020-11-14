@@ -1,4 +1,5 @@
 const pool = require('../config/database');
+const keywords = require('../models/keywords.js');
 let ProductModel = {};
 const date = require('date-and-time');
 
@@ -77,6 +78,8 @@ ProductModel.NewProduct = (ProductData,PreferecesProduct,ImagesProduct,callback)
 //ListUsers  - obtenemos lista de usuarios segun el rol
 ProductModel.NewProductKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,callback) => {
     //let resultado = {};
+    console.log("KeyWordsProduct");
+    console.log(KeyWordsProduct);
     return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
@@ -202,19 +205,26 @@ ProductModel.ExistKeyWords = (KW,callback) => {
 
 
 //ListUsers  - obtenemos lista de usuarios segun el rol
-ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct) => {
+ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct) => {
     //let resultado = {};
+    // console.log("KeyWordsProduct");
+    // console.log(KeyWordsProduct);
     return new Promise((resolve, reject) => {
         if (pool) {
+            let createdkeywords={};
             pool.query(
                 'INSERT INTO product SET ?', ProductData,
-                (err, resut) => {
+                async(err, resut) => {
                     //console.log(resut);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
+                        // console.log("resut reg product");
+                        // console.log(resut.insertId);
+                        createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
+                        //console.log(createdkeywords);
                         if(ImagesProduct.length!=0){
                         for(var atr2 in ImagesProduct){  
                             pool.query(
@@ -229,6 +239,7 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct) => {
                                             'error': err
                                         })
                                     } else {
+                                         
                                         resolve({
                                             'result': resut
                                         })                                       
@@ -266,6 +277,34 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct) => {
                     
 
                     }//
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+//FindProductCKW  - Buscar productos
+ProductModel.FindProductCKW = (idUserProduct,idProduct) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                'SELECT * FROM product WHERE id=?', idProduct,
+                (err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut[0]
+                        })  
+                    }//fin if ImagesProduct.length!=0
+                      
 
                 }
             )

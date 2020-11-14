@@ -1788,6 +1788,11 @@ router.post('/newproductkw', rutasProtegidas,[
 
 })
 /////
+
+
+
+
+
  /**
  * @api {post} /user/newproductckw  8 newproductckw
  * @apiName  newproductckw - Registro De Producto con Características
@@ -1871,6 +1876,94 @@ router.post('/newproductckw', rutasProtegidas,[
         return res.status(500).json({ error: 'Error' })
     }
     console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+/////
+
+/**
+ * @api {post} /user/editproductckw  9 editproductckw
+ * @apiName  editproductckw - Editar Producto con Características
+ * @apiGroup Product
+ * 
+ *      
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ * 
+ * 
+ * @apiParam {varchar} iduserProduct required.
+ * @apiParam {varchar} idProduct required.
+ * @apiParam {varchar} nameProduct required.
+ * @apiParam {varchar} detailsProduct  unique required.
+ * @apiParam {smallint} typemoneyProduct   required.
+ * @apiParam {decimal} marketvalueProduct  required .
+ * @apiParam {int} subcategoryProduct  required .
+ * @apiParam {array} PreferecesProduct  required array de enteros .
+ * @apiParam {array} ImagesProduct  required arrays de varchar .
+ * @apiParam {array} KeyWordsProduct  optional array de varchar .
+ * @apiParam {int} UsePoduct  optional.
+ * @apiParam {int} SizePoduct  optional.
+ * @apiParam {int} WeightProduct  optional.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status":: "200",
+    "msg": "Producto registrado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "data": "Ha superdo el límite de imagenes",
+    "msg": "Error al registrar producto"
+}
+ *
+ *
+ **/
+
+//Crear newproduct
+router.post('/editproductckw', rutasProtegidas,[
+    check('iduserProduct', 'El iduserProduct es obligatorio').not().isEmpty().exists(),
+    check('idProduct', 'El idProduct     si un producto es nuo o usado es obligatorio').not().isEmpty().exists(),
+    check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
+    check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
+    check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
+    check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
+    check('subcategoryProduct', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
+    check('ImagesProduct', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
+], async (req, res) => {
+
+    /*,
+    check('PreferecesProduct', ' Las Preferencias son requerido aceptar términos y condisiones').not().isEmpty().exists(),
+    check('ImagesProduct', ' Es requerido aceptar términos y condisiones').not().isEmpty().exists() */
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.EditProductCKW(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
     return res.status(response.data.status).json(response.data)
 
 })

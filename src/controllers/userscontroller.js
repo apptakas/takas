@@ -762,27 +762,30 @@ userController.NewProductCKW = async (req) => {
 
             let now = new Date();
             let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+            //buscar fecha de creación del producto
+
            // console.log(now+" - "+hoy);
             let UsePoduct = null;
             if(req.UsePoduct!=null){               
                  UsePoduct= req.UsePoduct;  
-                 console.log("UsePoduct");
-                 console.log(UsePoduct);                
+                //  console.log("UsePoduct");
+                //  console.log(UsePoduct);                
             }
 
             let SizePoduct = null;
             if(req.SizePoduct!=null){               
                 SizePoduct= req.SizePoduct;  
-                console.log("SizePoduct");
-                console.log(SizePoduct);                
+                // console.log("SizePoduct");
+                // console.log(SizePoduct);                
             }
 
             let WeightProduct = null;
             if(req.WeightProduct!=null){
                 if(req.WeightProduct!=null){               
                     WeightProduct= req.WeightProduct;  
-                    console.log("WeightProduct");
-                    console.log(WeightProduct);                
+                    // console.log("WeightProduct");
+                    // console.log(WeightProduct);                
                 }
             }
             let ProductData = {
@@ -812,10 +815,173 @@ userController.NewProductCKW = async (req) => {
 
             const PreferecesProduct = {};
             //console.log(req.PreferecesProduct.length);
+            let valReferencia=false;
             if(req.PreferecesProduct.length!=0){
-                for(var atr2 in req.PreferecesProduct){
-                    PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
+                if(req.PreferecesProduct.length==1){
+                    for(var atr2 in req.PreferecesProduct){
+                        PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
+                    };
+                    valReferencia=true;
+                }
+            }
+
+            const topeKW=10;      
+            const KeyWordsProduct = {};
+            let lengthkw=0;
+            //console.log(req.ImagesProduct.length);
+            if(req.KeyWordsProduct!=null){
+                lengthkw=req.KeyWordsProduct.length;
+                if(req.KeyWordsProduct.length!=0){
+                    for(var atr1 in req.KeyWordsProduct){
+                        KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
+                    };
+                   // console.log(KeyWordsProduct);
+                }
+            }
+
+            
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            // console.log(topeKW);
+            // console.log(valReferencia);
+
+            let msgError="";
+            
+
+        let response ={};
+
+        // && lengthkw<=topeKW 
+
+        if(req.ImagesProduct.length<=topeimg && valReferencia==true){
+            response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct);
+            // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
+
+        }else{               
+            msgError = "Se ha superado el límite de imagenes , palabras claves ó preferencias";
+        }
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Producto registrado con éxito'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                //data: response.error,
+                data: msgError,
+                msg: 'Error al registrar producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+//Editar Producto (TAKASTEAR)
+userController.EditProductCKW = async (req) => {
+    //existe este usuario? 
+    try {
+
+            let now = new Date();
+            //fecha actual del servidor
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            let horaServidor=date.format(now, 'HH:mm:ss');
+
+            let rp = await Product.FindProductCKW(req.iduserProduct,req.idProduct);
+            //console.log(rp);
+            console.log(horaServidor);
+            let datepublication = new Date(rp.result.datepublication);
+            //console.log(rp.result.datepublication);
+            console.log(datepublication);
+            //fecha de creación de producto
+            let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+            //console.log(now);
+            //console.log(fechacp);
+
+            // const minutes_later = date.addMinutes(fechacp, 20);
+            // console.log(minutes_later);
+            //let Diferenciafechas=hoy-fechacp;
+            let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
+            //console.log(fechacp.diff(hoy, 'days')) ;
+            //console.log(Diferenciafechas);
+
+            //buscar fecha de creación del producto
+
+           // console.log(now+" - "+hoy);
+            let UsePoduct = null;
+            if(req.UsePoduct!=null){               
+                 UsePoduct= req.UsePoduct;  
+                //  console.log("UsePoduct");
+                //  console.log(UsePoduct);                
+            }
+
+            let SizePoduct = null;
+            if(req.SizePoduct!=null){               
+                SizePoduct= req.SizePoduct;  
+                // console.log("SizePoduct");
+                // console.log(SizePoduct);                
+            }
+
+            let WeightProduct = null;
+            if(req.WeightProduct!=null){
+                if(req.WeightProduct!=null){               
+                    WeightProduct= req.WeightProduct;  
+                    // console.log("WeightProduct");
+                    // console.log(WeightProduct);                
+                }
+            }
+            let ProductData = {
+                iduser: req.iduserProduct,
+                datepublication: hoy,
+                new: req.NewProduct,
+                condition:UsePoduct,
+                size: SizePoduct,
+                weight: WeightProduct,
+                name: req.nameProduct,
+                details: req.detailsProduct,
+                typemoney: req.typemoneyProduct,
+                marketvalue: req.marketvalueProduct,
+                subcategory:req.subcategoryProduct,
+                datecreated: hoy,
+                typepublication:1,
+                status:1
+            };
+            const topeimg=10;      
+            const ImagesProduct = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.ImagesProduct.length!=0){
+                for(var atr1 in req.ImagesProduct){
+                    ImagesProduct[atr1] = req.ImagesProduct[atr1];     
                 };
+            }
+
+            const PreferecesProduct = {};
+            //console.log(req.PreferecesProduct.length);
+            let valReferencia=false;
+            if(req.PreferecesProduct.length!=0){
+                if(req.PreferecesProduct.length==1){
+                    for(var atr2 in req.PreferecesProduct){
+                        PreferecesProduct[atr2] = req.PreferecesProduct[atr2]; 
+                    };
+                    valReferencia=true;
+                }
             }
 
             const topeKW=10;      
@@ -830,22 +996,36 @@ userController.NewProductCKW = async (req) => {
                     };
                     console.log(KeyWordsProduct);
                 }
+                
             }
 
             
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            // console.log(topeKW);
+            // console.log(valReferencia);
+
+            let msgError="";
             
 
-        let response ="";
-        
-        if(req.ImagesProduct.length<=topeimg && lengthkw<=topeKW){
-            //response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,UsePoduct,WeightProduct,SizePoduct);
-            response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
-        }else{
-             response ={
-                'error': "Ha superdo el límite de imagenes o palabras claves"
-            };
+        let response ={};
+
+        // && lengthkw<=topeKW 
+
+        if(req.ImagesProduct.length<=topeimg && valReferencia==true){
+            if(Diferenciafechas<=20){
+            //////response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,UsePoduct,WeightProduct,SizePoduct);
+            // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
+            //let rp = await Product.FindProductCKW(req.iduserProduct,req.idProduct);
+            }
+            else{
+                msgError = "Ha superado el límite de tiempo máximo disponible para editar";
+            }
+        }else{               
+            msgError = "Se ha superado el límite de imagenes , palabras claves ó preferencias";
         }
-       // console.log(response);
+        
+        //console.log(msgError);
 
         let data = {};
         if (response && response.result) {
@@ -855,17 +1035,17 @@ userController.NewProductCKW = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                msg: 'Producto registrado con éxito'
+                msg: 'Producto Editado  con éxito'
                 //data: response
             }
         } else {
-
             //console.log(response);
             data = {
                 success: false,
                 status: '500',
-                data: response.error,
-                msg: 'Error al registrar producto'
+                //data: response.error,
+                data: msgError,
+                msg: 'Error al Editar producto'
             }
         }
         //validar si esta llegado vacio
@@ -876,6 +1056,7 @@ userController.NewProductCKW = async (req) => {
     }
 
 };
+
 
 
 //Listar status de un producto
