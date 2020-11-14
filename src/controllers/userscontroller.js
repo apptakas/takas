@@ -683,7 +683,7 @@ userController.NewProductKW = async (req) => {
                 subcategory:req.subcategoryProduct,
                 datecreated: hoy,
                 typepublication:1,
-                status:1
+                status:3
             };
             const topeimg=10;      
             const ImagesProduct = {};
@@ -802,7 +802,7 @@ userController.NewProductCKW = async (req) => {
                 subcategory:req.subcategoryProduct,
                 datecreated: hoy,
                 typepublication:1,
-                status:1
+                status:3
             };
             const topeimg=10;      
             const ImagesProduct = {};
@@ -908,23 +908,11 @@ userController.EditProductCKW = async (req) => {
             //console.log(rp);
             console.log(horaServidor);
             let datepublication = new Date(rp.result.datepublication);
-            //console.log(rp.result.datepublication);
-            console.log(datepublication);
             //fecha de creación de producto
             let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
             //console.log(now);
-            //console.log(fechacp);
-
-            // const minutes_later = date.addMinutes(fechacp, 20);
-            // console.log(minutes_later);
-            //let Diferenciafechas=hoy-fechacp;
             let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
-            //console.log(fechacp.diff(hoy, 'days')) ;
-            //console.log(Diferenciafechas);
 
-            //buscar fecha de creación del producto
-
-           // console.log(now+" - "+hoy);
             let UsePoduct = null;
             if(req.UsePoduct!=null){               
                  UsePoduct= req.UsePoduct;  
@@ -961,7 +949,7 @@ userController.EditProductCKW = async (req) => {
                 subcategory:req.subcategoryProduct,
                 datecreated: hoy,
                 typepublication:1,
-                status:1
+                status:26
             };
             const topeimg=10;      
             const ImagesProduct = {};
@@ -1564,7 +1552,7 @@ userController.NewOffer = async (req) => {
                 observation: req.descriptionOffer,
                 dateoffers:hoy,
                 publication:1,
-                status:3,
+                status:6,
             };
         }if(req.typePublication==2){
             OfferData = {
@@ -1573,7 +1561,7 @@ userController.NewOffer = async (req) => {
                 observation: req.descriptionOffer,
                 dateoffers:hoy,
                 publication:2,
-                status:3,
+                status:6,
             };
         }if(req.typePublication==3){
             OfferData = {
@@ -1582,7 +1570,7 @@ userController.NewOffer = async (req) => {
                 observation: req.descriptionOffer,
                 dateoffers:hoy,
                 publication:3,
-                status:3,
+                status:6,
             };
         }
 
