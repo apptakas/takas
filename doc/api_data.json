@@ -1341,6 +1341,13 @@
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idFirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "typePublication",
@@ -3281,7 +3288,7 @@
     "groupTitle": "Questions"
   },
   {
-    "type": "get",
+    "type": "post",
     "url": "/user/listcharacteristicpublication",
     "title": "2 listcharacteristicpublication",
     "name": "listcharacteristicpublication_-_Listar_Caracter´sticas_de_una_publicación_según_bandera",
@@ -3968,6 +3975,96 @@
     "groupTitle": "User"
   },
   {
+    "type": "post",
+    "url": "/user/perfiluser",
+    "title": "7 perfiluser",
+    "name": "perfiluser_-_Perfil_de_un_usuario",
+    "group": "User",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{ \"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the User.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"Anailys Rodríguez\",\n        \"EmailUser\": \"anailysrodriguez@gmail.com\",\n        \"PhonenumberUser\": \"3174723818\",\n        \"DatecreatedUser\": \"07/09/20\",\n        \"Reputation\": 4.5\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the User was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar obtener perfil de usuario\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "User"
+  },
+  {
     "type": "put",
     "url": "/user/tokenpush",
     "title": "4 tokenpush",
@@ -4056,6 +4153,196 @@
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Categoría\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/user/updateperfil",
+    "title": "6 updateperfil",
+    "name": "updateperfil_-_Completar_o_actualizar_perfil_de_usuario_De_Usuario",
+    "group": "User",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>unique required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "imgUser",
+            "description": "<p>unique optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "codCity",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "fullnameUser",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "datebirthUser",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "phonenumberUser",
+            "description": "<p>unique optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "emailUser",
+            "description": "<p>unique  optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "passwordUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "tycUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "urlimgUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "countryUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "departmentUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "membershipsUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "dirUser",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "versionTYC",
+            "description": "<p>optional .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "versionApp",
+            "description": "<p>optional .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the User.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0\",\n    \"msg\": \"Usuario Registrado con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the User was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n            success: false,\n            status: '500',\n            msgerr: 'response.error.sqlMessage',\n            codeerr: 'response.error.code',\n            noerr: 'response.error.errno'\n    }",
           "type": "json"
         }
       ]

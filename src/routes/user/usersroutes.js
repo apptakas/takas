@@ -107,6 +107,81 @@ router.post('/newUser', [
 
 })
 
+/**
+ * @api {post} /user/updateperfil  6 updateperfil
+ * @apiName  updateperfil - Completar o actualizar perfil de usuario De Usuario
+ * @apiGroup User
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser unique required.
+ * @apiParam {varchar} imgUser unique optional.
+ * @apiParam {int} codCity  optional. 
+ * @apiParam {varchar} fullnameUser optional.
+ * @apiParam {varchar} datebirthUser optional.
+ * @apiParam {varchar} phonenumberUser  unique optional.
+ * @apiParam {varchar} emailUser  unique  optional.
+ * @apiParam {varchar} passwordUser  optional .
+ * @apiParam {varchar} tycUser  optional .
+ * @apiParam {varchar} urlimgUser  optional .
+ * @apiParam {varchar} countryUser  optional .
+ * @apiParam {varchar} departmentUser  optional .
+ * @apiParam {varchar} membershipsUser  optional .
+ * @apiParam {varchar} dirUser  optional .
+ * @apiParam {varchar} dirUser  optional .
+ * @apiParam {varchar} versionTYC  optional .
+ * @apiParam {varchar} versionApp  optional .
+ * 
+ *
+ * @apiSuccess {boolean} success of the User.
+ * @apiSuccess {int} status 200 of the User.
+ * @apiSuccess {string} msg   of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "success": true,
+    "status":: "200",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MTYzMjUsImV4cCI6MTYwMjAwMjcyNX0.KBsaWobyOo2_NRmrbhFDisMfvvD9oddNFwfK0D6imC0",
+    "msg": "Usuario Registrado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+                success: false,
+                status: '500',
+                msgerr: 'response.error.sqlMessage',
+                codeerr: 'response.error.code',
+                noerr: 'response.error.errno'
+        }
+ */
+//Completar perfilUser- 
+router.post('/updateperfil',rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.UpdatePerfil(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 router.get('/datos', rutasProtegidas, (req, res) => {
     const datos = [
@@ -246,6 +321,67 @@ router.post('/gautenticar', [
     return res.status(response.data.status).json(response.data)
 
 })
+
+
+/**
+ * @api {post} /user/perfiluser 7 perfiluser
+ * @apiName perfiluser - Perfil de un usuario
+ * @apiGroup User
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ *
+ * @apiParam {varchar}  idfirebaseUser  required.
+ * 
+ * @apiSuccess {boolean} success of the User.
+ * @apiSuccess {int} status 200 of the User.
+ * @apiSuccess {string} msg   of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": {
+        "NameUser": "Anailys Rodríguez",
+        "EmailUser": "anailysrodriguez@gmail.com",
+        "PhonenumberUser": "3174723818",
+        "DatecreatedUser": "07/09/20",
+        "Reputation": 4.5
+    },
+    "msg": "Perfil de Usuario"
+}
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar obtener perfil de usuario"
+}
+ */
+//PERFIL DE USUARIO
+router.post('/perfiluser', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebaseUser el obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+//console.log(req.body);
+    let response = await userController.PerfilUser(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
 
 
 /**
@@ -832,7 +968,7 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
 
 
 /**
- * @api {get} /user/listcharacteristicpublication 2 listcharacteristicpublication
+ * @api {post} /user/listcharacteristicpublication 2 listcharacteristicpublication
  * @apiName listcharacteristicpublication - Listar Caracter´sticas de una publicación según bandera
  * @apiGroup Status
  * 
@@ -2369,7 +2505,7 @@ router.post('/listoffer', rutasProtegidas, [
  *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
  *
  *
- * 
+ * @apiParam {varchar}  idFirebaseUser required.
  * @apiParam {int} typePublication required.
  * @apiParam {int} Int idOferta required.
  * 
@@ -2434,6 +2570,7 @@ router.post('/listoffer', rutasProtegidas, [
 
 //DETALLE DE LA OFERTA - PUBLICACIÓN
 router.post('/detailsoffer', rutasProtegidas, [
+    check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
     check('idOferta', 'El idOferta es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {

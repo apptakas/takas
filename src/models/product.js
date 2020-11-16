@@ -286,6 +286,88 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
 };
 
 
+////ListUsers  - obtenemos lista de usuarios segun el rol
+ProductModel.EditProductCKW = (ProductData,idproduct,PreferecesProduct,ImagesProduct,KeyWordsProduct) => {
+    let createdkeywords = {};
+    // console.log("KeyWordsProduct");
+    // console.log(KeyWordsProduct);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let createdkeywords={};
+            pool.query(
+                'Update product SET ? where id='+idproduct, ProductData,
+                async(err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        // console.log("resut reg product");
+                        // console.log(resut.insertId);
+                        createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,idproduct);
+                        //console.log(createdkeywords);
+                        if(ImagesProduct.length!=0){
+                        for(var atr2 in ImagesProduct){  
+                            pool.query(
+                                'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
+                                    ImagesProduct[atr2],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                         
+                                        resolve({
+                                            'result': resut
+                                        })                                       
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido imagenes
+                    }//fin if ImagesProduct.length!=0
+                    if(PreferecesProduct.length!=0){
+                        for(var atr3 in PreferecesProduct){  
+                            pool.query(
+                                'INSERT INTO preferences_product (preference,idproduct) value( ?, ?) ', [
+                                    PreferecesProduct[atr3],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'result': resut
+                                        })
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido Preferencias
+                    }//fin if PreferecesProduct.length!=0     
+                    
+
+                    }//
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
 //FindProductCKW  - Buscar productos
 ProductModel.FindProductCKW = (idUserProduct,idProduct) => {
     //let resultado = {};

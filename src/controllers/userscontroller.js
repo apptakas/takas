@@ -94,6 +94,84 @@ userController.newUser = async (req) => {
 
 };
 
+
+
+//Completar o actualizar perfil del Usuario
+userController.UpdatePerfil = async (req) => {
+    //existe este usuario? 
+    try {
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+        let idUser= req.idfirebaseUser;
+        const userData = {
+            idcity: req.codCity,
+            fullname: req.fullnameUser,
+            email: req.emailUser,
+            phonenumber: req.phonenumberUser,
+            imgurl: req.urlimgUser,
+            datebirth:req.datebirthUser,
+            role: 2,
+            password: sha1(req.passwordUser),
+            datecreated: hoy,
+            country:req.countryUser,
+            department:req.departmentUser,
+            memberships:req.membershipsUser,
+            address: req.dirUser,
+            tyc: req.tycUser,
+            versiontyc: req.versionTYC,
+            versionapp: req.versionApp
+        };
+        ///console.log(userData.password);
+        let response = await User.createUser(userData,idUser);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            const payload = {
+                ignoreExpiration: true
+            };
+
+            var token = jwt.sign(payload, config.llave, {
+                expiresIn: 60 * 60 * 720
+            });
+            // var refreshToken = randtoken.uid(256) ;
+            // refreshTokens[refreshToken] = {token: 'JWT ' + token, refreshToken: refreshToken};
+
+            // const token = jwt.sign(payload, config.llave, {
+            //     expiresIn: 60 * 60 * 720
+            // });
+            data = {
+                success: true,
+                status: '200',
+                token: token,
+                //refreshTokens: refreshTokens,
+                msg: 'Usuario Registrado con éxito'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msgerr: response.error.sqlMessage,
+                codeerr: response.error.code,
+                noerr: response.error.errno
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
 //Login 
 userController.Autenticar = async (req) => {
     //existe este usuario? 
@@ -225,6 +303,49 @@ userController.LisTypePublication = async () => {
                 success: false,
                 status: '500',
                 msg: 'Error al Listar Tipo de Publicación'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Listar datos del perfil de usuario
+userController.PerfilUser = async (req) => {
+    //existe este usuario? 
+    try {
+        let idUser=req.idFirebaseUser;
+        //idUser='zSiRYTbNbpW5vOQ6K6XpxvpKu2v1';
+        //console.log(idUser);
+        //console.log(userData.password);
+        let response = await User.PerfilUser(idUser);
+
+        //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Perfil de Usuario'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar obtener perfil de usuario'
             }
         }
         //validar si esta llegado vacio
@@ -1003,7 +1124,8 @@ userController.EditProductCKW = async (req) => {
         if(req.ImagesProduct.length<=topeimg && valReferencia==true){
             if(Diferenciafechas<=20){
             //////response = await Product.NewProductKW(ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct,UsePoduct,WeightProduct,SizePoduct);
-            // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
+            response = await Product.EditProductCKW(ProductData,req.idProduct,PreferecesProduct,ImagesProduct,KeyWordsProduct);
+
             //let rp = await Product.FindProductCKW(req.iduserProduct,req.idProduct);
             }
             else{
@@ -1752,11 +1874,12 @@ userController.DetailsOffer = async (req) => {
 
         let now = new Date();
         let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+        let UserConsulta= req.idFirebaseUser;
 
         let OfferData ={};
        // console.log(req.typeQuestion);
         if(req.typePublication==1){
-            OfferData = {
+            OfferData = {                
                 id: req.idOferta,
                 publication: req.typePublication
             };
@@ -1772,7 +1895,7 @@ userController.DetailsOffer = async (req) => {
             };
         }
         //console.log(userData.password);
-        let response = await Offer.DetailsOffer(OfferData);
+        let response = await Offer.DetailsOffer(OfferData,UserConsulta);
 
        //console.log(response);
 

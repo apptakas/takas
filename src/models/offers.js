@@ -307,7 +307,7 @@ OffersModel.ListItemsOffers = (element) => {
 
 
 //DETALLES DE LA OFERTA  - Obtenemos lista de detalles de una oferta sobre una publicación
-OffersModel.DetailsOffer = (OfferData,callback) => {
+OffersModel.DetailsOffer = (OfferData,UserConsulta) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {

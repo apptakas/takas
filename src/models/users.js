@@ -2,6 +2,7 @@ const pool = require('../config/database');
 const { serializeUser } = require('passport');
 const { database } = require('../config/keys');
 const { Result } = require('express-validator');
+const date = require('date-and-time');
 
 
 
@@ -91,6 +92,38 @@ userModel.createUser = (userData, callback) => {
 
 };
 
+
+//Actualizar Usuario
+userModel.UpdatePerfil = (userData, iduser) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+        if(userData.tyc==true){
+            pool.query(
+                'UPDATE users SET ? WHERE id="'+iduser+'"', userData,
+                (err, resut) => {
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
+
+                }
+            )
+        }else {
+            resolve({
+                'result': "Debe aceptar términos y condiciones"
+            })
+        }
+    }
+    )
+
+
+};
+
 //LoginUser
 userModel.loginUser = (userData, callback) => {
     return new Promise((resolve, reject) => {
@@ -105,6 +138,40 @@ userModel.loginUser = (userData, callback) => {
                     if (resut && Object.entries(resut).length != 0) {
                         resolve({
                             'result': resut
+                        })
+                    } else {
+                        resolve({
+                            'error': err
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+//LoginUser
+userModel.PerfilUser = (idUser,callback) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'SELECT * FROM users where id="'+idUser+'"',
+                (err, result) => {
+                   //console.log(result);
+                    if (result && Object.entries(result).length != 0) {
+                        let registro = new Date(result[0].datecreated);
+                        let regis = date.format(registro, 'DD/MM/YY');
+                        resolve({
+                            'result': {
+                                'NameUser':result[0].fullname,
+                                'EmailUser':result[0].email,
+                                'PhonenumberUser':result[0].phonenumber,
+                                'DatecreatedUser':regis,
+                                'Reputation':4.5,
+                            }
                         })
                     } else {
                         resolve({
