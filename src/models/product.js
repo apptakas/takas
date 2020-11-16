@@ -202,7 +202,33 @@ ProductModel.ExistKeyWords = (KW,callback) => {
 
 }
 
+ProductModel.DeletePublication = (idfirebaseUser,idPublication) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+       // let armaresult={};
+        pool.query(
+            "UPDATE product SET status = 5 where id="+idPublication+" AND iduser='"+idfirebaseUser+"'",
+            (err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {  
+                    //armaresult = await ProductModel.armaresult(result);  
+                    resolve({
+                        'result': result
+                    })
+                }
 
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
 
 //ListUsers  - obtenemos lista de usuarios segun el rol
 ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWordsProduct) => {
@@ -528,6 +554,18 @@ ProductModel.armaresult = (result) => {
                 }else{
                     let nuevo=false;
                 }
+
+                let FlagProduct=element.status;
+                let statusProduct=0; //Publicación activa
+                if(FlagProduct==4){
+                    statusProduct=1; // Publicación Takasteada
+                }
+                if(FlagProduct==5){
+                    statusProduct=2;//Publicación Elimidada ó Deshabilitada
+                }
+                if(FlagProduct==26){
+                    statusProduct=3;//Publicación Editada
+                }
                 arr.push({
                     "idproduct": element.idproduct,
                     "datecreated":regis,
@@ -539,7 +577,10 @@ ProductModel.armaresult = (result) => {
                     "typemoney": element.typemoney,
                     "marketvalue": Precio,
                     "typepublication": element.typepublication,
-                    "status": element.status,
+                    "conditions": element.conditions,
+                    "size": element.size,
+                    "weight": element.weight,
+                    "status": statusProduct,
                     "CantidadOfertas":CantidadOfertas.CantOfertas,
                     "ProductImages":img.ImagesProduct,
                     "Preferences":prefe.Preferences
@@ -702,7 +743,7 @@ ProductModel.DetailsProduct = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM  product  WHERE id="+ProductData.id,
+                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,conditions,size,weight,status FROM  product  WHERE id="+ProductData.id,
                 async(err, result) => {
                     //console.log(result);
                    

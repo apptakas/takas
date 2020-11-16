@@ -232,6 +232,21 @@ OffersModel.ListItemsOffers = (element) => {
                    // console.log(SumItemsOffer);
                     for(var atr2 in result2){
                         // "iduser": result2[0].iduser,
+                        let statuspo=3;
+                        
+                        if(result2[atr2].status==23){
+                            statuspo=0
+                        }
+                        if(result2[atr2].status==8){
+                            statuspo=1
+                        }
+                        if(result2[atr2].status==7){
+                            statuspo=2
+                        }
+                        if(result2[atr2].status==6){
+                            statuspo=3
+                        }
+
 
                             if(idItems!=result2[atr2].idproduct){
 
@@ -241,7 +256,7 @@ OffersModel.ListItemsOffers = (element) => {
                                     "idpublication": result2[atr2].idproduct,
                                     "imgpublicacion": result2[atr2].url,
                                     "nameproduct": result2[atr2].name,
-                                    "status": result2[atr2].status,
+                                    "status": statuspo,
                                     "img": result2[atr2].url,
                                     "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
                                 });
@@ -282,10 +297,24 @@ OffersModel.ListItemsOffers = (element) => {
                 sala=await chatroomsModel.idSala(element.id);
                 idSala=sala.idSala
                 //console.log(sala);
+                let statuso=3;
+                        
+                        if(element.status==23){
+                            statuso=0
+                        }
+                        if(element.status==8){
+                            statuso=1
+                        }
+                        if(element.status==7){
+                            statuso=2
+                        }
+                        if(element.status==6){
+                            statuso=3
+                        }
                 resolve({                    
                     "idoffer": element.id,
                     "iduseroffer": element.iduser,
-                    "statusoffer": element.status,
+                    "statusoffer": statuso,
                     "idSala": idSala,
                     "idproduct": element.idproduct,
                     "namepublication": element.namePublication,

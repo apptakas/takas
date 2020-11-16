@@ -913,7 +913,7 @@ userController.NewProductCKW = async (req) => {
                 iduser: req.iduserProduct,
                 datepublication: hoy,
                 new: req.NewProduct,
-                condition:UsePoduct,
+                conditions:UsePoduct,
                 size: SizePoduct,
                 weight: WeightProduct,
                 name: req.nameProduct,
@@ -1172,6 +1172,7 @@ userController.EditProductCKW = async (req) => {
 //Listar status de un producto
 userController.listStatusProduct = async (req) => {
     //existe este usuario? 
+    
     try {
         let idfilter=4;// ESTADO DEL PRODUCTO  NUEVO Ó USADO
         if(req.idfilter=1){
@@ -1268,13 +1269,26 @@ userController.ListMisProductos = async (req) => {
 //Listar las publicaciones  de otros usuarios- TAKASTEAR 
 userController.ListProductos = async (req) => {
     try {
+
+        let FlagProduct=req.FlagProduct;
+        let statusProduct=3; //Publicación activa
+        if(FlagProduct==1){
+            statusProduct=4; // Publicación Takasteada
+        }
+        if(FlagProduct==2){
+            statusProduct=5;//Publicación Elimidada ó Deshabilitada
+        }
+        if(FlagProduct==3){
+            statusProduct=26;//Publicación Editada
+        }
+
         const UserData = {
             iduser: req.idfirebaseUser
         };
         const ProductData = {
-            status: req.statusProduct
+            status: statusProduct
         };
-        //console.log(userData.password);
+        //console.log(ProductData.status);
         let response = await Product.ListProductos(UserData,ProductData);
 
        console.log(response);
@@ -2555,6 +2569,50 @@ userController.cantnOfertasPublications = async (req) => {
                 success: false,
                 status: '500',
                 msg: 'Error al intentar obtener Cantidad de Ofertas a una publicación'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+// Eliminación lógica de una publicación
+userController.DeletePublication = async (req) => {
+    try {
+        
+          let idfirebaseUser= req.idfirebaseUser;
+          let idPublication= req.idPublication;
+       
+        //console.log(userData.password);
+        let response = await Product.DeletePublication(idfirebaseUser,idPublication);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+
+            data = {
+                success: true,
+                status: '200',                
+                msg: 'publicación eliminada con éxito'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar eliminar una publicación'
             }
         }
         //validar si esta llegado vacio

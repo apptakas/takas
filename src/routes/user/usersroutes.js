@@ -1398,7 +1398,7 @@ check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exis
  *
  *
  * @apiParam {varchar} idfirebaseUser required.
- * @apiParam {varchar} statusProduct required.
+ * @apiParam {varchar} FlagProduct required 0=Activa, 1=Takasteada, 2=Eliminada(deshabilitada), 3=Editada.
  * 
  * 
  * 
@@ -1480,7 +1480,7 @@ check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exis
 //LISTAR MIS PUBLICACIONES
 router.post('/listproductos', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('statusProduct', 'El statusProduct es obligatorio').not().isEmpty().exists()
+    check('FlagProduct', 'El FlagProduct es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
         const error = validationResult(req);
@@ -1781,25 +1781,30 @@ router.post('/listproductsubcategory', rutasProtegidas, [
     "success": true,
     "status": "200",
     "data": {
-        "idproduct": 1,
-        "datecreated": "01/11/2020",
-        "iduser": "EVln0Vj6DNOtTXQVS2fN9P68Gl13",
+        "idproduct": 61,
+        "datecreated": "14/11/2020",
+        "iduser": "idfirebaseU4534dsaxgg",
         "nuevo": false,
         "subcategory": 4,
-        "name": "Estufa de 4 hornillas",
-        "details": "Estufa de 4 hornillas color blanco ",
-        "typemoney": 3,
-        "marketvalue": "200000.0000",
+        "name": "pueba laptop 2",
+        "details": "Hp Procesador intel core i7",
+        "typemoney": 2,
+        "marketvalue": "1200000.0000",
         "typepublication": 1,
-        "status": 1,
-        "CantidadOfertas": 1,
+        "conditions": 1,
+        "size": null,
+        "weight": null,
+        "status": 0,
+        "CantidadOfertas": 0,
         "ProductImages": [
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722",
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c"
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
         ],
         "Preferences": [
-            1,
-            2
+            1
         ]
     },
     "msg": "Listar detalles de un producto"
@@ -1944,7 +1949,7 @@ router.post('/newproductkw', rutasProtegidas,[
  * 
  * @apiParam {varchar} iduserProduct required.
  * @apiParam {varchar} nameProduct required.
- * @apiParam {boolean} NewProduct required.
+ * @apiParam {boolean} NewProduct optional.
  * @apiParam {varchar} detailsProduct  unique required.
  * @apiParam {smallint} typemoneyProduct   required.
  * @apiParam {decimal} marketvalueProduct  required .
@@ -1986,9 +1991,7 @@ router.post('/newproductkw', rutasProtegidas,[
 
 //Crear newproduct
 router.post('/newproductckw', rutasProtegidas,[
-    check('iduserProduct', 'El iduserProduct es obligatorio').not().isEmpty().exists(),
-    check('NewProduct', 'El Determinar si un producto es nuo o usado es obligatorio').not().isEmpty().exists(),
-    check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
+    check('iduserProduct', 'El iduserProduct es obligatorio').not().isEmpty().exists(),check('nameProduct', 'El Nombre del producto es obligatorio').not().isEmpty().exists(),
     check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
     check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
     check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
@@ -2440,21 +2443,38 @@ router.post('/newoffer', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idoffer": 6,
-            "statusoffer": 7,
+            "idoffer": 7,
+            "iduseroffer": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "statusoffer": 2,
             "idSala": null,
-            "idproduct": 5,
-            "namepublication": "Camisas de Among Us",
+            "idproduct": 1,
+            "namepublication": "Estufa de 4 hornillas",
             "img": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1"
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722"
             ],
-            "observation": "Podemos hacer trato y la diferencia en efectivo",
-            "valorpublication": "50000.0000",
-            "sumitemsoffer": "0.0000",
-            "differenceoffer": "0.0000",
-            "infavor": false,
-            "itemsoffer": []
+            "observation": "-",
+            "valorpublication": "200000.0000",
+            "sumitemsoffer": "130000.0000",
+            "differenceoffer": "70000.0000",
+            "infavor": true,
+            "itemsoffer": [
+                {
+                    "idpublication": 5,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                    "nameproduct": "Camisas de Among Us",
+                    "status": 3,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                    "marketvalue": "50000.0000"
+                },
+                {
+                    "idpublication": 6,
+                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                    "nameproduct": "Plancha para el pelo",
+                    "status": 3,
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
+                    "marketvalue": "80000.0000"
+                }
+            ]
         }
     ],
     "msg": "Listar Ofertas exitosamente"
@@ -3404,6 +3424,69 @@ router.post('/cantnofertaspublications', [
 
     //let response = await userController.listNotifications(req.body);
     let response = await userController.cantnOfertasPublications(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+     /**
+ * @api {post} /user/deletepublication 10 deletepublication
+ * @apiName deletepublication - Eliminación lógica de un producto
+ * @apiGroup Product
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idfirebaseUser requeride .
+ * @apiParam {varchar} idPublication requeride .
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "msg": "publicación eliminada con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar eliminar una publicación"
+}
+ **/
+
+// Eliminación lógica de una publicación
+router.post('/deletepublication', [
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists()
+    ], rutasProtegidas,async (req, res) => {
+        
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    //let response = await userController.listNotifications(req.body);
+    let response = await userController.DeletePublication(req.body);
 
     if (response.status == 'ko') {
         return res.status(500).json({ error: 'Error' })

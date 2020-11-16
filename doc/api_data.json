@@ -1586,7 +1586,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 6,\n            \"statusoffer\": 7,\n            \"idSala\": null,\n            \"idproduct\": 5,\n            \"namepublication\": \"Camisas de Among Us\",\n            \"img\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1\"\n            ],\n            \"observation\": \"Podemos hacer trato y la diferencia en efectivo\",\n            \"valorpublication\": \"50000.0000\",\n            \"sumitemsoffer\": \"0.0000\",\n            \"differenceoffer\": \"0.0000\",\n            \"infavor\": false,\n            \"itemsoffer\": []\n        }\n    ],\n    \"msg\": \"Listar Ofertas exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idoffer\": 7,\n            \"iduseroffer\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n            \"statusoffer\": 2,\n            \"idSala\": null,\n            \"idproduct\": 1,\n            \"namepublication\": \"Estufa de 4 hornillas\",\n            \"img\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\"\n            ],\n            \"observation\": \"-\",\n            \"valorpublication\": \"200000.0000\",\n            \"sumitemsoffer\": \"130000.0000\",\n            \"differenceoffer\": \"70000.0000\",\n            \"infavor\": true,\n            \"itemsoffer\": [\n                {\n                    \"idpublication\": 5,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"nameproduct\": \"Camisas de Among Us\",\n                    \"status\": 3,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                    \"marketvalue\": \"50000.0000\"\n                },\n                {\n                    \"idpublication\": 6,\n                    \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"nameproduct\": \"Plancha para el pelo\",\n                    \"status\": 3,\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d\",\n                    \"marketvalue\": \"80000.0000\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Listar Ofertas exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -1824,6 +1824,103 @@
   },
   {
     "type": "post",
+    "url": "/user/deletepublication",
+    "title": "10 deletepublication",
+    "name": "deletepublication_-_Eliminación_lógica_de_un_producto",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>requeride .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idPublication",
+            "description": "<p>requeride .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"publicación eliminada con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar eliminar una publicación\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
     "url": "/user/detailsproduct",
     "title": "5 detailsproduct",
     "name": "detailsproduct_-_Detalle_del_producto",
@@ -1891,7 +1988,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idproduct\": 1,\n        \"datecreated\": \"01/11/2020\",\n        \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n        \"nuevo\": false,\n        \"subcategory\": 4,\n        \"name\": \"Estufa de 4 hornillas\",\n        \"details\": \"Estufa de 4 hornillas color blanco \",\n        \"typemoney\": 3,\n        \"marketvalue\": \"200000.0000\",\n        \"typepublication\": 1,\n        \"status\": 1,\n        \"CantidadOfertas\": 1,\n        \"ProductImages\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A32%3A00.684299.jpg?alt=media&token=0094b859-5e33-4329-9730-1a73ebd1341c\"\n        ],\n        \"Preferences\": [\n            1,\n            2\n        ]\n    },\n    \"msg\": \"Listar detalles de un producto\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idproduct\": 61,\n        \"datecreated\": \"14/11/2020\",\n        \"iduser\": \"idfirebaseU4534dsaxgg\",\n        \"nuevo\": false,\n        \"subcategory\": 4,\n        \"name\": \"pueba laptop 2\",\n        \"details\": \"Hp Procesador intel core i7\",\n        \"typemoney\": 2,\n        \"marketvalue\": \"1200000.0000\",\n        \"typepublication\": 1,\n        \"conditions\": 1,\n        \"size\": null,\n        \"weight\": null,\n        \"status\": 0,\n        \"CantidadOfertas\": 0,\n        \"ProductImages\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n        ],\n        \"Preferences\": [\n            1\n        ]\n    },\n    \"msg\": \"Listar detalles de un producto\"\n}",
           "type": "json"
         }
       ]
@@ -2321,8 +2418,8 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "statusProduct",
-            "description": "<p>required.</p>"
+            "field": "FlagProduct",
+            "description": "<p>required 0=Activa, 1=Takasteada, 2=Eliminada(deshabilitada), 3=Editada.</p>"
           }
         ]
       }
@@ -2669,7 +2766,7 @@
             "type": "boolean",
             "optional": false,
             "field": "NewProduct",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           },
           {
             "group": "Parameter",
