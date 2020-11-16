@@ -433,7 +433,7 @@ ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
             let armaresult={};
             let consulta="";
             if(estatus==1){
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ";
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ";
             }else{
                 consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct ";
             }
@@ -468,7 +468,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -557,6 +557,7 @@ ProductModel.armaresult = (result) => {
 
                 let FlagProduct=element.status;
                 let statusProduct=0; //Publicación activa
+                let Editable=true; //Publicación activa
                 if(FlagProduct==4){
                     statusProduct=1; // Publicación Takasteada
                 }
@@ -565,7 +566,22 @@ ProductModel.armaresult = (result) => {
                 }
                 if(FlagProduct==26){
                     statusProduct=3;//Publicación Editada
+                   
                 }
+
+                let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
+                //console.log(rp);
+                //console.log(horaServidor);
+                let datepublication = new Date(rp.result.datepublication);
+                //fecha de creación de producto
+                let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+                //console.log(now);
+                let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
+
+                if(Diferenciafechas>20){
+                    Editable=false;
+                }
+                    
                 arr.push({
                     "idproduct": element.idproduct,
                     "datecreated":regis,
@@ -581,6 +597,7 @@ ProductModel.armaresult = (result) => {
                     "size": element.size,
                     "weight": element.weight,
                     "status": statusProduct,
+                    "editable": Editable,
                     "CantidadOfertas":CantidadOfertas.CantOfertas,
                     "ProductImages":img.ImagesProduct,
                     "Preferences":prefe.Preferences

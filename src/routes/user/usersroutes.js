@@ -2443,41 +2443,57 @@ router.post('/newoffer', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idoffer": 7,
-            "iduseroffer": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
-            "statusoffer": 2,
-            "idSala": null,
-            "idproduct": 1,
-            "namepublication": "Estufa de 4 hornillas",
-            "img": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722"
+            "idproduct": 5,
+            "datecreated": "23/10/2020",
+            "iduser": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nuevo": false,
+            "subcategory": 1,
+            "name": "Camisas de Among Us",
+            "details": "camisas muy creativas",
+            "typemoney": 3,
+            "marketvalue": "50000.0000",
+            "typepublication": 1,
+            "conditions": null,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 30,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1"
             ],
-            "observation": "-",
-            "valorpublication": "200000.0000",
-            "sumitemsoffer": "130000.0000",
-            "differenceoffer": "70000.0000",
-            "infavor": true,
-            "itemsoffer": [
-                {
-                    "idpublication": 5,
-                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                    "nameproduct": "Camisas de Among Us",
-                    "status": 3,
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                    "marketvalue": "50000.0000"
-                },
-                {
-                    "idpublication": 6,
-                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
-                    "nameproduct": "Plancha para el pelo",
-                    "status": 3,
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
-                    "marketvalue": "80000.0000"
-                }
+            "Preferences": [
+                1,
+                2
+            ]
+        },
+        {
+            "idproduct": 6,
+            "datecreated": "26/10/2020",
+            "iduser": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nuevo": false,
+            "subcategory": 1,
+            "name": "Plancha para el pelo",
+            "details": "maraca baby liz",
+            "typemoney": 3,
+            "marketvalue": "80000.0000",
+            "typepublication": 1,
+            "conditions": null,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d"
+            ],
+            "Preferences": [
+                2
             ]
         }
     ],
-    "msg": "Listar Ofertas exitosamente"
+    "msg": "Lista de mis productos"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -2712,40 +2728,57 @@ router.post('/caldifference', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idoffer": 7,
-            "statusoffer": 7,
-            "idSala": "949bdc81078b49cd604b6622ddd762054ca8963a",
-            "idproduct": 1,
-            "namepublication": "Estufa de 4 hornillas",
-            "img": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722"
+            "idproduct": 5,
+            "datecreated": "23/10/2020",
+            "iduser": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nuevo": false,
+            "subcategory": 1,
+            "name": "Camisas de Among Us",
+            "details": "camisas muy creativas",
+            "typemoney": 3,
+            "marketvalue": "50000.0000",
+            "typepublication": 1,
+            "conditions": null,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 30,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A51.015093.jpg?alt=media&token=0a56f3d1-55f0-46ed-ab6c-2e91b83fd6c1"
             ],
-            "observation": "-",
-            "valorpublication": "200000.0000",
-            "sumitemsoffer": "130000.0000",
-            "differenceoffer": "70000.0000",
-            "infavor": true,
-            "itemsoffer": [
-                {
-                    "idpublication": 5,
-                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                    "nameproduct": "Camisas de Among Us",
-                    "status": 1,
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                    "marketvalue": "50000.0000"
-                },
-                {
-                    "idpublication": 6,
-                    "imgpublicacion": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
-                    "nameproduct": "Plancha para el pelo",
-                    "status": 1,
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d",
-                    "marketvalue": "80000.0000"
-                }
+            "Preferences": [
+                1,
+                2
+            ]
+        },
+        {
+            "idproduct": 6,
+            "datecreated": "26/10/2020",
+            "iduser": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nuevo": false,
+            "subcategory": 1,
+            "name": "Plancha para el pelo",
+            "details": "maraca baby liz",
+            "typemoney": 3,
+            "marketvalue": "80000.0000",
+            "typepublication": 1,
+            "conditions": null,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-26%2013%3A47%3A42.386738.jpg?alt=media&token=8184ec1a-b122-4076-a539-0890214e6b9d"
+            ],
+            "Preferences": [
+                2
             ]
         }
     ],
-    "msg": "Lista de mis Ofertas exitosamente"
+    "msg": "Lista de mis productos"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
