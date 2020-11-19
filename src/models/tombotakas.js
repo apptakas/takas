@@ -176,6 +176,7 @@ tombotakasModel.ListimgTombotakas = (element) => {
                     "nameTTK": element.name,
                     "datecreatedTTK": dc,
                     "detailseventTTK": element.detailsevent,
+                    "detailsAwardttk": element.detailsaward,
                     "pinreferenceTTK": element.pinreference,
                     "datelotTTK": dl,
                     "moneyTTK": element.money,
@@ -314,6 +315,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
     return new Promise((resolve, reject) => {
         
         let tickets=[];
+        let numberticketsr=[];
         pool.query(
             'SELECT t.id, t.idtombotakas,t.number, t.status, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE idtombotakas='+element.id,
             async(err2, result2) => {
@@ -335,6 +337,8 @@ tombotakasModel.LisTicketsReservados = (element) => {
                         if(result2[atr2].status==31){
                             statusticket=2
                         }
+                        numberticketsr.push(parseInt(result2[atr2].number));
+
                         tickets.push({
                             "idNUmbre":result2[atr2].id,
                             "Number":parseInt(result2[atr2].number),
@@ -362,11 +366,13 @@ tombotakasModel.LisTicketsReservados = (element) => {
                     "statusTTK": statusTTK,
                     "datecreatedTTK": dc,
                     "detailseventTTK": element.detailsevent,
+                    "detailsAwardttk": element.detailsaward,
                     "pinreferenceTTK": element.pinreference,
                     "datelotTTK": dl,
                     "moneyTTK": element.money,
                     "priceTTK": Number.parseFloat(element.price).toFixed(4),
                     "resultTTK": element.result,
+                    "numberticketsrs":numberticketsr,
                     "ticketsReservados":tickets
                 });
             }

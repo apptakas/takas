@@ -3634,6 +3634,7 @@ router.post('/newtombotakas',rutasProtegidas, [
             "nameTTK": "test Nueva Tombotakas",
             "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "detailsAwardttk": "La imagen que voy a cargar en este momento",
             "pinreferenceTTK": "ibxJu2",
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
@@ -3651,6 +3652,7 @@ router.post('/newtombotakas',rutasProtegidas, [
             "nameTTK": "test Nueva Tombotakas",
             "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "detailsAwardttk": "La imagen que voy a cargar en este momento",
             "pinreferenceTTK": "YuYMXs",
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
@@ -3668,6 +3670,7 @@ router.post('/newtombotakas',rutasProtegidas, [
             "nameTTK": "test Nueva Tombotakas",
             "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "detailsAwardttk": "La imagen que voy a cargar en este momento",
             "pinreferenceTTK": "hBKyxU",
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
@@ -3685,6 +3688,7 @@ router.post('/newtombotakas',rutasProtegidas, [
             "nameTTK": "test Nueva Tombotakas",
             "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "detailsAwardttk": "La imagen que voy a cargar en este momento",
             "pinreferenceTTK": "J3uxSU",
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
@@ -3702,6 +3706,7 @@ router.post('/newtombotakas',rutasProtegidas, [
             "nameTTK": "test Nueva Tombotakas",
             "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "detailsAwardttk": "La imagen que voy a cargar en este momento",
             "pinreferenceTTK": "8JGthr",
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
@@ -3855,16 +3860,27 @@ router.post('/comprarapartartickets', rutasProtegidas,[
             "statusTTK": 0,
             "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "detailsAwardttk": "La imagen que voy a cargar en este momento",
             "pinreferenceTTK": "ibxJu2",
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
             "priceTTK": "10000.0000",
             "resultTTK": null,
+            "numberticketsrs": [
+                31,
+                40,
+                21,
+                1,
+                10,
+                32,
+                22,
+                2
+            ],
             "ticketsReservados": [
                 {
                     "idNUmbre": 1,
                     "Number": 31,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3872,7 +3888,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 2,
                     "Number": 40,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3880,7 +3896,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 3,
                     "Number": 21,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3888,7 +3904,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 4,
                     "Number": 1,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3896,7 +3912,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 5,
                     "Number": 10,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3904,7 +3920,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 6,
                     "Number": 32,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3912,7 +3928,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 7,
                     "Number": 22,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3920,7 +3936,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 {
                     "idNUmbre": 8,
                     "Number": 2,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -3930,6 +3946,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
     ],
     "msg": "Tombotakas ha sido encontrada con éxito"
 }
+
  *
  * @apiError UserNotFound The id of the Tombotakas was not found.
  *
