@@ -173,10 +173,12 @@ tombotakasModel.ListimgTombotakas = (element) => {
                 resolve({                    
                     "idTombotakas": element.id,
                     "statusTTK": statusTTK,
+                    "nameTTK": element.name,
                     "datecreatedTTK": dc,
                     "detailseventTTK": element.detailsevent,
                     "pinreferenceTTK": element.pinreference,
                     "datelotTTK": dl,
+                    "moneyTTK": element.money,
                     "priceTTK": Number.parseFloat(element.price).toFixed(4),
                     "resultTTK": element.result,
                     "imgTTk":img

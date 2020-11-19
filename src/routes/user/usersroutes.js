@@ -3629,17 +3629,68 @@ router.post('/newtombotakas',rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idTombotakas": 5,
+            "idTombotakas": 2,
             "statusTTK": 0,
-            "datecreatedTTK": "18/11/2020",
+            "nameTTK": "test Nueva Tombotakas",
+            "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-            "pinreferenceTTK": "AWVf7w",
+            "pinreferenceTTK": "ibxJu2",
             "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
             "priceTTK": "10000.0000",
             "resultTTK": null,
             "imgTTk": [
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idTombotakas": 3,
+            "statusTTK": 0,
+            "nameTTK": "test Nueva Tombotakas",
+            "datecreatedTTK": "19/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "YuYMXs",
+            "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "imgTTk": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idTombotakas": 4,
+            "statusTTK": 0,
+            "nameTTK": "test Nueva Tombotakas",
+            "datecreatedTTK": "19/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "hBKyxU",
+            "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "imgTTk": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idTombotakas": 5,
+            "statusTTK": 0,
+            "nameTTK": "test Nueva Tombotakas",
+            "datecreatedTTK": "19/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "J3uxSU",
+            "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "imgTTk": [
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
@@ -3648,26 +3699,17 @@ router.post('/newtombotakas',rutasProtegidas, [
         {
             "idTombotakas": 6,
             "statusTTK": 0,
-            "datecreatedTTK": "18/11/2020",
+            "nameTTK": "test Nueva Tombotakas",
+            "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-            "pinreferenceTTK": "HZK0Jf",
+            "pinreferenceTTK": "8JGthr",
             "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
             "priceTTK": "10000.0000",
             "resultTTK": null,
             "imgTTk": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idTombotakas": 7,
-            "statusTTK": 0,
-            "datecreatedTTK": "18/11/2020",
-            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-            "pinreferenceTTK": "klDpiu",
-            "datelotTTK": "25/11/2020 19:47",
-            "priceTTK": "10000.0000",
-            "resultTTK": null,
-            "imgTTk": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
         }
@@ -3687,7 +3729,7 @@ router.post('/newtombotakas',rutasProtegidas, [
  */
 
 
-//Crear Tombotakas- 
+//Listar Tombotakas- 
 router.post('/mytombotakas', rutasProtegidas,[
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
