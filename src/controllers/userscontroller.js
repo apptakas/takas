@@ -12,12 +12,14 @@ const MasterCities = require('../models/mastercities.js');
 const MasterStatus = require('../models/masterstatus.js');
 const ChatRooms = require('../models/chatrooms.js');
 const notificationModel = require('../models/notifications.js');
+const tombotakas = require('../models/tombotakas.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const notifications = require('../lib/notifications.js');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const sha1 = require('sha1');
+const securePin = require("secure-pin");
 const date = require('date-and-time');
 //var redis = require('redis');
 const { resolveInclude } = require('ejs');
@@ -1334,7 +1336,7 @@ userController.findProductos = async (req) => {
         //console.log(userData.password);
         let response = await Product.findProductos(nameProduct,IdUserProduct);
 
-       console.log(response);
+       //console.log(response);
 
         let data = {};
         if (response && response.result) {
@@ -2680,6 +2682,379 @@ userController.changeStatusNotifications = async (req) => {
     }
 
 };
+
+//////////////////TOMBOTAKAS////////////////////////////
+
+//Nuevo Producto (TAKASTEAR)
+userController.NewTomboTakas = async (req) => {
+    //existe este usuario? 
+    try {
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            let DLottk = new Date(req.DateLottk);
+            let DateLottk = date.format(DLottk, 'YYYY-MM-DD HH:mm');
+
+            //buscar fecha de creación del producto
+            /////
+            /*GENERAR PIN DE REFERENCIA*/
+            let pin="";
+            let pinexistr={};
+            let pinexist=1;
+            //let pinexist=true;
+            while (pinexist!=0 ) {
+                pin= securePin.generateStringSync(6, securePin.defaultCharset);
+                pinexistr= await tombotakas.PinExist(pin);
+                pinexist=pinexistr.result;
+                console.log("pinexist");
+                 console.log(pinexist);
+            }
+            //console.log(pin);
+            ////
+
+           // console.log(now+" - "+hoy);
+            let dataTTK = {
+                iduser: req.idfirebaseUser,
+                datecreated: hoy,
+                detailsevent: req.DetailsEventtk,
+                detailsaward: req.DetailsAwardttk,
+                datelot: DateLottk,
+                pinreference:pin,
+                price: req.pricettk,
+                status:27
+            };
+            console.log(dataTTK);
+
+            const topeimg=10;      
+            const ImagesLot = {};
+            //console.log(req.ImagesLot.length);
+            if(req.ImagesLot.length!=0){
+                for(var atr1 in req.ImagesLot){
+                    ImagesLot[atr1] = req.ImagesLot[atr1];     
+                };
+            }
+        
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+
+            let msgError="";            
+
+        let response ={};
+
+        // && lengthkw<=topeKW 
+
+        if(req.ImagesLot.length<=topeimg ){
+            if(req.ImagesLot.length!=0){
+                response = await tombotakas.NewTomboTakas(dataTTK,ImagesLot);
+            }else{               
+                msgError = "Una TomboTakas debe tener al menos una imagen";
+            }
+
+        }else{               
+            msgError = "Se ha superado el límite de imagenes";
+        }        
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                pinReference:pin,
+                msg: 'Tombotakas se ha creado con éxito'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                //data: response.error,
+                data: msgError,
+                msg: 'Error al intentar registrar la Tombotakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Lista de mis Tombotakas
+userController.MyTomboTakas = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idUser=req.idfirebaseUser;
+            let Status=null;
+            if(req.flagTTK!=null){
+                if(req.flagTTK==0){
+                    Status=27;
+                }
+                if(req.flagTTK==1){
+                    Status=28;
+                }
+
+            }
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.MyTomboTakas(idUser,Status);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msg: 'Lista de Tombotakas creada  con éxito'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar las Tombotakas del usuario'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Comprar o Apartar un ticket
+userController.ComprarApartarTickets = async (req) => {
+    //existe este usuario? 
+    try {       
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+            let idUser=req.idfirebaseUser;
+            let idTombotaka=req.idTombotaka;
+            let tickets=[]
+            let ticketsNoDispo=[]
+            let accionTTK=req.accionTTK;
+
+            let ticketdispo=0;
+
+            let t="";
+            //const ImagesLot = {};
+            if(req.tickets.length!=0){
+                for(var atr1 in req.tickets){
+                    ticketdispo= await tombotakas.TicketsDispo(idTombotaka,req.tickets[atr1]);
+                    if(req.tickets[atr1]>=0 && req.tickets[atr1]<=99){   
+                        if(req.tickets[atr1]<=9){
+                            t="0"+req.tickets[atr1];
+                        } 
+                        else{
+                            t=""+req.tickets[atr1];
+                        }  
+
+                        if(ticketdispo.result==0){
+                            tickets.push(t);
+                            //tickets[atr1] = req.tickets[atr1];
+                        }else{
+                            ticketsNoDispo.push(t);
+                            //ticketsNoDispo[atr1]= req.tickets[atr1];
+                        }
+                    }                  
+                        
+                };
+
+            }
+
+            let msgError="";            
+
+             let response ={};
+             
+            //COMPROBAR SI ESTÁN DISPONIBLES
+            console.log(tickets.length);
+            
+            if(tickets.length!=0){
+                response = await tombotakas.comprarapartartickets(idUser,idTombotaka,tickets,accionTTK,hoy);
+            } 
+            else{
+                msgError="Los tickets nos están disponibles";
+            }       
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                tickets:tickets,
+                ticketsNoDispo:ticketsNoDispo,
+                msg: 'Los tickets disponibles fueron procesados con éxito'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+                data: msgError,
+                msg: 'Error al intentar Procesar tickets'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Lista de mis Tombotakas
+userController.FindTomboTakasPin = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let pinttk=req.pinttk;
+            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.FindTomboTakasPin(pinttk);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msg: 'Tombotakas ha sido encontrada con éxito'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar buscar Tombotakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Lista de mis Tombotakas
+userController.MyTickets = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            let Status=null;
+            if(req.flagTTK!=null){
+                if(req.flagTTK==0){
+                    Status=27;
+                }
+                if(req.flagTTK==1){
+                    Status=28;
+                }
+
+            }
+            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.MyTickets(idfirebaseUser,Status);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msg: 'Lista de tickets'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar tickets'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 

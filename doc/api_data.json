@@ -3642,6 +3642,501 @@
     "groupTitle": "SubCategory"
   },
   {
+    "type": "post",
+    "url": "/user/comprarapartartickets",
+    "title": "3 comprarapartartickets",
+    "name": "comprarapartartickets_-_Comprar_o_apartar_tickets",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idTombotaka",
+            "description": "<p>int required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "tickets",
+            "description": "<p>array int required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "accionTTK",
+            "description": "<p>optional.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"tickets\": [\n        \"01\"\n    ],\n    \"ticketsNoDispo\": [\n        \"00\",\n        \"21\",\n        \"31\"\n    ],\n    \"msg\": \"Los tickets disponibles fueron procesados con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"data\": \"Los tickets nos están disponibles\",\n    \"msg\": \"Error al intentar Procesar tickets\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/findtombotakaspin",
+    "title": "4 findtombotakaspin",
+    "name": "findtombotakaspin_-_Buscar_tombotakas_por_pin_de_referencia",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "pinttk",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 1,\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"18/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"pinreferenceTTK\": \"KU39Jq\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": \"00\",\n                    \"status\": 30,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": \"21\",\n                    \"status\": 30,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": \"31\",\n                    \"status\": 30,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": \"01\",\n                    \"status\": 30,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Tombotakas ha sido encontrada con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar buscar Tombotakas\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/mytickets",
+    "title": "5 mytickets",
+    "name": "mytickets_-_Listar_mis_tickets",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "flagTTK",
+            "description": "<p>optional.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"idtombotakas\": 1,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"00\",\n            \"dateapart\": \"2020-11-19T04:39:37.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 2,\n            \"idtombotakas\": 1,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"21\",\n            \"dateapart\": \"2020-11-19T04:39:37.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 3,\n            \"idtombotakas\": 1,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"31\",\n            \"dateapart\": \"2020-11-19T04:39:37.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 4,\n            \"idtombotakas\": 1,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"01\",\n            \"dateapart\": \"2020-11-19T04:40:05.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 5,\n            \"idtombotakas\": 2,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"01\",\n            \"dateapart\": \"2020-11-19T05:22:47.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 6,\n            \"idtombotakas\": 2,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"00\",\n            \"dateapart\": \"2020-11-19T05:22:47.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 7,\n            \"idtombotakas\": 2,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"21\",\n            \"dateapart\": \"2020-11-19T05:22:47.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 8,\n            \"idtombotakas\": 2,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"31\",\n            \"dateapart\": \"2020-11-19T05:22:47.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        },\n        {\n            \"id\": 9,\n            \"idtombotakas\": 2,\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"number\": \"40\",\n            \"dateapart\": \"2020-11-19T05:22:55.000Z\",\n            \"datebuy\": null,\n            \"status\": 30\n        }\n    ],\n    \"msg\": \"Lista de tickets\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar tickets\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/mytombotakas",
+    "title": "2 mytombotakas",
+    "name": "mytombotakas_-_Lista_de_mis_tombolas",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "flagTTK",
+            "description": "<p>optional.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 5,\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"18/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"pinreferenceTTK\": \"AWVf7w\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTk\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idTombotakas\": 6,\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"18/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"pinreferenceTTK\": \"HZK0Jf\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTk\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idTombotakas\": 7,\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"18/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"pinreferenceTTK\": \"klDpiu\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTk\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Tombotakas creada  con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar las Tombotakas del usuario\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/newtombotakas",
+    "title": "1 newtombotakas",
+    "name": "newtombotakas_-_Registro_De_TOMBOTAKAS",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>unique required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DetailsEventtk",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DetailsAwardttk",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "datetime",
+            "optional": false,
+            "field": "DateLottk",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "double",
+            "optional": false,
+            "field": "pricettk",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "ImagesLot",
+            "description": "<p>required arrays de varchar.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"pinReference\": \"h8dGBL\",\n    \"msg\": \"Tombotakas se ha creado con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"data\": \"Se ha superado el límite de imagenes\",\n    \"msg\": \"Error al intentar registrar la Tombotakas\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
     "type": "get",
     "url": "/user/LisTypePublication",
     "title": "1 LisTypePublication",

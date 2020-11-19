@@ -500,7 +500,7 @@ ProductModel.findProductos = (nameProduct,IdUserProduct) => {
 
             let armaresult={};
             pool.query(
-                "SELECT * FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE NAME LIKE '%"+nameProduct+"%' AND STATUS=1 AND iduser<>'"+IdUserProduct+"'",
+                "SELECT * FROM keywords AS k INNER JOIN keyword_product AS kp ON k.id=kp.idword INNER JOIN product AS p ON kp.idproduct=p.id INNER JOIN  imgproduct AS i ON p.id=i.idproduct WHERE (k.word LIKE '%Intel%' OR p.NAME LIKE '%"+nameProduct+"%')  AND STATUS=3 AND iduser<>'"+IdUserProduct+"' ORDER BY p.datepublication DESC",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -509,7 +509,8 @@ ProductModel.findProductos = (nameProduct,IdUserProduct) => {
                             'error': err
                         })
                     } else {   
-                        armaresult = await ProductModel.armaresult(result);  
+                        armaresult = await ProductModel.armaresult(result); 
+                        //console.log("armaresult: "+armaresult); 
                         resolve({
                             'result': armaresult
                         })
@@ -526,85 +527,94 @@ ProductModel.armaresult = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
+        
+        
         try{
+            
             let img={};
             let prefe={};
             let CantidadOfertas=0;
+            let idproducs=0;
             //console.log(result);
             for (const element of result) {
-                img=await ProductModel.ListImagesProduct(element);
-                prefe=await ProductModel.ListPrefrencesProduct(element);
-                CantidadOfertas=await ProductModel.CantidadOfertas(element);
-                let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+                //console.log(element.idproduct+" - "+idproducs);
+                if(element.idproduct!=idproducs){
+                    //console.log("idproducs - "+element.idproduct);
+                    idproducs=element.idproduct;
+                    img=await ProductModel.ListImagesProduct(element);
+                    prefe=await ProductModel.ListPrefrencesProduct(element);
+                    CantidadOfertas=await ProductModel.CantidadOfertas(element);
+                    let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
 
-                let now = new Date();
-                let servidor=date.format(now, 'DD/MM/YYYY');
-                //let registro=element.registro;
-                let registro = new Date(element.datepublication);
-                let regis = date.format(registro, 'DD/MM/YYYY');
+                    let now = new Date();
+                    let servidor=date.format(now, 'DD/MM/YYYY');
+                    //let registro=element.registro;
+                    let registro = new Date(element.datepublication);
+                    let regis = date.format(registro, 'DD/MM/YYYY');
 
-                //console.log(now+" - "+registro);
+                    //console.log(now+" - "+registro);
 
-                let comprobar_fecha=date.isSameDay(now, registro); 
-                // console.log(comprobar_fecha+" - ");
-                // console.log("//////");
-                let nuevo=false;
-                if (registro == servidor){
-                    let nuevo=true;
-                }else{
+                    let comprobar_fecha=date.isSameDay(now, registro); 
+                    // console.log(comprobar_fecha+" - ");
+                    // console.log("//////");
                     let nuevo=false;
-                }
+                    if (registro == servidor){
+                        let nuevo=true;
+                    }else{
+                        let nuevo=false;
+                    }
 
-                let FlagProduct=element.status;
-                let statusProduct=0; //Publicación activa
-                let Editable=true; //Publicación activa
-                if(FlagProduct==4){
-                    statusProduct=1; // Publicación Takasteada
-                }
-                if(FlagProduct==5){
-                    statusProduct=2;//Publicación Elimidada ó Deshabilitada
-                }
-                if(FlagProduct==26){
-                    statusProduct=3;//Publicación Editada
+                    let FlagProduct=element.status;
+                    let statusProduct=0; //Publicación activa
+                    let Editable=true; //Publicación activa
+                    if(FlagProduct==4){
+                        statusProduct=1; // Publicación Takasteada
+                    }
+                    if(FlagProduct==5){
+                        statusProduct=2;//Publicación Elimidada ó Deshabilitada
+                    }
+                    if(FlagProduct==26){
+                        statusProduct=3;//Publicación Editada
+                    
+                    }
+
+                    let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
+                    //console.log(rp);
+                    //console.log(horaServidor);
+                    let datepublication = new Date(rp.result.datepublication);
+                    //fecha de creación de producto
+                    let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+                    //console.log(now);
+                    let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
+
+                    if(Diferenciafechas>20){
+                        Editable=false;
+                    }
+                        
+                    arr.push({
+                        "idproduct": element.idproduct,
+                        "datecreated":regis,
+                        "iduser": element.iduser,
+                        "nuevo": comprobar_fecha,
+                        "subcategory": element.subcategory,
+                        "name": element.name,
+                        "details": element.details,
+                        "typemoney": element.typemoney,
+                        "marketvalue": Precio,
+                        "typepublication": element.typepublication,
+                        "conditions": element.conditions,
+                        "size": element.size,
+                        "weight": element.weight,
+                        "status": statusProduct,
+                        "editable": Editable,
+                        "CantidadOfertas":CantidadOfertas.CantOfertas,
+                        "ProductImages":img.ImagesProduct,
+                        "Preferences":prefe.Preferences
+                        
+                    });
                    
                 }
-
-                let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
-                //console.log(rp);
-                //console.log(horaServidor);
-                let datepublication = new Date(rp.result.datepublication);
-                //fecha de creación de producto
-                let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
-                //console.log(now);
-                let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
-
-                if(Diferenciafechas>20){
-                    Editable=false;
-                }
-                    
-                arr.push({
-                    "idproduct": element.idproduct,
-                    "datecreated":regis,
-                    "iduser": element.iduser,
-                    "nuevo": comprobar_fecha,
-                    "subcategory": element.subcategory,
-                    "name": element.name,
-                    "details": element.details,
-                    "typemoney": element.typemoney,
-                    "marketvalue": Precio,
-                    "typepublication": element.typepublication,
-                    "conditions": element.conditions,
-                    "size": element.size,
-                    "weight": element.weight,
-                    "status": statusProduct,
-                    "editable": Editable,
-                    "CantidadOfertas":CantidadOfertas.CantOfertas,
-                    "ProductImages":img.ImagesProduct,
-                    "Preferences":prefe.Preferences
-                    
-                });
-                
-            }
+            }//fin for 
             resolve(arr)
         }
         catch(e){

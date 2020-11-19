@@ -644,7 +644,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,userNotification,titulo,detalles,idOferta);  
                         //console.log(respCrearPush);
                         //console.log(respCrearPush.result.insertId);
-                        console.log(tokenPush);
+                        //console.log(tokenPush);
                         ///////////////////////////////////////////
                                                 
                         resolve({

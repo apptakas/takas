@@ -11,7 +11,6 @@ const userController = require('../../controllers/userscontroller');
 
 
 
-
 router.get('/prueba', function (req, res) {
     //res.send('Inicio');
     let data={
@@ -3466,6 +3465,7 @@ router.post('/cantnofertaspublications', [
 
 })
 
+
      /**
  * @api {post} /user/deletepublication 10 deletepublication
  * @apiName deletepublication - Eliminación lógica de un producto
@@ -3507,7 +3507,7 @@ router.post('/cantnofertaspublications', [
  **/
 
 // Eliminación lógica de una publicación
-router.post('/deletepublication', [
+router.post('/deletepublication', rutasProtegidas,[
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists()
     ], rutasProtegidas,async (req, res) => {
@@ -3530,6 +3530,509 @@ router.post('/deletepublication', [
 })
 
 
+/**
+ * @api {post} /user/newtombotakas  1 newtombotakas
+ * @apiName  newtombotakas - Registro De TOMBOTAKAS
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser unique required.
+ * @apiParam {varchar} DetailsEventtk required.
+ * @apiParam {varchar} DetailsAwardttk  required.
+ * @apiParam {datetime} DateLottk  required.
+ * @apiParam {double} pricettk  required. 
+ * @apiParam {array} ImagesLot  required arrays de varchar.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ {
+    "success": true,
+    "status": "200",
+    "pinReference": "h8dGBL",
+    "msg": "Tombotakas se ha creado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "data": "Se ha superado el límite de imagenes",
+    "msg": "Error al intentar registrar la Tombotakas"
+}
+ */
+//Crear Tombotakas- 
+router.post('/newtombotakas',rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('DetailsEventtk', 'El Detaille del evento  es obligatorio').not().isEmpty().exists(),
+    check('DetailsAwardttk', 'El detalle del premio es obligatorio').not().isEmpty().exists(),
+    check('DateLottk', 'La fecha del sorteo es obligatoria').not().isEmpty().exists(),
+    check('pricettk', 'El precio es obligatorio').not().isEmpty().exists(),
+    check('ImagesLot', 'Debe ingresar al menos una imagen').not().isEmpty().exists()
+], async (req, res) => {
 
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.NewTomboTakas(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+ * @api {post} /user/mytombotakas  2 mytombotakas
+ * @apiName  mytombotakas - Lista de mis tombolas
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {int} flagTTK optional.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idTombotakas": 5,
+            "statusTTK": 0,
+            "datecreatedTTK": "18/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "AWVf7w",
+            "datelotTTK": "25/11/2020 19:47",
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "imgTTk": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idTombotakas": 6,
+            "statusTTK": 0,
+            "datecreatedTTK": "18/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "HZK0Jf",
+            "datelotTTK": "25/11/2020 19:47",
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "imgTTk": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idTombotakas": 7,
+            "statusTTK": 0,
+            "datecreatedTTK": "18/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "klDpiu",
+            "datelotTTK": "25/11/2020 19:47",
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "imgTTk": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        }
+    ],
+    "msg": "Lista de Tombotakas creada  con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar las Tombotakas del usuario"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/mytombotakas', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.MyTomboTakas(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+ * @api {post} /user/comprarapartartickets  3 comprarapartartickets
+ * @apiName  comprarapartartickets - Comprar o apartar tickets
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {int} idTombotaka   int required.
+ * @apiParam {array} tickets  array int required.
+ * @apiParam {int} accionTTK optional.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "tickets": [
+        "01"
+    ],
+    "ticketsNoDispo": [
+        "00",
+        "21",
+        "31"
+    ],
+    "msg": "Los tickets disponibles fueron procesados con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "data": "Los tickets nos están disponibles",
+    "msg": "Error al intentar Procesar tickets"
+}
+ */
+
+
+//COMPRAR O APARTAR Tombotakas- 
+router.post('/comprarapartartickets', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+     check('idTombotaka', 'El idTombotaka es obligatorio').not().isEmpty().exists(),
+     check('tickets', 'Debe elegir al menos un Ticket').not().isEmpty().exists(),
+    check('accionTTK', 'El accionTTK es obligatorio, debe definir si es compra o apartado').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.ComprarApartarTickets(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+ * @api {post} /user/findtombotakaspin  4 findtombotakaspin
+ * @apiName  findtombotakaspin - Buscar tombotakas por pin de referencia
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} pinttk  required.
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idTombotakas": 1,
+            "statusTTK": 0,
+            "datecreatedTTK": "18/11/2020",
+            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+            "pinreferenceTTK": "KU39Jq",
+            "datelotTTK": "25/11/2020 19:47",
+            "priceTTK": "10000.0000",
+            "resultTTK": null,
+            "ticketsReservados": [
+                {
+                    "idNUmbre": 1,
+                    "Number": "00",
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 2,
+                    "Number": "21",
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 3,
+                    "Number": "31",
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 4,
+                    "Number": "01",
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                }
+            ]
+        }
+    ],
+    "msg": "Tombotakas ha sido encontrada con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar buscar Tombotakas"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/findtombotakaspin', rutasProtegidas,[
+    check('pinttk', 'El pinttk es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.FindTomboTakasPin(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+ * @api {post} /user/mytickets  5 mytickets
+ * @apiName  mytickets - Listar mis tickets
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} flagTTK  optional.
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "idtombotakas": 1,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "00",
+            "dateapart": "2020-11-19T04:39:37.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 2,
+            "idtombotakas": 1,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "21",
+            "dateapart": "2020-11-19T04:39:37.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 3,
+            "idtombotakas": 1,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "31",
+            "dateapart": "2020-11-19T04:39:37.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 4,
+            "idtombotakas": 1,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "01",
+            "dateapart": "2020-11-19T04:40:05.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 5,
+            "idtombotakas": 2,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "01",
+            "dateapart": "2020-11-19T05:22:47.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 6,
+            "idtombotakas": 2,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "00",
+            "dateapart": "2020-11-19T05:22:47.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 7,
+            "idtombotakas": 2,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "21",
+            "dateapart": "2020-11-19T05:22:47.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 8,
+            "idtombotakas": 2,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "31",
+            "dateapart": "2020-11-19T05:22:47.000Z",
+            "datebuy": null,
+            "status": 30
+        },
+        {
+            "id": 9,
+            "idtombotakas": 2,
+            "iduser": "idfirebaseU4534dsaxgg",
+            "number": "40",
+            "dateapart": "2020-11-19T05:22:55.000Z",
+            "datebuy": null,
+            "status": 30
+        }
+    ],
+    "msg": "Lista de tickets"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar tickets"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/mytickets', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.MyTickets(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+
+   
 
 module.exports = router;
