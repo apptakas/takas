@@ -2707,7 +2707,7 @@ userController.NewTomboTakas = async (req) => {
                 pinexistr= await tombotakas.PinExist(pin);
                 pinexist=pinexistr.result;
                 console.log("pinexist");
-                 console.log(pinexist);
+                console.log(pinexist);
             }
             //console.log(pin);
             ////
@@ -2715,15 +2715,18 @@ userController.NewTomboTakas = async (req) => {
            // console.log(now+" - "+hoy);
             let dataTTK = {
                 iduser: req.idfirebaseUser,
+                name: req.namettk,
                 datecreated: hoy,
                 detailsevent: req.DetailsEventtk,
                 detailsaward: req.DetailsAwardttk,
                 datelot: DateLottk,
                 pinreference:pin,
+                money: req.moneyttk,
                 price: req.pricettk,
                 status:27
             };
-            console.log(dataTTK);
+
+            //console.log(dataTTK);
 
             const topeimg=10;      
             const ImagesLot = {};
@@ -2859,8 +2862,10 @@ userController.ComprarApartarTickets = async (req) => {
 
             let idUser=req.idfirebaseUser;
             let idTombotaka=req.idTombotaka;
-            let tickets=[]
-            let ticketsNoDispo=[]
+            let tickets=[];
+            let ticketsNoDispo=[];
+            let ticketsr=[];
+            let ticketsNoDispor=[];
             let accionTTK=req.accionTTK;
 
             let ticketdispo=0;
@@ -2873,16 +2878,20 @@ userController.ComprarApartarTickets = async (req) => {
                     if(req.tickets[atr1]>=0 && req.tickets[atr1]<=99){   
                         if(req.tickets[atr1]<=9){
                             t="0"+req.tickets[atr1];
+                            
                         } 
                         else{
                             t=""+req.tickets[atr1];
                         }  
+                        
 
                         if(ticketdispo.result==0){
                             tickets.push(t);
+                            ticketsr.push(req.tickets[atr1]);
                             //tickets[atr1] = req.tickets[atr1];
                         }else{
                             ticketsNoDispo.push(t);
+                            ticketsNoDispor.push(req.tickets[atr1]);
                             //ticketsNoDispo[atr1]= req.tickets[atr1];
                         }
                     }                  
@@ -2915,8 +2924,8 @@ userController.ComprarApartarTickets = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                tickets:tickets,
-                ticketsNoDispo:ticketsNoDispo,
+                tickets:ticketsr,
+                ticketsNoDispo:ticketsNoDispor,
                 msg: 'Los tickets disponibles fueron procesados con éxito'
                 //data: response
             }
@@ -3056,6 +3065,131 @@ userController.MyTickets = async (req) => {
 };
 
 
+//Solicitudes de Tickets
+userController.RequestsTickets = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            // let Status=null;
+            // if(req.flagTTK!=null){
+            //     if(req.flagTTK==0){
+            //         Status=27;
+            //     }
+            //     if(req.flagTTK==1){
+            //         Status=28;
+            //     }
+
+            // }
+            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.RequestsTickets(idfirebaseUser);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msg: 'Solicitudes de tickets'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar solicitudes tickets'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//Solicitudes de Tickets
+userController.ProcessRequestsTickets = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            let idticket=req.idticket;
+            //let FlagTTk=req.FlagTTk;
+            let statusTicket=30;
+            // let Status=null;
+            if(req.flagTTK!=null){
+                if(req.flagTTK==2){
+                    statusTicket=31;//COMPRADO (VENDER )
+                }
+                if(req.flagTTK==4){
+                    statusTicket=33;//RECHAZADO
+                }
+            }            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.ProcessRequestsTickets(idfirebaseUser,idticket,statusTicket);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                //data:response.result,
+                msg: 'Ticket procesado exitosamente'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar procesar ticket'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
 

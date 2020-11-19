@@ -3542,9 +3542,11 @@ router.post('/deletepublication', rutasProtegidas,[
  * 
  *   
  * @apiParam {varchar} idfirebaseUser unique required.
+ * @apiParam {varchar} namettk  required.
  * @apiParam {varchar} DetailsEventtk required.
  * @apiParam {varchar} DetailsAwardttk  required.
  * @apiParam {datetime} DateLottk  required.
+ * @apiParam {int} moneyttk  required. 
  * @apiParam {double} pricettk  required. 
  * @apiParam {array} ImagesLot  required arrays de varchar.
  * 
@@ -3576,9 +3578,11 @@ router.post('/deletepublication', rutasProtegidas,[
 //Crear Tombotakas- 
 router.post('/newtombotakas',rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('namettk', 'El namettk es obligatorio').not().isEmpty().exists(),
     check('DetailsEventtk', 'El Detaille del evento  es obligatorio').not().isEmpty().exists(),
     check('DetailsAwardttk', 'El detalle del premio es obligatorio').not().isEmpty().exists(),
     check('DateLottk', 'La fecha del sorteo es obligatoria').not().isEmpty().exists(),
+    check('moneyttk', 'El moneyttk es obligatorio').not().isEmpty().exists(),
     check('pricettk', 'El precio es obligatorio').not().isEmpty().exists(),
     check('ImagesLot', 'Debe ingresar al menos una imagen').not().isEmpty().exists()
 ], async (req, res) => {
@@ -3804,18 +3808,20 @@ router.post('/comprarapartartickets', rutasProtegidas,[
     "status": "200",
     "data": [
         {
-            "idTombotakas": 1,
+            "idTombotakas": 2,
+            "nameTombotakas": "test Nueva Tombotakas",
             "statusTTK": 0,
-            "datecreatedTTK": "18/11/2020",
+            "datecreatedTTK": "19/11/2020",
             "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-            "pinreferenceTTK": "KU39Jq",
+            "pinreferenceTTK": "ibxJu2",
             "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
             "priceTTK": "10000.0000",
             "resultTTK": null,
             "ticketsReservados": [
                 {
                     "idNUmbre": 1,
-                    "Number": "00",
+                    "Number": 31,
                     "status": 30,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
@@ -3823,7 +3829,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 },
                 {
                     "idNUmbre": 2,
-                    "Number": "21",
+                    "Number": 40,
                     "status": 30,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
@@ -3831,7 +3837,7 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 },
                 {
                     "idNUmbre": 3,
-                    "Number": "31",
+                    "Number": 21,
                     "status": 30,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
@@ -3839,7 +3845,39 @@ router.post('/comprarapartartickets', rutasProtegidas,[
                 },
                 {
                     "idNUmbre": 4,
-                    "Number": "01",
+                    "Number": 1,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 5,
+                    "Number": 10,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 6,
+                    "Number": 32,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 7,
+                    "Number": 22,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 8,
+                    "Number": 2,
                     "status": 30,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
@@ -3910,89 +3948,78 @@ router.post('/findtombotakaspin', rutasProtegidas,[
     "status": "200",
     "data": [
         {
-    "success": true,
-    "status": "200",
-    "data": [
-        {
-            "id": 1,
-            "idtombotakas": 1,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "00",
-            "dateapart": "2020-11-19T04:39:37.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 2,
-            "idtombotakas": 1,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "21",
-            "dateapart": "2020-11-19T04:39:37.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 3,
-            "idtombotakas": 1,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "31",
-            "dateapart": "2020-11-19T04:39:37.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 4,
-            "idtombotakas": 1,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "01",
-            "dateapart": "2020-11-19T04:40:05.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 5,
-            "idtombotakas": 2,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "01",
-            "dateapart": "2020-11-19T05:22:47.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 6,
-            "idtombotakas": 2,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "00",
-            "dateapart": "2020-11-19T05:22:47.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 7,
-            "idtombotakas": 2,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "21",
-            "dateapart": "2020-11-19T05:22:47.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 8,
-            "idtombotakas": 2,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "31",
-            "dateapart": "2020-11-19T05:22:47.000Z",
-            "datebuy": null,
-            "status": 30
-        },
-        {
-            "id": 9,
-            "idtombotakas": 2,
-            "iduser": "idfirebaseU4534dsaxgg",
-            "number": "40",
-            "dateapart": "2020-11-19T05:22:55.000Z",
-            "datebuy": null,
-            "status": 30
+            "idTombotakas": 2,
+            "nameTombotakas": "test Nueva Tombotakas",
+            "statusTTK": 0,
+            "datecreatedTTK": "19/11/2020",
+            "datelotTTK": "25/11/2020 19:47",
+            "priceTTK": "10000.0000",
+            "ticketsReservados": [
+                {
+                    "idNUmbre": 1,
+                    "Number": 31,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 2,
+                    "Number": 40,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 3,
+                    "Number": 21,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 4,
+                    "Number": 1,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 5,
+                    "Number": 10,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 6,
+                    "Number": 32,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 7,
+                    "Number": 22,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 8,
+                    "Number": 2,
+                    "status": 30,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                }
+            ]
         }
     ],
     "msg": "Lista de tickets"
@@ -4031,6 +4058,207 @@ router.post('/mytickets', rutasProtegidas,[
 
 })
 
+
+/**
+ * @api {post} /user/requeststickets  6 requeststickets
+ * @apiName  requeststickets - Listar Solicitudes de compra de tickets
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idTombotakas": 2,
+            "nameTombotakas": "test Nueva Tombotakas",
+            "statusTTK": 0,
+            "datecreatedTTK": "19/11/2020",
+            "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
+            "priceTTK": "10000.0000",
+            "ticketsReservados": [
+                {
+                    "idNUmbre": 1,
+                    "Number": 31,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 2,
+                    "Number": 40,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 3,
+                    "Number": 21,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 4,
+                    "Number": 1,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 5,
+                    "Number": 10,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 6,
+                    "Number": 32,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 7,
+                    "Number": 22,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                },
+                {
+                    "idNUmbre": 8,
+                    "Number": 2,
+                    "status": 1,
+                    "NameUser": "gusuario12",
+                    "phonenumber": null,
+                    "email": "emailUser12@gmail.com"
+                }
+            ]
+        }
+    ],
+    "msg": "Solicitudes de tickets"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar solicitudes tickets"
+}
+ */
+
+
+//Listar Solicitudes- 
+router.post('/requeststickets', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.RequestsTickets(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+
+/**
+ * @api {post} /user/processrequeststickets  7 processrequeststickets
+ * @apiName  processrequeststickets - Procesar Solicitudes de compra de tickets
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {int} idticket  required.
+ * @apiParam {int} FlagTTk  required 2=COMPRADO(VENDER) 4=RECHAZADO.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "msg": "Ticket procesado exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar procesar ticket"
+}
+ */
+
+
+//Procesar Solicitud de un ticket- 
+router.post('/processrequeststickets', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idticket', 'El idticket es obligatorio').not().isEmpty().exists(),
+    check('FlagTTk', 'El FlagTTk es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.ProcessRequestsTickets(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 
    
