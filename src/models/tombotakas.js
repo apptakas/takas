@@ -468,6 +468,35 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUser,idticket,statusTicket) 
 };
 
 
+tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
+    return new Promise((resolve, reject) => {
+     if (pool) {
+         let ticketsReservados={};
+         pool.query(
+            'SELECT * FROM tombotakas WHERE id=?',  idTTK,
+             async(err, result) => {
+                 console.log(err);
+                // console.log(result);
+                 if (err) {
+                     resolve({
+                         'error': err
+                     })
+                 } else {
+                     ticketsReservados = await tombotakasModel.rTombotakas(result);
+                     
+                     resolve({
+                         'result': ticketsReservados
+                     })
+                 }
+
+             }
+         )
+         //return resultado;
+     }
+ })
+};
+
+
 
 
 module.exports = tombotakasModel;

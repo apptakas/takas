@@ -3853,97 +3853,95 @@ router.post('/comprarapartartickets', rutasProtegidas,[
 {
     "success": true,
     "status": "200",
-    "data": [
-        {
-            "idTombotakas": 2,
-            "nameTombotakas": "test Nueva Tombotakas",
-            "statusTTK": 0,
-            "datecreatedTTK": "19/11/2020",
-            "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-            "detailsAwardttk": "La imagen que voy a cargar en este momento",
-            "pinreferenceTTK": "ibxJu2",
-            "datelotTTK": "25/11/2020 19:47",
-            "moneyTTK": 1,
-            "priceTTK": "10000.0000",
-            "resultTTK": null,
-            "numberticketsrs": [
-                31,
-                40,
-                21,
-                1,
-                10,
-                32,
-                22,
-                2
-            ],
-            "ticketsReservados": [
-                {
-                    "idNUmbre": 1,
-                    "Number": 31,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 2,
-                    "Number": 40,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 3,
-                    "Number": 21,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 4,
-                    "Number": 1,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 5,
-                    "Number": 10,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 6,
-                    "Number": 32,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 7,
-                    "Number": 22,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                },
-                {
-                    "idNUmbre": 8,
-                    "Number": 2,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
-                }
-            ]
-        }
-    ],
+    "data": {
+        "idTombotakas": 2,
+        "nameTombotakas": "test Nueva Tombotakas",
+        "statusTTK": 0,
+        "datecreatedTTK": "19/11/2020",
+        "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+        "detailsAwardttk": "La imagen que voy a cargar en este momento",
+        "pinreferenceTTK": "ibxJu2",
+        "datelotTTK": "25/11/2020 19:47",
+        "moneyTTK": 1,
+        "priceTTK": "10000.0000",
+        "resultTTK": null,
+        "numberticketsrs": [
+            31,
+            40,
+            21,
+            1,
+            10,
+            32,
+            22,
+            2
+        ],
+        "ticketsReservados": [
+            {
+                "idNUmbre": 1,
+                "Number": 31,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 2,
+                "Number": 40,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 3,
+                "Number": 21,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 4,
+                "Number": 1,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 5,
+                "Number": 10,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 6,
+                "Number": 32,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 7,
+                "Number": 22,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 8,
+                "Number": 2,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            }
+        ]
+    },
     "msg": "Tombotakas ha sido encontrada con éxito"
 }
 
@@ -4318,6 +4316,160 @@ router.post('/processrequeststickets', rutasProtegidas,[
     return res.status(response.data.status).json(response.data)
 
 })
+
+/**
+ * @api {post} /user/detailstombotakas  8 detailstombotakas
+ * @apiName  detailstombotakas - Detalle Tombotakas
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {int} idTTK  required.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": {
+        "idTombotakas": 2,
+        "nameTombotakas": "test Nueva Tombotakas",
+        "statusTTK": 0,
+        "datecreatedTTK": "19/11/2020",
+        "detailseventTTK": "Para canche 25/11/20 8:00 pm",
+        "detailsAwardttk": "La imagen que voy a cargar en este momento",
+        "pinreferenceTTK": "ibxJu2",
+        "datelotTTK": "25/11/2020 19:47",
+        "moneyTTK": 1,
+        "priceTTK": "10000.0000",
+        "resultTTK": null,
+        "numberticketsrs": [
+            31,
+            40,
+            21,
+            1,
+            10,
+            32,
+            22,
+            2
+        ],
+        "ticketsReservados": [
+            {
+                "idNUmbre": 1,
+                "Number": 31,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 2,
+                "Number": 40,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 3,
+                "Number": 21,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 4,
+                "Number": 1,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 5,
+                "Number": 10,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 6,
+                "Number": 32,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 7,
+                "Number": 22,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            },
+            {
+                "idNUmbre": 8,
+                "Number": 2,
+                "status": 1,
+                "NameUser": "gusuario12",
+                "phonenumber": null,
+                "email": "emailUser12@gmail.com"
+            }
+        ]
+    },
+    "msg": "Detalle de Tombotakas encontrado exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar buscar detalles de Tombotakas"
+}
+ */
+
+
+
+//DETALLE DE LA TOMBOTAKAS- 
+router.post('/detailstombotakas', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idTTK', 'El idticket es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.DetailsTombotakas(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+
 
 
    

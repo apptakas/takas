@@ -3749,6 +3749,98 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/user/detailstombotakas",
+    "title": "8 detailstombotakas",
+    "name": "detailstombotakas_-_Detalle_Tombotakas",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idTTK",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idTombotakas\": 2,\n        \"nameTombotakas\": \"test Nueva Tombotakas\",\n        \"statusTTK\": 0,\n        \"datecreatedTTK\": \"19/11/2020\",\n        \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n        \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n        \"pinreferenceTTK\": \"ibxJu2\",\n        \"datelotTTK\": \"25/11/2020 19:47\",\n        \"moneyTTK\": 1,\n        \"priceTTK\": \"10000.0000\",\n        \"resultTTK\": null,\n        \"numberticketsrs\": [\n            31,\n            40,\n            21,\n            1,\n            10,\n            32,\n            22,\n            2\n        ],\n        \"ticketsReservados\": [\n            {\n                \"idNUmbre\": 1,\n                \"Number\": 31,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 2,\n                \"Number\": 40,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 3,\n                \"Number\": 21,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 4,\n                \"Number\": 1,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 5,\n                \"Number\": 10,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 6,\n                \"Number\": 32,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 7,\n                \"Number\": 22,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 8,\n                \"Number\": 2,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            }\n        ]\n    },\n    \"msg\": \"Detalle de Tombotakas encontrado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar buscar detalles de Tombotakas\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
     "url": "/user/findtombotakaspin",
     "title": "4 findtombotakaspin",
     "name": "findtombotakaspin_-_Buscar_tombotakas_por_pin_de_referencia",
@@ -3804,7 +3896,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 2,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n            \"pinreferenceTTK\": \"ibxJu2\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"numberticketsrs\": [\n                31,\n                40,\n                21,\n                1,\n                10,\n                32,\n                22,\n                2\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 31,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": 40,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": 21,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": 1,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 5,\n                    \"Number\": 10,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 6,\n                    \"Number\": 32,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 7,\n                    \"Number\": 22,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 8,\n                    \"Number\": 2,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Tombotakas ha sido encontrada con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idTombotakas\": 2,\n        \"nameTombotakas\": \"test Nueva Tombotakas\",\n        \"statusTTK\": 0,\n        \"datecreatedTTK\": \"19/11/2020\",\n        \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n        \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n        \"pinreferenceTTK\": \"ibxJu2\",\n        \"datelotTTK\": \"25/11/2020 19:47\",\n        \"moneyTTK\": 1,\n        \"priceTTK\": \"10000.0000\",\n        \"resultTTK\": null,\n        \"numberticketsrs\": [\n            31,\n            40,\n            21,\n            1,\n            10,\n            32,\n            22,\n            2\n        ],\n        \"ticketsReservados\": [\n            {\n                \"idNUmbre\": 1,\n                \"Number\": 31,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 2,\n                \"Number\": 40,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 3,\n                \"Number\": 21,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 4,\n                \"Number\": 1,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 5,\n                \"Number\": 10,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 6,\n                \"Number\": 32,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 7,\n                \"Number\": 22,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 8,\n                \"Number\": 2,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            }\n        ]\n    },\n    \"msg\": \"Tombotakas ha sido encontrada con éxito\"\n}",
           "type": "json"
         }
       ]

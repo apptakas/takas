@@ -2978,7 +2978,7 @@ userController.FindTomboTakasPin = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data:response.result,
+                data:response.result[0],
                 msg: 'Tombotakas ha sido encontrada con éxito'
                 //data: response
             }
@@ -3190,6 +3190,71 @@ userController.ProcessRequestsTickets = async (req) => {
     }
 
 };
+
+
+//Detalles Tombotakas
+userController.DetailsTombotakas = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            let idTTK=req.idTTK;
+            //let FlagTTk=req.FlagTTk;
+            let statusTicket=30;
+            // let Status=null;
+            // if(req.flagTTK!=null){
+            //     if(req.flagTTK==2){
+            //         statusTicket=31;//COMPRADO (VENDER )
+            //     }
+            //     if(req.flagTTK==4){
+            //         statusTicket=33;//RECHAZADO
+            //     }
+            // }            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.DetailsTombotakas(idfirebaseUser,idTTK);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result[0],
+                msg: 'Detalle de Tombotakas encontrado exitosamente'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar buscar detalles de Tombotakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 
