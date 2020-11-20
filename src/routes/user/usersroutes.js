@@ -4010,12 +4010,23 @@ router.post('/findtombotakaspin', rutasProtegidas,[
             "statusTTK": 0,
             "datecreatedTTK": "19/11/2020",
             "datelotTTK": "25/11/2020 19:47",
+            "moneyTTK": 1,
             "priceTTK": "10000.0000",
+            "numberticketsrs": [
+                31,
+                40,
+                21,
+                1,
+                10,
+                32,
+                22,
+                2
+            ],
             "ticketsReservados": [
                 {
                     "idNUmbre": 1,
                     "Number": 31,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4023,7 +4034,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 2,
                     "Number": 40,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4031,7 +4042,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 3,
                     "Number": 21,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4039,7 +4050,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 4,
                     "Number": 1,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4047,7 +4058,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 5,
                     "Number": 10,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4055,7 +4066,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 6,
                     "Number": 32,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4063,7 +4074,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 7,
                     "Number": 22,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4071,7 +4082,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 8,
                     "Number": 2,
-                    "status": 30,
+                    "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4343,6 +4354,7 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "status": "200",
     "data": {
         "idTombotakas": 2,
+        "pertenece": false,
         "nameTombotakas": "test Nueva Tombotakas",
         "statusTTK": 0,
         "datecreatedTTK": "19/11/2020",
@@ -4449,7 +4461,7 @@ router.post('/processrequeststickets', rutasProtegidas,[
 //DETALLE DE LA TOMBOTAKAS- 
 router.post('/detailstombotakas', rutasProtegidas,[
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('idTTK', 'El idticket es obligatorio').not().isEmpty().exists()
+    check('idTTK', 'El idTTK es obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
 
     const error = validationResult(req);

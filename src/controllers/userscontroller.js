@@ -2971,14 +2971,18 @@ userController.FindTomboTakasPin = async (req) => {
         //console.log(msgError);
 
         let data = {};
+        let datar = [];
         if (response && response.result) {
             let r = {};
             r = response.result;
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
 
             data = {
                 success: true,
                 status: '200',
-                data:response.result[0],
+                data:datar,
                 msg: 'Tombotakas ha sido encontrada con éxito'
                 //data: response
             }
@@ -3225,14 +3229,20 @@ userController.DetailsTombotakas = async (req) => {
         //console.log(msgError);
 
         let data = {};
+        let datar = [];
         if (response && response.result) {
             let r = {};
             r = response.result;
 
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
+
+
             data = {
                 success: true,
                 status: '200',
-                data:response.result[0],
+                data:datar,
                 msg: 'Detalle de Tombotakas encontrado exitosamente'
                 //data: response
             }

@@ -320,7 +320,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
             'SELECT t.id, t.idtombotakas,t.number, t.status, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE idtombotakas='+element.id,
             async(err2, result2) => {
                 if (err2) {
-                    console.log(err2);
+                    //console.log(err2);
                     resolve({
                         'error': err2
                     })
@@ -328,7 +328,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                 
                 if(result2.length>0){
                    // console.log(SumItemsOffer);
-                    console.log(result2);
+                   // console.log(result2);
                     let statusticket=0;
                     for(var atr2 in result2){
                         if(result2[atr2].status==30){
@@ -360,24 +360,47 @@ tombotakasModel.LisTicketsReservados = (element) => {
                 let dc = date.format(datecreated, 'DD/MM/YYYY');
                 let datelot = new Date(element.datelot);
                 let dl = date.format(datelot, 'DD/MM/YYYY HH:mm');
-                resolve({                    
-                    "idTombotakas": element.id,
-                    "nameTombotakas": element.name,
-                    "statusTTK": statusTTK,
-                    "datecreatedTTK": dc,
-                    "detailseventTTK": element.detailsevent,
-                    "detailsAwardttk": element.detailsaward,
-                    "pinreferenceTTK": element.pinreference,
-                    "datelotTTK": dl,
-                    "moneyTTK": element.money,
-                    "priceTTK": Number.parseFloat(element.price).toFixed(4),
-                    "resultTTK": element.result,
-                    "numberticketsrs":numberticketsr,
-                    "ticketsReservados":tickets
-                });
+
+                console.log("element");
+                //console.log(element);
+                if(element.pertenece!=undefined){
+                    console.log("pertenece");
+                    resolve({                   
+                        "idTombotakas": element.id,
+                        "pertenece": element.pertenece,
+                        "nameTombotakas": element.name,
+                        "statusTTK": statusTTK,
+                        "datecreatedTTK": dc,
+                        "detailseventTTK": element.detailsevent,
+                        "detailsAwardttk": element.detailsaward,
+                        "pinreferenceTTK": element.pinreference,
+                        "datelotTTK": dl,
+                        "moneyTTK": element.money,
+                        "priceTTK": Number.parseFloat(element.price).toFixed(4),
+                        "resultTTK": element.result,
+                        "numberticketsrs":numberticketsr,
+                        "ticketsReservados":tickets
+                    });
+                }else{
+                    resolve({                   
+                        "idTombotakas": element.id,
+                        "nameTombotakas": element.name,
+                        "statusTTK": statusTTK,
+                        "datecreatedTTK": dc,
+                        "detailseventTTK": element.detailsevent,
+                        "detailsAwardttk": element.detailsaward,
+                        "pinreferenceTTK": element.pinreference,
+                        "datelotTTK": dl,
+                        "moneyTTK": element.money,
+                        "priceTTK": Number.parseFloat(element.price).toFixed(4),
+                        "resultTTK": element.result,
+                        "numberticketsrs":numberticketsr,
+                        "ticketsReservados":tickets
+                    });
+                }
             }
 
-            })
+        })
     })
 }
 
@@ -442,7 +465,7 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUser,idticket,statusTicket) 
     return new Promise((resolve, reject) => {
      if (pool) {
          pool.query(
-            'UPDATE tombotakas SET status=? WHERE id=?', [
+            'UPDATE tombotikets SET status=? WHERE id=?', [
                 statusTicket,
                 idticket
             ],
@@ -475,15 +498,28 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
          pool.query(
             'SELECT * FROM tombotakas WHERE id=?',  idTTK,
              async(err, result) => {
-                 console.log(err);
+                 //console.log(err);
                 // console.log(result);
                  if (err) {
                      resolve({
                          'error': err
                      })
                  } else {
+                     //console.log()
+                    if(result.length>0){
+                        if(result.iduser==idfirebaseUser){
+                            pertenece=true;
+                        }
+                        else{
+                            pertenece=false;
+                        }
+                       // result.push({'pertenece':pertenece});   
+                    }; 
+                    //result["pertenece"] = pertenece;
+                    result[0].pertenece = pertenece;
                      ticketsReservados = await tombotakasModel.rTombotakas(result);
-                     
+                    
+
                      resolve({
                          'result': ticketsReservados
                      })
