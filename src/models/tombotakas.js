@@ -316,6 +316,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
         
         let tickets=[];
         let numberticketsr=[];
+        let img={};
         pool.query(
             'SELECT t.id, t.idtombotakas,t.number, t.status, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE idtombotakas='+element.id,
             async(err2, result2) => {
@@ -363,6 +364,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
 
                 console.log("element");
                 //console.log(element);
+                img=await tombotakasModel.ListImagesTombotakas(element);
                 if(element.pertenece!=undefined){
                     console.log("pertenece");
                     resolve({                   
@@ -378,6 +380,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                         "moneyTTK": element.money,
                         "priceTTK": Number.parseFloat(element.price).toFixed(4),
                         "resultTTK": element.result,
+                        "imgTTK":img.ImagesTTK,
                         "numberticketsrs":numberticketsr,
                         "ticketsReservados":tickets
                     });
@@ -394,6 +397,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                         "moneyTTK": element.money,
                         "priceTTK": Number.parseFloat(element.price).toFixed(4),
                         "resultTTK": element.result,
+                        "imgTTK":img.ImagesTTK,
                         "numberticketsrs":numberticketsr,
                         "ticketsReservados":tickets
                     });
@@ -532,7 +536,44 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
  })
 };
 
+//////////////////////
+tombotakasModel.ListImagesTombotakas = (element) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            'SELECT  url FROM imgtombotakas WHERE idtombotakas=? ',[element.id],
+            (err2, result2) => {
+                 
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    //console.log(result2); 
+                    // console.log(result2.length);
+                    let ImagesTTK= []; 
+                    for(var atr2 in result2){
+                    ImagesTTK.push(result2[atr2].url); 
+                    };  
+                    //console.log(element.idproduct);  
+                   // console.log(ImagesTTK);
+                    resolve({
+                        
+                        "ImagesTTK": ImagesTTK
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
 
+            })
+    })
+}
+////////
 
 
 module.exports = tombotakasModel;
