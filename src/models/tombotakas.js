@@ -441,8 +441,9 @@ tombotakasModel.RequestsTickets = (idfirebaseUser) => {
     return new Promise((resolve, reject) => {
      if (pool) {
          let ticketsReservados={};
+         //SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser=? AND tk.status=30 ORDER BY tk.idtombotakas ASC
          pool.query(
-            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser=? AND tk.status=30 ORDER BY tk.idtombotakas ASC',  idfirebaseUser,
+            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser=? AND tk.status=30 ORDER BY tk.idtombotakas ASC',  idfirebaseUser,
              async(err, result) => {
                  console.log(err);
                 // console.log(result);

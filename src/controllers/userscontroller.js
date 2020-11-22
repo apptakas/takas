@@ -3142,16 +3142,20 @@ userController.ProcessRequestsTickets = async (req) => {
             let idfirebaseUser=req.idfirebaseUser;
             let idticket=req.idticket;
             //let FlagTTk=req.FlagTTk;
+            console.log(req.FlagTTk);
             let statusTicket=30;
             // let Status=null;
-            if(req.flagTTK!=null){
-                if(req.flagTTK==2){
+            
+                if(req.FlagTTk==2){
                     statusTicket=31;//COMPRADO (VENDER )
                 }
-                if(req.flagTTK==4){
+
+                if(req.FlagTTk==4){
+                  
                     statusTicket=33;//RECHAZADO
                 }
-            }            
+
+            console.log(statusTicket);         
 
             let msgError="";            
 
