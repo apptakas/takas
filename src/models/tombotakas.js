@@ -338,6 +338,12 @@ tombotakasModel.LisTicketsReservados = (element) => {
                         if(result2[atr2].status==31){
                             statusticket=2
                         }
+                        if(result2[atr2].status==32){
+                            statusticket=3
+                        }
+                        if(result2[atr2].status==33){
+                            statusticket=4
+                        }
                         numberticketsr.push(parseInt(result2[atr2].number));
 
                         tickets.push({
