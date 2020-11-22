@@ -516,9 +516,11 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
                          'error': err
                      })
                  } else {
-                     //console.log()
-                    if(result.length>0){
-                        if(result.iduser==idfirebaseUser){
+                     let pertenece=false;
+                     console.log(result[0].iduser);
+                    if(result[0].length!=0){
+                        if(result[0].iduser==idfirebaseUser){
+                            //console.log(idfirebaseUser);
                             pertenece=true;
                         }
                         else{
