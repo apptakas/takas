@@ -350,7 +350,8 @@ router.post('/gautenticar', [
         "EmailUser": "anailysrodriguez@gmail.com",
         "PhonenumberUser": "3174723818",
         "DatecreatedUser": "07/09/20",
-        "Reputation": 4.5
+        "Reputation Vendedor": 4,
+        "Reputation Cliente": 0
     },
     "msg": "Perfil de Usuario"
 }
@@ -4456,6 +4457,196 @@ router.post('/processrequeststickets', rutasProtegidas,[
 }
  */
 
+//Score
+/**
+ * @api {post} /user/scorepublication  11 scorepublication
+ * @apiName  scorepublication - Puntuación de la publicación
+ * @apiGroup Product
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {int} idPublication  required.
+ * @apiParam {int} scoreUser  required.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "msg": "Se ha calificado exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar calificar"
+}
+ */
+
+//PUNTICAIÓN PARA UNA PUBLICACIÓN - 
+router.post('/scorepublication', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('scoreUser', 'El scoreUser es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.scorePublication(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+//pqrs
+/**
+ * @api {post} /user/pqrs  1 pqrs
+ * @apiName  pqrs - Crear nueva PQRs
+ * @apiGroup PQRs
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} detailsPQRs  required.
+ * @apiParam {int} flagPQRs  required. Preguntas=0, Quejas=1, Respuestas=2, Sugerencias=3
+ * 
+ *
+ * @apiSuccess {boolean} success of the PQRs.
+ * @apiSuccess {int} status 200 of the PQRs.
+ * @apiSuccess {string} msg   of the PQRs.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "msg": "Se ha creado la PQRs exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the PQRs was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar crear una nueva PQRs"
+}
+ */
+
+//CREAR NUEVA PQRS - 
+router.post('/pqrs', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('detailsPQRs', 'El detailsPQRs es obligatorio').not().isEmpty().exists(),
+    check('flagPQRs', 'El flagPQRs es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.pqrs(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+//Solicitud Membresía
+/**
+ * @api {post} /user/solicitarmembresia  1 solicitarmembresia
+ * @apiName  solicitarmembresia - Crear nueva PQRs
+ * @apiGroup Memberships
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {int} typeMemberships  required.
+ * 
+ *
+ * @apiSuccess {boolean} success of the Memberships.
+ * @apiSuccess {int} status 200 of the Memberships.
+ * @apiSuccess {string} msg   of the Memberships.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "msg": "Solicitud ha sido enviada"
+}
+ *
+ * @apiError UserNotFound The id of the Memberships was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar enviar solicitud"
+}
+ */
+
+//SOLICITUD DE COMPRA DE MEMBRESÍA - 
+router.post('/solicitarmembresia', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('typeMemberships', 'El typeMemberships es obligatorio').not().isEmpty().exists(),
+    //check('flagPQRs', 'El flagPQRs es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.SolicitarMembresia(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
 
 
 //DETALLE DE LA TOMBOTAKAS- 
@@ -4479,6 +4670,8 @@ router.post('/detailstombotakas', rutasProtegidas,[
     return res.status(response.data.status).json(response.data)
 
 })
+
+
 
 
 

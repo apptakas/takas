@@ -158,19 +158,28 @@ userModel.PerfilUser = (idUser,callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT * FROM users where id="'+idUser+'"',
+                'SELECT u.fullname,u.email,u.phonenumber,u.datecreated,AVG(p.scorev) AS calfVendedor,AVG(p.scorec)AS calfClient FROM users AS u INNER JOIN product AS p ON u.id=p.iduser WHERE u.id="'+idUser+'" GROUP BY p.iduser',
                 (err, result) => {
                    //console.log(result);
                     if (result && Object.entries(result).length != 0) {
                         let registro = new Date(result[0].datecreated);
                         let regis = date.format(registro, 'DD/MM/YY');
+                        let calfClient=0;
+                        if(result[0].calfClient!=null){
+                            calfClient=result[0].calfClient;
+                        }
+                        let calfVendedor=0;
+                        if(calfVendedor!=null){
+                            calfVendedor=result[0].calfVendedor;
+                        }
                         resolve({
                             'result': {
                                 'NameUser':result[0].fullname,
                                 'EmailUser':result[0].email,
                                 'PhonenumberUser':result[0].phonenumber,
                                 'DatecreatedUser':regis,
-                                'Reputation':4.5,
+                                'Reputation Vendedor':calfVendedor,
+                                'Reputation Cliente':calfClient,
                             }
                         })
                     } else {
@@ -362,6 +371,145 @@ userModel.DataUserOferta= (idOferta) => {
 
 
 };
+
+
+//SolicitarMembresia
+userModel.SolicitarMembresia = (userData, iduser) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'UPDATE users SET ? WHERE id="'+iduser+'"', userData,
+                (err, resut) => {
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
+
+                }
+            )
+       
+    }
+    )
+
+
+};
+
+
+//ListUsers  - obtenemos lista de usuarios segun filtros
+userModel.ListUsers = (Consulta) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                Consulta,
+                (err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+//Eliminación lógia o suspención de Usuario
+userModel.DeleteSUser = (id) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                'UPDATE `users` SET status= 2 where id='+id, 
+                (err, resut) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+//Obtener la cantidad de regisrados por rango de fecha
+userModel.CantUsersRegistrados = (inicio,fin) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                "SELECT COUNT(id) AS CantRegistros FROM users WHERE status=1 AND datecreated  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id", 
+                (err, result) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': result[0]
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
+//Obtener la cantidad de Solicitudes de Membresías  por rango de fecha
+userModel.CantMemberShiprequests = (inicio,fin) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                "SELECT COUNT(id) AS CantRM FROM users WHERE statusmemberships=38 AND datememberships  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id", 
+                (err, result) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': result[0]
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
+
+
+
 
 
 module.exports = userModel;

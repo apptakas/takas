@@ -869,6 +869,165 @@ ProductModel.RecorridoPublicationOffer = async(element) => {
 
 };
 
+ProductModel.scorePublication = (idfirebaseUser,idPublication,scoreUser) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        let Puntuar={};
+        pool.query(
+            "SELECT * FROM product where id="+idPublication,
+            async(err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {  
+                    let consulta="";
+                    if(result[0].iduser==idfirebaseUser){
+                        consulta="UPDATE product SET scorev = "+scoreUser+"  where status=4 AND id='"+idPublication+"'"; 
+                    }
+                    else{
+                        consulta="UPDATE product SET scorev = "+scoreUser+", idclient='"+idfirebaseUser+"'  where status=4 AND id='"+idPublication+"'"; 
+                    }
+                    //console.log(result);
+                    Puntuar = await ProductModel.Calificar(consulta);  
+
+                    resolve({
+                        'result': Puntuar
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+ProductModel.Calificar = (consulta) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            consulta,
+            (err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {                      
+
+                    resolve({
+                        'result': result
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+
+ProductModel.ListPublications = (consulta) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            consulta,
+            (err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {                      
+
+                    resolve({
+                        'result': result
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+
+ProductModel.cantPublications = (inicio,fin) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        consulta="SELECT COUNT(id) AS CantPublications FROM product WHERE datepublication  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id";
+        console.log(consulta);
+        pool.query(
+            consulta,
+            (err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {                      
+
+                    resolve({
+                        'result': result[0]
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+
+ProductModel.cantPublications = (inicio,fin) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        consulta="SELECT COUNT(id) AS CantPublications FROM product WHERE datepublication  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id";
+        console.log(consulta);
+        pool.query(
+            consulta,
+            (err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {                      
+
+                    resolve({
+                        'result': result[0]
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+
 
 
 

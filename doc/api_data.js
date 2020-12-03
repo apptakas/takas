@@ -561,6 +561,558 @@ define({ "api": [
     "groupTitle": "Cities"
   },
   {
+    "type": "post",
+    "url": "/admin/cantmembershiprequests",
+    "title": "4 cantmembershiprequests",
+    "name": "cantmembershiprequests_-_Cantidad_de_Solicitudes_de_Membresías",
+    "group": "Indicadores",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateInicio",
+            "description": "<p>Reqired.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateFin",
+            "description": "<p>Reqired.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"CantRM\": 1\n    },\n    \"msg\": \"Cantidad de Solicitudes de Membresías según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Obtener cantidad de Solicitudes de Membresías según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Indicadores"
+  },
+  {
+    "type": "post",
+    "url": "/admin/cantombotakas",
+    "title": "3 cantombotakas",
+    "name": "cantombotakas_-_Cantidad_de_Tombotakas",
+    "group": "Indicadores",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateInicio",
+            "description": "<p>Reqired.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateFin",
+            "description": "<p>Reqired.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"CantTomboTakas\": 1\n    },\n    \"msg\": \"Cantidad de Tombotakas según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Obtener cantidad de Tombotakas según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Indicadores"
+  },
+  {
+    "type": "post",
+    "url": "/admin/cantpublications",
+    "title": "2 cantpublications",
+    "name": "cantpublications_-_Cantidad_de_Publications",
+    "group": "Indicadores",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateInicio",
+            "description": "<p>Reqired.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateFin",
+            "description": "<p>Reqired.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"CantPublications\": 1\n    },\n    \"msg\": \"Cantidad de Registrados según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Obtener cantidad de registros según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Indicadores"
+  },
+  {
+    "type": "post",
+    "url": "/admin/cantusersregistrados",
+    "title": "1 cantusersregistrados",
+    "name": "cantusersregistrados_-_Cantidad_de_Usuarios_registrados",
+    "group": "Indicadores",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateInicio",
+            "description": "<p>Reqired.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DateFin",
+            "description": "<p>Reqired.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"CantRegistros\": 1\n    },\n    \"msg\": \"Cantidad de Registrados según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Obtener cantidad de registros según fecha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Indicadores"
+  },
+  {
+    "type": "post",
+    "url": "/admin/gestionmembership",
+    "title": "2 gestionmembership",
+    "name": "gestionmembership_-_Gestionar_Membresías",
+    "group": "Memberships",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "flagMembership",
+            "description": "<p>required. Aprobada=1, Expirada=2, Cancelada=3, Rechazada=4</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Memberships.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Memberships.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Memberships.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Solicitud Procesada con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Memberships was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Procesar la solicitud solicitud\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Memberships"
+  },
+  {
+    "type": "post",
+    "url": "/user/solicitarmembresia",
+    "title": "1 solicitarmembresia",
+    "name": "solicitarmembresia_-_Crear_nueva_PQRs",
+    "group": "Memberships",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "typeMemberships",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Memberships.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Memberships.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Memberships.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Solicitud ha sido enviada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Memberships was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar enviar solicitud\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Memberships"
+  },
+  {
     "type": "get",
     "url": "/user/listmoney",
     "title": "1 listmoney",
@@ -1733,6 +2285,381 @@ define({ "api": [
     "groupTitle": "Offers"
   },
   {
+    "type": "post",
+    "url": "/admin/listpqrs",
+    "title": "3 listpqrs",
+    "name": "listpqrs_-_Listar_PQRs",
+    "group": "PQRs",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "FlagPQRs",
+            "description": "<p>Reqired. PREGUNTA = 0, QUEJAS=1, RESPUESTAS=2, SUGERENCIAS=3, TODO=4</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"details\": \"Puedo pagar en línea?\",\n            \"datecreated\": \"2020-11-27T03:50:30.000Z\",\n            \"status\": 34\n        },\n        {\n            \"id\": 2,\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"details\": \"El vendedor tarda mucho en contestar!\",\n            \"datecreated\": \"2020-11-27T03:51:26.000Z\",\n            \"status\": 35\n        },\n        {\n            \"id\": 3,\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"details\": \"Sería genial tener un panel de preguntas frecuentes\",\n            \"datecreated\": \"2020-11-27T03:52:03.000Z\",\n            \"status\": 37\n        }\n    ],\n    \"msg\": \"Lista de PQRs con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar PQRs\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "PQRs"
+  },
+  {
+    "type": "post",
+    "url": "/admin/listpqrs",
+    "title": "3 listpqrs",
+    "name": "listpqrs_-_Listar_PQRs",
+    "group": "PQRs",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idFirebaseUser",
+            "description": "<p>Reqired.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"details\": \"Puedo pagar en línea?\",\n            \"datecreated\": \"2020-11-27T03:50:30.000Z\",\n            \"status\": 34\n        },\n        {\n            \"id\": 2,\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"details\": \"El vendedor tarda mucho en contestar!\",\n            \"datecreated\": \"2020-11-27T03:51:26.000Z\",\n            \"status\": 35\n        },\n        {\n            \"id\": 3,\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"details\": \"Sería genial tener un panel de preguntas frecuentes\",\n            \"datecreated\": \"2020-11-27T03:52:03.000Z\",\n            \"status\": 37\n        }\n    ],\n    \"msg\": \"Lista de PQRs con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar PQRs\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "PQRs"
+  },
+  {
+    "type": "post",
+    "url": "/user/pqrs",
+    "title": "1 pqrs",
+    "name": "pqrs_-_Crear_nueva_PQRs",
+    "group": "PQRs",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "detailsPQRs",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "flagPQRs",
+            "description": "<p>required. Preguntas=0, Quejas=1, Respuestas=2, Sugerencias=3</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Se ha creado la PQRs exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar crear una nueva PQRs\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "PQRs"
+  },
+  {
+    "type": "post",
+    "url": "/admin/responsepqrs",
+    "title": "2 responsepqrs",
+    "name": "responsepqrs_-_Crear_respuesta_de_nueva_PQRs",
+    "group": "PQRs",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idPQRs",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "detailsPQRs",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "flagPQRs",
+            "description": "<p>required. Preguntas=0, Quejas=1, Respuestas=2, Sugerencias=3</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the PQRs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the PQRs.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Se ha creado respuesta a la PQRs exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the PQRs was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar crear una respuesta para  PQRs\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "PQRs"
+  },
+  {
     "type": "get",
     "url": "/user/listypepreferences",
     "title": "1 Listypepreferences",
@@ -2587,6 +3514,98 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/admin/listpublications",
+    "title": "12 listpublications",
+    "name": "listpublications_-_Listar_Publicaciones",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "TypeP",
+            "description": "<p>Reqired. Takastear = 0, Subastakear=1, Servitakastear=2</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "StatusP",
+            "description": "<p>Reqired. ACTIVA = 0, TAKASTEADO=1, DESHABILITADA=2, EDITADA=2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"new\": null,\n            \"datepublication\": \"2020-10-24T00:32:10.000Z\",\n            \"iduser\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"name\": \"Estufa de 4 hornillas\",\n            \"details\": \"Estufa de 4 hornillas color blanco \",\n            \"typemoney\": 3,\n            \"marketvalue\": 200000,\n            \"conditions\": null,\n            \"size\": null,\n            \"weight\": null,\n            \"datecreated\": \"2020-10-24T00:32:10.000Z\",\n            \"subcategory\": 4,\n            \"level\": null,\n            \"typepublication\": 1,\n            \"idclient\": null,\n            \"scorev\": null,\n            \"scorec\": null,\n            \"status\": 1\n        }\n    ],\n    \"msg\": \"Lista de Publicaciones con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar Publicaciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
     "url": "/user/newproduct",
     "title": "1 newproduct",
     "name": "newproduct_-_Registro_De_Producto_TAKASTEAR",
@@ -3057,6 +4076,105 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"data\": \"Ha superdo el límite de imagenes\",\n    \"msg\": \"Error al registrar producto\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/user/scorepublication",
+    "title": "11 scorepublication",
+    "name": "scorepublication_-_Puntuación_de_la_publicación",
+    "group": "Product",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idPublication",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "scoreUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Se ha calificado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar calificar\"\n}",
           "type": "json"
         }
       ]
@@ -3926,6 +5044,91 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/admin/listombotakas",
+    "title": "9 listombotakas",
+    "name": "listombotakas_-_Listar_Publicaciones",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "StatusT",
+            "description": "<p>Reqired. ACTIVA = 0, TAKASTEADO=1, DESHABILITADA=2, EDITADA=2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 2,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n            \"pinreferenceTTK\": \"ibxJu2\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [\n                31,\n                40,\n                21,\n                1,\n                10,\n                32,\n                22,\n                2\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 31,\n                    \"status\": 4,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": 40,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": 21,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": 1,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 5,\n                    \"Number\": 10,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 6,\n                    \"Number\": 32,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 7,\n                    \"Number\": 22,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 8,\n                    \"Number\": 2,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                }\n            ]\n        },\n        {\n            \"idTombotakas\": 3,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n            \"pinreferenceTTK\": \"YuYMXs\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [],\n            \"ticketsReservados\": []\n        },\n        {\n            \"idTombotakas\": 4,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n            \"pinreferenceTTK\": \"hBKyxU\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [],\n            \"ticketsReservados\": []\n        },\n        {\n            \"idTombotakas\": 5,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n            \"pinreferenceTTK\": \"J3uxSU\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [],\n            \"ticketsReservados\": []\n        },\n        {\n            \"idTombotakas\": 6,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n            \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n            \"pinreferenceTTK\": \"8JGthr\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"resultTTK\": null,\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [],\n            \"ticketsReservados\": []\n        }\n    ],\n    \"msg\": \"Lista de tombotakas con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar Tombotakas\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
     "url": "/user/mytickets",
     "title": "5 mytickets",
     "name": "mytickets_-_Listar_mis_tickets",
@@ -4717,6 +5920,126 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/admin/listusers",
+    "title": "8 listusers",
+    "name": "listusers_-_Gestionar_Membresías",
+    "group": "User",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "TypeConsulta",
+            "description": "<p>Reqired. Sin Filtro = 0, Filtro por Usuario=1, Filtro Membresía=2, Filtro Status User=3, Filtro Membresía y status=4, Filtro por fecha de registro=5, Filtro por fecha de Membresía=6, Filtro por Membresía=7</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>Optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "dateRegMem",
+            "description": "<p>Optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "Memberships",
+            "description": "<p>Optional. Free=0, Suprime=1</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "flagstatusMemberships",
+            "description": "<p>Optional. Solicitud en revisión=0, Aprobada=1, Expirada=2, Cancelada=3, Rechazada=4</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "flagStatusUser",
+            "description": "<p>Optional. Activo=0, Inactivo=1</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Users.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n            \"idcity\": null,\n            \"tokenpush\": \"d9wYESVb9q8:APA91bGmzQ5ZjRgZwRfd7zTJr_XWsI6NY0NkMsrEV7E05uIZhwEK-S1ktWqsMZCI0EL85iuweAyTYze49xm9fAdIuA-lhPFsmSokW_JiM9Wi-gr_jONk4TiXVXQM0Mt0vqhJKM4FbY8o\",\n            \"email\": \"ronny.sotillet777@gmail.com\",\n            \"memberships\": 2,\n            \"datememberships\": \"2020-11-27T05:01:17.000Z\",\n            \"statusmemberships\": 39,\n            \"phonenumber\": null,\n            \"phonenumber2\": null,\n            \"datebirth\": null,\n            \"country\": null,\n            \"department\": null,\n            \"address\": null,\n            \"fullname\": \"Ana\",\n            \"firstname\": null,\n            \"secondname\": null,\n            \"firstsurname\": null,\n            \"secondsurname\": null,\n            \"password\": null,\n            \"imgurl\": \"https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d\",\n            \"score\": null,\n            \"online\": null,\n            \"role\": 2,\n            \"status\": null,\n            \"datecreated\": null,\n            \"tyc\": 1\n        },\n        {\n            \"id\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"idcity\": null,\n            \"tokenpush\": null,\n            \"email\": \"rafael@faria.com\",\n            \"memberships\": null,\n            \"datememberships\": null,\n            \"statusmemberships\": null,\n            \"phonenumber\": \"3116623665\",\n            \"phonenumber2\": null,\n            \"datebirth\": null,\n            \"country\": null,\n            \"department\": null,\n            \"address\": null,\n            \"fullname\": \"ronny\",\n            \"firstname\": null,\n            \"secondname\": null,\n            \"firstsurname\": null,\n            \"secondsurname\": null,\n            \"password\": \"8bc5de83cf1daf79ed5b2f13f93d7c05d01d0388\",\n            \"imgurl\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\",\n            \"score\": null,\n            \"online\": null,\n            \"role\": 2,\n            \"status\": null,\n            \"datecreated\": \"2020-10-24T00:30:13.000Z\",\n            \"tyc\": 1\n        },\n        {\n            \"id\": \"idfirebaseU4534dsaxgg\",\n            \"idcity\": 1,\n            \"tokenpush\": null,\n            \"email\": \"emailUser12@gmail.com\",\n            \"memberships\": null,\n            \"datememberships\": null,\n            \"statusmemberships\": null,\n            \"phonenumber\": null,\n            \"phonenumber2\": null,\n            \"datebirth\": null,\n            \"country\": null,\n            \"department\": null,\n            \"address\": null,\n            \"fullname\": \"gusuario12\",\n            \"firstname\": null,\n            \"secondname\": null,\n            \"firstsurname\": null,\n            \"secondsurname\": null,\n            \"password\": null,\n            \"imgurl\": null,\n            \"score\": null,\n            \"online\": null,\n            \"role\": 2,\n            \"status\": null,\n            \"datecreated\": null,\n            \"tyc\": 1\n        },\n        {\n            \"id\": \"idfirebaseU4534dsaxgg4\",\n            \"idcity\": null,\n            \"tokenpush\": null,\n            \"email\": \"gusuario124@gmail.com\",\n            \"memberships\": null,\n            \"datememberships\": null,\n            \"statusmemberships\": null,\n            \"phonenumber\": null,\n            \"phonenumber2\": null,\n            \"datebirth\": null,\n            \"country\": null,\n            \"department\": null,\n            \"address\": null,\n            \"fullname\": \"gusuario12\",\n            \"firstname\": null,\n            \"secondname\": null,\n            \"firstsurname\": null,\n            \"secondsurname\": null,\n            \"password\": null,\n            \"imgurl\": null,\n            \"score\": null,\n            \"online\": null,\n            \"role\": 2,\n            \"status\": null,\n            \"datecreated\": null,\n            \"tyc\": 1\n        }\n    ],\n    \"msg\": \"Lista de usuarios con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Users was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar Usuarios\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
     "url": "/user/newUser",
     "title": "1 newUser",
     "name": "newUser_-_Registro_De_Usuario",
@@ -4918,7 +6241,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"Anailys Rodríguez\",\n        \"EmailUser\": \"anailysrodriguez@gmail.com\",\n        \"PhonenumberUser\": \"3174723818\",\n        \"DatecreatedUser\": \"07/09/20\",\n        \"Reputation\": 4.5\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"Anailys Rodríguez\",\n        \"EmailUser\": \"anailysrodriguez@gmail.com\",\n        \"PhonenumberUser\": \"3174723818\",\n        \"DatecreatedUser\": \"07/09/20\",\n        \"Reputation Vendedor\": 4,\n        \"Reputation Cliente\": 0\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
           "type": "json"
         }
       ]

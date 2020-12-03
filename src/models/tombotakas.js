@@ -585,4 +585,91 @@ tombotakasModel.ListImagesTombotakas = (element) => {
 ////////
 
 
+tombotakasModel.ListPublications = (consulta) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            consulta,
+            (err, result) => {
+                console.log(result);                 
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {                      
+
+                    resolve({
+                        'result': result
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+
+tombotakasModel.LisTombotakas = (status) => {
+    return new Promise((resolve, reject) => {
+     if (pool) {
+         let ticketsReservados={};
+         pool.query(
+            'SELECT * FROM tombotakas WHERE status=?',  status,
+             async(err, result) => {
+                 console.log(err);
+                // console.log(result);
+                 if (err) {
+                     resolve({
+                         'error': err
+                     })
+                 } else {
+                     ticketsReservados = await tombotakasModel.rTombotakas(result);
+                     resolve({
+                         'result': ticketsReservados
+                     })
+                 }
+
+             }
+         )
+         //return resultado;
+     }
+ })
+};
+
+//Obtener la cantidad de regisrados por rango de fecha
+tombotakasModel.canTomboTakas = (inicio,fin) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            pool.query(
+                "SELECT COUNT(id) AS CanTomboTakas FROM tombotakas WHERE status=1 AND datecreated  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id", 
+                (err, result) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': result[0]
+                        })
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
+
+
+
 module.exports = tombotakasModel;

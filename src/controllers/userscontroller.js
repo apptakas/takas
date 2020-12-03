@@ -13,6 +13,7 @@ const MasterStatus = require('../models/masterstatus.js');
 const ChatRooms = require('../models/chatrooms.js');
 const notificationModel = require('../models/notifications.js');
 const tombotakas = require('../models/tombotakas.js');
+const PQRsModel = require('../models/pqrs.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const notifications = require('../lib/notifications.js');
@@ -899,7 +900,7 @@ userController.NewProductCKW = async (req) => {
             let SizePoduct = null;
             if(req.SizePoduct!=null){               
                 SizePoduct= req.SizePoduct;  
-                // console.log("SizePoduct");
+                 console.log("SizePoduct");
                 // console.log(SizePoduct);                
             }
 
@@ -3268,6 +3269,238 @@ userController.DetailsTombotakas = async (req) => {
     }
 
 };
+
+
+
+
+//PUNTUACIÓN A UNA PUBLICACIÓN
+userController.scorePublication = async (req) => {
+    //existe este usuario? 
+    try {       
+
+            let idfirebaseUser=req.idfirebaseUser;
+            let idPublication=req.idPublication;
+            let scoreUser=req.scoreUser;
+            console.log(scoreUser);
+            //let FlagTTk=req.FlagTTk;
+            let statusTicket=30;                      
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await Product.scorePublication(idfirebaseUser,idPublication,scoreUser);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        let datar = [];
+        if (response.result) {
+            let r = {};
+            r = response.result;
+            //console.log(response.result);
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
+
+
+            data = {
+                success: true,
+                status: '200',
+                //data:datar,
+                msg: 'Se ha calificado exitosamente'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar calificar '
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+
+
+
+//PQRs
+userController.pqrs = async (req) => {
+    //existe este usuario? 
+    try {       
+            let status=0;
+            if(req.flagPQRs==0){
+                status=34;//PREGUNTAS
+            }
+            if(req.flagPQRs==1){
+                status=35;//QUEJAS
+            }
+            // if(req.flagPQRs==2){
+            //     status=36;//RESPUESTAS
+            // }
+            if(req.flagPQRs==3){
+                status=37;//SUGERENCIAS
+            }
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+            let DataPQRs={
+               iduser: req.idfirebaseUser,
+               details: req.detailsPQRs,
+               datecreated: hoy,
+               status: status
+            }
+           
+
+            console.log(DataPQRs);
+            //let FlagTTk=req.FlagTTk;
+            //let statusTicket=30;                      
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+            if(status!=0){
+             response = await PQRsModel.pqrs(DataPQRs);
+            }
+            else{
+                response==null;
+            }
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        let datar = [];
+        if (response.result) {
+            let r = {};
+            r = response.result;
+            //console.log(response.result);
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
+
+
+            data = {
+                success: true,
+                status: '200',
+                //data:datar,
+                msg: 'Se ha creado la PQRs exitosamente'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar crear una nueva PQRs'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+//SolicitarMembresia
+userController.SolicitarMembresia = async (req) => {
+    //existe este usuario? 
+    try {       
+            //let status=0;
+            // if(req.flagPQRs==0){
+            //     status=34;//PREGUNTAS
+            // }
+            // if(req.flagPQRs==1){
+            //     status=35;//QUEJAS
+            // }
+            // if(req.flagPQRs==2){
+            //     status=36;//RESPUESTAS
+            // }
+            // if(req.flagPQRs==3){
+            //     status=37;//SUGERENCIAS
+            // }
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            let iduser= req.idfirebaseUser;
+            let Datamemberships={
+                memberships: req.typeMemberships,
+               datememberships: hoy,
+               statusmemberships: 38
+            }
+           
+
+            console.log(Datamemberships);
+            //let FlagTTk=req.FlagTTk;
+            //let statusTicket=30;                      
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+             response = await User.SolicitarMembresia(Datamemberships,iduser);
+                 
+        
+        //console.log(msgError);
+
+        let data = {};
+        let datar = [];
+        if (response.result) {
+            let r = {};
+            r = response.result;
+            //console.log(response.result);
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
+
+
+            data = {
+                success: true,
+                status: '200',
+                //data:datar,
+                msg: 'Solicitud ha sido enviada'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar enviar solicitud'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 
 
 
