@@ -1134,35 +1134,39 @@ router.get('/listmoney', rutasProtegidas, async (req, res) => {
     "status":: "200",
     "data": [
         {
-            "id": 1,
-            "name": "Ropa de bebes",
-            "icon": "",
+            "idsc": 1,
+            "name": "Bicicletas y Eléctricos",
+            "icon": "bike",
             "category": 1,
-            "status":: 1,
+            "status": 1,
+            "namec": "Vehículos",
             "typepublication": 1
         },
         {
-            "id": 2,
-            "name": "Accesorios para Vehículos",
-            "icon": "wheel",
-            "category": 4,
-            "status":: 1,
-            "typepublication": 1
-        },
-        {
-            "id": 3,
-            "name": "Vehículos",
+            "idsc": 2,
+            "name": "Automóviles",
             "icon": "car",
-            "category": 4,
-            "status":: 1,
+            "category": 1,
+            "status": 1,
+            "namec": "Vehículos",
             "typepublication": 1
         },
         {
-            "id": 4,
-            "name": "Alimentos y Bebidas",
-            "icon": "eat",
-            "category": 4,
-            "status":: 1,
+            "idsc": 3,
+            "name": "Náutica",
+            "icon": "ancle",
+            "category": 1,
+            "status": 1,
+            "namec": "Vehículos",
+            "typepublication": 1
+        },
+        {
+            "idsc": 4,
+            "name": "Accesorios para vehiculos",
+            "icon": "wheel",
+            "category": 1,
+            "status": 1,
+            "namec": "Vehículos",
             "typepublication": 1
         }
     ],

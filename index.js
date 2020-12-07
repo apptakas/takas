@@ -48,6 +48,14 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname,'doc')))
 
 
+const http= require('http').Server(app);
+const io= require('socket.io')(http);
+
+io.on('connection', (socket) => {
+    console.log('Usuario Conectado');
+});
+
+
 //starting the server
 app.listen(app.get('port'),()=>{
     console.log('Server on port', app.get('port'));
