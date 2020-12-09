@@ -45,7 +45,8 @@ app.use(express.json());
 
 
 ////Public
-app.use(express.static(path.join(__dirname,'doc')))
+app.use(express.static(path.join(__dirname,'doc')));
+app.use('/admin',express.static(path.join(__dirname,'src/public')));
 
 
 const http= require('http').Server(app);
