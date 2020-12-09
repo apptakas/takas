@@ -468,7 +468,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -590,28 +590,53 @@ ProductModel.armaresult = (result) => {
                     if(Diferenciafechas>20){
                         Editable=false;
                     }
-                        
-                    arr.push({
-                        "idproduct": element.idproduct,
-                        "datecreated":regis,
-                        "iduser": element.iduser,
-                        "nuevo": comprobar_fecha,
-                        "subcategory": element.subcategory,
-                        "name": element.name,
-                        "details": element.details,
-                        "typemoney": element.typemoney,
-                        "marketvalue": Precio,
-                        "typepublication": element.typepublication,
-                        "conditions": element.conditions,
-                        "size": element.size,
-                        "weight": element.weight,
-                        "status": statusProduct,
-                        "editable": Editable,
-                        "CantidadOfertas":CantidadOfertas.CantOfertas,
-                        "ProductImages":img.ImagesProduct,
-                        "Preferences":prefe.Preferences
-                        
-                    });
+                    if(element.typepublication==1){   
+                        arr.push({
+                            "idproduct": element.idproduct,
+                            "datecreated":regis,
+                            "iduser": element.iduser,
+                            "nuevo": comprobar_fecha,
+                            "subcategory": element.subcategory,
+                            "name": element.name,
+                            "details": element.details,
+                            "typemoney": element.typemoney,
+                            "marketvalue": Precio,
+                            "typepublication": element.typepublication,
+                            "conditions": element.conditions,
+                            "size": element.size,
+                            "weight": element.weight,
+                            "status": statusProduct,
+                            "editable": Editable,
+                            "CantidadOfertas":CantidadOfertas.CantOfertas,
+                            "ProductImages":img.ImagesProduct,
+                            "Preferences":prefe.Preferences
+                            
+                        });
+                    }
+                    if(element.typepublication==3){   
+                        arr.push({
+                            "idproduct": element.idproduct,
+                            "datecreated":regis,
+                            "begin":element.datebeginst,
+                            "end":element.dateendst,
+                            "iduser": element.iduser,
+                            "nuevo": comprobar_fecha,
+                            "subcategory": element.subcategory,
+                            "name": element.name,
+                            "details": element.details,
+                            "typemoney": element.typemoney,
+                            "marketvalue": Precio,
+                            "typepublication": element.typepublication,
+                            "conditions": element.conditions,
+                            "size": element.size,
+                            "weight": element.weight,
+                            "status": statusProduct,
+                            "editable": Editable,
+                            "CantidadOfertas":CantidadOfertas.CantOfertas,
+                            "ProductImages":img.ImagesProduct
+                            
+                        });
+                    }
                    
                 }
             }//fin for 
@@ -1029,6 +1054,95 @@ ProductModel.cantPublications = (inicio,fin) => {
 
 
 
+//SUBASTAKAS
+ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubastakas) => {
+    //let resultado = {};
+    // console.log("KeyWordsProduct");
+    // console.log(KeyWordsProduct);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let createdkeywords={};
+            pool.query(
+                'INSERT INTO product SET ?', SubastakasData,
+                async(err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        // console.log("resut reg product");
+                        // console.log(resut.insertId);
+                        createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                        //console.log(createdkeywords);
+                        if(ImagesSubastakas.length!=0){
+                        for(var atr2 in ImagesSubastakas){  
+                            pool.query(
+                                'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
+                                    ImagesSubastakas[atr2],
+                                    resut.insertId
+                                ],
+                                (err, resut) => {
+                                    //console.log(resut);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                         
+                                        resolve({
+                                            'result': resut
+                                        })                                       
+                                    }
+                
+                                }
+                            )
+                            
+                        }//fin for reforrido imagenes
+                    }//fin if ImagesSubastakas.length!=0
+                    
+                    
+
+                    }//
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+//LISTAR LAS SUBASTAKAS PUBLICADAS POR OTROS USUARIOS - SUBASTAKEAR 
+ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+
+            let armaresult={};
+            pool.query(
+                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                async(err, result) => {
+                    //console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///
 
 
 module.exports = ProductModel;
