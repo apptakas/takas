@@ -4742,7 +4742,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
     check('detailsSubastakas', 'El detalle de la Subastakas es obligatorio').not().isEmpty().exists(),
     check('typemoneySubastakas', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
     check('marketvalueSubastakas', ' El precioinicial es obligatoria').not().isEmpty().exists(),
-    check('subcategorySubastakas', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('subcategorySubastakas', 'Desbes definir la subcategoría es requerida').not().isEmpty().exists(),
     check('ImagesSubastakas', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
 

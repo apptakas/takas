@@ -3515,13 +3515,24 @@ userController.NewSubasTakasCKW = async (req) => {
             let begin=date.format(beginSubastakas, 'YYYY-MM-DD HH:mm:ss');
 
             let endSubastakas = new Date(req.endSubastakas);
-            let end=date.format(endSubastakas, 'YYYY-MM-DD HH:mm:ss');
+            let end=date.format(new Date(req.endSubastakas), 'YYYY-MM-DD HH:mm:ss');
             
+
+            // let DLottk = new Date(req.DateLottk);
+            // let DateLottk = date.format(DLottk, 'YYYY-MM-DD HH:mm');
+
             // console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
             // console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
 
             console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
             console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
+
+            // let datepublication = new Date(rp.result.datepublication);
+            // //fecha de creación de producto
+            // let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+            // //console.log(now);
+            // let Diferenciafechas=date.subtract(beginSubastakas, endSubastakas).toMinutes();
+            // console.log("Diferenciafechas: "+Diferenciafechas);
 
             //buscar fecha de creación del producto
 
@@ -3605,7 +3616,7 @@ userController.NewSubasTakasCKW = async (req) => {
 
         // && lengthkw<=topeKW 
 
-        if(req.ImagesSubastakas.length<=topeimg ){
+        if(req.ImagesSubastakas.length<=topeimg ){//<
             response = await Product.NewSubasTakasCKW(SubastakasData,ImagesSubastakas,KeyWordsSubastakas);
             // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
 
