@@ -397,6 +397,7 @@ ProductModel.EditProductCKW = (ProductData,idproduct,PreferecesProduct,ImagesPro
 //FindProductCKW  - Buscar productos
 ProductModel.FindProductCKW = (idUserProduct,idProduct) => {
     //let resultado = {};
+    console.log(idProduct);
     return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
@@ -468,7 +469,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT RAND(idproduct), datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
+                "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -579,9 +580,10 @@ ProductModel.armaresult = (result) => {
                     }
 
                     let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
-                    //console.log(rp);
+                   // console.log(rp);
                     //console.log(horaServidor);
                     let datepublication = new Date(rp.result.datepublication);
+                    console.log(datepublication);
                     //fecha de creación de producto
                     let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
                     //console.log(now);
@@ -590,6 +592,7 @@ ProductModel.armaresult = (result) => {
                     if(Diferenciafechas>20){
                         Editable=false;
                     }
+                    console.log(element.typepublication);
                     if(element.typepublication==1){   
                         arr.push({
                             "idproduct": element.idproduct,
