@@ -14,6 +14,7 @@ const ChatRooms = require('../models/chatrooms.js');
 const notificationModel = require('../models/notifications.js');
 const tombotakas = require('../models/tombotakas.js');
 const PQRsModel = require('../models/pqrs.js');
+const Interested = require('../models/interested.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const notifications = require('../lib/notifications.js');
@@ -3703,9 +3704,150 @@ userController.ListSubasTakas = async (req) => {
 
 };
 
+//Listar las publicaciones  de otros usuarios- TAKASTEAR 
+userController.ListMiSubasTakas = async (req) => {
+    try {
+
+        let FlagSubastakas=req.FlagSubastakas;
+        let statuSubastakas=3; //Publicación activa
+        if(FlagSubastakas==1){
+            statuSubastakas=4; // Publicación Takasteada
+        }
+        if(FlagSubastakas==2){
+            statuSubastakas=5;//Publicación Elimidada ó Deshabilitada
+        }
+        if(FlagSubastakas==3){
+            statuSubastakas=26;//Publicación Editada
+        }
+
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const SubastakasData = {
+            status: statuSubastakas
+        };
+        //console.log(ProductData.status);
+        let response = await Product.ListMiSubasTakas(UserData,SubastakasData);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de mis subastakas'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar mis subastakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
+userController.DetailSubasTakas = async (req) => {
+    try {
+        const SubasTakasData = {
+            id: req.IdSubastakas,
+            iduser: req.IdUserSubastakas
+            
+        };
+        //console.log(userData.password);
+        let response = await Product.DetailSubasTakas(SubasTakasData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result[0],
+                images: response.images,
+                msg: 'Listar detalles de un producto'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar detalles de un producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
+userController.InterestedSubasTakas = async (req) => {
+    try {
+        const DataInterested = {
+            idsubastakas: req.IdSubastakas,
+            iduser: req.IdUserSubastakas,
+            status: 2
+            
+        };
+        //console.log(userData.password);
+        let response = await Interested.InterestedSubasTakas(DataInterested);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result[0],
+                images: response.images,
+                msg: 'Se ha registrado Me interesa'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar registar Subastakas como me interesa'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 module.exports = userController;

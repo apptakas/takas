@@ -4834,6 +4834,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
     "msg": "Error al Listar Productos"
 }
  **/
+
 //LISTAR SUBASTAKAS
 router.post('/listsubastakas', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
@@ -4856,9 +4857,247 @@ router.post('/listsubastakas', rutasProtegidas, [
     
     })
 
-
     ///////
 
+/**
+ * @api {post} /user/listmisubastakas 3 listmisubastakas
+ * @apiName listmisubastakas - Listar mis Subastakas publicadas 
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idfirebaseUser required.
+ * @apiParam {varchar} FlagProduct required 0=Activa, 1=Takasteada, 2=Eliminada(deshabilitada), 3=Editada.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *            {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idproduct": 1,
+            "datecreated": "09/12/2020",
+            "begin": "0000-00-00 00:00:00",
+            "end": "0000-00-00 00:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": true,
+            "subcategory": 4,
+            "name": "pueba laptop 2",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        }
+    ],
+    "msg": "Lista de mis subastakas"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "'Error al Listar mis subastakas"
+}
+ **/
+
+//LISTAR SUBASTAKAS
+router.post('/listmisubastakas', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('FlagSubastakas', 'El FlagSubastakas es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+        
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+    
+        let response = await userController.ListMiSubasTakas(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
+    ///////
+
+    /**
+ * @api {post} /user/detailsubastakas 4 detailsubastakas
+ * @apiName detailsubastakas - Detalle de la Subastakas
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} IdUserSubastakas required.
+ * @apiParam {int} IdSubastakas required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *   {
+    "success": true,
+    "status": "200",
+    "data": {
+        "idproduct": 6,
+        "datecreated": "09/12/2020",
+        "iduser": "idfirebaseU4534dsaxgg",
+        "nuevo": true,
+        "subcategory": 4,
+        "name": "pueba laptop 2",
+        "details": "Hp Procesador intel core i7",
+        "typemoney": 2,
+        "marketvalue": "1200000.0000",
+        "typepublication": 3,
+        "conditions": 1,
+        "size": null,
+        "weight": null,
+        "status": 0,
+        "editable": false,
+        "CantidadOfertas": 0,
+        "ProductImages": [
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+        ]
+    },
+    "msg": "Listar detalles de un producto"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar obtener Cantidad de notificaciones según bandera"
+}
+ **/
+
+//LISTAR DE DETALLES DE LA SUBASTAKAS
+router.post('/detailsubastakas', rutasProtegidas, [
+    check('IdUserSubastakas', 'El IdUserSubastakas es obligatorio').not().isEmpty().exists(),
+    check('IdSubastakas', 'El IdSubastakas es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.DetailSubasTakas(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })    
+//////////////////
+
+    /**
+ * @api {post} /user/interestedsubastakas 5 interestedsubastakas
+ * @apiName interestedsubastakas - Me interesa Subastakas
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} IdUserSubastakas required.
+ * @apiParam {int} IdSubastakas required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *   {
+    "success": true,
+    "status": "200",
+    "msg": "Se ha registrado Me interesa"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar registar Subastakas como me interesa"
+}
+ **/
+
+router.post('/interestedsubastakas', rutasProtegidas, [
+    check('IdUserSubastakas', 'El IdUserSubastakas es obligatorio').not().isEmpty().exists(),
+    check('IdSubastakas', 'El IdSubastakas es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.InterestedSubasTakas(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })    
+//////////////////
 
 
 

@@ -468,7 +468,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
+                "SELECT DISTINCT RAND(idproduct), datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -1121,7 +1121,7 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                "SELECT DISTINCT RAND(idproduct), datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -1143,6 +1143,68 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
     })
 };
 ///
+
+ProductModel.ListMiSubasTakas = (UserData,SubastakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+
+            let armaresult={};
+            pool.query(
+                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                async(err, result) => {
+                    //console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///
+
+ProductModel.DetailSubasTakas = (SubasTakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubasTakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let armaresult={};
+            pool.query(
+                "SELECT id as idproduct,datepublication ,datepublication AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,conditions,size,weight,status FROM  product  WHERE id="+SubasTakasData.id,
+                async(err, result) => {
+                    //console.log(result);
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {     
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///////////////
 
 
 module.exports = ProductModel;
