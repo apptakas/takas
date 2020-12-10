@@ -14,6 +14,7 @@ const ChatRooms = require('../models/chatrooms.js');
 const notificationModel = require('../models/notifications.js');
 const tombotakas = require('../models/tombotakas.js');
 const PQRsModel = require('../models/pqrs.js');
+const Interested = require('../models/interested.js');
 //const Domiciliary = require('../models/domiciliary.js');
 //const TeamWork = require('../models/teamwork.js');
 const notifications = require('../lib/notifications.js');
@@ -3500,10 +3501,353 @@ userController.SolicitarMembresia = async (req) => {
 
 };
 
+/////////////SUBASTAKAS//////////////////////
+
+//Nueva Subastakas (SUBASTAKAS)
+userController.NewSubasTakasCKW = async (req) => {
+    //existe este usuario? 
+    try {
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+            let beginSubastakas = new Date(req.beginSubastakas);
+            let begin=date.format(beginSubastakas, 'YYYY-MM-DD HH:mm:ss');
+
+            let endSubastakas = new Date(req.endSubastakas);
+            let end=date.format(endSubastakas, 'YYYY-MM-DD HH:mm:ss');
+            
+            // console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
+            // console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
+
+            console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
+            console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
+
+            //buscar fecha de creación del producto
+
+           // console.log(now+" - "+hoy);
+            let UseSubastakas = null;
+            if(req.UseSubastakas!=null){               
+                 UseSubastakas= req.UseSubastakas;  
+                //  console.log("UsePoduct");
+                //  console.log(UsePoduct);                
+            }
+
+            let SizeSubastakas = null;
+            if(req.SizeSubastakas!=null){               
+                SizeSubastakas= req.SizeSubastakas;  
+                 console.log("SizeSubastakas");
+                // console.log(SizePoduct);                
+            }
+
+            let WeightSubastakas = null;
+            if(req.WeightSubastakas!=null){
+                if(req.WeightSubastakas!=null){               
+                    WeightSubastakas= req.WeightSubastakas;  
+                    // console.log("WeightSubastakas");
+                    // console.log(WeightSubastakas);                
+                }
+            }
+
+            let SubastakasData = {
+                iduser: req.iduserSubastakas,
+                datepublication: hoy,
+                datebeginst: begin,
+                dateendst: end,
+                new: req.NewSubastakas,
+                conditions:UseSubastakas,
+                size: SizeSubastakas,
+                weight: WeightSubastakas,
+                name: req.nameSubastakas,
+                details: req.detailsSubastakas,
+                typemoney: req.typemoneySubastakas,
+                marketvalue: req.marketvalueSubastakas,
+                subcategory:req.subcategorySubastakas,
+                datecreated: hoy,
+                typepublication:3,
+                status:3
+            };
+            const topeimg=10;      
+            const ImagesSubastakas = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.ImagesSubastakas.length!=0){
+                for(var atr1 in req.ImagesSubastakas){
+                    ImagesSubastakas[atr1] = req.ImagesSubastakas[atr1];     
+                };
+            }
+
+           
+
+            const topeKW=10;      
+            const KeyWordsSubastakas = {};
+            let lengthkw=0;
+            //console.log(req.ImagesProduct.length);
+            if(req.KeyWordsSubastakas!=null){
+                lengthkw=req.KeyWordsSubastakas.length;
+                if(req.KeyWordsSubastakas.length!=0){
+                    for(var atr1 in req.KeyWordsSubastakas){
+                        KeyWordsSubastakas[atr1] = req.KeyWordsSubastakas[atr1];     
+                    };
+                   // console.log(KeyWordsProduct);
+                }
+            }
+
+            
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            // console.log(topeKW);
+            // console.log(valReferencia);
+
+            let msgError="";
+            
+
+        let response ={};
+
+        // && lengthkw<=topeKW 
+
+        if(req.ImagesSubastakas.length<=topeimg ){
+            response = await Product.NewSubasTakasCKW(SubastakasData,ImagesSubastakas,KeyWordsSubastakas);
+            // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
+
+        }else{               
+            msgError = "Se ha superado el límite de imagenes ó palabras claves";
+        }
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                msg: 'Subastakas registrada con éxito'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                //data: response.error,
+                data: msgError,
+                msg: 'Error al registrar Subastakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
 
+//Listar las publicaciones  de otros usuarios- TAKASTEAR 
+userController.ListSubasTakas = async (req) => {
+    try {
+
+        let FlagSubastakas=req.FlagSubastakas;
+        let statuSubastakas=3; //Publicación activa
+        if(FlagSubastakas==1){
+            statuSubastakas=4; // Publicación Takasteada
+        }
+        if(FlagSubastakas==2){
+            statuSubastakas=5;//Publicación Elimidada ó Deshabilitada
+        }
+        if(FlagSubastakas==3){
+            statuSubastakas=26;//Publicación Editada
+        }
+
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const SubastakasData = {
+            status: statuSubastakas
+        };
+        //console.log(ProductData.status);
+        let response = await Product.ListSubasTakas(UserData,SubastakasData);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de productos'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar productos'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Listar las publicaciones  de otros usuarios- TAKASTEAR 
+userController.ListMiSubasTakas = async (req) => {
+    try {
+
+        let FlagSubastakas=req.FlagSubastakas;
+        let statuSubastakas=3; //Publicación activa
+        if(FlagSubastakas==1){
+            statuSubastakas=4; // Publicación Takasteada
+        }
+        if(FlagSubastakas==2){
+            statuSubastakas=5;//Publicación Elimidada ó Deshabilitada
+        }
+        if(FlagSubastakas==3){
+            statuSubastakas=26;//Publicación Editada
+        }
+
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const SubastakasData = {
+            status: statuSubastakas
+        };
+        //console.log(ProductData.status);
+        let response = await Product.ListMiSubasTakas(UserData,SubastakasData);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de mis subastakas'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar mis subastakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 
+userController.DetailSubasTakas = async (req) => {
+    try {
+        const SubasTakasData = {
+            id: req.IdSubastakas,
+            iduser: req.IdUserSubastakas
+            
+        };
+        //console.log(userData.password);
+        let response = await Product.DetailSubasTakas(SubasTakasData);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result[0],
+                images: response.images,
+                msg: 'Listar detalles de un producto'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar detalles de un producto'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+userController.InterestedSubasTakas = async (req) => {
+    try {
+        const DataInterested = {
+            idsubastakas: req.IdSubastakas,
+            iduser: req.IdUserSubastakas,
+            status: 2
+            
+        };
+        //console.log(userData.password);
+        let response = await Interested.InterestedSubasTakas(DataInterested);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result[0],
+                images: response.images,
+                msg: 'Se ha registrado Me interesa'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar registar Subastakas como me interesa'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 module.exports = userController;
