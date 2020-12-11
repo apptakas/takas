@@ -3563,8 +3563,8 @@ userController.NewSubasTakasCKW = async (req) => {
             let SubastakasData = {
                 iduser: req.iduserSubastakas,
                 datepublication: hoy,
-                datebeginst: begin,
-                dateendst: end,
+                // datebeginst: begin,
+                // dateendst: end,
                 new: req.NewSubastakas,
                 conditions:UseSubastakas,
                 size: SizeSubastakas,
