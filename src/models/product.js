@@ -1124,7 +1124,7 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT RAND(idproduct), datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    

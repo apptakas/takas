@@ -2697,6 +2697,8 @@ userController.NewTomboTakas = async (req) => {
             let DLottk = new Date(req.DateLottk);
             let DateLottk = date.format(DLottk, 'YYYY-MM-DD HH:mm');
 
+
+               console.log(DLottk) ;
             //buscar fecha de creación del producto
             /////
             /*GENERAR PIN DE REFERENCIA*/
@@ -3524,8 +3526,8 @@ userController.NewSubasTakasCKW = async (req) => {
             // console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
             // console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
 
-            console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
-            console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
+            // console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
+            // console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
 
             // let datepublication = new Date(rp.result.datepublication);
             // //fecha de creación de producto
@@ -3563,8 +3565,8 @@ userController.NewSubasTakasCKW = async (req) => {
             let SubastakasData = {
                 iduser: req.iduserSubastakas,
                 datepublication: hoy,
-                // datebeginst: begin,
-                // dateendst: end,
+                datebeginst: begin,
+                dateendst: end,
                 new: req.NewSubastakas,
                 conditions:UseSubastakas,
                 size: SizeSubastakas,
