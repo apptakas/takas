@@ -1208,6 +1208,146 @@ ProductModel.DetailSubasTakas = (SubasTakasData) => {
     })
 };
 ///////////////
+ProductModel.LisTodo = (SubasTakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubasTakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let armaresult={};
+            pool.query(
+                "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 AND p.id=idproduct   LIMIT 50",
+                async(err, result) => {
+                    //console.log(result);
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {     
+                        armaresult = await ProductModel.armaresulT(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///////////////
+
+///
+ProductModel.armaresulT = (result) => {
+
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+        
+        
+        try{
+            
+            let img={};
+            let prefe={};
+            let CantidadOfertas=0;
+            let idproducs=0;
+            //console.log(result);
+            for (const element of result) {
+                //console.log(element.idproduct+" - "+idproducs);
+                if(element.idproduct!=idproducs){
+                    //console.log("idproducs - "+element.idproduct);
+                    idproducs=element.idproduct;
+                    img=await ProductModel.ListImagesProduct(element);
+                    prefe=await ProductModel.ListPrefrencesProduct(element);
+                    CantidadOfertas=await ProductModel.CantidadOfertas(element);
+                    let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+
+                    let now = new Date();
+                    let servidor=date.format(now, 'DD/MM/YYYY');
+                    //let registro=element.registro;
+                    let registro = new Date(element.datepublication);
+                    let regis = date.format(registro, 'DD/MM/YYYY');
+
+                    //console.log(now+" - "+registro);
+
+                    let comprobar_fecha=date.isSameDay(now, registro); 
+                    // console.log(comprobar_fecha+" - ");
+                    // console.log("//////");
+                    let nuevo=false;
+                    if (registro == servidor){
+                        let nuevo=true;
+                    }else{
+                        let nuevo=false;
+                    }
+
+                    let FlagProduct=element.status;
+                    let statusProduct=0; //Publicación activa
+                    let Editable=true; //Publicación activa
+                    if(FlagProduct==4){
+                        statusProduct=1; // Publicación Takasteada
+                    }
+                    if(FlagProduct==5){
+                        statusProduct=2;//Publicación Elimidada ó Deshabilitada
+                    }
+                    if(FlagProduct==26){
+                        statusProduct=3;//Publicación Editada
+                    
+                    }
+
+                    let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
+                   // console.log(rp);
+                    //console.log(horaServidor);
+                    let datepublication = new Date(rp.result.datepublication);
+                    console.log(datepublication);
+                    //fecha de creación de producto
+                    let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+                    //console.log(now);
+                    let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
+
+                    if(Diferenciafechas>20){
+                        Editable=false;
+                    }
+                   // console.log(element.typepublication);
+                       
+                        arr.push({
+                            "idproduct": element.idproduct,
+                            "datecreated":regis,
+                            "begin":element.datebeginst,
+                            "end":element.dateendst,
+                            "iduser": element.iduser,
+                            "nuevo": comprobar_fecha,
+                            "subcategory": element.subcategory,
+                            "name": element.name,
+                            "details": element.details,
+                            "typemoney": element.typemoney,
+                            "marketvalue": Precio,
+                            "typepublication": element.typepublication,
+                            "conditions": element.conditions,
+                            "size": element.size,
+                            "weight": element.weight,
+                            "status": statusProduct,
+                            "editable": Editable,
+                            "CantidadOfertas":CantidadOfertas.CantOfertas,
+                            "ProductImages":img.ImagesProduct
+                            
+                        });
+                    
+                   
+                }
+            }//fin for 
+            resolve(arr)
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    )
+
+} 
+///////////////////////////
+
+
 
 
 module.exports = ProductModel;

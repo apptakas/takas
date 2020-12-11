@@ -3863,4 +3863,45 @@ userController.InterestedSubasTakas = async (req) => {
 
 };
 
+userController.LisTodo = async (req) => {
+    try {
+        const SubasTakasData = {
+            iduser: req.IdUserSubastakas            
+        };
+        //console.log(userData.password);
+        let response = await Product.LisTodo(SubasTakasData);
+
+       //console.log(response);
+
+       let data = {};
+       if (response && response.result) {
+           let r = {};
+           r = response.result;
+
+           data = {
+               success: true,
+               status: '200',
+               data: r,
+               images: response.images,
+               msg: 'Listar Todas las publicaciones'
+               //data: response
+           }
+       } else {
+
+          console.log(response);
+           data = {
+               success: false,
+               status: '500',
+               msg: 'Error al Listar todas las Publicaciones'
+           }
+       }
+       //validar si esta llegado vacio
+       return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 module.exports = userController;
