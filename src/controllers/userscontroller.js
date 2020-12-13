@@ -2772,6 +2772,7 @@ userController.NewTomboTakas = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                idTTK:r.insertId,
                 pinReference:pin,
                 msg: 'Tombotakas se ha creado con éxito'
                 //data: response

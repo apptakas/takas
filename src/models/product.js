@@ -534,6 +534,7 @@ ProductModel.armaresult = (result) => {
             
             let img={};
             let prefe={};
+            let interested={};
             let CantidadOfertas=0;
             let idproducs=0;
             //console.log(result);
@@ -616,12 +617,38 @@ ProductModel.armaresult = (result) => {
                             
                         });
                     }
-                    if(element.typepublication==3){   
+                    if(element.typepublication==3){ 
+                        let now2 = new Date();
+                        let servidor2=date.format(now, 'DD/MM/YYYY HH:mm:ss');  
+                        let beginSubastakas = new Date(element.datebeginst);
+                        let begin=date.format(beginSubastakas, 'DD/MM/YYYY HH:mm:ss');
+                        let endSubastakas = new Date(element.dateendst);
+                        let end=date.format(endSubastakas, 'DD/MM/YYYY HH:mm:ss');
+                        let valStarted=date.subtract(now2,beginSubastakas).toMinutes();
+                        console.log("valStarted: "+valStarted);
+                        let started=false;
+                        if(valStarted > 0){
+                            started=true;
+                        }
+                        let finished=false;
+                        let valFinished=date.subtract(now2,endSubastakas).toMinutes();
+                        if(valFinished > 0){
+                            finished=true;
+                        }
+                        interested=await ProductModel.interestedSubastacas(element);
+                        console.log("interested: "+interested.interested[0]);
+                        let flagInterested=false;
+                        if(interested.interested[0]!= undefined){
+                            flagInterested=true;
+                        }
                         arr.push({
                             "idproduct": element.idproduct,
                             "datecreated":regis,
-                            "begin":element.datebeginst,
-                            "end":element.dateendst,
+                            "flagInterested":flagInterested,
+                            "started":started,
+                            "finished":finished,
+                            "begin":begin,
+                            "end":end,
                             "iduser": element.iduser,
                             "nuevo": comprobar_fecha,
                             "subcategory": element.subcategory,
@@ -1147,6 +1174,7 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
 };
 ///
 
+
 ProductModel.ListMiSubasTakas = (UserData,SubastakasData) => {
     //let resultado = {};
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
@@ -1346,6 +1374,47 @@ ProductModel.armaresulT = (result) => {
 
 } 
 ///////////////////////////
+ProductModel.interestedSubastacas = (element) => {
+    return new Promise((resolve, reject) => {
+        pool.query(
+            'SELECT id FROM interested WHERE iduser=? AND idsubastakas=?',
+            [element.iduser,
+            element.idproduct
+            ],
+            (err2, result2) => {
+                 
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    console.log(result2); 
+                    // console.log(result2.length);
+                    // let ImagesProduct= []; 
+                    // for(var atr2 in result2){
+                    // ImagesProduct.push(result2[atr2].url); 
+                    // };  
+                    //console.log(element.idproduct);  
+                   // console.log(ImagesProduct);
+                    resolve({                        
+                        "interested": result2
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
+
+
+
 
 
 

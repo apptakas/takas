@@ -3565,7 +3565,8 @@ router.post('/deletepublication', rutasProtegidas,[
  {
     "success": true,
     "status": "200",
-    "pinReference": "h8dGBL",
+    "idTTK": 10,
+    "pinReference": "ccLctE",
     "msg": "Tombotakas se ha creado con éxito"
 }
  *
@@ -4017,6 +4018,11 @@ router.post('/findtombotakaspin', rutasProtegidas,[
             "datelotTTK": "25/11/2020 19:47",
             "moneyTTK": 1,
             "priceTTK": "10000.0000",
+            "imgTTK": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
             "numberticketsrs": [
                 31,
                 40,
@@ -4031,7 +4037,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 1,
                     "Number": 31,
-                    "status": 1,
+                    "status": 4,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
                     "email": "emailUser12@gmail.com"
@@ -4359,7 +4365,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "status": "200",
     "data": {
         "idTombotakas": 2,
-        "pertenece": false,
+        "timeremaining": 25593.626933333333,
+        "pertenece": true,
         "nameTombotakas": "test Nueva Tombotakas",
         "statusTTK": 0,
         "datecreatedTTK": "19/11/2020",
@@ -4370,6 +4377,11 @@ router.post('/processrequeststickets', rutasProtegidas,[
         "moneyTTK": 1,
         "priceTTK": "10000.0000",
         "resultTTK": null,
+        "imgTTK": [
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+        ],
         "numberticketsrs": [
             31,
             40,
@@ -4384,10 +4396,11 @@ router.post('/processrequeststickets', rutasProtegidas,[
             {
                 "idNUmbre": 1,
                 "Number": 31,
-                "status": 1,
+                "status": 4,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 2,
@@ -4395,7 +4408,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 3,
@@ -4403,7 +4417,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 4,
@@ -4411,7 +4426,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 5,
@@ -4419,7 +4435,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 6,
@@ -4427,7 +4444,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 7,
@@ -4435,7 +4453,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 8,
@@ -4443,7 +4462,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             }
         ]
     },
@@ -4796,8 +4816,11 @@ router.post('/newsubastakasckw', rutasProtegidas,[
         {
             "idproduct": 1,
             "datecreated": "09/12/2020",
-            "begin": "0000-00-00 00:00:00",
-            "end": "0000-00-00 00:00:00",
+            "flagInterested": true,
+            "started": false,
+            "finished": false,
+            "begin": "20/12/2020 12:30:00",
+            "end": "21/12/2020 20:00:00",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": true,
             "subcategory": 4,
@@ -4837,8 +4860,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
 
 //LISTAR SUBASTAKAS
 router.post('/listsubastakas', rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('FlagSubastakas', 'El FlagSubastakas es obligatorio').not().isEmpty().exists()
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
         const error = validationResult(req);
