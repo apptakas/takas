@@ -318,7 +318,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
         let numberticketsr=[];
         let img={};
         pool.query(
-            'SELECT t.id, t.idtombotakas,t.number, t.status, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE idtombotakas='+element.id,
+            'SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE idtombotakas='+element.id,
             async(err2, result2) => {
                 if (err2) {
                     //console.log(err2);
@@ -353,6 +353,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                             "NameUser":result2[atr2].fullname,
                             "phonenumber":result2[atr2].phonenumber,
                             "email":result2[atr2].email,
+                            "img":result2[atr2].imgurl,
                         });                        
                     }; // fin for
                     
@@ -367,6 +368,10 @@ tombotakasModel.LisTicketsReservados = (element) => {
                 let dc = date.format(datecreated, 'DD/MM/YYYY');
                 let datelot = new Date(element.datelot);
                 let dl = date.format(datelot, 'DD/MM/YYYY HH:mm');
+                let now = new Date();
+                let servidor2=date.format(now, 'DD/MM/YYYY HH:mm:ss');  
+
+                let tiemporestante=date.subtract(now,datelot).toMinutes();
 
                 console.log("element");
                 //console.log(element);
@@ -375,6 +380,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                     console.log("pertenece");
                     resolve({                   
                         "idTombotakas": element.id,
+                        "timeremaining":tiemporestante,
                         "pertenece": element.pertenece,
                         "nameTombotakas": element.name,
                         "statusTTK": statusTTK,
@@ -393,6 +399,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                 }else{
                     resolve({                   
                         "idTombotakas": element.id,
+                        "timeremaining":tiemporestante,
                         "nameTombotakas": element.name,
                         "statusTTK": statusTTK,
                         "datecreatedTTK": dc,
