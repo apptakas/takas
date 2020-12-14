@@ -167,9 +167,9 @@ tombotakasModel.ListimgTombotakas = (element) => {
                 }
 
                 let datecreated = new Date(element.datecreated);
-                let dc = date.format(datecreated, 'DD/MM/YYYY');
+                let dc = date.format(datecreated, 'YYYY-MM-DD');
                 let datelot = new Date(element.datelot);
-                let dl = date.format(datelot, 'DD/MM/YYYY HH:mm');
+                let dl = date.format(datelot, 'YYYY-MM-DD HH:mm');
                 resolve({                    
                     "idTombotakas": element.id,
                     "statusTTK": statusTTK,
@@ -365,11 +365,11 @@ tombotakasModel.LisTicketsReservados = (element) => {
                 }
 
                 let datecreated = new Date(element.datecreated);
-                let dc = date.format(datecreated, 'DD/MM/YYYY');
+                let dc = date.format(datecreated, 'YYYY-MM-DD');
                 let datelot = new Date(element.datelot);
-                let dl = date.format(datelot, 'DD/MM/YYYY HH:mm');
+                let dl = date.format(datelot, 'YYYY-MM-DD HH:mm');
                 let now = new Date();
-                let servidor2=date.format(now, 'DD/MM/YYYY HH:mm:ss');  
+                let servidor2=date.format(now, 'YYYY-MM-DD HH:mm:ss');  
 
                 let tiemporestante=date.subtract(now,datelot).toMinutes();
 
