@@ -1,8 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
- const path = require('path');
+const path = require('path');
+
+const session =require('express-session')
+const RedisStore = require('connect-redis')(session);
+const SocketIO= require('socket.io');
+const http=require('http');
 
 var ip = require('ip');
+//const { Socket } = require('socket.io');
  console.log(ip.address());
 
 //  const http = require('http');
@@ -20,6 +26,7 @@ const port = 1111;
 
 //initialization
 const app = express();
+const server = http.Server(app);
 
 //settings
  app.set('port', process.env.PORT || port);
@@ -47,18 +54,31 @@ app.use(express.json());
 
 ////Public
 app.use(express.static(path.join(__dirname,'doc')));
-app.use('/admin',express.static(path.join(__dirname,'src/public')));
+app.use('/consola',express.static(path.join(__dirname,'src/public')));
 
 
-const http= require('http').Server(app);
-const io= require('socket.io')(http);
+// const http= require('http').Server(app);
+// const io= require('socket.io')(http);
 
-io.on('connection', (socket) => {
-    console.log('Usuario Conectado');
-});
+// io.on('connection', (socket) => {
+//     console.log('Usuario Conectado');
+// });
 
 
 //starting the server
+// app.listen(app.get('port'),()=>{
+//     console.log('Server on port', app.get('port'));
+// })
 app.listen(app.get('port'),()=>{
-    console.log('Server on port', app.get('port'));
-})
+        console.log('Server on port', app.get('port'));
+    })
+
+
+//webSokects
+
+
+// const io = SocketIO(server);
+// //webSokects
+// io.on('connection', (socket) => {
+//     console.log('Usuario Conectado',socket.id);
+// });

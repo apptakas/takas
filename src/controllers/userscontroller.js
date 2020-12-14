@@ -3822,14 +3822,19 @@ userController.DetailSubasTakas = async (req) => {
 
 userController.InterestedSubasTakas = async (req) => {
     try {
+        let FlagInterested= req.FlagInterested;
+        let status= 1;
+        if(FlagInterested==false){
+            status= 2;
+        }
         const DataInterested = {
             idsubastakas: req.IdSubastakas,
             iduser: req.IdUserSubastakas,
-            status: 2
+            status: status
             
         };
         //console.log(userData.password);
-        let response = await Interested.InterestedSubasTakas(DataInterested);
+        let response = await Interested.InterestedSubasTakas(DataInterested,FlagInterested);
 
        //console.log(response);
 
@@ -3898,6 +3903,63 @@ userController.LisTodo = async (req) => {
        }
        //validar si esta llegado vacio
        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Listar las Subastakas que me interesan  
+userController.MInterestedSubasTakas = async (req) => {
+    try {
+
+        let FlagSubastakas=req.FlagSubastakas;
+        let statuSubastakas=3; //Publicación activa
+        if(FlagSubastakas==1){
+            statuSubastakas=4; // Publicación Takasteada
+        }
+        if(FlagSubastakas==2){
+            statuSubastakas=5;//Publicación Elimidada ó Deshabilitada
+        }
+        if(FlagSubastakas==3){
+            statuSubastakas=26;//Publicación Editada
+        }
+
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const SubastakasData = {
+            status: statuSubastakas
+        };
+        //console.log(ProductData.status);
+        let response = await Product.MInterestedSubasTakas(UserData,SubastakasData);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Subastakas marcadas como interesantes'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Subastakas marcadas como interesantes'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
     } catch (e) {
         console.log(e);
         return { status: 'ko' };

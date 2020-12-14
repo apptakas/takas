@@ -434,9 +434,9 @@ ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
             let armaresult={};
             let consulta="";
             if(estatus==1){
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ";
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1 ";
             }else{
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct ";
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct AND typepublication=1";
             }
             pool.query(consulta,
                 async(err, result) => {
@@ -549,10 +549,10 @@ ProductModel.armaresult = (result) => {
                     let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
 
                     let now = new Date();
-                    let servidor=date.format(now, 'DD/MM/YYYY');
+                    let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss');
                     //let registro=element.registro;
                     let registro = new Date(element.datepublication);
-                    let regis = date.format(registro, 'DD/MM/YYYY');
+                    let regis = date.format(registro, 'YYYY-MM-DD HH:mm:ss');
 
                     //console.log(now+" - "+registro);
 
@@ -619,11 +619,11 @@ ProductModel.armaresult = (result) => {
                     }
                     if(element.typepublication==3){ 
                         let now2 = new Date();
-                        let servidor2=date.format(now, 'DD/MM/YYYY HH:mm:ss');  
+                        let servidor2=date.format(now, 'YYYY-MM-DD HH:mm:ss');  
                         let beginSubastakas = new Date(element.datebeginst);
-                        let begin=date.format(beginSubastakas, 'DD/MM/YYYY HH:mm:ss');
+                        let begin=date.format(beginSubastakas, 'YYYY-MM-DD HH:mm:ss');
                         let endSubastakas = new Date(element.dateendst);
-                        let end=date.format(endSubastakas, 'DD/MM/YYYY HH:mm:ss');
+                        let end=date.format(endSubastakas, 'YYYY-MM-DD HH:mm:ss');
                         let valStarted=date.subtract(now2,beginSubastakas).toMinutes();
                         console.log("valStarted: "+valStarted);
                         let started=false;
@@ -1292,10 +1292,10 @@ ProductModel.armaresulT = (result) => {
                     let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
 
                     let now = new Date();
-                    let servidor=date.format(now, 'DD/MM/YYYY');
+                    let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss');
                     //let registro=element.registro;
                     let registro = new Date(element.datepublication);
-                    let regis = date.format(registro, 'DD/MM/YYYY');
+                    let regis = date.format(registro, 'YYYY-MM-DD HH:mm:ss');
 
                     //console.log(now+" - "+registro);
 
@@ -1377,7 +1377,7 @@ ProductModel.armaresulT = (result) => {
 ProductModel.interestedSubastacas = (element) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            'SELECT id FROM interested WHERE iduser=? AND idsubastakas=?',
+            'SELECT id FROM interested WHERE iduser=? AND idsubastakas=? AND status=1',
             [element.iduser,
             element.idproduct
             ],
@@ -1412,6 +1412,40 @@ ProductModel.interestedSubastacas = (element) => {
             })
     })
 }
+
+
+
+//LISTAR LAS SUBASTAKAS PUBLICADAS POR OTROS USUARIOS - SUBASTAKEAR 
+ProductModel.MInterestedSubasTakas = (UserData,SubastakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+
+            let armaresult={};
+            pool.query(
+                "SELECT DISTINCT idproduct,i.id, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,i.iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,p.status  FROM interested AS i INNER JOIN product AS p ON i.iduser=p.iduser INNER JOIN  imgproduct AS im ON p.id=idproduct WHERE i.iduser='"+UserData.iduser+"' AND p.status<>4 AND p.id=idproduct AND typepublication=3 AND i.status=1 LIMIT 50",
+                async(err, result) => {
+                    //console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///
 
 
 
