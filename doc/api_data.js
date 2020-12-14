@@ -3878,14 +3878,14 @@ define({ "api": [
             "type": "int",
             "optional": false,
             "field": "SizePoduct",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "WeightProduct",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           }
         ]
       }
@@ -5476,14 +5476,14 @@ define({ "api": [
             "type": "int",
             "optional": false,
             "field": "UseSubastakas",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "SizeSubastakas",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
