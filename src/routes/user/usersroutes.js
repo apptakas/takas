@@ -1962,8 +1962,8 @@ router.post('/newproductkw', rutasProtegidas,[
  * @apiParam {array} ImagesProduct  required arrays de varchar .
  * @apiParam {array} KeyWordsProduct  optional array de varchar .
  * @apiParam {int} UsePoduct  optional.
- * @apiParam {int} SizePoduct  optional.
- * @apiParam {int} WeightProduct  optional.
+ * @apiParam {int} SizePoduct  required.
+ * @apiParam {int} WeightProduct  required.
  * 
  * 
  * 
@@ -1999,7 +1999,9 @@ router.post('/newproductckw', rutasProtegidas,[
     check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
     check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
     check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
-    check('subcategoryProduct', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('subcategoryProduct', ' la Categoríaes requerida').not().isEmpty().exists(),
+    check('SizePoduct', ' El tamaño es requerido').not().isEmpty().exists(),
+    check('WeightProduct', ' El Peso es requerido').not().isEmpty().exists(),
     check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
     check('ImagesProduct', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
@@ -4721,8 +4723,8 @@ router.post('/detailstombotakas', rutasProtegidas,[
  * @apiParam {int} subcategorySubastakas  required .
  * @apiParam {array} ImagesSubastakas  required arrays de varchar .
  * @apiParam {array} KeyWordsSubastakas  optional array de varchar .
- * @apiParam {int} UseSubastakas  optional.
- * @apiParam {int} SizeSubastakas  optional.
+ * @apiParam {int} UseSubastakas  required.
+ * @apiParam {int} SizeSubastakas  required.
  * @apiParam {int} WeightSubastakas  optional.
  * 
  * 
@@ -4763,6 +4765,8 @@ router.post('/newsubastakasckw', rutasProtegidas,[
     check('typemoneySubastakas', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
     check('marketvalueSubastakas', ' El precioinicial es obligatoria').not().isEmpty().exists(),
     check('subcategorySubastakas', 'Desbes definir la subcategoría es requerida').not().isEmpty().exists(),
+    check('SizeSubastakas', 'El tamaño es requerido').not().isEmpty().exists(),
+    check('WeightSubastakas', 'El peso es requerido').not().isEmpty().exists(),
     check('ImagesSubastakas', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
 
