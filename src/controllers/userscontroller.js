@@ -1233,7 +1233,7 @@ userController.ListMisProductos = async (req) => {
             status: req.statusProduct
         };
         if(req.statusProduct){
-            estatus=1;            
+            estatus=3;            
         }
         //console.log(userData.password);
         let response = await Product.ListMisProductos(UserData,ProductData,estatus);
