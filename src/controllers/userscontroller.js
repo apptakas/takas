@@ -3597,10 +3597,10 @@ userController.NewSubasTakasCKW = async (req) => {
            
 
             const topeKW=10;      
-            const KeyWordsSubastakas = {};
+            const KeyWordsSubastakas = [];
             let lengthkw=0;
             //console.log(req.ImagesProduct.length);
-            if(req.KeyWordsSubastakas!=null){
+            if(req.KeyWordsSubastakas!=null && req.KeyWordsSubastakas!=undefined){
                 lengthkw=req.KeyWordsSubastakas.length;
                 if(req.KeyWordsSubastakas.length!=0){
                     for(var atr1 in req.KeyWordsSubastakas){

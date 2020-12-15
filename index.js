@@ -1,11 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+//const redis = require('redis');
 
-const session =require('express-session')
-const RedisStore = require('connect-redis')(session);
+
+// const session =require('express-session')
+// const RedisStore = require('connect-redis')(session);
+// const redisClient = redis.createClient();
 const SocketIO= require('socket.io');
 const http=require('http');
+const realtime=require('./src/lib/socket');
+
+//const methodOverride = require('method-override');
 
 var ip = require('ip');
 //const { Socket } = require('socket.io');
@@ -27,6 +33,14 @@ const port = 1111;
 //initialization
 const app = express();
 const server = http.Server(app);
+
+//middlewares Sockets
+// const sessionmiddlewares= session({
+//     store:new RedisStore({}),
+//     secret:"Secreto"
+// });
+
+//realtime(session,sessionmiddlewares);
 
 //settings
  app.set('port', process.env.PORT || port);
