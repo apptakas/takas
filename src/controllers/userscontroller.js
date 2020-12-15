@@ -901,7 +901,7 @@ userController.NewProductCKW = async (req) => {
             let SizePoduct = null;
             if(req.SizePoduct!=null){               
                 SizePoduct= req.SizePoduct;  
-                 console.log("SizePoduct");
+                 //console.log("SizePoduct");
                 // console.log(SizePoduct);                
             }
 
@@ -951,18 +951,22 @@ userController.NewProductCKW = async (req) => {
             }
 
             const topeKW=10;      
-            const KeyWordsProduct = {};
+            const KeyWordsProduct = [];
             let lengthkw=0;
             //console.log(req.ImagesProduct.length);
-            if(req.KeyWordsProduct!=null){
+            if(req.KeyWordsProduct!=null && req.KeyWordsProduct!=undefined){
                 lengthkw=req.KeyWordsProduct.length;
                 if(req.KeyWordsProduct.length!=0){
                     for(var atr1 in req.KeyWordsProduct){
                         KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
                     };
-                   // console.log(KeyWordsProduct);
+                   
                 }
             }
+            else{
+
+            }
+            //console.log(req.KeyWordsProduct);
 
             
             // console.log(req.ImagesProduct.length);
