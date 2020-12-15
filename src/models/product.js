@@ -249,8 +249,10 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
-                        //console.log(createdkeywords);
+                        if(KeyWordsProduct.length!=0){
+                            createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
+                        }
+                            //console.log(createdkeywords);
                         if(ImagesProduct.length!=0){
                         for(var atr2 in ImagesProduct){  
                             pool.query(
@@ -1103,8 +1105,10 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
-                        //console.log(createdkeywords);
+                        if(KeyWordsProduct.length!=0){
+                            createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                        }
+                            //console.log(createdkeywords);
                         if(ImagesSubastakas.length!=0){
                         for(var atr2 in ImagesSubastakas){  
                             pool.query(
@@ -1357,7 +1361,8 @@ ProductModel.armaresulT = (result) => {
                             "status": statusProduct,
                             "editable": Editable,
                             "CantidadOfertas":CantidadOfertas.CantOfertas,
-                            "ProductImages":img.ImagesProduct
+                            "ProductImages":img.ImagesProduct,
+                            "Preferences":prefe.Preferences
                             
                         });
                     
