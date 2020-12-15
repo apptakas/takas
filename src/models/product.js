@@ -1111,9 +1111,16 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        if(KeyWordsProduct.length!=0){
-                            createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                        if(SubastakasData!=undefined){
+                            if(SubastakasData.length!=0){
+                                console.log(SubastakasData);
+                                console.log(SubastakasData.length);
+                                createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                            }
                         }
+                        // if(KeyWordsProduct.length!=0){
+                        //     createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                        // }
                             //console.log(createdkeywords);
                         if(ImagesSubastakas.length!=0){
                         for(var atr2 in ImagesSubastakas){  
