@@ -249,8 +249,14 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        if(KeyWordsProduct.length!=0){
-                            createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
+                        // console.log(KeyWordsProduct);
+                        // console.log(KeyWordsProduct.length);
+                        if(KeyWordsProduct!=undefined){
+                            if(KeyWordsProduct.length!=0){
+                                console.log(KeyWordsProduct);
+                                console.log(KeyWordsProduct.length);
+                                createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
+                            }
                         }
                             //console.log(createdkeywords);
                         if(ImagesProduct.length!=0){
