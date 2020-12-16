@@ -5,7 +5,7 @@ const date = require('date-and-time');
 InterestedModel.InterestedSubasTakas = (DataInterested,FlagInterested) => {
     return new Promise((resolve, reject) => {
      if (pool) {
-         let consulta="INSERT INTO interested SET ?";
+         let consulta="INSERT INTO interested SET status="+DataInterested.status+",idsubastakas="+DataInterested.idsubastakas+",iduser='"+DataInterested.iduser+"'";
          if(FlagInterested==false){
             consulta="UPDATE interested SET status="+DataInterested.status+" WHERE idsubastakas="+DataInterested.idsubastakas+" AND iduser='"+DataInterested.iduser+"'"
          }
