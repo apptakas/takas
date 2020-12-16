@@ -1355,10 +1355,17 @@ ProductModel.armaresulT = (result) => {
                     if(Diferenciafechas>20){
                         Editable=false;
                     }
+                    interested=await ProductModel.interestedSubastacas(element);
+                    console.log("interested: "+interested.interested[0]);
+                    let flagInterested=false;
+                    if(interested.interested[0]!= undefined){
+                        flagInterested=true;
+                    }
                    // console.log(element.typepublication);
                        
                         arr.push({
                             "idproduct": element.idproduct,
+                            "flagInterested":flagInterested,
                             "datecreated":regis,
                             "begin":element.datebeginst,
                             "end":element.dateendst,
