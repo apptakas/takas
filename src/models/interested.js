@@ -7,10 +7,11 @@ InterestedModel.InterestedSubasTakas = (DataInterested,FlagInterested) => {
      if (pool) {
          let consulta="INSERT INTO interested SET ?";
          if(FlagInterested==false){
-            consulta="UPDATE interested SET ? WHERE idsubastakas="+DataInterested.idsubastakas+" AND iduser="+DataInterested.idsubastakas
+            consulta="UPDATE interested SET status="+DataInterested.status+" WHERE idsubastakas="+DataInterested.idsubastakas+" AND iduser='"+DataInterested.iduser+"'"
          }
+         console.log(consulta);
          pool.query(
-            consulta, DataInterested,
+            consulta,
              (err, result) => {
                 // console.log(err);
                 // console.log(result);

@@ -5166,20 +5166,21 @@ router.post('/interestedsubastakas', rutasProtegidas, [
     "data": [
         {
             "idproduct": 1,
-            "datecreated": "09/12/2020",
-            "begin": "0000-00-00 00:00:00",
-            "end": "0000-00-00 00:00:00",
+            "flagInterested": false,
+            "datecreated": "2020-12-15 16:40:41",
+            "begin": "2020-12-20T17:30:00.000Z",
+            "end": "2020-12-22T01:00:00.000Z",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": false,
             "subcategory": 4,
-            "name": "pueba laptop 2",
+            "name": "pueba laptop 23",
             "details": "Hp Procesador intel core i7",
             "typemoney": 2,
             "marketvalue": "1200000.0000",
             "typepublication": 3,
             "conditions": 1,
-            "size": null,
-            "weight": null,
+            "size": 1,
+            "weight": 1,
             "status": 0,
             "editable": false,
             "CantidadOfertas": 0,
@@ -5193,6 +5194,125 @@ router.post('/interestedsubastakas', rutasProtegidas, [
             "Preferences": [
                 1
             ]
+        },
+        {
+            "idproduct": 2,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 16:41:37",
+            "begin": "2020-12-20T17:30:00.000Z",
+            "end": "2020-12-22T01:00:00.000Z",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 3,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 17:10:54",
+            "begin": null,
+            "end": null,
+            "iduser": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 4",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 1,
+            "conditions": 1,
+            "size": 18,
+            "weight": 19,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 4,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 17:11:32",
+            "begin": null,
+            "end": null,
+            "iduser": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 4",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 1,
+            "conditions": 1,
+            "size": 18,
+            "weight": 19,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 5,
+            "flagInterested": true,
+            "datecreated": "2020-12-15 19:08:42",
+            "begin": "2020-12-15T17:30:00.000Z",
+            "end": "2020-12-22T01:00:00.000Z",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": []
         }
     ],
     "msg": "Listar Todas las publicaciones"

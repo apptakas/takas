@@ -3158,6 +3158,10 @@ userController.ProcessRequestsTickets = async (req) => {
                 if(req.FlagTTk==2){
                     statusTicket=31;//COMPRADO (VENDER )
                 }
+                if(req.FlagTTk==4){
+                  
+                    statusTicket=33;//RECHAZADO
+                }
 
                 if(req.FlagTTk==4){
                   
@@ -3826,10 +3830,12 @@ userController.DetailSubasTakas = async (req) => {
 
 userController.InterestedSubasTakas = async (req) => {
     try {
+        let msg="Se ha registrado Me interesa";
         let FlagInterested= req.FlagInterested;
         let status= 1;
         if(FlagInterested==false){
             status= 2;
+            msg="Se ha eliminado la indicación de Me interesa";
         }
         const DataInterested = {
             idsubastakas: req.IdSubastakas,
@@ -3837,7 +3843,7 @@ userController.InterestedSubasTakas = async (req) => {
             status: status
             
         };
-        //console.log(userData.password);
+        console.log(DataInterested);
         let response = await Interested.InterestedSubasTakas(DataInterested,FlagInterested);
 
        //console.log(response);
@@ -3852,7 +3858,7 @@ userController.InterestedSubasTakas = async (req) => {
                 status: '200',
                 data: response.result[0],
                 images: response.images,
-                msg: 'Se ha registrado Me interesa'
+                msg: msg
                 //data: response
             }
         } else {
