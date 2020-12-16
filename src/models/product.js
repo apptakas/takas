@@ -1,6 +1,8 @@
 const pool = require('../config/database');
+const chatroomsModel = require('../models/chatrooms.js');
 const keywords = require('../models/keywords.js');
 let ProductModel = {};
+const sha1 = require('sha1');
 const date = require('date-and-time');
 
 
@@ -1464,6 +1466,139 @@ ProductModel.MInterestedSubasTakas = (UserData,SubastakasData) => {
     })
 };
 ///
+ProductModel.GetSubasTakas = (SubastakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let armaresult={};
+            let IdSAla="";
+            let ExistChatroom={};
+            let Msg="";
+            pool.query(
+                "SELECT * FROM product AS p  WHERE p.id="+SubastakasData.idSubastakas,
+                async(err, result) => {
+                    console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        
+                        let now = new Date();
+                        let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss'); 
+                        let datepublication= new Date(result[0].datepublication);
+                        let dateCreated=  date.format(datepublication, 'YYYY-MM-DD HH:mm');
+
+                        IdSAla=sha1(result[0].id+result[0].iduser+result[0].datepublication+result[0].typepublication,result[0].subcategory+result[0].name+now);
+                        console.log("IdSAla: "+IdSAla);
+
+                        let datebeginst= new Date(result[0].datebeginst);
+                        let dateInicio=  date.format(datebeginst, 'YYYY-MM-DD HH:mm');
+                        let dateendst= new Date(result[0].dateendst);
+                        let dateFin=  date.format(dateendst, 'YYYY-MM-DD HH:mm');
+                        //AQUÍ COMIENZAN LAS CONDICIONES PARA CREAR LA SALA
+                        //DETERMINAR SI YA DEBIÓ HABER COMENZADO
+                        let valStarted=date.subtract(now,datebeginst).toMinutes();
+
+                        //console.log("valStarted: "+valStarted);
+                        let finished=false;
+                        let valFinished=date.subtract(now,dateendst).toMinutes();
+                        if(valFinished > 0){
+                            finished=true;
+                        }
+                        let started=false;
+                        if(valStarted > 0){
+                            started=true;
+                        }
+                        console.log("started: "+started+" finished: "+finished);
+                        //Si ya es tiempo de iniciar 
+                        if(started==true && finished==false){
+                            //se compueda si ya la sala exisite
+                            ExistChatroom = await chatroomsModel.ExistChatRooms(IdSAla);
+                            //console.log(ExistChatroom);
+                             // NO Extiste = Se crea la sala y se pasa la información
+                            if(ExistChatroom.result.length==0){
+                                console.log("NO existe");
+                                Msg="Que gane el mejor postor! en la subasta de <<"+result[0].name+">>";
+                                DataSalas = await chatroomsModel.newChatRooms(IdSAla,IdSAla,result[0].iduser,result[0].id,result[0].id,servidor,43);
+                                armaresult={
+                                    "IdSAla":IdSAla,
+                                    "idproduct": result[0].id,
+                                    "datecreated":dateCreated,
+                                    "started":started,
+                                    "finished":finished,
+                                    "begin":dateInicio,
+                                    "end":dateFin,
+                                    "statusSubasta":43,
+                                    "msg":Msg
+                                }  
+                            }
+                            //SI existe = se pasa la información de la sala
+                            if(ExistChatroom.result.length!=0){
+                                Msg="Que gane el mejor postor! en la subasta de << "+result[0].name+" >>";
+                                console.log("Existe");
+                                console.log("ExistChatroom: "+ExistChatroom.result.id);
+                                armaresult={
+                                    "IdSAla":ExistChatroom.result.id,
+                                    "idproduct": result[0].id,
+                                    "datecreated":dateCreated,
+                                    "started":started,
+                                    "finished":finished,
+                                    "begin":dateInicio,
+                                    "end":dateFin,
+                                    "statusSubasta":ExistChatroom.result.status,
+                                    "msg":Msg
+                                }
+                            }
+                           
+
+                        }
+                        //Si aún NO inicia 
+                        if(started==false && finished==false){
+                            Msg="¡Pronto! Aún no es tiempo de comenzar la subasta de <<"+result[0].name+">>";
+                            armaresult={
+                                "IdSAla":null,
+                                "idproduct": result[0].id,
+                                "datecreated":dateCreated,
+                                "started":started,
+                                "finished":finished,
+                                "begin":dateInicio,
+                                "end":dateFin,
+                                "statusSubasta":null,
+                                "msg":Msg
+                            }                           
+                        }
+                        //Si Ya finalizó
+                        if(started==true && finished==true){
+                            Msg="¡Suerte en la proxima! Ya finalizó la subasta de <<"+result[0].name+">>";
+                            armaresult={
+                                "IdSAla":null,
+                                "idproduct": result[0].id,
+                                "datecreated":dateCreated,
+                                "started":started,
+                                "finished":finished,
+                                "begin":dateInicio,
+                                "end":dateFin,
+                                "statusSubasta":null,
+                                "msg":Msg
+                            }                           
+                        }
+                        //console.log(started);
+                        
+                        //armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
 
 
 

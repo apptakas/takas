@@ -3970,5 +3970,83 @@ userController.MInterestedSubasTakas = async (req) => {
     }
 
 };
+ 
+
+userController.GetChatRoomSubastakas = async (req) => {
+    try {
+        let match=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let statusChatroomSubastakas=43;
+            
+
+            SubastakasData = {
+                idUser: req.idUserFirabase,
+                idSubastakas: req.idSubastakas,
+                status:statusChatroomSubastakas
+            };
+       
+        //console.log(OfferData);
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await Product.GetSubasTakas(SubastakasData);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            console.log(response);
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                data:r,
+                //msg: r.msg
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar Obtener la Sala de la Subastakas'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+     //notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 module.exports = userController;

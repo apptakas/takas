@@ -616,7 +616,7 @@ OffersModel.FindDatOffer = (OfferData,callback) => {
                         // console.log(IdSAla);
                         // console.log(result[0].userOffer);
                         // console.log(result[0].userPublication);
-                        DataSalas = await chatroomsModel.newChatRooms(IdSAla,result[0].userOffer,result[0].userPublication,result[0].idPublication,hoy,OfferData.id);                      
+                        DataSalas = await chatroomsModel.newChatRooms(IdSAla,result[0].userOffer,result[0].userPublication,result[0].idPublication,hoy,OfferData.id,24);                      
                         //console.log("DataSalas");
                         //console.log(DataSalas.error);
                         if (DataSalas.error) {
