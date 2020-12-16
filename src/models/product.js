@@ -1261,6 +1261,7 @@ ProductModel.LisTodo = (SubasTakasData) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             let armaresult={};
+            console.log("SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 AND p.id=idproduct   LIMIT 50");
             pool.query(
                 "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 AND p.id=idproduct   LIMIT 50",
                 async(err, result) => {
@@ -1361,7 +1362,7 @@ ProductModel.armaresulT = (result) => {
                     if(interested.interested[0]!= undefined){
                         flagInterested=true;
                     }
-                   // console.log(element.typepublication);
+                    console.log(element.idproduct);
                        
                         arr.push({
                             "idproduct": element.idproduct,
@@ -1403,6 +1404,7 @@ ProductModel.armaresulT = (result) => {
 ///////////////////////////
 ProductModel.interestedSubastacas = (element) => {
     return new Promise((resolve, reject) => {
+        console.log('SELECT id FROM interested WHERE iduser="'+element.iduser+'" AND idsubastakas='+element.idproduct+' AND status=1');
         pool.query(
             'SELECT id FROM interested WHERE iduser=? AND idsubastakas=? AND status=1',
             [element.iduser,
