@@ -8,19 +8,21 @@ const date = require('date-and-time');
 let chatroomsModel = {};
 
 //Crear una nueva Sala de chat
-chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,hoy,OfferData,callback) => {
+chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,OfferData,hoy,Status) => {
        return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
-                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) values("'+IdSAla+'","'+userPublication+'","'+userOffer+'",'+idPublication+','+OfferData+',"'+hoy+'",24)',
+                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) values("'+IdSAla+'","'+userPublication+'","'+userOffer+'",'+idPublication+','+OfferData+',"'+hoy+'",'+Status+')',
                 (err, result) => {
                     //console.log(err);
                    // console.log(result);
                     if (err) {
+                        console.log(err);
                         resolve({
                             'error': err
                         })
                     } else {
+                        console.log(result);
                         resolve({
                             'result': result
                         })
@@ -31,6 +33,33 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
             //return resultado;
         }
     })
+};
+
+//Crear una nueva Sala de chat
+chatroomsModel.ExistChatRooms = (IdSAla) => {
+    return new Promise((resolve, reject) => {
+     if (pool) {
+         pool.query(
+             'SELECT * FROM chatrooms WHERE id=?', IdSAla,
+             (err, result) => {
+                 //console.log(err);
+                // console.log(result);
+                 if (err) {
+                     resolve({
+                         'error': err
+                     })
+                 } else {
+                    //console.log(result);
+                     resolve({
+                         'result': result[0]
+                     })
+                 }
+
+             }
+         )
+         //return resultado;
+     }
+ })
 };
 
 

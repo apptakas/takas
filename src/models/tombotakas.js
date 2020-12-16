@@ -380,6 +380,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                     console.log("pertenece");
                     resolve({                   
                         "idTombotakas": element.id,
+                        "pinTombotakas":element.pinreference,
                         "timeremaining":tiemporestante,
                         "pertenece": element.pertenece,
                         "nameTombotakas": element.name,
@@ -399,6 +400,7 @@ tombotakasModel.LisTicketsReservados = (element) => {
                 }else{
                     resolve({                   
                         "idTombotakas": element.id,
+                        "pinTombotakas":element.pinreference,
                         "timeremaining":tiemporestante,
                         "nameTombotakas": element.name,
                         "statusTTK": statusTTK,
@@ -427,7 +429,7 @@ tombotakasModel.MyTickets = (idfirebaseUser,Status) => {
      if (pool) {
          let ticketsReservados={};
          pool.query(
-            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser=? ORDER BY tk.idtombotakas ASC',  idfirebaseUser,
+            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser=? ORDER BY tk.idtombotakas ASC',  idfirebaseUser,
              async(err, result) => {
                  console.log(err);
                 // console.log(result);

@@ -4014,10 +4014,13 @@ router.post('/findtombotakaspin', rutasProtegidas,[
     "data": [
         {
             "idTombotakas": 2,
+            "pinTombotakas": "ibxJu2",
+            "timeremaining": 28841.56545,
             "nameTombotakas": "test Nueva Tombotakas",
             "statusTTK": 0,
-            "datecreatedTTK": "19/11/2020",
-            "datelotTTK": "25/11/2020 19:47",
+            "datecreatedTTK": "2020-11-19",
+            "pinreferenceTTK": "ibxJu2",
+            "datelotTTK": "2020-11-25 19:47",
             "moneyTTK": 1,
             "priceTTK": "10000.0000",
             "imgTTK": [
@@ -4042,7 +4045,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 4,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 2,
@@ -4050,7 +4054,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 3,
@@ -4058,7 +4063,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 4,
@@ -4066,7 +4072,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 5,
@@ -4074,7 +4081,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 6,
@@ -4082,7 +4090,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 7,
@@ -4090,7 +4099,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 8,
@@ -4098,7 +4108,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 }
             ]
         }
@@ -5402,8 +5413,99 @@ router.post('/minterestedsubastakas', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)
     
     })
-
     ///////
+//SALAS SUBASTAKAS
+   /**
+ * @api {put} /user/changestatusoffer 6 changestatusoffer
+ * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idUserFirabase required.
+ * @apiParam {int} idSubastakas required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *  {
+    "success": true,
+    "status": "200",
+    "data": {
+        "IdSAla": "a10531f9f302177ecbd30ef97ac9fcbeab88265c",
+        "idproduct": 5,
+        "datecreated": "2020-12-15 19:08",
+        "started": true,
+        "finished": false,
+        "begin": "2020-12-15 12:30",
+        "end": "2020-12-21 20:00",
+        "statusSubasta": 43,
+        "msg": "Que gane el mejor postor! en la subasta de << pueba laptop 23 >>"
+    }
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *  {
+        "success": false,
+        "status":: "500",
+        "msg": "Error al intentar Obtener la Sala de la Subastakas"
+    }
+ **/
+
+//CAMBIO DE ESTATUS DE UNA SUBASTAKAS - SUBASTAKAS
+router.post('/getchatroomsubastakas', rutasProtegidas, [
+    check('idUserFirabase', 'El idUserFirabase es obligatorio').not().isEmpty().exists(),
+    check('idSubastakas', 'El idSubastakas es obligatorio').not().isEmpty().exists()
+    // check('FlagStatusSubastakas', 'El FlagStatusSubastakas es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.GetChatRoomSubastakas(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+// router.put('/changestatusubastakas', rutasProtegidas, [
+//     check('idUserFirabase', 'El idUserFirabase es obligatorio').not().isEmpty().exists(),
+//     check('idSubastakas', 'El idSubastakas es obligatorio').not().isEmpty().exists(),
+//     check('FlagStatusSubastakas', 'El FlagStatusSubastakas es obligatorio').not().isEmpty().exists()
+//     ],async (req, res) => {
+    
+//         const error = validationResult(req);
+
+//         if (error.array().length != 0) {
+//             return res.status(422).json({ errores: error.array(), msg: 'Error' });
+//         }        
+//         let response = await userController.ChangeStatusOffer(req.body);
+    
+//         if (response.status == 'ko') {
+//             return res.status(500).json({ error: 'Error' })
+//         }
+//         //console.log(response);
+//         return res.status(response.data.status).json(response.data)
+    
+//     }) 
    
 
 module.exports = router;
