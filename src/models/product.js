@@ -1444,7 +1444,7 @@ ProductModel.MInterestedSubasTakas = (UserData,SubastakasData) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,i.id, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,i.iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,p.status  FROM interested AS i INNER JOIN product AS p ON i.iduser=p.iduser INNER JOIN  imgproduct AS im ON p.id=idproduct WHERE i.iduser='"+UserData.iduser+"' AND p.status<>4 AND p.id=idproduct AND typepublication=3 AND i.status=1 LIMIT 50",
+                "SELECT DISTINCT idproduct,i.id, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,i.iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,p.status  FROM interested AS i INNER JOIN product AS p ON i.idsubastakas=p.id  INNER JOIN  imgproduct AS im ON p.id=idproduct WHERE i.iduser='"+UserData.iduser+"' AND p.status<>4 AND p.id=idproduct AND typepublication=3 AND i.status=1 LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
