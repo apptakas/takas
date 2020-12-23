@@ -1113,9 +1113,9 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        if(SubastakasData!=undefined){
-                            if(SubastakasData.length!=0){
-                                console.log(SubastakasData);
+                        if(KeyWordsSubastakas!=undefined){
+                            if(KeyWordsSubastakas.length!=0){
+                                //console.log(SubastakasData);
                                 console.log(SubastakasData.length);
                                 createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
                             }
