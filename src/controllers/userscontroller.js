@@ -3610,10 +3610,10 @@ userController.NewSubasTakasCKW = async (req) => {
                     for(var atr1 in req.KeyWordsSubastakas){
                         KeyWordsSubastakas[atr1] = req.KeyWordsSubastakas[atr1];     
                     };
-                   // console.log(KeyWordsProduct);
+                   // console.log(KeyWordsSubastakas);
                 }
             }
-
+            console.log(KeyWordsSubastakas);
             
             // console.log(req.ImagesProduct.length);
             // console.log(lengthkw);

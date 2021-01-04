@@ -1,20 +1,31 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+// const session =require('express-session');
 const morgan = require('morgan');
 const path = require('path');
-//const redis = require('redis');
-
-
-// const session =require('express-session')
+// const redis = require('redis');
+//const SocketIO= require('socket.io');
 // const RedisStore = require('connect-redis')(session);
-// const redisClient = redis.createClient();
-const SocketIO= require('socket.io');
-const http=require('http');
-const realtime=require('./src/lib/socket');
 
-//const methodOverride = require('method-override');
+
+// const methodOverride = require('method-override');
+
+// const SocketIO= require('socket.io');
+
+
+
+
+
+//
+//const RedisClient = redis.createClient();
+
+const socketio= require('socket.io');
+const http=require('http');
+// const realtime=require('./src/lib/socket');
+
 
 var ip = require('ip');
-//const { Socket } = require('socket.io');
+
  console.log(ip.address());
 
 //  const http = require('http');
@@ -32,7 +43,8 @@ const port = 1111;
 
 //initialization
 const app = express();
-const server = http.Server(app);
+const server = http.createServer(app);
+const io = socketio(server);
 
 //middlewares Sockets
 // const sessionmiddlewares= session({
@@ -40,7 +52,7 @@ const server = http.Server(app);
 //     secret:"Secreto"
 // });
 
-//realtime(session,sessionmiddlewares);
+// realtime(session,sessionmiddlewares);
 
 //settings
  app.set('port', process.env.PORT || port);
@@ -80,12 +92,13 @@ app.use('/consola',express.static(path.join(__dirname,'src/public')));
 
 
 //starting the server
+server.listen(app.get('port'),()=>{
+    console.log('Server on port', app.get('port'));
+})
+
 // app.listen(app.get('port'),()=>{
-//     console.log('Server on port', app.get('port'));
-// })
-app.listen(app.get('port'),()=>{
-        console.log('Server on port', app.get('port'));
-    })
+//         console.log('Server on port', app.get('port'));
+//     })
 
 
 //webSokects
@@ -96,3 +109,20 @@ app.listen(app.get('port'),()=>{
 // io.on('connection', (socket) => {
 //     console.log('Usuario Conectado',socket.id);
 // });
+
+//Escuchando el evento de conexión 
+io.on('connection',function(socket){
+    //obtenemos id
+    console.log("Cliente: "+socket.id);
+    //enviar numeros aleatorios cada 2 segundos al cliente
+    setInterval(()=>{
+        socket.emit('server/random', Math.random());
+    },2000);
+
+    //Recibiendo el número aleatorio del cliente
+    socket.on('client/random',(num)=>{
+        console.log(num);
+    })
+})
+
+
