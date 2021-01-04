@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "apidoc": {
     "title": "Custom apiDoc browser title",
-    "url": "https://takas-291016.ue.r.appspot.com"
+    "url": "https://takas-300716.ue.r.appspot.com"
   },
   "engines": {
     "node": "12.x.x"
@@ -39,6 +39,7 @@
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
     "jwt-redis": "^6.0.0",
+    "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "node-datetime": "^2.1.2",
