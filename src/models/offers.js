@@ -60,7 +60,7 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                         let nameProducto=idUserPublication.result[0].nameProducto;
                         let marketvalue=idUserPublication.result[0].marketvalue;
                         let titulo="Haz recibido un takasteo potencial";
-                        let detalles="¡En hora buena "+fullname+"! tú publicación  <<"+nameProducto+">> tiene un takasteo potencial con un valor comercial de "+CalValorOferta;
+                        let detalles="¡En hora buena "+fullname+"! tú publicación  <<"+nameProducto+">> tiene una oferta por valor comercial de "+CalValorOferta;
                         // console.log("idUserPublication.tokenpush");
                          console.log(detalles);
                         // //console.log(idUserPublication);
@@ -541,7 +541,7 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                             
                             if(statusOffer==7){
                                 titulo="POSIBLE TAKASTEO!";
-                                detalles="¡Falta sólo un paso "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido Aceptada, estamos y habilitamos un chat para que acuerden los últimos detalles antes del match";
+                                detalles="¡Falta sólo un paso "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido Aceptada, habilitamos un chat para que acuerden los últimos detalles antes del match";
                             }
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);  
                             //console.log(respCrearPush);
@@ -561,8 +561,8 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                         if(FlagStatusOffer==1) {
 
                             if(statusOffer==8){
-                                titulo="Oferta rechazada, mejor suete a la proxima!";
-                                detalles="¡No te preocupes "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido rechazada, puedes intentar con otros productos deinterés para el dueño de la publicación";
+                                titulo="Oferta rechazada, sigue intentando y tendrás éxito!";
+                                detalles="¡No te preocupes "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido rechazada, puedes intentar con otros productos de interés para el dueño de la publicación";
                             }
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);
 
