@@ -47,7 +47,9 @@ tombotakasModel.NewTomboTakas = (dataTTK,ImagesLot) => {
                         }//fin for reforrido imagenes
                     }//fin if ImagesProduct.length!=0
                      resolve({
-                         'result': result
+                         'result': result,
+                         'id':result.insertId
+                         
                      })
                  }
 

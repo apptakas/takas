@@ -2383,7 +2383,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Oferta creada exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idoferta\":5,\n    \"msg\": \"Oferta creada exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -4044,7 +4044,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Producto registrado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idProduct\":47,\n    \"msg\": \"Producto registrado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -6753,7 +6753,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "emailuser",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           },
           {
             "group": "Parameter",

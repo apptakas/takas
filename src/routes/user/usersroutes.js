@@ -267,7 +267,7 @@ router.post('/autenticar', [
  * 
  * 
  * @apiParam {varchar}  idfirebase  required.
- * @apiParam {varchar} emailuser  required.
+ * @apiParam {varchar} emailuser  optional.
  * @apiParam {varchar} fullnameUser  required.
  * @apiParam {varchar} imgUser  optional.
  * @apiParam {varchar} tycUser  optional.
@@ -300,10 +300,11 @@ router.post('/autenticar', [
  */
 router.post('/gautenticar', [
     check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists(),
-    check('fullnameUser', 'El fullnameUser el obligatorio').not().isEmpty().exists(),
-    check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
+    check('fullnameUser', 'El fullnameUser el obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
-
+    
+    // ,
+    // check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
     const error = validationResult(req);
 
         if (error.array().length != 0) {
@@ -1976,7 +1977,8 @@ router.post('/newproductkw', rutasProtegidas,[
  *     HTTP/1.1 200 OK
  *    {
     "success": true,
-    "status":: "200",
+    "status": "200",
+    "idProduct":47,
     "msg": "Producto registrado con éxito"
 }
  *
@@ -2384,6 +2386,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
  *             {
     "success": true,
     "status": "200",
+    "idoferta":5,
     "msg": "Oferta creada exitosamente"
 }
  *
@@ -2881,7 +2884,7 @@ router.put('/changestatusoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }        
-        let response = await userController.ChangeStatusOffer(req.body);
+        let response = await userController.ChangeStatfusOffer(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })

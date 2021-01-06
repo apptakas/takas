@@ -997,6 +997,8 @@ userController.NewProductCKW = async (req) => {
         //console.log(msgError);
 
         let data = {};
+
+        console.log(response);
         if (response && response.result) {
             let r = {};
             r = response.result;
@@ -1004,6 +1006,7 @@ userController.NewProductCKW = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                idProduct:response.id, 
                 msg: 'Producto registrado con éxito'
                 //data: response
             }
@@ -1760,7 +1763,7 @@ userController.NewOffer = async (req) => {
             data = {
                 success: true,
                 status: '200',                
-                // idoferta:response.idOferta,
+                idoferta:response.idOferta,
                 // idnotification:response.idNotificacion,
                 // Typenotification:response.TypeNotification,
                 // titulo:response.titulo,

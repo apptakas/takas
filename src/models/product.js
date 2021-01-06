@@ -277,7 +277,8 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                     } else {
                                          
                                         resolve({
-                                            'result': resut
+                                            'result': resut,
+                                            'id':resut.insertId
                                         })                                       
                                     }
                 
