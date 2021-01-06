@@ -3183,6 +3183,20 @@
             "optional": false,
             "field": "WeightProduct",
             "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "valueweight",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "unitofmeasurement",
+            "description": "<p>optional.</p>"
           }
         ]
       }
@@ -3983,6 +3997,20 @@
             "optional": false,
             "field": "WeightProduct",
             "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "ValueWeightProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "UnitOfMeasurementP",
+            "description": "<p>required.</p>"
           }
         ]
       }
@@ -4657,7 +4685,7 @@
             "type": "smallint",
             "optional": false,
             "field": "FlagCharacteristic",
-            "description": "<p>requeride  1=Nuevo o Usado 2=Tamaño 3=Peso.</p>"
+            "description": "<p>requeride  1=Nuevo ó Usado 2=Tamaño 3=Peso y 4= Unidad de Medida.</p>"
           }
         ]
       }
@@ -4691,7 +4719,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 19,\n            \"namestatus\": \"Muy liviano (0-1kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 20,\n            \"namestatus\": \"Liviano (1-3kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 21,\n            \"namestatus\": \"Normal (3 a 7kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 22,\n            \"namestatus\": \"Pesado (7-15kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        }\n    ],\n    \"msg\": \"Lista de Características para una publicación sengún bandera\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 19,\n            \"namestatus\": \"Muy liviano \",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 20,\n            \"namestatus\": \"Liviano\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 21,\n            \"namestatus\": \"Normal \",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 22,\n            \"namestatus\": \"Pesado \",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        }\n    ],\n    \"msg\": \"Lista de Características para una publicación sengún bandera\"\n}",
           "type": "json"
         }
       ]

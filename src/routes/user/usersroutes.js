@@ -82,7 +82,6 @@ router.get('/prueba', function (req, res) {
 //Crear newUser- 
 router.post('/newUser', [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
-    check('imgUser', 'El imgUser es obligatorio').not().isEmpty().exists(),
     check('fullnameUser', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
     check('phonenumberUser', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El email no puede estra vacio y debe corresponder al formato').isEmail().exists(),
@@ -980,7 +979,7 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
  *
  *
  * 
- * @apiParam {smallint}  FlagCharacteristic  requeride  1=Nuevo o Usado 2=Tamaño 3=Peso. 
+ * @apiParam {smallint}  FlagCharacteristic  requeride  1=Nuevo ó Usado 2=Tamaño 3=Peso y 4= Unidad de Medida. 
  * 
  * @apiSuccess {boolean} success of the Status.
  * @apiSuccess {int} status 200 of the Status.
@@ -994,25 +993,25 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
     "data": [
         {
             "id": 19,
-            "namestatus": "Muy liviano (0-1kg)",
+            "namestatus": "Muy liviano ",
             "filter": 6,
             "namefilter": "Peso Producto"
         },
         {
             "id": 20,
-            "namestatus": "Liviano (1-3kg)",
+            "namestatus": "Liviano",
             "filter": 6,
             "namefilter": "Peso Producto"
         },
         {
             "id": 21,
-            "namestatus": "Normal (3 a 7kg)",
+            "namestatus": "Normal ",
             "filter": 6,
             "namefilter": "Peso Producto"
         },
         {
             "id": 22,
-            "namestatus": "Pesado (7-15kg)",
+            "namestatus": "Pesado ",
             "filter": 6,
             "namefilter": "Peso Producto"
         }
@@ -1964,6 +1963,8 @@ router.post('/newproductkw', rutasProtegidas,[
  * @apiParam {int} UsePoduct  optional.
  * @apiParam {int} SizePoduct  required.
  * @apiParam {int} WeightProduct  required.
+ * @apiParam {int} ValueWeightProduct  required.
+ * @apiParam {smallint} UnitOfMeasurementP  required.
  * 
  * 
  * 
@@ -2002,6 +2003,8 @@ router.post('/newproductckw', rutasProtegidas,[
     check('subcategoryProduct', ' la Categoríaes requerida').not().isEmpty().exists(),
     check('SizePoduct', ' El tamaño es requerido').not().isEmpty().exists(),
     check('WeightProduct', ' El Peso es requerido').not().isEmpty().exists(),
+    check('ValueWeightProduct', ' Valor del Peso es requerido').not().isEmpty().exists(),
+    check('UnitOfMeasurementP', ' Dese ingresar la unidad de medida').not().isEmpty().exists(),
     check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
     check('ImagesProduct', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
@@ -2052,6 +2055,8 @@ router.post('/newproductckw', rutasProtegidas,[
  * @apiParam {int} UsePoduct  optional.
  * @apiParam {int} SizePoduct  optional.
  * @apiParam {int} WeightProduct  optional.
+ * @apiParam {int} valueweight  optional.
+ * @apiParam {smallint} unitofmeasurement  optional.
  * 
  * 
  * 

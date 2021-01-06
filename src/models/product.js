@@ -479,7 +479,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
+                "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1   ORDER BY datepublication DESC LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -569,12 +569,12 @@ ProductModel.armaresult = (result) => {
                     let comprobar_fecha=date.isSameDay(now, registro); 
                     // console.log(comprobar_fecha+" - ");
                     // console.log("//////");
+                    console.log(element.conditions);
                     let nuevo=false;
-                    if (registro == servidor){
-                        let nuevo=true;
-                    }else{
-                        let nuevo=false;
+                    if (element.conditions==9){
+                         nuevo=true;
                     }
+                    console.log(nuevo);
 
                     let FlagProduct=element.status;
                     let statusProduct=0; //Publicación activa
@@ -594,8 +594,8 @@ ProductModel.armaresult = (result) => {
                    // console.log(rp);
                     //console.log(horaServidor);
                     let datepublication = new Date(rp.result.datepublication);
-                    console.log(datepublication);
-                    //fecha de creación de producto
+                    //console.log(datepublication);
+                    ////fecha de creación de producto
                     let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
                     //console.log(now);
                     let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
@@ -603,13 +603,13 @@ ProductModel.armaresult = (result) => {
                     if(Diferenciafechas>20){
                         Editable=false;
                     }
-                    console.log(element.typepublication);
+                    //console.log(element.typepublication);
                     if(element.typepublication==1){   
                         arr.push({
                             "idproduct": element.idproduct,
                             "datecreated":regis,
                             "iduser": element.iduser,
-                            "nuevo": comprobar_fecha,
+                            "nuevo":nuevo,
                             "subcategory": element.subcategory,
                             "name": element.name,
                             "details": element.details,
@@ -660,7 +660,7 @@ ProductModel.armaresult = (result) => {
                             "begin":begin,
                             "end":end,
                             "iduser": element.iduser,
-                            "nuevo": comprobar_fecha,
+                            "nuevo": nuevo,
                             "subcategory": element.subcategory,
                             "name": element.name,
                             "details": element.details,

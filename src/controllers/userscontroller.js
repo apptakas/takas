@@ -536,6 +536,9 @@ userController.CharacteristicPublication = async (req) => {
         if(req.FlagCharacteristic==3){
             filter=6;
         }
+        if(req.FlagCharacteristic==4){
+            filter=13;
+        }
         //console.log(userData.password);
         let response = await MasterStatus.CharacteristicPublication(filter);
 
@@ -920,6 +923,8 @@ userController.NewProductCKW = async (req) => {
                 conditions:UsePoduct,
                 size: SizePoduct,
                 weight: WeightProduct,
+                valueweight:req.ValueWeightProduct,
+                unitofmeasurement: req.UnitOfMeasurementP,
                 name: req.nameProduct,
                 details: req.detailsProduct,
                 typemoney: req.typemoneyProduct,
@@ -1071,6 +1076,8 @@ userController.EditProductCKW = async (req) => {
                 condition:UsePoduct,
                 size: SizePoduct,
                 weight: WeightProduct,
+                valueweight:req.ValueWeightProduct,
+                unitofmeasurement: req.UnitOfMeasurementP,
                 name: req.nameProduct,
                 details: req.detailsProduct,
                 typemoney: req.typemoneyProduct,
@@ -1299,7 +1306,7 @@ userController.ListProductos = async (req) => {
         //console.log(ProductData.status);
         let response = await Product.ListProductos(UserData,ProductData);
 
-       console.log(response);
+       //console.log(response);
 
         let data = {};
         if (response && response.result) {
@@ -1325,7 +1332,7 @@ userController.ListProductos = async (req) => {
         //validar si esta llegado vacio
         return { status: 'ok', data: data };
     } catch (e) {
-        console.log(e);
+        //console.log(e);
         return { status: 'ko' };
     }
 
