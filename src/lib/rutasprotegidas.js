@@ -12,7 +12,7 @@ rutasProtegidas.use((req, res, next) => {
  
     if (token) {
       jwt.verify(token, config.llave, (err, decoded) => {      
-        if (err) {
+        if (err) {   
           return res.json({ mensaje: 'Token inválida' });    
         } else {
           req.decoded = decoded;    

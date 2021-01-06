@@ -138,7 +138,7 @@ userController.UpdatePerfil = async (req) => {
             };
 
             var token = jwt.sign(payload, config.llave, {
-                expiresIn: 60 * 60 * 720
+                // expiresIn: 0
             });
             // var refreshToken = randtoken.uid(256) ;
             // refreshTokens[refreshToken] = {token: 'JWT ' + token, refreshToken: refreshToken};
