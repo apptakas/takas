@@ -42,25 +42,25 @@ masterstatus.CharacteristicPublication = (idfilter,callback) => {
                             'error': err
                         })
                     } else {
-                        let NoAplica= {
-                            "id": 49,
-                            "namestatus": "No Aplica ",
-                            "filter": 0,
-                            "namefilter": "No aplica"
-                        }; 
+                        // let NoAplica= {
+                        //     "id": 49,
+                        //     "namestatus": "No Aplica ",
+                        //     "filter": 0,
+                        //     "namefilter": "No aplica"
+                        // }; 
                         let CaracteristicasP= []; 
                         for(var atr2 in result){
                             console.log(result);
                             CaracteristicasP.push(result[atr2]);
                         }; 
 
-                        if(idfilter!=4){
-                        CaracteristicasP.push(NoAplica);
-                        }
+                        // if(idfilter!=4){
+                        // CaracteristicasP.push(NoAplica);
+                        // }
                         //result.NoAplica = "nuevoValor";
                      
                         resolve({
-                            'result': CaracteristicasP
+                            'result': result
                         })
                     }
 
