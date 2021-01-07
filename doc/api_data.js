@@ -4003,14 +4003,14 @@ define({ "api": [
             "type": "int",
             "optional": false,
             "field": "ValueWeightProduct",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           },
           {
             "group": "Parameter",
             "type": "smallint",
             "optional": false,
             "field": "UnitOfMeasurementP",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           }
         ]
       }
