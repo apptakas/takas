@@ -54,7 +54,7 @@ masterstatus.CharacteristicPublication = (idfilter,callback) => {
                             CaracteristicasP.push(result[atr2]);
                         }; 
 
-                        if(idfilter!=4){
+                        if(idfilter==6){
                         CaracteristicasP.push(NoAplica);
                         }
                         //result.NoAplica = "nuevoValor";
