@@ -5616,6 +5616,20 @@
             "optional": false,
             "field": "WeightSubastakas",
             "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "ValueWeightProduct",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "UnitOfMeasurementP",
+            "description": "<p>optional.</p>"
           }
         ]
       }
@@ -5649,7 +5663,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Subastakas registrada con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idsubastakas\": 51,\n    \"msg\": \"Subastakas registrada con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -6808,7 +6822,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU\",\n    \"newUser\": true,\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTAwNTM2NzAsImV4cCI6MTYxMjY0NTY3MH0.of4JPq8qP_p7lID3qL-RAGyhzw9x6DSC8GuwLHcitFs\",\n    \"newUser\": false,\n    \"Email\": \"gusuario124@gmail.com\",\n    \"Fullname\": \"gusuario12\",\n    \"PhoneNumber\": null,\n    \"ImgUrl\": null,\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -7328,7 +7342,7 @@
             "type": "varchar",
             "optional": false,
             "field": "fullnameUser",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
@@ -7342,14 +7356,14 @@
             "type": "varchar",
             "optional": false,
             "field": "phonenumberUser",
-            "description": "<p>unique optional.</p>"
+            "description": "<p>unique required.</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "emailUser",
-            "description": "<p>unique  optional.</p>"
+            "description": "<p>unique  required.</p>"
           },
           {
             "group": "Parameter",
@@ -7536,7 +7550,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Token Push Actualizado\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"UserExist\": true,\n    \"Email\": \"luis.perez@comfacundi.com.co\",\n    \"Fullname\": \"LUIS ALFONSO PEREZ GOMEZ\",\n    \"PhoneNumber\": null,\n    \"ImgUrl\": \"https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg\",\n    \"msg\": \"Verificación si el usuario existe y si sus campos estan completos\"\n}",
           "type": "json"
         }
       ]

@@ -255,8 +255,8 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                         // console.log(KeyWordsProduct.length);
                         if(KeyWordsProduct!=undefined){
                             if(KeyWordsProduct.length!=0){
-                                console.log(KeyWordsProduct);
-                                console.log(KeyWordsProduct.length);
+                                // console.log(KeyWordsProduct);
+                                // console.log(KeyWordsProduct.length);
                                 createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
                             }
                         }
@@ -1105,7 +1105,7 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
             let createdkeywords={};
             pool.query(
                 'INSERT INTO product SET ?', SubastakasData,
-                async(err, resut) => {
+                async(err, result) => {
                     //console.log(resut);
                     if (err) {
                         resolve({
@@ -1130,9 +1130,9 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                             pool.query(
                                 'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
                                     ImagesSubastakas[atr2],
-                                    resut.insertId
+                                    result.insertId
                                 ],
-                                (err, resut) => {
+                                (err, result2) => {
                                     //console.log(resut);
                                     if (err) {
                                         resolve({
@@ -1141,7 +1141,7 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                                     } else {
                                          
                                         resolve({
-                                            'result': resut
+                                            'result': result
                                         })                                       
                                     }
                 

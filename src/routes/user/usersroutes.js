@@ -119,10 +119,10 @@ router.post('/newUser', [
  * @apiParam {varchar} idfirebaseUser unique required.
  * @apiParam {varchar} imgUser unique optional.
  * @apiParam {int} codCity  optional. 
- * @apiParam {varchar} fullnameUser optional.
+ * @apiParam {varchar} fullnameUser required.
  * @apiParam {varchar} datebirthUser optional.
- * @apiParam {varchar} phonenumberUser  unique optional.
- * @apiParam {varchar} emailUser  unique  optional.
+ * @apiParam {varchar} phonenumberUser  unique required.
+ * @apiParam {varchar} emailUser  unique  required.
  * @apiParam {varchar} passwordUser  optional .
  * @apiParam {varchar} tycUser  optional .
  * @apiParam {varchar} urlimgUser  optional .
@@ -162,7 +162,10 @@ router.post('/newUser', [
  */
 //Completar perfilUser- 
 router.post('/updateperfil',rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists()
+    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('fullnameUser', 'El fullnameUser es obligatorio').not().isEmpty().exists(),
+    check('phonenumberUser', 'El phonenumberUser es obligatorio').not().isEmpty().exists(),
+    check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
 ], async (req, res) => {
 
     const error = validationResult(req);
@@ -279,11 +282,15 @@ router.post('/autenticar', [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
-    "status":: "200",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU",
-    "newUser": true,
+    "status": "200",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTAwNTM2NzAsImV4cCI6MTYxMjY0NTY3MH0.of4JPq8qP_p7lID3qL-RAGyhzw9x6DSC8GuwLHcitFs",
+    "newUser": false,
+    "Email": "gusuario124@gmail.com",
+    "Fullname": "gusuario12",
+    "PhoneNumber": null,
+    "ImgUrl": null,
     "msg": "Usuario Autenticado con éxito"
 }
  *
@@ -862,8 +869,13 @@ router.put('/tokenpush', rutasProtegidas, [
  *     HTTP/1.1 200 OK
 {
     "success": true,
-    "status":: "200",
-    "msg": "Token Push Actualizado"
+    "status": "200",
+    "UserExist": true,
+    "Email": "luis.perez@comfacundi.com.co",
+    "Fullname": "LUIS ALFONSO PEREZ GOMEZ",
+    "PhoneNumber": null,
+    "ImgUrl": "https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg",
+    "msg": "Verificación si el usuario existe y si sus campos estan completos"
 }
  *
  * @apiError UserNotFound The id of the User was not found.
@@ -895,6 +907,7 @@ router.post('/userexist', rutasProtegidas, [
     return res.status(response.data.status).json(response.data)
 
 })
+
 
 
 
@@ -4743,6 +4756,8 @@ router.post('/detailstombotakas', rutasProtegidas,[
  * @apiParam {int} UseSubastakas  required.
  * @apiParam {int} SizeSubastakas  required.
  * @apiParam {int} WeightSubastakas  optional.
+ * @apiParam {int} ValueWeightProduct  optional.
+ * @apiParam {smallint} UnitOfMeasurementP  optional.
  * 
  * 
  * 
@@ -4752,9 +4767,10 @@ router.post('/detailstombotakas', rutasProtegidas,[
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
     "status": "200",
+    "idsubastakas": 51,
     "msg": "Subastakas registrada con éxito"
 }
  *

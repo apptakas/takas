@@ -208,13 +208,17 @@ userModel.GloginUser = (userData, callback) => {
                 userData.id,
                 userData.email
             ],
-                (err, resut) => {
+                (err, result) => {
 
                     //
-                    if (resut && Object.entries(resut).length != 0) {
+                    if (result && Object.entries(result).length != 0) {
                         resolve({
                             'newUser':false,
-                            'result': resut
+                            'Email': result[0].email,
+                            'Fullname': result[0].fullname,
+                            'PhoneNumber': result[0].phonenumber,
+                            'ImgUrl': result[0].imgurl,  
+                            'result': result
                         })
                     } else {
                         
@@ -226,18 +230,22 @@ userModel.GloginUser = (userData, callback) => {
                             //console.log(userData.tyc);
                         pool.query(
                             'INSERT INTO users SET ?', userData,
-                            (err, resut) => {
+                            (err, result) => {
             
                                 //
                                 if (err) {
                                     resolve({
-                                        'newUser':true,
+                                        'newUser':false,
                                         'error': err
                                     })
                                 } else {
                                     resolve({
                                         'newUser':true,
-                                        'result': resut
+                                        'Email': result[0].email,
+                                        'Fullname': result[0].fullname,
+                                        'PhoneNumber': result[0].phonenumber,
+                                        'ImgUrl': result[0].imgurl,  
+                                        'result': result
                                     })
                                 }
                             })
@@ -295,15 +303,20 @@ userModel.UserExist = (userData, callback) => {
         if (pool)
             pool.query(
                 'SELECT * FROM `users`  where id= ?', [userData.id],
-                (err, resut) => {
-                    console.log(err);
+                (err, result) => {
+                    console.log(result);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
                         resolve({
-                            'UserExist': true
+                            'UserExist': true,
+                            'Email': result[0].email,
+                            'Fullname': result[0].fullname,
+                            'PhoneNumber': result[0].phonenumber,
+                            'ImgUrl': result[0].imgurl                          
+
                         })
                     }
 
