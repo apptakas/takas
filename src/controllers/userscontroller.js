@@ -256,6 +256,10 @@ userController.GAutenticar = async (req) => {
                 status: '200',
                 token: token,                
                 newUser: response.newUser,
+                Email:response.Email,
+                Fullname:response.Fullname,
+                PhoneNumber:response.PhoneNumber,
+                ImgUrl:response.ImgUrl,
                 msg: 'Usuario Autenticado con éxito'
                 //data: response
             }
@@ -461,7 +465,11 @@ userController.UserExist = async (req) => {
                 success: true,
                 status: '200',
                 UserExist:resp.UserExist,
-                msg: 'El Usuario si existe'
+                Email:resp.Email,
+                Fullname:resp.Fullname,
+                PhoneNumber:resp.PhoneNumber,
+                ImgUrl:resp.ImgUrl,
+                msg: 'Verificación si el usuario existe y si sus campos estan completos'
             }
 
         } else {
@@ -3590,6 +3598,8 @@ userController.NewSubasTakasCKW = async (req) => {
                 conditions:UseSubastakas,
                 size: SizeSubastakas,
                 weight: WeightSubastakas,
+                valueweight:req.ValueWeightProduct,
+                unitofmeasurement: req.UnitOfMeasurementP,
                 name: req.nameSubastakas,
                 details: req.detailsSubastakas,
                 typemoney: req.typemoneySubastakas,
@@ -3650,11 +3660,12 @@ userController.NewSubasTakasCKW = async (req) => {
         let data = {};
         if (response && response.result) {
             let r = {};
-            r = response.result;
-
+            r = response.result[0];
+//console.log(response);
             data = {
                 success: true,
                 status: '200',
+                idsubastakas: response.result.insertId, 
                 msg: 'Subastakas registrada con éxito'
                 //data: response
             }
