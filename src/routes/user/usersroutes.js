@@ -1964,8 +1964,8 @@ router.post('/newproductkw', rutasProtegidas,[
  * @apiParam {int} UsePoduct  optional.
  * @apiParam {int} SizePoduct  required.
  * @apiParam {int} WeightProduct  required.
- * @apiParam {int} ValueWeightProduct  required.
- * @apiParam {smallint} UnitOfMeasurementP  required.
+ * @apiParam {int} ValueWeightProduct  optional.
+ * @apiParam {smallint} UnitOfMeasurementP  optional.
  * 
  * 
  * 
@@ -2005,8 +2005,6 @@ router.post('/newproductckw', rutasProtegidas,[
     check('subcategoryProduct', ' la Categoríaes requerida').not().isEmpty().exists(),
     check('SizePoduct', ' El tamaño es requerido').not().isEmpty().exists(),
     check('WeightProduct', ' El Peso es requerido').not().isEmpty().exists(),
-    check('ValueWeightProduct', ' Valor del Peso es requerido').not().isEmpty().exists(),
-    check('UnitOfMeasurementP', ' Dese ingresar la unidad de medida').not().isEmpty().exists(),
     check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
     check('ImagesProduct', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
