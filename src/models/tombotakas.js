@@ -313,6 +313,137 @@ tombotakasModel.rTombotakas = (result) => {
 
 } 
 
+tombotakasModel.rTombotakas2 = (result) => {
+
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+        let tombotakas=0;
+        for (const element of result) {
+            if(tombotakas!=element.id){
+                arr.push(await tombotakasModel.LisTicketsReservados2(element));
+                tombotakas=element.id;
+            }
+        }
+        resolve(arr)
+    }
+    )
+
+} 
+
+tombotakasModel.LisTicketsReservados2 = (element) => {
+    return new Promise((resolve, reject) => {
+        
+        let tickets=[];
+        let numberticketsr=[];
+        let img={};
+        pool.query(
+            'SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.id='+element.idTicket,
+            async(err2, result2) => {
+                if (err2) {
+                    //console.log(err2);
+                    resolve({
+                        'error': err2
+                    })
+                } else { 
+                
+                console.log('SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.idtombotakas='+element.id);
+
+                if(result2.length>0){
+                   // console.log(SumItemsOffer);
+                   // console.log(result2);
+                    let statusticket=0;
+                    for(var atr2 in result2){
+                        if(result2[atr2].status==30){
+                            statusticket=1
+                        }
+                        if(result2[atr2].status==31){
+                            statusticket=2
+                        }
+                        if(result2[atr2].status==32){
+                            statusticket=3
+                        }
+                        if(result2[atr2].status==33){
+                            statusticket=4
+                        }
+                        numberticketsr.push(parseInt(result2[atr2].number));
+
+                        tickets.push({
+                            "idNUmbre":result2[atr2].id,
+                            "Number":parseInt(result2[atr2].number),
+                            "status":statusticket,
+                            "NameUser":result2[atr2].fullname,
+                            "phonenumber":result2[atr2].phonenumber,
+                            "email":result2[atr2].email,
+                            "img":result2[atr2].imgurl,
+                        });                        
+                    }; // fin for
+                    
+                }; 
+                let statusTTK=0;
+                        
+                if(element.status==28){
+                    statusTTK=1
+                }
+
+                let datecreated = new Date(element.datecreated);
+                let dc = date.format(datecreated, 'YYYY-MM-DD');
+                let datelot = new Date(element.datelot);
+                let dl = date.format(datelot, 'YYYY-MM-DD HH:mm');
+                let now = new Date();
+                let servidor2=date.format(now, 'YYYY-MM-DD HH:mm:ss');  
+
+                let tiemporestante=date.subtract(now,datelot).toMinutes();
+
+                console.log("element");
+                //console.log(element);
+                img=await tombotakasModel.ListImagesTombotakas(element);
+                if(element.pertenece!=undefined){
+                    console.log("pertenece");
+                    resolve({                   
+                        "idTombotakas": element.id,
+                        "pinTombotakas":element.pinreference,
+                        "timeremaining":tiemporestante,
+                        "pertenece": element.pertenece,
+                        "nameTombotakas": element.name,
+                        "statusTTK": statusTTK,
+                        "datecreatedTTK": dc,
+                        "detailseventTTK": element.detailsevent,
+                        "detailsAwardttk": element.detailsaward,
+                        "pinreferenceTTK": element.pinreference,
+                        "datelotTTK": dl,
+                        "moneyTTK": element.money,
+                        "priceTTK": Number.parseFloat(element.price).toFixed(4),
+                        "resultTTK": element.result,
+                        "imgTTK":img.ImagesTTK,
+                        "numberticketsrs":numberticketsr,
+                        "ticketsReservados":tickets
+                    });
+                }else{
+                    resolve({                   
+                        "idTombotakas": element.id,
+                        "pinTombotakas":element.pinreference,
+                        "timeremaining":tiemporestante,
+                        "nameTombotakas": element.name,
+                        "statusTTK": statusTTK,
+                        "datecreatedTTK": dc,
+                        "detailseventTTK": element.detailsevent,
+                        "detailsAwardttk": element.detailsaward,
+                        "pinreferenceTTK": element.pinreference,
+                        "datelotTTK": dl,
+                        "moneyTTK": element.money,
+                        "priceTTK": Number.parseFloat(element.price).toFixed(4),
+                        "resultTTK": element.result,
+                        "imgTTK":img.ImagesTTK,
+                        "numberticketsrs":numberticketsr,
+                        "ticketsReservados":tickets
+                    });
+                }
+            }
+
+        })
+    })
+}
+
 tombotakasModel.LisTicketsReservados = (element) => {
     return new Promise((resolve, reject) => {
         
@@ -430,8 +561,9 @@ tombotakasModel.MyTickets = (idfirebaseUser,Status) => {
     return new Promise((resolve, reject) => {
      if (pool) {
          let ticketsReservados={};
+         console.log(idfirebaseUser);
          pool.query(
-            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser=? ORDER BY tk.idtombotakas ASC',  idfirebaseUser,
+            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser="'+idfirebaseUser+'" ORDER BY tk.idtombotakas ASC', 
              async(err, result) => {
                  console.log(err);
                 // console.log(result);
@@ -440,7 +572,7 @@ tombotakasModel.MyTickets = (idfirebaseUser,Status) => {
                          'error': err
                      })
                  } else {
-                     ticketsReservados = await tombotakasModel.rTombotakas(result);
+                     ticketsReservados = await tombotakasModel.rTombotakas2(result);
                      resolve({
                          'result':ticketsReservados
                      })
