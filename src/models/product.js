@@ -1324,11 +1324,13 @@ ProductModel.armaresulT = (result) => {
                     // console.log(comprobar_fecha+" - ");
                     // console.log("//////");
                     let nuevo=false;
-                    if (registro == servidor){
-                        let nuevo=true;
-                    }else{
-                        let nuevo=false;
+                    
+                    console.log(element.conditions);
+                    let nuevo=false;
+                    if (element.conditions==9){
+                         nuevo=true;
                     }
+                    console.log(nuevo);
 
                     let FlagProduct=element.status;
                     let statusProduct=0; //Publicación activa
