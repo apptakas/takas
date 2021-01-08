@@ -1374,7 +1374,7 @@ ProductModel.armaresulT = (result) => {
                             "begin":element.datebeginst,
                             "end":element.dateendst,
                             "iduser": element.iduser,
-                            "nuevo": comprobar_fecha,
+                            "nuevo": nuevo,
                             "subcategory": element.subcategory,
                             "name": element.name,
                             "details": element.details,
