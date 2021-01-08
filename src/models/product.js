@@ -1324,9 +1324,9 @@ ProductModel.armaresulT = (result) => {
                     // console.log(comprobar_fecha+" - ");
                     // console.log("//////");
                     let nuevo=false;
-                    
+
                     console.log(element.conditions);
-                    let nuevo=false;
+                    //let nuevo=false;
                     if (element.conditions==9){
                          nuevo=true;
                     }
