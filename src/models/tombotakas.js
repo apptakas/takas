@@ -319,10 +319,11 @@ tombotakasModel.rTombotakas2 = (result) => {
         let arr = [];
         let tombotakas=0;
         for (const element of result) {
-            if(tombotakas!=element.id){
+            // if(tombotakas!=element.id){
+                console.log("element.number "+element.number);
                 arr.push(await tombotakasModel.LisTicketsReservados2(element));
-                tombotakas=element.id;
-            }
+                //tombotakas=element.id;
+            // }
         }
         resolve(arr)
     }
@@ -346,7 +347,7 @@ tombotakasModel.LisTicketsReservados2 = (element) => {
                     })
                 } else { 
                 
-                console.log('SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.idtombotakas='+element.id);
+                //console.log('SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.idtombotakas='+element.id);
 
                 if(result2.length>0){
                    // console.log(SumItemsOffer);
@@ -563,7 +564,7 @@ tombotakasModel.MyTickets = (idfirebaseUser,Status) => {
          let ticketsReservados={};
          console.log(idfirebaseUser);
          pool.query(
-            'SELECT ttk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser="'+idfirebaseUser+'" ORDER BY tk.idtombotakas ASC', 
+            'SELECT tk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser="'+idfirebaseUser+'" ORDER BY tk.idtombotakas ASC', 
              async(err, result) => {
                  console.log(err);
                 // console.log(result);
@@ -572,6 +573,7 @@ tombotakasModel.MyTickets = (idfirebaseUser,Status) => {
                          'error': err
                      })
                  } else {
+                     console.log('result '+result);
                      ticketsReservados = await tombotakasModel.rTombotakas2(result);
                      resolve({
                          'result':ticketsReservados
