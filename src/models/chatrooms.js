@@ -8,7 +8,7 @@ const date = require('date-and-time');
 let chatroomsModel = {};
 
 //Crear una nueva Sala de chat
-chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,OfferData,hoy,Status) => {
+chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,hoy,OfferData,Status) => {
        return new Promise((resolve, reject) => {
         if (pool) {
             console.log(OfferData);
