@@ -604,11 +604,15 @@ ProductModel.armaresult = (result) => {
                     if(Diferenciafechas>20){
                         Editable=false;
                     }
+
+                    //Transformar
+                    let datecreatedt = new Date(element.datecreated);
+                    let datecreated = date.format(datecreatedt, 'YYYY-MM-DD HH:mm:ss');
                     //console.log(element.typepublication);
                     if(element.typepublication==1){   
                         arr.push({
                             "idproduct": element.idproduct,
-                            "datecreated":regis,
+                            "datecreated":datecreated,
                             "iduser": element.iduser,
                             "nuevo":nuevo,
                             "subcategory": element.subcategory,
@@ -654,7 +658,7 @@ ProductModel.armaresult = (result) => {
                         }
                         arr.push({
                             "idproduct": element.idproduct,
-                            "datecreated":regis,
+                            "datecreated":datecreated,
                             "flagInterested":flagInterested,
                             "started":started,
                             "finished":finished,
@@ -805,7 +809,7 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct AND iduser<>'"+ProductData.iduser+"' GROUP BY idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct,idproduct,datebeginst,dateendst,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct AND iduser<>'"+ProductData.iduser+"' GROUP BY idproduct  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);
                    

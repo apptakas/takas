@@ -2895,7 +2895,7 @@ router.put('/changestatusoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }        
-        let response = await userController.ChangeStatfusOffer(req.body);
+        let response = await userController.ChangeStatusOffer(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
