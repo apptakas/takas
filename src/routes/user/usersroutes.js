@@ -216,17 +216,14 @@ router.get('/datos', rutasProtegidas, (req, res) => {
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-    "{
     "success": true,
-    "status":: "200",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U",
-    "newUser": false,
-    "Email": "gusuario124@gmail.com",
-    "Fullname": "gusuario12",
+    "status": "200",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTA0OTAxMDAsImV4cCI6MTYxMzA4MjEwMH0.5wtRrcb4xd08T7VlIlzMYTmdwjhLPFdb3rPavquOo7I",
+    "Email": "anailysrodriguez@gmail.com",
+    "Fullname": "anailys rodriguez",
     "PhoneNumber": null,
-    "ImgUrl": null,
+    "ImgUrl": "https://lh3.googleusercontent.com/a-/AOh14GghAJLELlkIz090ubKjqqHdki33JMljFn5d3RHVF4Q=s96-c",
     "msg": "Usuario Autenticado con éxito"
-}
 }
  *
  * @apiError UserNotFound The id of the Domiciliary was not found.
