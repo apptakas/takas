@@ -220,6 +220,11 @@ router.get('/datos', rutasProtegidas, (req, res) => {
     "success": true,
     "status":: "200",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U",
+    "newUser": false,
+    "Email": "gusuario124@gmail.com",
+    "Fullname": "gusuario12",
+    "PhoneNumber": null,
+    "ImgUrl": null,
     "msg": "Usuario Autenticado con éxito"
 }
 }

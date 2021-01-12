@@ -601,7 +601,7 @@ OffersModel.FindDatOffer = (OfferData,callback) => {
             let DataSalas={};
             let IdSAla="";
             let now = new Date();
-            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            let hoy=date.format(now,'YYYY-MM-DD HH:mm:ss');
             pool.query(
                 'SELECT o.iduser AS userOffer,p.iduser AS userPublication,p.id AS idPublication FROM offers AS o INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers INNER JOIN product AS p ON o.idproduct=p.id WHERE o.id=? limit 1',[
                     OfferData.id

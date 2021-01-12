@@ -137,7 +137,11 @@ userModel.loginUser = (userData, callback) => {
                 (err, resut) => {
                     if (resut && Object.entries(resut).length != 0) {
                         resolve({
-                            'result': resut
+                            'Email': result[0].email,
+                            'Fullname': result[0].fullname,
+                            'PhoneNumber': result[0].phonenumber,
+                            'ImgUrl': result[0].imgurl,  
+                            'result': result
                         })
                     } else {
                         resolve({
