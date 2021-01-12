@@ -204,6 +204,11 @@ userController.Autenticar = async (req) => {
                 success: true,
                 status: '200',
                 token: token,
+                newUser: response.newUser,
+                Email:response.Email,
+                Fullname:response.Fullname,
+                PhoneNumber:response.PhoneNumber,
+                ImgUrl:response.ImgUrl,
                 msg: 'Usuario Autenticado con éxito'
                 //data: response
             }
