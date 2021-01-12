@@ -495,13 +495,14 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
             let idOferta=OfferData.id;
             let idUser=OfferData.idUser;
             let respCrearPush={};
+            console.log(OfferData);
             pool.query(
                 'UPDATE  offers SET  status= ? WHERE id= ?',[
                     OfferData.status,
                     OfferData.id
                 ],
                 async(err, result) => {
-                   // console.log(result);
+                    console.log(err);
                     if (err) {
                         resolve({
                             'error': err
@@ -516,6 +517,7 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
 
                             //TOMAMOS DATOS DE LA OFERTA
                             idUserOferta= await UsersModel.DataUserOferta(idOferta);
+                            console.log(idUserOferta);
                             //CALCULAMOS VALOR DE LA OFERTA
                             ValorOferta= await OffersModel.CalculoValorOferta(idOferta);
                             //console.log(idUserOferta);
