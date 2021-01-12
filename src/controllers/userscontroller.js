@@ -2164,7 +2164,7 @@ userController.ChangeStatusOffer = async (req) => {
                 status:statusOffer
             };
        
-        //console.log(OfferData);
+        console.log(OfferData);
         
         //let response = await Offer.FindDatOffer(OfferData);
        let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
@@ -2215,7 +2215,7 @@ userController.ChangeStatusOffer = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-      notifications(token,titulo,detalle,datanoti);
+      //notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio

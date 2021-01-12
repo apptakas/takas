@@ -334,6 +334,7 @@ userModel.UserExist = (userData, callback) => {
 userModel.DataUserPublication = (idproduct, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
+        console.log("idproduct "+idproduct);
             pool.query(
                 'SELECT u.id AS UserPublication,u.tokenpush,u.email, u.fullname as NameUser,p.`name` AS nameProducto,p.`marketvalue`,p.status FROM `users` AS u INNER JOIN `product` AS p ON u.`id`=p.`iduser` WHERE p.`id`='+idproduct,
                 (err, result) => {
