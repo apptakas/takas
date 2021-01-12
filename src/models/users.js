@@ -134,8 +134,8 @@ userModel.loginUser = (userData, callback) => {
                 userData.password,
                 userData.email
             ],
-                (err, resut) => {
-                    if (resut && Object.entries(resut).length != 0) {
+                (err, result) => {
+                    if (result && Object.entries(result).length != 0) {
                         resolve({
                             'Email': result[0].email,
                             'Fullname': result[0].fullname,
