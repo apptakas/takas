@@ -811,7 +811,7 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
             pool.query(
                 "SELECT DISTINCT idproduct,idproduct,datebeginst,dateendst,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct AND iduser<>'"+ProductData.iduser+"' GROUP BY idproduct  LIMIT 50",
                 async(err, result) => {
-                    //console.log(result);
+                    console.log(result);
                    
                     if (err) {
                         resolve({

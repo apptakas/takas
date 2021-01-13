@@ -2438,7 +2438,8 @@ userController.listDataChatRoom = async (req) => {
             let idSala= req.idSalaChat;
             let idUser=req.idUser;
        
-        //console.log(userData.password);
+        console.log(idUser);
+        console.log(idSala);
         let response = await ChatRooms.listDataChatRoom(idSala,idUser);
 
        //console.log(response);

@@ -477,11 +477,11 @@ chatroomsModel.ListItemsOffers = (element,ValorPublication) => {
                     
                 }; 
                 // console.log("result2");
-                // console.log(result2);
+                console.log(result2);
 
                 //console.log(ListItemsOffers);
-                detalleProduct = await ProductModel.armaresult(result2);  
-                // console.log("detalleProduct");
+                //detalleProduct = await ProductModel.armaresul(result2);  
+                 console.log("detalleProduct");
                 // console.log(detalleProduct);
                 resolve({ 
                     "aFavor":Afavor,
