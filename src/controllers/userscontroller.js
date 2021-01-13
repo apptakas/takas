@@ -115,7 +115,7 @@ userController.UpdatePerfil = async (req) => {
             imgurl: req.urlimgUser,
             datebirth:req.datebirthUser,
             role: 2,
-            password: sha1(req.passwordUser),
+            // password: sha1(req.passwordUser),
             datecreated: hoy,
             country:req.countryUser,
             department:req.departmentUser,
