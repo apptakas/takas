@@ -162,10 +162,10 @@ router.post('/newUser', [
  */
 //Completar perfilUser- 
 router.post('/updateperfil',rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
     check('fullnameUser', 'El fullnameUser es obligatorio').not().isEmpty().exists(),
     check('phonenumberUser', 'El phonenumberUser es obligatorio').not().isEmpty().exists(),
-    check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
+    check('emailUser', 'El emailUser el obligatorio').isEmail().not().isEmpty().exists()
 ], async (req, res) => {
 
     const error = validationResult(req);
