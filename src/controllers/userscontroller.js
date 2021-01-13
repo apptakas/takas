@@ -108,7 +108,7 @@ userController.UpdatePerfil = async (req) => {
         let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
         let idUser= req.idfirebaseUser;
         const userData = {
-            idcity: req.codCity,
+            // idcity: req.codCity,
             fullname: req.fullnameUser,
             email: req.emailUser,
             phonenumber: req.phonenumberUser,
@@ -121,9 +121,9 @@ userController.UpdatePerfil = async (req) => {
             department:req.departmentUser,
             memberships:req.membershipsUser,
             address: req.dirUser,
-            tyc: req.tycUser,
-            versiontyc: req.versionTYC,
-            versionapp: req.versionApp
+            // tyc: req.tycUser,
+            // versiontyc: req.versionTYC,
+            // versionapp: req.versionApp
         };
         ///console.log(userData.password);
         let response = await User.UpdatePerfil(userData,idUser);
@@ -132,9 +132,10 @@ userController.UpdatePerfil = async (req) => {
         if (response && response.result) {
             let r = {};
             r = response.result;
+            console.log(response.result);
 
             const payload = {
-                ignoreExpiration: true
+                ignoreExpiration: 0
             };
 
             var token = jwt.sign(payload, config.llave, {
@@ -151,7 +152,7 @@ userController.UpdatePerfil = async (req) => {
                 status: '200',
                 token: token,
                 //refreshTokens: refreshTokens,
-                msg: 'Usuario Registrado con éxito'
+                msg: 'Usuario Actualizado con éxito'
                 //data: response
             }
         } else {
