@@ -280,9 +280,34 @@ userModel.GloginUser = (userData, callback) => {
 userModel.updatetokenpush = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
+            //Buscar si sexiste token
             pool.query(
-                'UPDATE `users` SET tokenpush= ? where id= ?', [
-                    userData.tokenpush,
+                'SELECT  * FROM `users` WHERE tokenpush= ?', [
+                    userData.tokenpush
+                ],
+                (err, result) => {
+                    if (err) {
+                    console.log(err);
+
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                    console.log(result);
+                    let eselmismo=false;
+                    //Verificar si el usuario del token es el mismo
+                    if(result[0].id==userData.id){
+                        eselmismo=true;
+                        resolve({
+                            'result': result,
+                            'eselmismo': eselmismo
+                        })
+
+                    }
+                    else{
+                        //eliminamos token de otro usurio
+                        pool.query(
+                'UPDATE `users` SET tokenpush="(NULL)" where id= ?', [
                     userData.id
                 ],
                 (err, resut) => {
@@ -292,13 +317,63 @@ userModel.updatetokenpush = (userData, callback) => {
                             'error': err
                         })
                     } else {
-                        resolve({
-                            'result': resut
-                        })
+                        //ACTUALIZAMOS TOKEN
+                        pool.query(
+                            'UPDATE `users` SET tokenpush= ? where id= ?', [
+                                userData.tokenpush,
+                                userData.id
+                            ],
+                            (err, resut) => {
+                                console.log(err);
+                                if (err) {
+                                    resolve({
+                                        'error': err
+                                    })
+                                } else {
+                                    resolve({
+                                        'result': resut,
+                                        'eselmismo': eselmismo
+                                    })
+                                }
+
+                            }
+                        )
                     }
 
                 }
             )
+
+                    }
+                    // console.log(result[0].id);
+                    // console.log(userData.id);
+                    // console.log(eselmismo);
+
+                        // resolve({
+                        //     'result': result
+                        // })
+                    }
+
+                }
+            )
+            // pool.query(
+            //     'UPDATE `users` SET tokenpush= ? where id= ?', [
+            //         userData.tokenpush,
+            //         userData.id
+            //     ],
+            //     (err, resut) => {
+            //         console.log(err);
+            //         if (err) {
+            //             resolve({
+            //                 'error': err
+            //             })
+            //         } else {
+            //             resolve({
+            //                 'result': resut
+            //             })
+            //         }
+
+            //     }
+            // )
     }
     )
 
