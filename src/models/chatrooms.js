@@ -510,10 +510,12 @@ chatroomsModel.CloseChatRoom = (ChatRoomData) => {
                 async(err, result) => {
                    // console.log(result);
                     if (err) {
+                        console.log(err);
                         resolve({
                             'error': err
                         })
-                    } else {                         
+                    } else {  
+                        console.log(result);                       
                                              
                         resolve({
                             'result': result
