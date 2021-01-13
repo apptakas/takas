@@ -413,15 +413,16 @@ ProductModel.FindProductCKW = (idUserProduct,idProduct) => {
         if (pool) {
             pool.query(
                 'SELECT * FROM product WHERE id=?', idProduct,
-                (err, resut) => {
+                (err, result) => {
                     //console.log(resut);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
+                        console.log("result "+result);
                         resolve({
-                            'result': resut[0]
+                            'result': result
                         })  
                     }//fin if ImagesProduct.length!=0
                       
@@ -511,16 +512,20 @@ ProductModel.findProductos = (nameProduct,IdUserProduct) => {
         if (pool) {
 
             let armaresult={};
+            //consulta para buscar por palabra clave
+            // "SELECT * FROM keywords AS k INNER JOIN keyword_product AS kp ON k.id=kp.idword INNER JOIN product AS p ON kp.idproduct=p.id INNER JOIN  imgproduct AS i ON p.id=i.idproduct WHERE (k.word LIKE '%Intel%' OR p.NAME LIKE '%"+nameProduct+"%')  AND STATUS=3 AND iduser<>'"+IdUserProduct+"' ORDER BY p.datecreated DESC"
+            console.log("SELECT * FROM product as p WHERE p.NAME LIKE ('%"+nameProduct+"%')  AND p.status=3 AND p.iduser<>'"+IdUserProduct+"' ORDER BY p.datecreated DESC");
             pool.query(
-                "SELECT * FROM keywords AS k INNER JOIN keyword_product AS kp ON k.id=kp.idword INNER JOIN product AS p ON kp.idproduct=p.id INNER JOIN  imgproduct AS i ON p.id=i.idproduct WHERE (k.word LIKE '%Intel%' OR p.NAME LIKE '%"+nameProduct+"%')  AND STATUS=3 AND iduser<>'"+IdUserProduct+"' ORDER BY p.datepublication DESC",
+                "SELECT *,id AS idproduct FROM product as p WHERE name LIKE ('%"+nameProduct+"%')  AND status=3 AND iduser<>'"+IdUserProduct+"' ORDER BY datepublication DESC",
                 async(err, result) => {
-                    //console.log(result);                  
+                                     
                    
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {   
+                    } else { 
+                        console.log(result);   //datepublication
                         armaresult = await ProductModel.armaresult(result); 
                         //console.log("armaresult: "+armaresult); 
                         resolve({
@@ -594,6 +599,7 @@ ProductModel.armaresult = (result) => {
                     let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
                    // console.log(rp);
                     //console.log(horaServidor);
+                    //console.log(rp.result);
                     let datepublication = new Date(rp.result.datepublication);
                     //console.log(datepublication);
                     ////fecha de creación de producto

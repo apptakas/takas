@@ -433,6 +433,7 @@ userController.Updatetokenpush = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                eselmismo: resp.eselmismo,
                 msg: 'Token Push Actualizado'
             }
 
@@ -1363,7 +1364,8 @@ userController.findProductos = async (req) => {
         
           let IdUserProduct=req.IdUserProduct;
           let nameProduct=req.nameProduct;
-        //console.log(userData.password);
+        console.log(IdUserProduct);
+        console.log(nameProduct);
         let response = await Product.findProductos(nameProduct,IdUserProduct);
 
        //console.log(response);

@@ -94,34 +94,35 @@ chatroomsModel.listDataChatRoom = (idSala,idUser) => {
                 if(result[0].iduseroffer==idUser){
                     isUserPubli=false;
                 }
+                console.log(isUserPubli);
                     //NINGUN USUARIO HA HECHO MATCH
-                    if(matchpublication!=0 && matchoffer!=0){
+                    if(matchpublication!=1 && matchoffer!=1){
                         match=0;
                     }
                     //LOS DOS USUARIOS HAN HECHO MATCH
                     if(matchpublication==1 && matchoffer==1){
                         match=3;
                     }
-                    
+                    console.log(isUserPubli);
                     if(isUserPubli==true){
                         if(matchpublication==1 && matchoffer!=1){
                             match=1; //EL USUARIO HIZO MATCH
                         }
-                        else{
-                            if(matchoffer!=1 && matchoffer==1){
-                                match=2;//EL OTRO USUARIO HIZO MATCH
-                            }
+                        else if(matchoffer==1 && matchpublication!=1){
+                             match=2;//EL OTRO USUARIO HIZO MATCH
+                            
                         }
+                        console.log(match);
                     }
                     else{
                         if(matchpublication!=1 && matchoffer==1){
                             match=1; //EL USUARIO HIZO MATCH
                         }
-                        else{
-                            if(matchoffer==1 && matchoffer!=1){
+                        else if(matchoffer==1 && matchpublication!=1){
                                 match=2;//EL OTRO USUARIO HIZO MATCH
-                            }
+                            
                         }
+                        console.log(match);
                     }
                     //match=false;
 
@@ -577,23 +578,25 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                 'SELECT * FROM chatrooms WHERE (iduseroffer="'+ChatRoomData.idUser+'" OR iduserpublication="'+ChatRoomData.idUser+'") AND id="'+ChatRoomData.id+'" AND STATUS=24',
                 async(err, result) => {
                     //console.log(err);
+                    console.log('SELECT * FROM chatrooms WHERE (iduseroffer="'+ChatRoomData.idUser+'" OR iduserpublication="'+ChatRoomData.idUser+'") AND id="'+ChatRoomData.id+'" AND STATUS=24');
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
-                        //console.log(result);
+                        console.log(result);
                         let TypeNotification=2;
                         let idrelation=result[0].idpubliction;
-
                         let idOferta=result[0].idoffer;
+                        let offeru=result[0].iuserdoffer;
+                        let publicationcoU=result[0].iduserpublication;
 
-                        if(result[0].iduserpublication==ChatRoomData.idUser){
+                        if(publicationcoU==ChatRoomData.idUser){
                             isUserPubli=true;
                             pertenece=true;
                         }
 
-                        if(result[0].iduseroffer==ChatRoomData.idUser){
+                        if(offeru==ChatRoomData.idUser){
                             isUserPubli=false;
                             pertenece=true;
                         }
@@ -644,15 +647,16 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         if(confirMatch==true){
                             MsgMatch="¡TAKASTEO EXITOSO!";
                             // CAMBIAR DE ESTATUS LA PUBLICACIÓN
-                            let response2=await ProductModel.UpdateStatusPublication(result[0].idpubliction);
+                            let response2=await ProductModel.UpdateStatusPublication2(result[0].idpubliction);
                             //CAMBIAR DE ESTATUS LAS PUBLICACIONES DE LA OFERTA - ITEMS
-                            let response3=await ProductModel.UpdateStatusPublicationOffer(result[0].idoffer);
+                            let response3=await ProductModel.UpdateStatusPublicationOffer2(result[0].idoffer);
                             // CAMBIAR DE ESTATUS A LA SALA - CERRARLA  
                             let ChatRoomData = {
                                 id: result[0].id,
                                 status:25
                             };
                             let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
+                            console.log(response4);
 
                             titulo="¡FELICIADES TIENES UN TAKASTEO!";
                             
@@ -675,8 +679,8 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
                         
                         let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,userNotification,titulo,detalles,idOferta);  
-                        //console.log(respCrearPush);
-                        //console.log(respCrearPush.result.insertId);
+                        console.log(respCrearPush);
+                        console.log(respCrearPush.result.insertId);
                         //console.log(tokenPush);
                         ///////////////////////////////////////////
                                                 
@@ -740,6 +744,83 @@ chatroomsModel.UpdateMatchChatRoom = (ChatRoomData,isUserPubli) => {
             //return resultado;
         }
     })
+};
+
+//ACTUALIZAMOS STATUS DE LA PUBLICACIÓN
+ProductModel.UpdateStatusPublication2 = (idPubli) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let FindDatOffer={};
+            let  consulta="UPDATE  product SET  status=4 WHERE id="+idPubli;
+        
+            pool.query(
+                consulta,
+                async(err, result) => {
+                    //console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {                         
+                                             
+                        resolve({
+                            'result': result
+                        })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+//ACTUALIZAMOS STATUS DE LAS PUBLICACIONES DE UNA OFERTA
+ProductModel.UpdateStatusPublicationOffer2 = (idOffer) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let FindDatOffer={};
+            let  consulta="SELECT o.id, ops.idpublication FROM offers AS o  INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers WHERE o.id="+idOffer;
+        
+            pool.query(
+                consulta,
+                async(err, result) => {
+                    //console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {    
+                        ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+                        let response=await ProductModel.RecorridoPublicationOffer2(result);                     
+                                             
+                        resolve({
+                            'result': result
+                        })                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+//UPDATE ITEMS DE PUBLICACIONES QUE PERTENECEN A UNA OFERTA 
+ProductModel.RecorridoPublicationOffer2 = async(element) => {
+
+    if(element.length>0){
+        // console.log(SumItemsOffer);
+        for(var atr2 in element){
+            // "iduser": element[0].iduser,
+            let response=await ProductModel.UpdateStatusPublication2(element[atr2].idpublication);               
+            
+        }; // fin for                    
+    }; //fin if
+
 };
 
 module.exports = chatroomsModel;
