@@ -126,7 +126,7 @@ userController.UpdatePerfil = async (req) => {
             versionapp: req.versionApp
         };
         ///console.log(userData.password);
-        let response = await User.createUser(userData,idUser);
+        let response = await User.UpdatePerfil(userData,idUser);
 
         let data = {};
         if (response && response.result) {
