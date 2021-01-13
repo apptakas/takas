@@ -97,27 +97,31 @@ userModel.createUser = (userData, callback) => {
 userModel.UpdatePerfil = (userData, iduser) => {
     return new Promise((resolve, reject) => {
         if (pool)
-        if(userData.tyc==true){
+        console.log('UPDATE users SET ? WHERE id="'+iduser+'"', userData);
+        // if(userData.tyc==true){
             pool.query(
                 'UPDATE users SET ? WHERE id="'+iduser+'"', userData,
-                (err, resut) => {
+                (err, result) => {
                     if (err) {
+                        console.log(err);
                         resolve({
                             'error': err
                         })
                     } else {
+                        console.log(result);
+
                         resolve({
-                            'result': resut
+                            'result': result
                         })
                     }
 
                 }
             )
-        }else {
-            resolve({
-                'result': "Debe aceptar términos y condiciones"
-            })
-        }
+        // }else {
+        //     resolve({
+        //         'result': "Debe aceptar términos y condiciones"
+        //     })
+        // }
     }
     )
 
