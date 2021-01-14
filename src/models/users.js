@@ -65,27 +65,27 @@ userModel.getUser = (iduser) => {
 userModel.createUser = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
-        if(userData.tyc==true){
-            pool.query(
-                'INSERT INTO users SET ?', userData,
-                (err, resut) => {
-                    if (err) {
-                        resolve({
-                            'error': err
-                        })
-                    } else {
-                        resolve({
-                            'result': resut
-                        })
-                    }
+            if (userData.tyc == true) {
+                pool.query(
+                    'INSERT INTO users SET ?', userData,
+                    (err, resut) => {
+                        if (err) {
+                            resolve({
+                                'error': err
+                            })
+                        } else {
+                            resolve({
+                                'result': resut
+                            })
+                        }
 
-                }
-            )
-        }else {
-            resolve({
-                'result': "Debe aceptar términos y condiciones"
-            })
-        }
+                    }
+                )
+            } else {
+                resolve({
+                    'result': "Debe aceptar términos y condiciones"
+                })
+            }
     }
     )
 
@@ -97,26 +97,26 @@ userModel.createUser = (userData, callback) => {
 userModel.UpdatePerfil = (userData, iduser) => {
     return new Promise((resolve, reject) => {
         if (pool)
-        console.log('UPDATE users SET ? WHERE id="'+iduser+'"', userData);
+            console.log('UPDATE users SET ? WHERE id="' + iduser + '"', userData);
         // if(userData.tyc==true){
-            pool.query(
-                'UPDATE users SET ? WHERE id="'+iduser+'"', userData,
-                (err, result) => {
-                    if (err) {
-                        console.log(err);
-                        resolve({
-                            'error': err
-                        })
-                    } else {
-                        console.log(result);
+        pool.query(
+            'UPDATE users SET ? WHERE id="' + iduser + '"', userData,
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    resolve({
+                        'error': err
+                    })
+                } else {
+                    console.log(result);
 
-                        resolve({
-                            'result': result
-                        })
-                    }
-
+                    resolve({
+                        'result': result
+                    })
                 }
-            )
+
+            }
+        )
         // }else {
         //     resolve({
         //         'result': "Debe aceptar términos y condiciones"
@@ -144,7 +144,7 @@ userModel.loginUser = (userData, callback) => {
                             'Email': result[0].email,
                             'Fullname': result[0].fullname,
                             'PhoneNumber': result[0].phonenumber,
-                            'ImgUrl': result[0].imgurl,  
+                            'ImgUrl': result[0].imgurl,
                             'result': result
                         })
                     } else {
@@ -162,32 +162,32 @@ userModel.loginUser = (userData, callback) => {
 };
 
 //LoginUser
-userModel.PerfilUser = (idUser,callback) => {
+userModel.PerfilUser = (idUser, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT u.fullname,u.email,u.phonenumber,u.datecreated,AVG(p.scorev) AS calfVendedor,AVG(p.scorec)AS calfClient FROM users AS u INNER JOIN product AS p ON u.id=p.iduser WHERE u.id="'+idUser+'" GROUP BY p.iduser',
+                'SELECT u.fullname,u.email,u.phonenumber,u.datecreated,AVG(p.scorev) AS calfVendedor,AVG(p.scorec)AS calfClient FROM users AS u INNER JOIN product AS p ON u.id=p.iduser WHERE u.id="' + idUser + '" GROUP BY p.iduser',
                 (err, result) => {
-                   //console.log(result);
+                    //console.log(result);
                     if (result && Object.entries(result).length != 0) {
                         let registro = new Date(result[0].datecreated);
                         let regis = date.format(registro, 'DD/MM/YY');
-                        let calfClient=0;
-                        if(result[0].calfClient!=null){
-                            calfClient=result[0].calfClient;
+                        let calfClient = 0;
+                        if (result[0].calfClient != null) {
+                            calfClient = result[0].calfClient;
                         }
-                        let calfVendedor=0;
-                        if(calfVendedor!=null){
-                            calfVendedor=result[0].calfVendedor;
+                        let calfVendedor = 0;
+                        if (calfVendedor != null) {
+                            calfVendedor = result[0].calfVendedor;
                         }
                         resolve({
                             'result': {
-                                'NameUser':result[0].fullname,
-                                'EmailUser':result[0].email,
-                                'PhonenumberUser':result[0].phonenumber,
-                                'DatecreatedUser':regis,
-                                'Reputation Vendedor':calfVendedor,
-                                'Reputation Cliente':calfClient,
+                                'NameUser': result[0].fullname,
+                                'EmailUser': result[0].email,
+                                'PhonenumberUser': result[0].phonenumber,
+                                'DatecreatedUser': regis,
+                                'Reputation Vendedor': calfVendedor,
+                                'Reputation Cliente': calfClient,
                             }
                         })
                     } else {
@@ -207,9 +207,9 @@ userModel.PerfilUser = (idUser,callback) => {
 //GloginUser
 userModel.GloginUser = (userData, callback) => {
     return new Promise((resolve, reject) => {
-        if (pool){
+        if (pool) {
 
-             //Verificar si un usuario existe
+            //Verificar si un usuario existe
 
             pool.query(
                 'SELECT * FROM users where `id`=? AND email=?', [
@@ -221,46 +221,46 @@ userModel.GloginUser = (userData, callback) => {
                     //
                     if (result && Object.entries(result).length != 0) {
                         resolve({
-                            'newUser':false,
+                            'newUser': false,
                             'Email': result[0].email,
                             'Fullname': result[0].fullname,
                             'PhoneNumber': result[0].phonenumber,
-                            'ImgUrl': result[0].imgurl,  
+                            'ImgUrl': result[0].imgurl,
                             'result': result
                         })
                     } else {
-                        
+
                         // resolve({
                         //     'error': err
                         // })
                         //Ragistrar nuevo usuario
-                        if(userData.tyc==true){
+                        if (userData.tyc == true) {
                             //console.log(userData.tyc);
-                        pool.query(
-                            'INSERT INTO users SET ?', userData,
-                            (err, result) => {
-            
-                                //
-                                if (err) {
-                                    resolve({
-                                        'newUser':false,
-                                        'error': err
-                                    })
-                                } else {
-                                    resolve({
-                                        'newUser':true,
-                                        'Email': result[0].email,
-                                        'Fullname': result[0].fullname,
-                                        'PhoneNumber': result[0].phonenumber,
-                                        'ImgUrl': result[0].imgurl,  
-                                        'result': result
-                                    })
-                                }
-                            })
+                            pool.query(
+                                'INSERT INTO users SET ?', userData,
+                                (err, result) => {
+
+                                    //
+                                    if (err) {
+                                        resolve({
+                                            'newUser': false,
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'newUser': true,
+                                            'Email': result[0].email,
+                                            'Fullname': result[0].fullname,
+                                            'PhoneNumber': result[0].phonenumber,
+                                            'ImgUrl': result[0].imgurl,
+                                            'result': result
+                                        })
+                                    }
+                                })
                         } //if para verificar si aceptó terminos y condiciones
-                        else{
+                        else {
                             resolve({
-                                'newUser':true,
+                                'newUser': true,
                                 'error': "Debe aceptar terminos y condiciones"
                             })
                         }
@@ -280,73 +280,113 @@ userModel.GloginUser = (userData, callback) => {
 userModel.updatetokenpush = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
+            // let now = new Date();
+            // let hoytp=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            //let tokeprovisional=userData.tokenpush+" "+userData.id+"asdas";
+            //let tokeprovisional="userData.tokenpush";
             //Buscar si sexiste token
             pool.query(
                 'SELECT  * FROM `users` WHERE tokenpush= ?', [
-                    userData.tokenpush
-                ],
+                userData.tokenpush
+            ],
                 (err, result) => {
                     if (err) {
-                    console.log(err);
+                        console.log(err);
 
                         resolve({
                             'error': err
                         })
                     } else {
-                    console.log(result);
-                    let eselmismo=false;
-                    //Verificar si el usuario del token es el mismo
-                    if(result[0].id==userData.id){
-                        eselmismo=true;
-                        resolve({
-                            'result': result,
-                            'eselmismo': eselmismo
-                        })
+                        console.log(result);
+                        let eselmismo = false;
+                        let tokenrexist = false;
+                        console.log(result.length);
+                        //Verificar si el usuario del token es el mismo
+                        if (result.length != 0) {
+                            tokenrexist = true;
+                            if (result[0].id == userData.id) {
 
-                    }
-                    else{
-                        //eliminamos token de otro usurio
-                        pool.query(
-                'UPDATE `users` SET tokenpush="(NULL)" where id= ?', [
-                    userData.id
-                ],
-                (err, resut) => {
-                    console.log(err);
-                    if (err) {
-                        resolve({
-                            'error': err
-                        })
-                    } else {
-                        //ACTUALIZAMOS TOKEN
-                        pool.query(
-                            'UPDATE `users` SET tokenpush= ? where id= ?', [
+                                eselmismo = true;
+                                resolve({
+                                    'result': result,
+                                    'eselmismo': eselmismo
+                                })
+
+                            }
+                            else {
+                                //eliminamos token de otro usurio
+                                
+                                pool.query(
+                                    'UPDATE `users` SET tokenpush=(NULL) where id= ?', [
+                                    userData.id
+                                ],
+                                    (err, resut) => {
+                                        console.log(err);
+                                        if (err) {
+                                            resolve({
+                                                'error': err
+                                            })
+                                        } else {
+                                            //ACTUALIZAMOS TOKEN
+                                            pool.query(
+                                                'UPDATE `users` SET tokenpush= ? where id= ?', [
+                                                userData.tokenpush,
+                                                userData.id
+                                            ],
+                                                (err, resut) => {
+                                                    console.log(err);
+                                                    if (err) {
+                                                        resolve({
+                                                            'error': err
+                                                        })
+                                                    } else {
+                                                        resolve({
+                                                            'result': resut,
+                                                            'eselmismo': eselmismo
+                                                        })
+                                                    }
+
+                                                }
+                                            )
+                                        }
+
+                                    }
+                                )
+
+                            }
+
+                        }//
+                        else{
+                            //ACTUALIZAMOS TOKEN
+                            pool.query(
+                                'UPDATE `users` SET tokenpush= ? where id= ?', [
                                 userData.tokenpush,
                                 userData.id
                             ],
-                            (err, resut) => {
-                                console.log(err);
-                                if (err) {
-                                    resolve({
-                                        'error': err
-                                    })
-                                } else {
-                                    resolve({
-                                        'result': resut,
-                                        'eselmismo': eselmismo
-                                    })
+                                (err, resut) => {
+                                    console.log(err);
+                                    if (err) {
+                                        resolve({
+                                            'error': err
+                                        })
+                                    } else {
+                                        resolve({
+                                            'result': resut,
+                                            'eselmismo': eselmismo
+                                        })
+                                    }
+
                                 }
+                            )
+                        
 
-                            }
-                        )
-                    }
+                    
+                
+                        }
 
-                }
-            )
-
-                    }
-                    // console.log(result[0].id);
-                    // console.log(userData.id);
-                    // console.log(eselmismo);
+                        // console.log(result[0].id);
+                        // console.log(userData.id);
+                        // console.log(eselmismo);
 
                         // resolve({
                         //     'result': result
@@ -355,25 +395,7 @@ userModel.updatetokenpush = (userData, callback) => {
 
                 }
             )
-            // pool.query(
-            //     'UPDATE `users` SET tokenpush= ? where id= ?', [
-            //         userData.tokenpush,
-            //         userData.id
-            //     ],
-            //     (err, resut) => {
-            //         console.log(err);
-            //         if (err) {
-            //             resolve({
-            //                 'error': err
-            //             })
-            //         } else {
-            //             resolve({
-            //                 'result': resut
-            //             })
-            //         }
-
-            //     }
-            // )
+   
     }
     )
 
@@ -398,7 +420,7 @@ userModel.UserExist = (userData, callback) => {
                             'Email': result[0].email,
                             'Fullname': result[0].fullname,
                             'PhoneNumber': result[0].phonenumber,
-                            'ImgUrl': result[0].imgurl                          
+                            'ImgUrl': result[0].imgurl
 
                         })
                     }
@@ -417,23 +439,23 @@ userModel.UserExist = (userData, callback) => {
 userModel.DataUserPublication = (idproduct, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
-        console.log("idproduct "+idproduct);
-            pool.query(
-                'SELECT u.id AS UserPublication,u.tokenpush,u.email, u.fullname as NameUser,p.`name` AS nameProducto,p.`marketvalue`,p.status FROM `users` AS u INNER JOIN `product` AS p ON u.`id`=p.`iduser` WHERE p.`id`='+idproduct,
-                (err, result) => {
-                    console.log(err);
-                    if (err) {
-                        resolve({
-                            'error': err
-                        })
-                    } else {
-                        resolve({
-                            'result': result
-                        })
-                    }
-
+            console.log("idproduct " + idproduct);
+        pool.query(
+            'SELECT u.id AS UserPublication,u.tokenpush,u.email, u.fullname as NameUser,p.`name` AS nameProducto,p.`marketvalue`,p.status FROM `users` AS u INNER JOIN `product` AS p ON u.`id`=p.`iduser` WHERE p.`id`=' + idproduct,
+            (err, result) => {
+                console.log(err);
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {
+                    resolve({
+                        'result': result
+                    })
                 }
-            )
+
+            }
+        )
     }
     )
 
@@ -442,11 +464,11 @@ userModel.DataUserPublication = (idproduct, callback) => {
 
 
 ///TOMAR LA INFORMACION DE UN USUARIO SEGÚN UNA OFERTA 
-userModel.DataUserOferta= (idOferta) => {
+userModel.DataUserOferta = (idOferta) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT o.idproduct,u.id AS UserOferta,u.tokenpush,u.email, u.fullname AS NameUser FROM offers AS o INNER JOIN users AS u ON u.id=o.iduser WHERE o.id='+idOferta,
+                'SELECT o.idproduct,u.id AS UserOferta,u.tokenpush,u.email, u.fullname AS NameUser FROM offers AS o INNER JOIN users AS u ON u.id=o.iduser WHERE o.id=' + idOferta,
                 (err, result) => {
                     console.log(err);
                     if (err) {
@@ -475,7 +497,7 @@ userModel.SolicitarMembresia = (userData, iduser) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'UPDATE users SET ? WHERE id="'+iduser+'"', userData,
+                'UPDATE users SET ? WHERE id="' + iduser + '"', userData,
                 (err, resut) => {
                     if (err) {
                         resolve({
@@ -489,7 +511,7 @@ userModel.SolicitarMembresia = (userData, iduser) => {
 
                 }
             )
-       
+
     }
     )
 
@@ -529,7 +551,7 @@ userModel.DeleteSUser = (id) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'UPDATE `users` SET status= 2 where id='+id, 
+                'UPDATE `users` SET status= 2 where id=' + id,
                 (err, resut) => {
                     console.log(err);
                     if (err) {
@@ -551,11 +573,11 @@ userModel.DeleteSUser = (id) => {
 };
 
 //Obtener la cantidad de regisrados por rango de fecha
-userModel.CantUsersRegistrados = (inicio,fin) => {
+userModel.CantUsersRegistrados = (inicio, fin) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                "SELECT COUNT(id) AS CantRegistros FROM users WHERE status=1 AND datecreated  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id", 
+                "SELECT COUNT(id) AS CantRegistros FROM users WHERE status=1 AND datecreated  BETWEEN '" + inicio + "' AND '" + fin + "' GROUP BY id",
                 (err, result) => {
                     console.log(err);
                     if (err) {
@@ -578,11 +600,11 @@ userModel.CantUsersRegistrados = (inicio,fin) => {
 
 
 //Obtener la cantidad de Solicitudes de Membresías  por rango de fecha
-userModel.CantMemberShiprequests = (inicio,fin) => {
+userModel.CantMemberShiprequests = (inicio, fin) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                "SELECT COUNT(id) AS CantRM FROM users WHERE statusmemberships=38 AND datememberships  BETWEEN '"+inicio+"' AND '"+fin+"' GROUP BY id", 
+                "SELECT COUNT(id) AS CantRM FROM users WHERE statusmemberships=38 AND datememberships  BETWEEN '" + inicio + "' AND '" + fin + "' GROUP BY id",
                 (err, result) => {
                     console.log(err);
                     if (err) {
