@@ -1,6 +1,8 @@
 const pool = require('../config/database');
+const chatroomsModel = require('../models/chatrooms.js');
 const keywords = require('../models/keywords.js');
 let ProductModel = {};
+const sha1 = require('sha1');
 const date = require('date-and-time');
 
 
@@ -249,8 +251,16 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
-                        //console.log(createdkeywords);
+                        // console.log(KeyWordsProduct);
+                        // console.log(KeyWordsProduct.length);
+                        if(KeyWordsProduct!=undefined){
+                            if(KeyWordsProduct.length!=0){
+                                // console.log(KeyWordsProduct);
+                                // console.log(KeyWordsProduct.length);
+                                createdkeywords = await keywords.newkeywords(KeyWordsProduct,ProductData.subcategory,resut.insertId);
+                            }
+                        }
+                            //console.log(createdkeywords);
                         if(ImagesProduct.length!=0){
                         for(var atr2 in ImagesProduct){  
                             pool.query(
@@ -267,7 +277,8 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                     } else {
                                          
                                         resolve({
-                                            'result': resut
+                                            'result': resut,
+                                            'id':resut.insertId
                                         })                                       
                                     }
                 
@@ -397,19 +408,21 @@ ProductModel.EditProductCKW = (ProductData,idproduct,PreferecesProduct,ImagesPro
 //FindProductCKW  - Buscar productos
 ProductModel.FindProductCKW = (idUserProduct,idProduct) => {
     //let resultado = {};
+    console.log(idProduct);
     return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
                 'SELECT * FROM product WHERE id=?', idProduct,
-                (err, resut) => {
+                (err, result) => {
                     //console.log(resut);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
+                        console.log("result "+result);
                         resolve({
-                            'result': resut[0]
+                            'result': result
                         })  
                     }//fin if ImagesProduct.length!=0
                       
@@ -433,9 +446,9 @@ ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
             let armaresult={};
             let consulta="";
             if(estatus==1){
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct ";
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1 ";
             }else{
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct ";
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct AND typepublication=1";
             }
             pool.query(consulta,
                 async(err, result) => {
@@ -468,7 +481,7 @@ ProductModel.ListProductos = (UserData,ProductData,callback) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT RAND(idproduct), datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1  LIMIT 50",
+                "SELECT DISTINCT RAND(idproduct),idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1   ORDER BY datepublication DESC LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -499,16 +512,20 @@ ProductModel.findProductos = (nameProduct,IdUserProduct) => {
         if (pool) {
 
             let armaresult={};
+            //consulta para buscar por palabra clave
+            // "SELECT * FROM keywords AS k INNER JOIN keyword_product AS kp ON k.id=kp.idword INNER JOIN product AS p ON kp.idproduct=p.id INNER JOIN  imgproduct AS i ON p.id=i.idproduct WHERE (k.word LIKE '%Intel%' OR p.NAME LIKE '%"+nameProduct+"%')  AND STATUS=3 AND iduser<>'"+IdUserProduct+"' ORDER BY p.datecreated DESC"
+            console.log("SELECT * FROM product as p WHERE p.NAME LIKE ('%"+nameProduct+"%')  AND p.status=3 AND p.iduser<>'"+IdUserProduct+"' ORDER BY p.datecreated DESC");
             pool.query(
-                "SELECT * FROM keywords AS k INNER JOIN keyword_product AS kp ON k.id=kp.idword INNER JOIN product AS p ON kp.idproduct=p.id INNER JOIN  imgproduct AS i ON p.id=i.idproduct WHERE (k.word LIKE '%Intel%' OR p.NAME LIKE '%"+nameProduct+"%')  AND STATUS=3 AND iduser<>'"+IdUserProduct+"' ORDER BY p.datepublication DESC",
+                "SELECT *,id AS idproduct FROM product as p WHERE name LIKE ('%"+nameProduct+"%')  AND status=3 AND iduser<>'"+IdUserProduct+"' ORDER BY datepublication DESC",
                 async(err, result) => {
-                    //console.log(result);                  
+                                     
                    
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {   
+                    } else { 
+                        console.log(result);   //datepublication
                         armaresult = await ProductModel.armaresult(result); 
                         //console.log("armaresult: "+armaresult); 
                         resolve({
@@ -533,6 +550,7 @@ ProductModel.armaresult = (result) => {
             
             let img={};
             let prefe={};
+            let interested={};
             let CantidadOfertas=0;
             let idproducs=0;
             //console.log(result);
@@ -547,22 +565,22 @@ ProductModel.armaresult = (result) => {
                     let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
 
                     let now = new Date();
-                    let servidor=date.format(now, 'DD/MM/YYYY');
+                    let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss');
                     //let registro=element.registro;
                     let registro = new Date(element.datepublication);
-                    let regis = date.format(registro, 'DD/MM/YYYY');
+                    let regis = date.format(registro, 'YYYY-MM-DD HH:mm:ss');
 
                     //console.log(now+" - "+registro);
 
                     let comprobar_fecha=date.isSameDay(now, registro); 
                     // console.log(comprobar_fecha+" - ");
                     // console.log("//////");
+                    console.log(element.conditions);
                     let nuevo=false;
-                    if (registro == servidor){
-                        let nuevo=true;
-                    }else{
-                        let nuevo=false;
+                    if (element.conditions==9){
+                         nuevo=true;
                     }
+                    console.log(nuevo);
 
                     let FlagProduct=element.status;
                     let statusProduct=0; //Publicación activa
@@ -579,10 +597,12 @@ ProductModel.armaresult = (result) => {
                     }
 
                     let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
-                    //console.log(rp);
+                   // console.log(rp);
                     //console.log(horaServidor);
+                    //console.log(rp.result);
                     let datepublication = new Date(rp.result.datepublication);
-                    //fecha de creación de producto
+                    //console.log(datepublication);
+                    ////fecha de creación de producto
                     let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
                     //console.log(now);
                     let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
@@ -590,12 +610,17 @@ ProductModel.armaresult = (result) => {
                     if(Diferenciafechas>20){
                         Editable=false;
                     }
+
+                    //Transformar
+                    let datecreatedt = new Date(element.datecreated);
+                    let datecreated = date.format(datecreatedt, 'YYYY-MM-DD HH:mm:ss');
+                    //console.log(element.typepublication);
                     if(element.typepublication==1){   
                         arr.push({
                             "idproduct": element.idproduct,
-                            "datecreated":regis,
+                            "datecreated":datecreated,
                             "iduser": element.iduser,
-                            "nuevo": comprobar_fecha,
+                            "nuevo":nuevo,
                             "subcategory": element.subcategory,
                             "name": element.name,
                             "details": element.details,
@@ -613,14 +638,40 @@ ProductModel.armaresult = (result) => {
                             
                         });
                     }
-                    if(element.typepublication==3){   
+                    if(element.typepublication==3){ 
+                        let now2 = new Date();
+                        let servidor2=date.format(now, 'YYYY-MM-DD HH:mm:ss');  
+                        let beginSubastakas = new Date(element.datebeginst);
+                        let begin=date.format(beginSubastakas, 'YYYY-MM-DD HH:mm:ss');
+                        let endSubastakas = new Date(element.dateendst);
+                        let end=date.format(endSubastakas, 'YYYY-MM-DD HH:mm:ss');
+                        let valStarted=date.subtract(now2,beginSubastakas).toMinutes();
+                        console.log("valStarted: "+valStarted);
+                        let started=false;
+                        if(valStarted > 0){
+                            started=true;
+                        }
+                        let finished=false;
+                        let valFinished=date.subtract(now2,endSubastakas).toMinutes();
+                        if(valFinished > 0){
+                            finished=true;
+                        }
+                        interested=await ProductModel.interestedSubastacas(element);
+                        console.log("interested: "+interested.interested[0]);
+                        let flagInterested=false;
+                        if(interested.interested[0]!= undefined){
+                            flagInterested=true;
+                        }
                         arr.push({
                             "idproduct": element.idproduct,
-                            "datecreated":regis,
-                            "begin":element.datebeginst,
-                            "end":element.dateendst,
+                            "datecreated":datecreated,
+                            "flagInterested":flagInterested,
+                            "started":started,
+                            "finished":finished,
+                            "begin":begin,
+                            "end":end,
                             "iduser": element.iduser,
-                            "nuevo": comprobar_fecha,
+                            "nuevo": nuevo,
                             "subcategory": element.subcategory,
                             "name": element.name,
                             "details": element.details,
@@ -764,9 +815,9 @@ ProductModel.ListProductSubCategory = (ProductData,callback) => {
         if (pool) {
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct AND iduser<>'"+ProductData.iduser+"' GROUP BY idproduct  LIMIT 50",
+                "SELECT DISTINCT idproduct,idproduct,datebeginst,dateendst,DATE_FORMAT(datepublication, '%d/%m/%Y') AS registro,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE subcategory='"+ProductData.subcategory+"' AND status="+ProductData.status+" AND p.id=idproduct AND iduser<>'"+ProductData.iduser+"' GROUP BY idproduct  LIMIT 50",
                 async(err, result) => {
-                    //console.log(result);
+                    console.log(result);
                    
                     if (err) {
                         resolve({
@@ -1064,7 +1115,7 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
             let createdkeywords={};
             pool.query(
                 'INSERT INTO product SET ?', SubastakasData,
-                async(err, resut) => {
+                async(err, result) => {
                     //console.log(resut);
                     if (err) {
                         resolve({
@@ -1073,16 +1124,25 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                     } else {
                         // console.log("resut reg product");
                         // console.log(resut.insertId);
-                        createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
-                        //console.log(createdkeywords);
+                        if(KeyWordsSubastakas!=undefined){
+                            if(KeyWordsSubastakas.length!=0){
+                                //console.log(SubastakasData);
+                                console.log(SubastakasData.length);
+                                createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                            }
+                        }
+                        // if(KeyWordsProduct.length!=0){
+                        //     createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                        // }
+                            //console.log(createdkeywords);
                         if(ImagesSubastakas.length!=0){
                         for(var atr2 in ImagesSubastakas){  
                             pool.query(
                                 'INSERT INTO imgproduct (url,idproduct) value( ?, ?) ', [
                                     ImagesSubastakas[atr2],
-                                    resut.insertId
+                                    result.insertId
                                 ],
-                                (err, resut) => {
+                                (err, result2) => {
                                     //console.log(resut);
                                     if (err) {
                                         resolve({
@@ -1091,7 +1151,7 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                                     } else {
                                          
                                         resolve({
-                                            'result': resut
+                                            'result': result
                                         })                                       
                                     }
                 
@@ -1121,7 +1181,7 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT RAND(idproduct), datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                "SELECT DISTINCT RAND(id),id as idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product  as p WHERE iduser<>'"+UserData.iduser+"' AND status="+SubastakasData.status+" AND typepublication=3 ORDER BY datepublication DESC LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -1143,6 +1203,7 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
     })
 };
 ///
+
 
 ProductModel.ListMiSubasTakas = (UserData,SubastakasData) => {
     //let resultado = {};
@@ -1205,6 +1266,366 @@ ProductModel.DetailSubasTakas = (SubasTakasData) => {
     })
 };
 ///////////////
+ProductModel.LisTodo = (SubasTakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubasTakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let armaresult={};
+            console.log("SELECT DISTINCT RAND(id),id, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 ORDER BY datepublication DESC LIMIT 50");
+            pool.query(
+                "SELECT DISTINCT RAND(id),id as idproduct, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 ORDER BY datepublication DESC LIMIT 50",
+                async(err, result) => {
+                    //console.log(result);
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {     
+                        armaresult = await ProductModel.armaresulT(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                        
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///////////////
+
+///
+ProductModel.armaresulT = (result) => {
+
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+        
+        
+        try{
+            
+            let img={};
+            let prefe={};
+            let CantidadOfertas=0;
+            let idproducs=0;
+            //console.log(result);
+            for (const element of result) {
+                //console.log(element.idproduct+" - "+idproducs);
+                if(element.idproduct!=idproducs){
+                    //console.log("idproducs - "+element.idproduct);
+                    idproducs=element.idproduct;
+                    img=await ProductModel.ListImagesProduct(element);
+                    prefe=await ProductModel.ListPrefrencesProduct(element);
+                    CantidadOfertas=await ProductModel.CantidadOfertas(element);
+                    let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+
+                    let now = new Date();
+                    let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+                    //let registro=element.registro;
+                    let registro = new Date(element.datepublication);
+                    let regis = date.format(registro, 'YYYY-MM-DD HH:mm:ss');
+
+                    //console.log(now+" - "+registro);
+
+                    let comprobar_fecha=date.isSameDay(now, registro); 
+                    // console.log(comprobar_fecha+" - ");
+                    // console.log("//////");
+                    let nuevo=false;
+
+                    console.log(element.conditions);
+                    //let nuevo=false;
+                    if (element.conditions==9){
+                         nuevo=true;
+                    }
+                    console.log(nuevo);
+
+                    let FlagProduct=element.status;
+                    let statusProduct=0; //Publicación activa
+                    let Editable=true; //Publicación activa
+                    if(FlagProduct==4){
+                        statusProduct=1; // Publicación Takasteada
+                    }
+                    if(FlagProduct==5){
+                        statusProduct=2;//Publicación Elimidada ó Deshabilitada
+                    }
+                    if(FlagProduct==26){
+                        statusProduct=3;//Publicación Editada
+                    
+                    }
+
+                    let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
+                   // console.log(rp);
+                    //console.log(horaServidor);
+                    let datepublication = new Date(rp.result.datepublication);
+                    console.log(datepublication);
+                    //fecha de creación de producto
+                    let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+                    //console.log(now);
+                    let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
+
+                    if(Diferenciafechas>20){
+                        Editable=false;
+                    }
+                    interested=await ProductModel.interestedSubastacas(element);
+                    console.log("interested: "+interested.interested[0]);
+                    let flagInterested=false;
+                    if(interested.interested[0]!= undefined){
+                        flagInterested=true;
+                    }
+                    console.log(element.idproduct);
+                       
+                        arr.push({
+                            "idproduct": element.idproduct,
+                            "flagInterested":flagInterested,
+                            "datecreated":regis,
+                            "begin":element.datebeginst,
+                            "end":element.dateendst,
+                            "iduser": element.iduser,
+                            "nuevo": nuevo,
+                            "subcategory": element.subcategory,
+                            "name": element.name,
+                            "details": element.details,
+                            "typemoney": element.typemoney,
+                            "marketvalue": Precio,
+                            "typepublication": element.typepublication,
+                            "conditions": element.conditions,
+                            "size": element.size,
+                            "weight": element.weight,
+                            "status": statusProduct,
+                            "editable": Editable,
+                            "CantidadOfertas":CantidadOfertas.CantOfertas,
+                            "ProductImages":img.ImagesProduct,
+                            "Preferences":prefe.Preferences
+                            
+                        });
+                    
+                   
+                }
+            }//fin for 
+            resolve(arr)
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    )
+
+} 
+///////////////////////////
+ProductModel.interestedSubastacas = (element) => {
+    return new Promise((resolve, reject) => {
+        console.log('SELECT id FROM interested WHERE iduser="'+element.iduser+'" AND idsubastakas='+element.idproduct+' AND status=1');
+        pool.query(
+            'SELECT id FROM interested WHERE iduser=? AND idsubastakas=? AND status=1',
+            [element.iduser,
+            element.idproduct
+            ],
+            (err2, result2) => {
+                 
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    console.log(result2); 
+                    // console.log(result2.length);
+                    // let ImagesProduct= []; 
+                    // for(var atr2 in result2){
+                    // ImagesProduct.push(result2[atr2].url); 
+                    // };  
+                    //console.log(element.idproduct);  
+                   // console.log(ImagesProduct);
+                    resolve({                        
+                        "interested": result2
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
+
+
+
+//LISTAR LAS SUBASTAKAS PUBLICADAS POR OTROS USUARIOS - SUBASTAKEAR 
+ProductModel.MInterestedSubasTakas = (UserData,SubastakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+
+            let armaresult={};
+            pool.query(
+                "SELECT DISTINCT idproduct,i.id, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,i.iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,p.status  FROM interested AS i INNER JOIN product AS p ON i.idsubastakas=p.id  INNER JOIN  imgproduct AS im ON p.id=idproduct WHERE i.iduser='"+UserData.iduser+"' AND p.status<>4 AND p.id=idproduct AND typepublication=3 AND i.status=1 LIMIT 50",
+                async(err, result) => {
+                    //console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+///
+ProductModel.GetSubasTakas = (SubastakasData) => {
+    //let resultado = {};
+    //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let armaresult={};
+            let IdSAla="";
+            let ExistChatroom={};
+            let Msg="";
+            pool.query(
+                "SELECT * FROM product AS p  WHERE p.id="+SubastakasData.idSubastakas,
+                async(err, result) => {
+                    console.log(result);                  
+                   
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {   
+                        
+                        let now = new Date();
+                        let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss'); 
+                        let datepublication= new Date(result[0].datepublication);
+                        let dateCreated=  date.format(datepublication, 'YYYY-MM-DD HH:mm');
+
+                        IdSAla=sha1(result[0].id+result[0].iduser+result[0].datepublication+result[0].typepublication,result[0].subcategory+result[0].name+now);
+                        console.log("IdSAla: "+IdSAla);
+
+                        let datebeginst= new Date(result[0].datebeginst);
+                        let dateInicio=  date.format(datebeginst, 'YYYY-MM-DD HH:mm');
+                        let dateendst= new Date(result[0].dateendst);
+                        let dateFin=  date.format(dateendst, 'YYYY-MM-DD HH:mm');
+                        //AQUÍ COMIENZAN LAS CONDICIONES PARA CREAR LA SALA
+                        //DETERMINAR SI YA DEBIÓ HABER COMENZADO
+                        let valStarted=date.subtract(now,datebeginst).toMinutes();
+
+                        //console.log("valStarted: "+valStarted);
+                        let finished=false;
+                        let valFinished=date.subtract(now,dateendst).toMinutes();
+                        if(valFinished > 0){
+                            finished=true;
+                        }
+                        let started=false;
+                        if(valStarted > 0){
+                            started=true;
+                        }
+                        console.log("started: "+started+" finished: "+finished);
+                        //Si ya es tiempo de iniciar 
+                        if(started==true && finished==false){
+                            //se compueda si ya la sala exisite
+                            ExistChatroom = await chatroomsModel.ExistChatRooms(IdSAla);
+                            //console.log(ExistChatroom);
+                             // NO Extiste = Se crea la sala y se pasa la información
+                            if(ExistChatroom.result.length==0){
+                                console.log("NO existe");
+                                Msg="Que gane el mejor postor! en la subasta de <<"+result[0].name+">>";
+                                DataSalas = await chatroomsModel.newChatRooms(IdSAla,IdSAla,result[0].iduser,result[0].id,result[0].id,servidor,43);
+                                armaresult={
+                                    "IdSAla":IdSAla,
+                                    "idproduct": result[0].id,
+                                    "datecreated":dateCreated,
+                                    "started":started,
+                                    "finished":finished,
+                                    "begin":dateInicio,
+                                    "end":dateFin,
+                                    "statusSubasta":43,
+                                    "msg":Msg
+                                }  
+                            }
+                            //SI existe = se pasa la información de la sala
+                            if(ExistChatroom.result.length!=0){
+                                Msg="Que gane el mejor postor! en la subasta de << "+result[0].name+" >>";
+                                console.log("Existe");
+                                console.log("ExistChatroom: "+ExistChatroom.result.id);
+                                armaresult={
+                                    "IdSAla":ExistChatroom.result.id,
+                                    "idproduct": result[0].id,
+                                    "datecreated":dateCreated,
+                                    "started":started,
+                                    "finished":finished,
+                                    "begin":dateInicio,
+                                    "end":dateFin,
+                                    "statusSubasta":ExistChatroom.result.status,
+                                    "msg":Msg
+                                }
+                            }
+                           
+
+                        }
+                        //Si aún NO inicia 
+                        if(started==false && finished==false){
+                            Msg="¡Pronto! Aún no es tiempo de comenzar la subasta de <<"+result[0].name+">>";
+                            armaresult={
+                                "IdSAla":null,
+                                "idproduct": result[0].id,
+                                "datecreated":dateCreated,
+                                "started":started,
+                                "finished":finished,
+                                "begin":dateInicio,
+                                "end":dateFin,
+                                "statusSubasta":null,
+                                "msg":Msg
+                            }                           
+                        }
+                        //Si Ya finalizó
+                        if(started==true && finished==true){
+                            Msg="¡Suerte en la proxima! Ya finalizó la subasta de <<"+result[0].name+">>";
+                            armaresult={
+                                "IdSAla":null,
+                                "idproduct": result[0].id,
+                                "datecreated":dateCreated,
+                                "started":started,
+                                "finished":finished,
+                                "begin":dateInicio,
+                                "end":dateFin,
+                                "statusSubasta":null,
+                                "msg":Msg
+                            }                           
+                        }
+                        //console.log(started);
+                        
+                        //armaresult = await ProductModel.armaresult(result);  
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+
+
+
 
 
 module.exports = ProductModel;

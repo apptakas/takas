@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "apidoc": {
     "title": "Custom apiDoc browser title",
-    "url": "https://takas-291016.ue.r.appspot.com"
+    "url": "https://takas-300716.uk.r.appspot.com"
   },
   "engines": {
     "node": "12.x.x"
@@ -25,7 +25,9 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "connect-redis": "^5.0.0",
     "date-and-time": "^0.14.1",
+    "eiows": "^3.4.1",
     "ejs": "^3.1.5",
     "email-validator": "^2.0.4",
     "epayco-sdk-node": "^1.0.2",
@@ -37,11 +39,13 @@
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
     "jwt-redis": "^6.0.0",
+    "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "node-datetime": "^2.1.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "redis": "^3.0.2",
     "secure-pin": "^1.0.14",
     "sha1": "^1.1.1",
     "socket.io": "^3.0.3",

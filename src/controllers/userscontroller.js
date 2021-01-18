@@ -108,37 +108,38 @@ userController.UpdatePerfil = async (req) => {
         let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
         let idUser= req.idfirebaseUser;
         const userData = {
-            idcity: req.codCity,
+            // idcity: req.codCity,
             fullname: req.fullnameUser,
             email: req.emailUser,
             phonenumber: req.phonenumberUser,
             imgurl: req.urlimgUser,
             datebirth:req.datebirthUser,
             role: 2,
-            password: sha1(req.passwordUser),
+            // password: sha1(req.passwordUser),
             datecreated: hoy,
             country:req.countryUser,
             department:req.departmentUser,
             memberships:req.membershipsUser,
             address: req.dirUser,
-            tyc: req.tycUser,
-            versiontyc: req.versionTYC,
-            versionapp: req.versionApp
+            // tyc: req.tycUser,
+            // versiontyc: req.versionTYC,
+            // versionapp: req.versionApp
         };
         ///console.log(userData.password);
-        let response = await User.createUser(userData,idUser);
+        let response = await User.UpdatePerfil(userData,idUser);
 
         let data = {};
         if (response && response.result) {
             let r = {};
             r = response.result;
+            console.log(response.result);
 
             const payload = {
-                ignoreExpiration: true
+                ignoreExpiration: 0
             };
 
             var token = jwt.sign(payload, config.llave, {
-                expiresIn: 60 * 60 * 720
+                // expiresIn: 0
             });
             // var refreshToken = randtoken.uid(256) ;
             // refreshTokens[refreshToken] = {token: 'JWT ' + token, refreshToken: refreshToken};
@@ -151,7 +152,7 @@ userController.UpdatePerfil = async (req) => {
                 status: '200',
                 token: token,
                 //refreshTokens: refreshTokens,
-                msg: 'Usuario Registrado con éxito'
+                msg: 'Usuario Actualizado con éxito'
                 //data: response
             }
         } else {
@@ -204,6 +205,11 @@ userController.Autenticar = async (req) => {
                 success: true,
                 status: '200',
                 token: token,
+                newUser: response.newUser,
+                Email:response.Email,
+                Fullname:response.Fullname,
+                PhoneNumber:response.PhoneNumber,
+                ImgUrl:response.ImgUrl,
                 msg: 'Usuario Autenticado con éxito'
                 //data: response
             }
@@ -256,6 +262,10 @@ userController.GAutenticar = async (req) => {
                 status: '200',
                 token: token,                
                 newUser: response.newUser,
+                Email:response.Email,
+                Fullname:response.Fullname,
+                PhoneNumber:response.PhoneNumber,
+                ImgUrl:response.ImgUrl,
                 msg: 'Usuario Autenticado con éxito'
                 //data: response
             }
@@ -423,6 +433,7 @@ userController.Updatetokenpush = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                eselmismo: resp.eselmismo,
                 msg: 'Token Push Actualizado'
             }
 
@@ -461,7 +472,11 @@ userController.UserExist = async (req) => {
                 success: true,
                 status: '200',
                 UserExist:resp.UserExist,
-                msg: 'El Usuario si existe'
+                Email:resp.Email,
+                Fullname:resp.Fullname,
+                PhoneNumber:resp.PhoneNumber,
+                ImgUrl:resp.ImgUrl,
+                msg: 'Verificación si el usuario existe y si sus campos estan completos'
             }
 
         } else {
@@ -535,6 +550,9 @@ userController.CharacteristicPublication = async (req) => {
         }
         if(req.FlagCharacteristic==3){
             filter=6;
+        }
+        if(req.FlagCharacteristic==4){
+            filter=13;
         }
         //console.log(userData.password);
         let response = await MasterStatus.CharacteristicPublication(filter);
@@ -901,7 +919,7 @@ userController.NewProductCKW = async (req) => {
             let SizePoduct = null;
             if(req.SizePoduct!=null){               
                 SizePoduct= req.SizePoduct;  
-                 console.log("SizePoduct");
+                 //console.log("SizePoduct");
                 // console.log(SizePoduct);                
             }
 
@@ -920,6 +938,8 @@ userController.NewProductCKW = async (req) => {
                 conditions:UsePoduct,
                 size: SizePoduct,
                 weight: WeightProduct,
+                valueweight:req.ValueWeightProduct,
+                unitofmeasurement: req.UnitOfMeasurementP,
                 name: req.nameProduct,
                 details: req.detailsProduct,
                 typemoney: req.typemoneyProduct,
@@ -951,18 +971,22 @@ userController.NewProductCKW = async (req) => {
             }
 
             const topeKW=10;      
-            const KeyWordsProduct = {};
+            const KeyWordsProduct = [];
             let lengthkw=0;
             //console.log(req.ImagesProduct.length);
-            if(req.KeyWordsProduct!=null){
+            if(req.KeyWordsProduct!=null && req.KeyWordsProduct!=undefined){
                 lengthkw=req.KeyWordsProduct.length;
                 if(req.KeyWordsProduct.length!=0){
                     for(var atr1 in req.KeyWordsProduct){
                         KeyWordsProduct[atr1] = req.KeyWordsProduct[atr1];     
                     };
-                   // console.log(KeyWordsProduct);
+                   
                 }
             }
+            else{
+
+            }
+            //console.log(req.KeyWordsProduct);
 
             
             // console.log(req.ImagesProduct.length);
@@ -988,6 +1012,8 @@ userController.NewProductCKW = async (req) => {
         //console.log(msgError);
 
         let data = {};
+
+        console.log(response);
         if (response && response.result) {
             let r = {};
             r = response.result;
@@ -995,6 +1021,7 @@ userController.NewProductCKW = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                idProduct:response.id, 
                 msg: 'Producto registrado con éxito'
                 //data: response
             }
@@ -1067,6 +1094,8 @@ userController.EditProductCKW = async (req) => {
                 condition:UsePoduct,
                 size: SizePoduct,
                 weight: WeightProduct,
+                valueweight:req.ValueWeightProduct,
+                unitofmeasurement: req.UnitOfMeasurementP,
                 name: req.nameProduct,
                 details: req.detailsProduct,
                 typemoney: req.typemoneyProduct,
@@ -1233,7 +1262,7 @@ userController.ListMisProductos = async (req) => {
             status: req.statusProduct
         };
         if(req.statusProduct){
-            estatus=1;            
+            estatus=3;            
         }
         //console.log(userData.password);
         let response = await Product.ListMisProductos(UserData,ProductData,estatus);
@@ -1295,7 +1324,7 @@ userController.ListProductos = async (req) => {
         //console.log(ProductData.status);
         let response = await Product.ListProductos(UserData,ProductData);
 
-       console.log(response);
+       //console.log(response);
 
         let data = {};
         if (response && response.result) {
@@ -1321,7 +1350,7 @@ userController.ListProductos = async (req) => {
         //validar si esta llegado vacio
         return { status: 'ok', data: data };
     } catch (e) {
-        console.log(e);
+        //console.log(e);
         return { status: 'ko' };
     }
 
@@ -1335,7 +1364,8 @@ userController.findProductos = async (req) => {
         
           let IdUserProduct=req.IdUserProduct;
           let nameProduct=req.nameProduct;
-        //console.log(userData.password);
+        console.log(IdUserProduct);
+        console.log(nameProduct);
         let response = await Product.findProductos(nameProduct,IdUserProduct);
 
        //console.log(response);
@@ -1749,7 +1779,7 @@ userController.NewOffer = async (req) => {
             data = {
                 success: true,
                 status: '200',                
-                // idoferta:response.idOferta,
+                idoferta:response.idOferta,
                 // idnotification:response.idNotificacion,
                 // Typenotification:response.TypeNotification,
                 // titulo:response.titulo,
@@ -2142,7 +2172,7 @@ userController.ChangeStatusOffer = async (req) => {
                 status:statusOffer
             };
        
-        //console.log(OfferData);
+        console.log(OfferData);
         
         //let response = await Offer.FindDatOffer(OfferData);
        let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
@@ -2193,7 +2223,7 @@ userController.ChangeStatusOffer = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-      notifications(token,titulo,detalle,datanoti);
+      //notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio
@@ -2411,7 +2441,8 @@ userController.listDataChatRoom = async (req) => {
             let idSala= req.idSalaChat;
             let idUser=req.idUser;
        
-        //console.log(userData.password);
+        console.log(idUser);
+        console.log(idSala);
         let response = await ChatRooms.listDataChatRoom(idSala,idUser);
 
        //console.log(response);
@@ -2697,6 +2728,8 @@ userController.NewTomboTakas = async (req) => {
             let DLottk = new Date(req.DateLottk);
             let DateLottk = date.format(DLottk, 'YYYY-MM-DD HH:mm');
 
+
+               console.log(DLottk) ;
             //buscar fecha de creación del producto
             /////
             /*GENERAR PIN DE REFERENCIA*/
@@ -2770,6 +2803,7 @@ userController.NewTomboTakas = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                idTTK:r.insertId,
                 pinReference:pin,
                 msg: 'Tombotakas se ha creado con éxito'
                 //data: response
@@ -3151,6 +3185,10 @@ userController.ProcessRequestsTickets = async (req) => {
                 if(req.FlagTTk==2){
                     statusTicket=31;//COMPRADO (VENDER )
                 }
+                if(req.FlagTTk==4){
+                  
+                    statusTicket=33;//RECHAZADO
+                }
 
                 if(req.FlagTTk==4){
                   
@@ -3515,13 +3553,24 @@ userController.NewSubasTakasCKW = async (req) => {
             let begin=date.format(beginSubastakas, 'YYYY-MM-DD HH:mm:ss');
 
             let endSubastakas = new Date(req.endSubastakas);
-            let end=date.format(endSubastakas, 'YYYY-MM-DD HH:mm:ss');
+            let end=date.format(new Date(req.endSubastakas), 'YYYY-MM-DD HH:mm:ss');
             
+
+            // let DLottk = new Date(req.DateLottk);
+            // let DateLottk = date.format(DLottk, 'YYYY-MM-DD HH:mm');
+
             // console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
             // console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
 
-            console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
-            console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
+            // console.log(req.beginSubastakas+" - "+beginSubastakas+" - "+begin);
+            // console.log(req.endSubastakas+" - "+endSubastakas+" - "+end);
+
+            // let datepublication = new Date(rp.result.datepublication);
+            // //fecha de creación de producto
+            // let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+            // //console.log(now);
+            // let Diferenciafechas=date.subtract(beginSubastakas, endSubastakas).toMinutes();
+            // console.log("Diferenciafechas: "+Diferenciafechas);
 
             //buscar fecha de creación del producto
 
@@ -3558,6 +3607,8 @@ userController.NewSubasTakasCKW = async (req) => {
                 conditions:UseSubastakas,
                 size: SizeSubastakas,
                 weight: WeightSubastakas,
+                valueweight:req.ValueWeightProduct,
+                unitofmeasurement: req.UnitOfMeasurementP,
                 name: req.nameSubastakas,
                 details: req.detailsSubastakas,
                 typemoney: req.typemoneySubastakas,
@@ -3579,19 +3630,19 @@ userController.NewSubasTakasCKW = async (req) => {
            
 
             const topeKW=10;      
-            const KeyWordsSubastakas = {};
+            const KeyWordsSubastakas = [];
             let lengthkw=0;
             //console.log(req.ImagesProduct.length);
-            if(req.KeyWordsSubastakas!=null){
+            if(req.KeyWordsSubastakas!=null && req.KeyWordsSubastakas!=undefined){
                 lengthkw=req.KeyWordsSubastakas.length;
                 if(req.KeyWordsSubastakas.length!=0){
                     for(var atr1 in req.KeyWordsSubastakas){
                         KeyWordsSubastakas[atr1] = req.KeyWordsSubastakas[atr1];     
                     };
-                   // console.log(KeyWordsProduct);
+                   // console.log(KeyWordsSubastakas);
                 }
             }
-
+            console.log(KeyWordsSubastakas);
             
             // console.log(req.ImagesProduct.length);
             // console.log(lengthkw);
@@ -3605,7 +3656,7 @@ userController.NewSubasTakasCKW = async (req) => {
 
         // && lengthkw<=topeKW 
 
-        if(req.ImagesSubastakas.length<=topeimg ){
+        if(req.ImagesSubastakas.length<=topeimg ){//<
             response = await Product.NewSubasTakasCKW(SubastakasData,ImagesSubastakas,KeyWordsSubastakas);
             // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
 
@@ -3618,11 +3669,12 @@ userController.NewSubasTakasCKW = async (req) => {
         let data = {};
         if (response && response.result) {
             let r = {};
-            r = response.result;
-
+            r = response.result[0];
+//console.log(response);
             data = {
                 success: true,
                 status: '200',
+                idsubastakas: response.result.insertId, 
                 msg: 'Subastakas registrada con éxito'
                 //data: response
             }
@@ -3808,14 +3860,21 @@ userController.DetailSubasTakas = async (req) => {
 
 userController.InterestedSubasTakas = async (req) => {
     try {
+        let msg="Se ha registrado Me interesa";
+        let FlagInterested= req.FlagInterested;
+        let status= 1;
+        if(FlagInterested==false){
+            status= 2;
+            msg="Se ha eliminado la indicación de Me interesa";
+        }
         const DataInterested = {
             idsubastakas: req.IdSubastakas,
             iduser: req.IdUserSubastakas,
-            status: 2
+            status: status
             
         };
-        //console.log(userData.password);
-        let response = await Interested.InterestedSubasTakas(DataInterested);
+        console.log(DataInterested);
+        let response = await Interested.InterestedSubasTakas(DataInterested,FlagInterested);
 
        //console.log(response);
 
@@ -3829,7 +3888,7 @@ userController.InterestedSubasTakas = async (req) => {
                 status: '200',
                 data: response.result[0],
                 images: response.images,
-                msg: 'Se ha registrado Me interesa'
+                msg: msg
                 //data: response
             }
         } else {
@@ -3841,6 +3900,182 @@ userController.InterestedSubasTakas = async (req) => {
                 msg: 'Error al intentar registar Subastakas como me interesa'
             }
         }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+userController.LisTodo = async (req) => {
+    try {
+        const SubasTakasData = {
+            iduser: req.IdUserSubastakas            
+        };
+        //console.log(userData.password);
+        let response = await Product.LisTodo(SubasTakasData);
+
+       //console.log(response);
+
+       let data = {};
+       if (response && response.result) {
+           let r = {};
+           r = response.result;
+
+           data = {
+               success: true,
+               status: '200',
+               data: r,
+               images: response.images,
+               msg: 'Listar Todas las publicaciones'
+               //data: response
+           }
+       } else {
+
+          console.log(response);
+           data = {
+               success: false,
+               status: '500',
+               msg: 'Error al Listar todas las Publicaciones'
+           }
+       }
+       //validar si esta llegado vacio
+       return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Listar las Subastakas que me interesan  
+userController.MInterestedSubasTakas = async (req) => {
+    try {
+
+        let FlagSubastakas=req.FlagSubastakas;
+        let statuSubastakas=3; //Publicación activa
+        if(FlagSubastakas==1){
+            statuSubastakas=4; // Publicación Takasteada
+        }
+        if(FlagSubastakas==2){
+            statuSubastakas=5;//Publicación Elimidada ó Deshabilitada
+        }
+        if(FlagSubastakas==3){
+            statuSubastakas=26;//Publicación Editada
+        }
+
+        const UserData = {
+            iduser: req.idfirebaseUser
+        };
+        const SubastakasData = {
+            status: statuSubastakas
+        };
+        //console.log(ProductData.status);
+        let response = await Product.MInterestedSubasTakas(UserData,SubastakasData);
+
+       console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Subastakas marcadas como interesantes'
+                //data: response
+            }
+        } else {
+
+           // console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Subastakas marcadas como interesantes'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+ 
+
+userController.GetChatRoomSubastakas = async (req) => {
+    try {
+        let match=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let statusChatroomSubastakas=43;
+            
+
+            SubastakasData = {
+                idUser: req.idUserFirabase,
+                idSubastakas: req.idSubastakas,
+                status:statusChatroomSubastakas
+            };
+       
+        //console.log(OfferData);
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await Product.GetSubasTakas(SubastakasData);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            console.log(response);
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                data:r,
+                //msg: r.msg
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar Obtener la Sala de la Subastakas'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+     //notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
         //validar si esta llegado vacio
         return { status: 'ok', data: data };
     } catch (e) {

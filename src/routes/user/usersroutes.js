@@ -82,7 +82,6 @@ router.get('/prueba', function (req, res) {
 //Crear newUser- 
 router.post('/newUser', [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
-    check('imgUser', 'El imgUser es obligatorio').not().isEmpty().exists(),
     check('fullnameUser', 'El Nombre del usuario es obligatorio').not().isEmpty().exists(),
     check('phonenumberUser', 'El númeto telefónico es obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El email no puede estra vacio y debe corresponder al formato').isEmail().exists(),
@@ -120,10 +119,10 @@ router.post('/newUser', [
  * @apiParam {varchar} idfirebaseUser unique required.
  * @apiParam {varchar} imgUser unique optional.
  * @apiParam {int} codCity  optional. 
- * @apiParam {varchar} fullnameUser optional.
+ * @apiParam {varchar} fullnameUser required.
  * @apiParam {varchar} datebirthUser optional.
- * @apiParam {varchar} phonenumberUser  unique optional.
- * @apiParam {varchar} emailUser  unique  optional.
+ * @apiParam {varchar} phonenumberUser  unique required.
+ * @apiParam {varchar} emailUser  unique  required.
  * @apiParam {varchar} passwordUser  optional .
  * @apiParam {varchar} tycUser  optional .
  * @apiParam {varchar} urlimgUser  optional .
@@ -163,7 +162,10 @@ router.post('/newUser', [
  */
 //Completar perfilUser- 
 router.post('/updateperfil',rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists()
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('fullnameUser', 'El fullnameUser es obligatorio').not().isEmpty().exists(),
+    check('phonenumberUser', 'El phonenumberUser es obligatorio').not().isEmpty().exists(),
+    check('emailUser', 'El emailUser el obligatorio').isEmail().not().isEmpty().exists()
 ], async (req, res) => {
 
     const error = validationResult(req);
@@ -214,12 +216,14 @@ router.get('/datos', rutasProtegidas, (req, res) => {
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-    "{
     "success": true,
-    "status":: "200",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U",
+    "status": "200",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTA0OTAxMDAsImV4cCI6MTYxMzA4MjEwMH0.5wtRrcb4xd08T7VlIlzMYTmdwjhLPFdb3rPavquOo7I",
+    "Email": "anailysrodriguez@gmail.com",
+    "Fullname": "anailys rodriguez",
+    "PhoneNumber": null,
+    "ImgUrl": "https://lh3.googleusercontent.com/a-/AOh14GghAJLELlkIz090ubKjqqHdki33JMljFn5d3RHVF4Q=s96-c",
     "msg": "Usuario Autenticado con éxito"
-}
 }
  *
  * @apiError UserNotFound The id of the Domiciliary was not found.
@@ -268,7 +272,7 @@ router.post('/autenticar', [
  * 
  * 
  * @apiParam {varchar}  idfirebase  required.
- * @apiParam {varchar} emailuser  required.
+ * @apiParam {varchar} emailuser  optional.
  * @apiParam {varchar} fullnameUser  required.
  * @apiParam {varchar} imgUser  optional.
  * @apiParam {varchar} tycUser  optional.
@@ -280,11 +284,15 @@ router.post('/autenticar', [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
-    "status":: "200",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU",
-    "newUser": true,
+    "status": "200",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTAwNTM2NzAsImV4cCI6MTYxMjY0NTY3MH0.of4JPq8qP_p7lID3qL-RAGyhzw9x6DSC8GuwLHcitFs",
+    "newUser": false,
+    "Email": "gusuario124@gmail.com",
+    "Fullname": "gusuario12",
+    "PhoneNumber": null,
+    "ImgUrl": null,
     "msg": "Usuario Autenticado con éxito"
 }
  *
@@ -301,10 +309,11 @@ router.post('/autenticar', [
  */
 router.post('/gautenticar', [
     check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists(),
-    check('fullnameUser', 'El fullnameUser el obligatorio').not().isEmpty().exists(),
-    check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
+    check('fullnameUser', 'El fullnameUser el obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
-
+    
+    // ,
+    // check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
     const error = validationResult(req);
 
         if (error.array().length != 0) {
@@ -862,8 +871,13 @@ router.put('/tokenpush', rutasProtegidas, [
  *     HTTP/1.1 200 OK
 {
     "success": true,
-    "status":: "200",
-    "msg": "Token Push Actualizado"
+    "status": "200",
+    "UserExist": true,
+    "Email": "luis.perez@comfacundi.com.co",
+    "Fullname": "LUIS ALFONSO PEREZ GOMEZ",
+    "PhoneNumber": null,
+    "ImgUrl": "https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg",
+    "msg": "Verificación si el usuario existe y si sus campos estan completos"
 }
  *
  * @apiError UserNotFound The id of the User was not found.
@@ -895,6 +909,7 @@ router.post('/userexist', rutasProtegidas, [
     return res.status(response.data.status).json(response.data)
 
 })
+
 
 
 
@@ -980,7 +995,7 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
  *
  *
  * 
- * @apiParam {smallint}  FlagCharacteristic  requeride  1=Nuevo o Usado 2=Tamaño 3=Peso. 
+ * @apiParam {smallint}  FlagCharacteristic  requeride  1=Nuevo ó Usado 2=Tamaño 3=Peso y 4= Unidad de Medida. 
  * 
  * @apiSuccess {boolean} success of the Status.
  * @apiSuccess {int} status 200 of the Status.
@@ -994,25 +1009,25 @@ router.get('/listypepreferences', rutasProtegidas, async (req, res) => {
     "data": [
         {
             "id": 19,
-            "namestatus": "Muy liviano (0-1kg)",
+            "namestatus": "Muy liviano ",
             "filter": 6,
             "namefilter": "Peso Producto"
         },
         {
             "id": 20,
-            "namestatus": "Liviano (1-3kg)",
+            "namestatus": "Liviano",
             "filter": 6,
             "namefilter": "Peso Producto"
         },
         {
             "id": 21,
-            "namestatus": "Normal (3 a 7kg)",
+            "namestatus": "Normal ",
             "filter": 6,
             "namefilter": "Peso Producto"
         },
         {
             "id": 22,
-            "namestatus": "Pesado (7-15kg)",
+            "namestatus": "Pesado ",
             "filter": 6,
             "namefilter": "Peso Producto"
         }
@@ -1962,8 +1977,10 @@ router.post('/newproductkw', rutasProtegidas,[
  * @apiParam {array} ImagesProduct  required arrays de varchar .
  * @apiParam {array} KeyWordsProduct  optional array de varchar .
  * @apiParam {int} UsePoduct  optional.
- * @apiParam {int} SizePoduct  optional.
- * @apiParam {int} WeightProduct  optional.
+ * @apiParam {int} SizePoduct  required.
+ * @apiParam {int} WeightProduct  required.
+ * @apiParam {int} ValueWeightProduct  optional.
+ * @apiParam {smallint} UnitOfMeasurementP  optional.
  * 
  * 
  * 
@@ -1975,7 +1992,8 @@ router.post('/newproductkw', rutasProtegidas,[
  *     HTTP/1.1 200 OK
  *    {
     "success": true,
-    "status":: "200",
+    "status": "200",
+    "idProduct":47,
     "msg": "Producto registrado con éxito"
 }
  *
@@ -1999,7 +2017,9 @@ router.post('/newproductckw', rutasProtegidas,[
     check('detailsProduct', 'El detalle del producto es obligatorio').not().isEmpty().exists(),
     check('typemoneyProduct', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
     check('marketvalueProduct', ' El precio es obligatoria').not().isEmpty().exists(),
-    check('subcategoryProduct', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('subcategoryProduct', ' la Categoríaes requerida').not().isEmpty().exists(),
+    check('SizePoduct', ' El tamaño es requerido').not().isEmpty().exists(),
+    check('WeightProduct', ' El Peso es requerido').not().isEmpty().exists(),
     check('PreferecesProduct', ' Debes elegir al menos una preferencia de negocio').not().isEmpty().exists(),
     check('ImagesProduct', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
@@ -2050,6 +2070,8 @@ router.post('/newproductckw', rutasProtegidas,[
  * @apiParam {int} UsePoduct  optional.
  * @apiParam {int} SizePoduct  optional.
  * @apiParam {int} WeightProduct  optional.
+ * @apiParam {int} valueweight  optional.
+ * @apiParam {smallint} unitofmeasurement  optional.
  * 
  * 
  * 
@@ -2377,6 +2399,7 @@ router.post('/listquestionanswer', rutasProtegidas, [
  *             {
     "success": true,
     "status": "200",
+    "idoferta":5,
     "msg": "Oferta creada exitosamente"
 }
  *
@@ -3565,7 +3588,8 @@ router.post('/deletepublication', rutasProtegidas,[
  {
     "success": true,
     "status": "200",
-    "pinReference": "h8dGBL",
+    "idTTK": 10,
+    "pinReference": "ccLctE",
     "msg": "Tombotakas se ha creado con éxito"
 }
  *
@@ -4011,12 +4035,20 @@ router.post('/findtombotakaspin', rutasProtegidas,[
     "data": [
         {
             "idTombotakas": 2,
+            "pinTombotakas": "ibxJu2",
+            "timeremaining": 28841.56545,
             "nameTombotakas": "test Nueva Tombotakas",
             "statusTTK": 0,
-            "datecreatedTTK": "19/11/2020",
-            "datelotTTK": "25/11/2020 19:47",
+            "datecreatedTTK": "2020-11-19",
+            "pinreferenceTTK": "ibxJu2",
+            "datelotTTK": "2020-11-25 19:47",
             "moneyTTK": 1,
             "priceTTK": "10000.0000",
+            "imgTTK": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
             "numberticketsrs": [
                 31,
                 40,
@@ -4031,10 +4063,11 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 {
                     "idNUmbre": 1,
                     "Number": 31,
-                    "status": 1,
+                    "status": 4,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 2,
@@ -4042,7 +4075,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 3,
@@ -4050,7 +4084,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 4,
@@ -4058,7 +4093,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 5,
@@ -4066,7 +4102,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 6,
@@ -4074,7 +4111,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 7,
@@ -4082,7 +4120,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 },
                 {
                     "idNUmbre": 8,
@@ -4090,7 +4129,8 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                     "status": 1,
                     "NameUser": "gusuario12",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com"
+                    "email": "emailUser12@gmail.com",
+                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
                 }
             ]
         }
@@ -4359,7 +4399,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "status": "200",
     "data": {
         "idTombotakas": 2,
-        "pertenece": false,
+        "timeremaining": 25593.626933333333,
+        "pertenece": true,
         "nameTombotakas": "test Nueva Tombotakas",
         "statusTTK": 0,
         "datecreatedTTK": "19/11/2020",
@@ -4370,6 +4411,11 @@ router.post('/processrequeststickets', rutasProtegidas,[
         "moneyTTK": 1,
         "priceTTK": "10000.0000",
         "resultTTK": null,
+        "imgTTK": [
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+        ],
         "numberticketsrs": [
             31,
             40,
@@ -4384,10 +4430,11 @@ router.post('/processrequeststickets', rutasProtegidas,[
             {
                 "idNUmbre": 1,
                 "Number": 31,
-                "status": 1,
+                "status": 4,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 2,
@@ -4395,7 +4442,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 3,
@@ -4403,7 +4451,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 4,
@@ -4411,7 +4460,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 5,
@@ -4419,7 +4469,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 6,
@@ -4427,7 +4478,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 7,
@@ -4435,7 +4487,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             },
             {
                 "idNUmbre": 8,
@@ -4443,7 +4496,8 @@ router.post('/processrequeststickets', rutasProtegidas,[
                 "status": 1,
                 "NameUser": "gusuario12",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com"
+                "email": "emailUser12@gmail.com",
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
             }
         ]
     },
@@ -4701,9 +4755,11 @@ router.post('/detailstombotakas', rutasProtegidas,[
  * @apiParam {int} subcategorySubastakas  required .
  * @apiParam {array} ImagesSubastakas  required arrays de varchar .
  * @apiParam {array} KeyWordsSubastakas  optional array de varchar .
- * @apiParam {int} UseSubastakas  optional.
- * @apiParam {int} SizeSubastakas  optional.
+ * @apiParam {int} UseSubastakas  required.
+ * @apiParam {int} SizeSubastakas  required.
  * @apiParam {int} WeightSubastakas  optional.
+ * @apiParam {int} ValueWeightProduct  optional.
+ * @apiParam {smallint} UnitOfMeasurementP  optional.
  * 
  * 
  * 
@@ -4713,9 +4769,10 @@ router.post('/detailstombotakas', rutasProtegidas,[
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
     "status": "200",
+    "idsubastakas": 51,
     "msg": "Subastakas registrada con éxito"
 }
  *
@@ -4742,7 +4799,9 @@ router.post('/newsubastakasckw', rutasProtegidas,[
     check('detailsSubastakas', 'El detalle de la Subastakas es obligatorio').not().isEmpty().exists(),
     check('typemoneySubastakas', 'El tipo de moneda estar vacio ').not().isEmpty().exists(),
     check('marketvalueSubastakas', ' El precioinicial es obligatoria').not().isEmpty().exists(),
-    check('subcategorySubastakas', ' la Contraseña es requerida').not().isEmpty().exists(),
+    check('subcategorySubastakas', 'Desbes definir la subcategoría es requerida').not().isEmpty().exists(),
+    check('SizeSubastakas', 'El tamaño es requerido').not().isEmpty().exists(),
+    check('WeightSubastakas', 'El peso es requerido').not().isEmpty().exists(),
     check('ImagesSubastakas', 'Debes cargar al menos 1 imagen del producto').not().isEmpty().exists()
 ], async (req, res) => {
 
@@ -4796,8 +4855,11 @@ router.post('/newsubastakasckw', rutasProtegidas,[
         {
             "idproduct": 1,
             "datecreated": "09/12/2020",
-            "begin": "0000-00-00 00:00:00",
-            "end": "0000-00-00 00:00:00",
+            "flagInterested": true,
+            "started": false,
+            "finished": false,
+            "begin": "20/12/2020 12:30:00",
+            "end": "21/12/2020 20:00:00",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": true,
             "subcategory": 4,
@@ -4837,8 +4899,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
 
 //LISTAR SUBASTAKAS
 router.post('/listsubastakas', rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('FlagSubastakas', 'El FlagSubastakas es obligatorio').not().isEmpty().exists()
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
         const error = validationResult(req);
@@ -4930,8 +4991,7 @@ router.post('/listsubastakas', rutasProtegidas, [
 
 //LISTAR SUBASTAKAS
 router.post('/listmisubastakas', rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('FlagSubastakas', 'El FlagSubastakas es obligatorio').not().isEmpty().exists()
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
         
         const error = validationResult(req);
@@ -5052,6 +5112,7 @@ router.post('/detailsubastakas', rutasProtegidas, [
  *
  * @apiParam {int} IdUserSubastakas required.
  * @apiParam {int} IdSubastakas required.
+ * @apiParam {boolean} FlagInterested required.
  * 
  * 
  * 
@@ -5080,7 +5141,8 @@ router.post('/detailsubastakas', rutasProtegidas, [
 
 router.post('/interestedsubastakas', rutasProtegidas, [
     check('IdUserSubastakas', 'El IdUserSubastakas es obligatorio').not().isEmpty().exists(),
-    check('IdSubastakas', 'El IdSubastakas es obligatorio').not().isEmpty().exists()
+    check('IdSubastakas', 'El IdSubastakas es obligatorio').not().isEmpty().exists(),
+    check('FlagInterested', 'El FlagInterested es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
         const error = validationResult(req);
@@ -5097,12 +5159,497 @@ router.post('/interestedsubastakas', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)
     
     })    
+
 //////////////////
+/**
+ * @api {post} /user/listodo 6 listodo
+ * @apiName listodo - Listar todas Publicaciones
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} IdUserSubastakas required.
+ * @apiParam {int} IdSubastakas required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *   {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idproduct": 1,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 16:40:41",
+            "begin": "2020-12-20T17:30:00.000Z",
+            "end": "2020-12-22T01:00:00.000Z",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 2,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 16:41:37",
+            "begin": "2020-12-20T17:30:00.000Z",
+            "end": "2020-12-22T01:00:00.000Z",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 3,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 17:10:54",
+            "begin": null,
+            "end": null,
+            "iduser": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 4",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 1,
+            "conditions": 1,
+            "size": 18,
+            "weight": 19,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 4,
+            "flagInterested": false,
+            "datecreated": "2020-12-15 17:11:32",
+            "begin": null,
+            "end": null,
+            "iduser": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 4",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 1,
+            "conditions": 1,
+            "size": 18,
+            "weight": 19,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": [
+                1
+            ]
+        },
+        {
+            "idproduct": 5,
+            "flagInterested": true,
+            "datecreated": "2020-12-15 19:08:42",
+            "begin": "2020-12-15T17:30:00.000Z",
+            "end": "2020-12-22T01:00:00.000Z",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "Preferences": []
+        }
+    ],
+    "msg": "Listar Todas las publicaciones"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar todas las Publicaciones"
+}
+ **/
 
+//LISTAR DE DETALLES DE LA SUBASTAKAS
+router.post('/listodo', rutasProtegidas, [
+    check('IdUserSubastakas', 'El IdUserSubastakas es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
 
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+        let response = await userController.LisTodo(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
 
+/**
+ * @api {post} /user/minterestedsubastakas 7 minterestedsubastakas
+ * @apiName minterestedsubastakas - Listar Las Subastakas marcadas como de Interés
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {varchar} idfirebaseUser required.
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Product.
+ * @apiSuccess {int} status 200 of the Product.
+ * @apiSuccess {string} msg   of the Product.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *             {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "idproduct": 7,
+            "datecreated": "2020-12-09 14:11:39",
+            "flagInterested": true,
+            "started": false,
+            "finished": false,
+            "begin": "2020-12-20 12:30:00",
+            "end": "2020-12-21 20:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 2",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idproduct": 15,
+            "datecreated": "2020-12-11 13:26:28",
+            "flagInterested": false,
+            "started": false,
+            "finished": false,
+            "begin": "2020-12-20 12:30:00",
+            "end": "2020-12-21 20:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idproduct": 7,
+            "datecreated": "2020-12-09 14:11:39",
+            "flagInterested": true,
+            "started": false,
+            "finished": false,
+            "begin": "2020-12-20 12:30:00",
+            "end": "2020-12-21 20:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 2",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idproduct": 15,
+            "datecreated": "2020-12-11 13:26:28",
+            "flagInterested": false,
+            "started": false,
+            "finished": false,
+            "begin": "2020-12-20 12:30:00",
+            "end": "2020-12-21 20:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 23",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": null,
+            "weight": null,
+            "status": 0,
+            "editable": false,
+            "CantidadOfertas": 0,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        }
+    ],
+    "msg": "Lista de Subastakas marcadas como interesantes"
+}
+ *
+ * @apiError UserNotFound The id of the Product was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar Subastakas marcadas como interesantes"
+}
+ **/
 
+//LISTAR MIS SUABASTAKAS INTERESADAS
+router.post('/minterestedsubastakas', rutasProtegidas, [
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+        
+        const error = validationResult(req);
 
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }
+    
+        let response = await userController.MInterestedSubasTakas(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })
+    ///////
+//SALAS SUBASTAKAS
+   /**
+ * @api {put} /user/changestatusoffer 6 changestatusoffer
+ * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idUserFirabase required.
+ * @apiParam {int} idSubastakas required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *  {
+    "success": true,
+    "status": "200",
+    "data": {
+        "IdSAla": "a10531f9f302177ecbd30ef97ac9fcbeab88265c",
+        "idproduct": 5,
+        "datecreated": "2020-12-15 19:08",
+        "started": true,
+        "finished": false,
+        "begin": "2020-12-15 12:30",
+        "end": "2020-12-21 20:00",
+        "statusSubasta": 43,
+        "msg": "Que gane el mejor postor! en la subasta de << pueba laptop 23 >>"
+    }
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *  {
+        "success": false,
+        "status":: "500",
+        "msg": "Error al intentar Obtener la Sala de la Subastakas"
+    }
+ **/
+
+//CAMBIO DE ESTATUS DE UNA SUBASTAKAS - SUBASTAKAS
+router.post('/getchatroomsubastakas', rutasProtegidas, [
+    check('idUserFirabase', 'El idUserFirabase es obligatorio').not().isEmpty().exists(),
+    check('idSubastakas', 'El idSubastakas es obligatorio').not().isEmpty().exists()
+    // check('FlagStatusSubastakas', 'El FlagStatusSubastakas es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.GetChatRoomSubastakas(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+// router.put('/changestatusubastakas', rutasProtegidas, [
+//     check('idUserFirabase', 'El idUserFirabase es obligatorio').not().isEmpty().exists(),
+//     check('idSubastakas', 'El idSubastakas es obligatorio').not().isEmpty().exists(),
+//     check('FlagStatusSubastakas', 'El FlagStatusSubastakas es obligatorio').not().isEmpty().exists()
+//     ],async (req, res) => {
+    
+//         const error = validationResult(req);
+
+//         if (error.array().length != 0) {
+//             return res.status(422).json({ errores: error.array(), msg: 'Error' });
+//         }        
+//         let response = await userController.ChangeStatusOffer(req.body);
+    
+//         if (response.status == 'ko') {
+//             return res.status(500).json({ error: 'Error' })
+//         }
+//         //console.log(response);
+//         return res.status(response.data.status).json(response.data)
+    
+//     }) 
    
 
 module.exports = router;

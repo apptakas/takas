@@ -6,6 +6,8 @@ let notificationModel = {};
 //CREAR NOTIFICACIÓN 
 notificationModel.cearnotificacion = (TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta) => {
     return new Promise((resolve, reject) => {
+
+        console.log("INSERT INTO notifications (typenotifications,title,details,iduser,idrelation,idevento,STATUS) VALUES ("+TypeNotification+",'"+titulo+"','"+detalles+"','"+UserPublication+"',"+idrelation+","+idOferta+",1)");
         pool.query(
             "INSERT INTO notifications (typenotifications,title,details,iduser,idrelation,idevento,STATUS) VALUES ("+TypeNotification+",'"+titulo+"','"+detalles+"','"+UserPublication+"',"+idrelation+","+idOferta+",1)",
             (err2, result2) => {
@@ -14,11 +16,12 @@ notificationModel.cearnotificacion = (TypeNotification,idrelation,UserPublicatio
                 //console.log(element.namec);   
                 //console.log(result2[1].preference);
                 if (err2) {
+                    console.log(err2);  
                     resolve({
                         'error': err2
                     })
                 } else {     
-                    //console.log(result2); 
+                    console.log(result2); 
                     // console.log(result2.length);
                     // let ImagesProduct= []; 
                     // for(var atr2 in result2){

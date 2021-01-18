@@ -60,7 +60,7 @@ OffersModel.NewOffer = (OfferData,IdOfferData,callback) => {
                         let nameProducto=idUserPublication.result[0].nameProducto;
                         let marketvalue=idUserPublication.result[0].marketvalue;
                         let titulo="Haz recibido un takasteo potencial";
-                        let detalles="¡En hora buena "+fullname+"! tú publicación  <<"+nameProducto+">> tiene un takasteo potencial con un valor comercial de "+CalValorOferta;
+                        let detalles="¡En hora buena "+fullname+"! tú publicación  <<"+nameProducto+">> tiene una oferta por valor comercial de "+CalValorOferta;
                         // console.log("idUserPublication.tokenpush");
                          console.log(detalles);
                         // //console.log(idUserPublication);
@@ -495,13 +495,14 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
             let idOferta=OfferData.id;
             let idUser=OfferData.idUser;
             let respCrearPush={};
+            console.log(OfferData);
             pool.query(
                 'UPDATE  offers SET  status= ? WHERE id= ?',[
                     OfferData.status,
                     OfferData.id
                 ],
                 async(err, result) => {
-                   // console.log(result);
+                    console.log(err);
                     if (err) {
                         resolve({
                             'error': err
@@ -516,6 +517,7 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
 
                             //TOMAMOS DATOS DE LA OFERTA
                             idUserOferta= await UsersModel.DataUserOferta(idOferta);
+                            console.log(idUserOferta);
                             //CALCULAMOS VALOR DE LA OFERTA
                             ValorOferta= await OffersModel.CalculoValorOferta(idOferta);
                             //console.log(idUserOferta);
@@ -541,7 +543,7 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                             
                             if(statusOffer==7){
                                 titulo="POSIBLE TAKASTEO!";
-                                detalles="¡Falta sólo un paso "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido Aceptada, estamos y habilitamos un chat para que acuerden los últimos detalles antes del match";
+                                detalles="¡Falta sólo un paso "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido Aceptada, habilitamos un chat para que acuerden los últimos detalles antes del match";
                             }
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);  
                             //console.log(respCrearPush);
@@ -561,8 +563,8 @@ OffersModel.ChangeStatusOffer = (OfferData,FlagStatusOffer,callback) => {
                         if(FlagStatusOffer==1) {
 
                             if(statusOffer==8){
-                                titulo="Oferta rechazada, mejor suete a la proxima!";
-                                detalles="¡No te preocupes "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido rechazada, puedes intentar con otros productos deinterés para el dueño de la publicación";
+                                titulo="Oferta rechazada, sigue intentando y tendrás éxito!";
+                                detalles="¡No te preocupes "+fullname+"! tú Oferta a la publicación <<"+nameProducto+">> ha sido rechazada, puedes intentar con otros productos de interés para el dueño de la publicación";
                             }
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,UserPublication,titulo,detalles,idOferta);
 
@@ -599,7 +601,7 @@ OffersModel.FindDatOffer = (OfferData,callback) => {
             let DataSalas={};
             let IdSAla="";
             let now = new Date();
-            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+            let hoy=date.format(now,'YYYY-MM-DD HH:mm:ss');
             pool.query(
                 'SELECT o.iduser AS userOffer,p.iduser AS userPublication,p.id AS idPublication FROM offers AS o INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers INNER JOIN product AS p ON o.idproduct=p.id WHERE o.id=? limit 1',[
                     OfferData.id
@@ -616,7 +618,7 @@ OffersModel.FindDatOffer = (OfferData,callback) => {
                         // console.log(IdSAla);
                         // console.log(result[0].userOffer);
                         // console.log(result[0].userPublication);
-                        DataSalas = await chatroomsModel.newChatRooms(IdSAla,result[0].userOffer,result[0].userPublication,result[0].idPublication,hoy,OfferData.id);                      
+                        DataSalas = await chatroomsModel.newChatRooms(IdSAla,result[0].userOffer,result[0].userPublication,result[0].idPublication,hoy,OfferData.id,24);                      
                         //console.log("DataSalas");
                         //console.log(DataSalas.error);
                         if (DataSalas.error) {

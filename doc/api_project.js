@@ -1,6 +1,6 @@
 define({
   "title": "Custom apiDoc browser title",
-  "url": "https://takas-291016.ue.r.appspot.com",
+  "url": "https://takas-300716.uk.r.appspot.com",
   "name": "takas",
   "version": "0.0.1",
   "description": "",
@@ -9,7 +9,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-12-10T01:27:27.314Z",
+    "time": "2021-01-13T01:58:24.253Z",
     "url": "https://apidocjs.com",
     "version": "0.25.0"
   }

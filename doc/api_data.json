@@ -1899,6 +1899,103 @@
     "groupTitle": "Offers"
   },
   {
+    "type": "put",
+    "url": "/user/changestatusoffer",
+    "title": "6 changestatusoffer",
+    "name": "changestatusoffer_-_Cambio_de_estado_de_una_oferta",
+    "group": "Offers",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUserFirabase",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idSubastakas",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"IdSAla\": \"a10531f9f302177ecbd30ef97ac9fcbeab88265c\",\n        \"idproduct\": 5,\n        \"datecreated\": \"2020-12-15 19:08\",\n        \"started\": true,\n        \"finished\": false,\n        \"begin\": \"2020-12-15 12:30\",\n        \"end\": \"2020-12-21 20:00\",\n        \"statusSubasta\": 43,\n        \"msg\": \"Que gane el mejor postor! en la subasta de << pueba laptop 23 >>\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "   HTTP/1.1 404 Not Found\n{\n       \"success\": false,\n       \"status\":: \"500\",\n       \"msg\": \"Error al intentar Obtener la Sala de la Subastakas\"\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Offers"
+  },
+  {
     "type": "post",
     "url": "/user/detailsoffer",
     "title": "3 detailsoffer",
@@ -2286,7 +2383,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Oferta creada exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idoferta\":5,\n    \"msg\": \"Oferta creada exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -3086,6 +3183,20 @@
             "optional": false,
             "field": "WeightProduct",
             "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "valueweight",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "unitofmeasurement",
+            "description": "<p>optional.</p>"
           }
         ]
       }
@@ -3878,13 +3989,27 @@
             "type": "int",
             "optional": false,
             "field": "SizePoduct",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "WeightProduct",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "ValueWeightProduct",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "UnitOfMeasurementP",
             "description": "<p>optional.</p>"
           }
         ]
@@ -3919,7 +4044,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Producto registrado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idProduct\":47,\n    \"msg\": \"Producto registrado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -4560,7 +4685,7 @@
             "type": "smallint",
             "optional": false,
             "field": "FlagCharacteristic",
-            "description": "<p>requeride  1=Nuevo o Usado 2=Tamaño 3=Peso.</p>"
+            "description": "<p>requeride  1=Nuevo ó Usado 2=Tamaño 3=Peso y 4= Unidad de Medida.</p>"
           }
         ]
       }
@@ -4594,7 +4719,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 19,\n            \"namestatus\": \"Muy liviano (0-1kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 20,\n            \"namestatus\": \"Liviano (1-3kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 21,\n            \"namestatus\": \"Normal (3 a 7kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 22,\n            \"namestatus\": \"Pesado (7-15kg)\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        }\n    ],\n    \"msg\": \"Lista de Características para una publicación sengún bandera\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 19,\n            \"namestatus\": \"Muy liviano \",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 20,\n            \"namestatus\": \"Liviano\",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 21,\n            \"namestatus\": \"Normal \",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        },\n        {\n            \"id\": 22,\n            \"namestatus\": \"Pesado \",\n            \"filter\": 6,\n            \"namefilter\": \"Peso Producto\"\n        }\n    ],\n    \"msg\": \"Lista de Características para una publicación sengún bandera\"\n}",
           "type": "json"
         }
       ]
@@ -4922,6 +5047,13 @@
             "optional": false,
             "field": "IdSubastakas",
             "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "FlagInterested",
+            "description": "<p>required.</p>"
           }
         ]
       }
@@ -5082,6 +5214,103 @@
   },
   {
     "type": "post",
+    "url": "/user/listodo",
+    "title": "6 listodo",
+    "name": "listodo_-_Listar_todas_Publicaciones",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "IdUserSubastakas",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "IdSubastakas",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"flagInterested\": false,\n            \"datecreated\": \"2020-12-15 16:40:41\",\n            \"begin\": \"2020-12-20T17:30:00.000Z\",\n            \"end\": \"2020-12-22T01:00:00.000Z\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"Preferences\": [\n                1\n            ]\n        },\n        {\n            \"idproduct\": 2,\n            \"flagInterested\": false,\n            \"datecreated\": \"2020-12-15 16:41:37\",\n            \"begin\": \"2020-12-20T17:30:00.000Z\",\n            \"end\": \"2020-12-22T01:00:00.000Z\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"Preferences\": [\n                1\n            ]\n        },\n        {\n            \"idproduct\": 3,\n            \"flagInterested\": false,\n            \"datecreated\": \"2020-12-15 17:10:54\",\n            \"begin\": null,\n            \"end\": null,\n            \"iduser\": \"zSiRYTbNbpW5vOQ6K6XpxvpKu2v1\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 4\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 1,\n            \"conditions\": 1,\n            \"size\": 18,\n            \"weight\": 19,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"Preferences\": [\n                1\n            ]\n        },\n        {\n            \"idproduct\": 4,\n            \"flagInterested\": false,\n            \"datecreated\": \"2020-12-15 17:11:32\",\n            \"begin\": null,\n            \"end\": null,\n            \"iduser\": \"zSiRYTbNbpW5vOQ6K6XpxvpKu2v1\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 4\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 1,\n            \"conditions\": 1,\n            \"size\": 18,\n            \"weight\": 19,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"Preferences\": [\n                1\n            ]\n        },\n        {\n            \"idproduct\": 5,\n            \"flagInterested\": true,\n            \"datecreated\": \"2020-12-15 19:08:42\",\n            \"begin\": \"2020-12-15T17:30:00.000Z\",\n            \"end\": \"2020-12-22T01:00:00.000Z\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"Preferences\": []\n        }\n    ],\n    \"msg\": \"Listar Todas las publicaciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar todas las Publicaciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "post",
     "url": "/user/listsubastakas",
     "title": "2 listsubastakas",
     "name": "listsubastakas_-_Listar_Las_Subastakas_pubicadas_por_otros_usuarios",
@@ -5149,7 +5378,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"09/12/2020\",\n            \"begin\": \"0000-00-00 00:00:00\",\n            \"end\": \"0000-00-00 00:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": true,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"09/12/2020\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"20/12/2020 12:30:00\",\n            \"end\": \"21/12/2020 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": true,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
           "type": "json"
         }
       ]
@@ -5169,6 +5398,96 @@
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Productos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/minterestedsubastakas",
+    "title": "7 minterestedsubastakas",
+    "name": "minterestedsubastakas_-_Listar_Las_Subastakas_marcadas_como_de_Interés",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Product.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 7,\n            \"datecreated\": \"2020-12-09 14:11:39\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 15,\n            \"datecreated\": \"2020-12-11 13:26:28\",\n            \"flagInterested\": false,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 7,\n            \"datecreated\": \"2020-12-09 14:11:39\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 15,\n            \"datecreated\": \"2020-12-11 13:26:28\",\n            \"flagInterested\": false,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Subastakas marcadas como interesantes\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Product was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Subastakas marcadas como interesantes\"\n}",
           "type": "json"
         }
       ]
@@ -5282,20 +5601,34 @@
             "type": "int",
             "optional": false,
             "field": "UseSubastakas",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "SizeSubastakas",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
             "field": "WeightSubastakas",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "ValueWeightProduct",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "smallint",
+            "optional": false,
+            "field": "UnitOfMeasurementP",
             "description": "<p>optional.</p>"
           }
         ]
@@ -5330,7 +5663,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Subastakas registrada con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idsubastakas\": 51,\n    \"msg\": \"Subastakas registrada con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -5528,7 +5861,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idTombotakas\": 2,\n        \"pertenece\": false,\n        \"nameTombotakas\": \"test Nueva Tombotakas\",\n        \"statusTTK\": 0,\n        \"datecreatedTTK\": \"19/11/2020\",\n        \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n        \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n        \"pinreferenceTTK\": \"ibxJu2\",\n        \"datelotTTK\": \"25/11/2020 19:47\",\n        \"moneyTTK\": 1,\n        \"priceTTK\": \"10000.0000\",\n        \"resultTTK\": null,\n        \"numberticketsrs\": [\n            31,\n            40,\n            21,\n            1,\n            10,\n            32,\n            22,\n            2\n        ],\n        \"ticketsReservados\": [\n            {\n                \"idNUmbre\": 1,\n                \"Number\": 31,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 2,\n                \"Number\": 40,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 3,\n                \"Number\": 21,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 4,\n                \"Number\": 1,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 5,\n                \"Number\": 10,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 6,\n                \"Number\": 32,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 7,\n                \"Number\": 22,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            },\n            {\n                \"idNUmbre\": 8,\n                \"Number\": 2,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\"\n            }\n        ]\n    },\n    \"msg\": \"Detalle de Tombotakas encontrado exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idTombotakas\": 2,\n        \"timeremaining\": 25593.626933333333,\n        \"pertenece\": true,\n        \"nameTombotakas\": \"test Nueva Tombotakas\",\n        \"statusTTK\": 0,\n        \"datecreatedTTK\": \"19/11/2020\",\n        \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n        \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n        \"pinreferenceTTK\": \"ibxJu2\",\n        \"datelotTTK\": \"25/11/2020 19:47\",\n        \"moneyTTK\": 1,\n        \"priceTTK\": \"10000.0000\",\n        \"resultTTK\": null,\n        \"imgTTK\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n        ],\n        \"numberticketsrs\": [\n            31,\n            40,\n            21,\n            1,\n            10,\n            32,\n            22,\n            2\n        ],\n        \"ticketsReservados\": [\n            {\n                \"idNUmbre\": 1,\n                \"Number\": 31,\n                \"status\": 4,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 2,\n                \"Number\": 40,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 3,\n                \"Number\": 21,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 4,\n                \"Number\": 1,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 5,\n                \"Number\": 10,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 6,\n                \"Number\": 32,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 7,\n                \"Number\": 22,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 8,\n                \"Number\": 2,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            }\n        ]\n    },\n    \"msg\": \"Detalle de Tombotakas encontrado exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -5790,7 +6123,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 2,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"19/11/2020\",\n            \"datelotTTK\": \"25/11/2020 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"numberticketsrs\": [\n                31,\n                40,\n                21,\n                1,\n                10,\n                32,\n                22,\n                2\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 31,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": 40,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": 21,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": 1,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 5,\n                    \"Number\": 10,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 6,\n                    \"Number\": 32,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 7,\n                    \"Number\": 22,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                },\n                {\n                    \"idNUmbre\": 8,\n                    \"Number\": 2,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de tickets\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 2,\n            \"pinTombotakas\": \"ibxJu2\",\n            \"timeremaining\": 28841.56545,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"2020-11-19\",\n            \"pinreferenceTTK\": \"ibxJu2\",\n            \"datelotTTK\": \"2020-11-25 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [\n                31,\n                40,\n                21,\n                1,\n                10,\n                32,\n                22,\n                2\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 31,\n                    \"status\": 4,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": 40,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": 21,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": 1,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 5,\n                    \"Number\": 10,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 6,\n                    \"Number\": 32,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 7,\n                    \"Number\": 22,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 8,\n                    \"Number\": 2,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de tickets\"\n}",
           "type": "json"
         }
       ]
@@ -6016,7 +6349,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"pinReference\": \"h8dGBL\",\n    \"msg\": \"Tombotakas se ha creado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idTTK\": 10,\n    \"pinReference\": \"ccLctE\",\n    \"msg\": \"Tombotakas se ha creado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -6376,7 +6709,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"{\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwMDU0NDQsImV4cCI6MTYwMTA5MTg0NH0.lzwyWiplFVyIYIc_TVI_vAindzOXTFuuIE7oLdAvo2U\",\n    \"msg\": \"Usuario Autenticado con éxito\"\n}\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTA0OTAxMDAsImV4cCI6MTYxMzA4MjEwMH0.5wtRrcb4xd08T7VlIlzMYTmdwjhLPFdb3rPavquOo7I\",\n    \"Email\": \"anailysrodriguez@gmail.com\",\n    \"Fullname\": \"anailys rodriguez\",\n    \"PhoneNumber\": null,\n    \"ImgUrl\": \"https://lh3.googleusercontent.com/a-/AOh14GghAJLELlkIz090ubKjqqHdki33JMljFn5d3RHVF4Q=s96-c\",\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -6434,7 +6767,7 @@
             "type": "varchar",
             "optional": false,
             "field": "emailuser",
-            "description": "<p>required.</p>"
+            "description": "<p>optional.</p>"
           },
           {
             "group": "Parameter",
@@ -6489,7 +6822,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\":: \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDE5MjA0NTcsImV4cCI6MTYwMjAwNjg1N30.GNL6njKiUfPvUSKh4ba7QwokYcs2osMltd0zAJ3dkvU\",\n    \"newUser\": true,\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTAwNTM2NzAsImV4cCI6MTYxMjY0NTY3MH0.of4JPq8qP_p7lID3qL-RAGyhzw9x6DSC8GuwLHcitFs\",\n    \"newUser\": false,\n    \"Email\": \"gusuario124@gmail.com\",\n    \"Fullname\": \"gusuario12\",\n    \"PhoneNumber\": null,\n    \"ImgUrl\": null,\n    \"msg\": \"Usuario Autenticado con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -7009,7 +7342,7 @@
             "type": "varchar",
             "optional": false,
             "field": "fullnameUser",
-            "description": "<p>optional.</p>"
+            "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
@@ -7023,14 +7356,14 @@
             "type": "varchar",
             "optional": false,
             "field": "phonenumberUser",
-            "description": "<p>unique optional.</p>"
+            "description": "<p>unique required.</p>"
           },
           {
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
             "field": "emailUser",
-            "description": "<p>unique  optional.</p>"
+            "description": "<p>unique  required.</p>"
           },
           {
             "group": "Parameter",
@@ -7217,7 +7550,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\":: \"200\",\n    \"msg\": \"Token Push Actualizado\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"UserExist\": true,\n    \"Email\": \"luis.perez@comfacundi.com.co\",\n    \"Fullname\": \"LUIS ALFONSO PEREZ GOMEZ\",\n    \"PhoneNumber\": null,\n    \"ImgUrl\": \"https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg\",\n    \"msg\": \"Verificación si el usuario existe y si sus campos estan completos\"\n}",
           "type": "json"
         }
       ]

@@ -35,15 +35,33 @@ masterstatus.CharacteristicPublication = (idfilter,callback) => {
         if (pool) {
             pool.query(
                 'SELECT s.id,s.name AS namestatus,s.filter,f.`name`AS namefilter FROM masterstatus AS s INNER JOIN masterfilterstatus AS f ON s.filter=f.id WHERE filter='+idfilter,
-                (err, resut) => {
+                (err, result) => {
                     //console.log(resut);
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
+                        // let NoAplica= {
+                        //     "id": 49,
+                        //     "namestatus": "No Aplica ",
+                        //     "filter": 0,
+                        //     "namefilter": "No aplica"
+                        // }; 
+                        // let CaracteristicasP= []; 
+                        // for(var atr2 in result){
+                        //     console.log(result);
+                        //     CaracteristicasP.push(result[atr2]);
+                        // }; 
+
+                        // if(idfilter==6){
+                        // CaracteristicasP.push(NoAplica);
+                        // }
+
+                        //result.NoAplica = "nuevoValor";
+                     
                         resolve({
-                            'result': resut
+                            'result': result
                         })
                     }
 
