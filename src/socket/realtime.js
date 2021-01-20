@@ -8,29 +8,95 @@ module.exports = function (server) {
     io.on('connection', (socket) => {
 
         console.log(socket.id);
-        socket.on('SubastakasRoom', function (code, data) {
+        socket.on('SubastakasRoom', function (code, data) { //? Siempre debe enviar roomID
+            //TODO: Validar que el estatus de la sala sea Open. (ver si esta en el rango)
+            var status = 1;
             switch (code) {
-                //TODO: Establecer cuales serán los códigos y la estructura del data de cada uno.
                 case 100: //* Unirse a la sala
-                    //TODO: Antes o despues se deberia guardar en la base de datos el miembro dentro de la sala.
-                    console.log('uniendose a la sala: ' + data.roomID);
-                    if (statics.rooms[data.roomID] == undefined) {
-                        statics.rooms[data.roomID] = {
-                            members: [{
-                                socket: socket,
-                                idUser: socket.id//! Cambiar por => data.uid
-                            }]
-                        };
-                    } else {
-                        if (!statics.rooms[data.roomID].members.some(item => item.idUser === socket.id)) {
-                            statics.rooms[data.roomID].members.push({
-                                socket: socket,
-                                idUser: socket.id//! Cambiar por => data.uid
-                            });
+                    /** 
+                     * ? Datos que se reciben
+                     * @param roomID String -> id de la sala
+                     * @param uid String
+                     * @param img String -> imagen de usuario
+                     * @param name String -> nombre del usuario
+                     */
+                    //! Cambiar "socket.id" por "data.uid"
+                    if (statics.addMemberToRoom(data.roomID, socket.id, socket, status)) {//* ¿Se agregó? 
+                        console.log(socket.id + ' se unió a la sala: ' + roomID);
+                        var members = statics.getDataMembersRoom(data.roomID);
+                        //TODO: Enviar los datos de esta sala al usuario (sin los miembros)
+                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', 100, members);
+                    }
+                    break;
+                case 101: //* Crear Oferta
+                    /** 
+                     * ? Datos que se reciben
+                     * @param roomID String 
+                     * @param uid String
+                     * @param products Array<String> -> Solo los ids de los productos que están dentro de la oferta
+                     * @param money Double -> Monto de dinero dentro de la oferta
+                     */
+                    var idOffert = roomID + socket.uid + Date.now().toString();
+                    //! Cambiar "socket.id" por "data.uid"
+                    if (statics.addOffertToRoom(data.roomID, idOffert, socket.id, data.products, data.money)) {//* ¿Se agregó? 
+                        var offerts = statics.getDataOffertsRoom(data.roomID);
+                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', 101, offerts);
+                    }
+                    break;
+                case 102: //* Salir de la sala
+                    /** 
+                     * ? Datos que se reciben
+                     * @param roomID String 
+                     * @param uid String
+                     * 
+                     */
+                    //! Cambiar "socket.id" por "data.uid"
+                    if (statics.deleteMemberToRoom(data.roomID, socket.id)) { //* ¿Se eliminó? 
+                        var members = statics.getDataMembersRoom(data.roomID);
+                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', 100, members);
+                    }
+                    break;
+                case 103: //* Seleccionar Mejor Oferta
+                    /** 
+                     * ? Datos que se reciben
+                     * @param roomID String 
+                     * @param uid String
+                     * @param idOffert String
+                     */
+                    //TODO: Validar que el usuario sea el dueño de la sala
+                    if (statics.updateBestOffertToRoom(data.roomID, data.idOffert)) { //* ¿Se Actualizó? 
+                        var bestOffert = statics.getDataBestOffertRoom(data.roomID);
+                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', 102, { bestOffert: bestOffert });
+                    }
+                    break;
+                case 104: //* Subastakear (cerrrar sala por subastakeo)
+                    /** 
+                     * ? Datos que se reciben
+                     * @param roomID String 
+                     * @param uid String
+                     * 
+                     */
+                    //TODO: Validar que el usuario sea el dueño de la sala
+                    if (statics.getDataStatusRoom(data.roomID) == 1) { //* ¿Esta abierta?
+                        if (statics.updateStatusToRoom(data.roomID, 3)) { //* ¿Se Actualizó? 
+                            var status = statics.getDataStatusRoom(data.roomID);
+                            statics.broadcastRoom(data.roomID, 'SubastakasRoom', 104);
+                            //TODO: Guardar en la base de dato y luego elimna
+                            statics.deleteRoom(data.roomID);
                         }
                     }
-                    var members = statics.getDataMembersRooms(data.roomID);
-                    statics.broadcastRoom(data.roomID, 'members', members);
+                    break;
+                case 105: //* Enviar todos los datos de la sala
+                    /** 
+                     * ? Datos que se reciben
+                     * @param roomID String 
+                     * @param uid String
+                     * 
+                     */
+                    var room = statics.getDataRoom(data.roomID);
+                    if (room != null) {
+                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', 105, room);
+                    }
                     break;
                 default:
                     console.log(`No define code: ${code}`);
