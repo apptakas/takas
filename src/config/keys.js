@@ -7,7 +7,8 @@ module.exports = {
     // }
 
     database:{
-        host:'takas.cq957db5krok.us-west-1.rds.amazonaws.com',
+        // host:'takas.cq957db5krok.us-west-1.rds.amazonaws.com',
+        host:'database-takas.cq957db5krok.us-west-1.rds.amazonaws.com',
         port: 3306,
         user:'root',
         password:'lpiP7kP36BrJK4m8',
