@@ -1,18 +1,18 @@
 module.exports = {
-    database:{
-        host:'localhost',
-        user:'root',
-        password:'',
-        database:'takas'
-    }
-
     // database:{
-    //     host:'takas.cq957db5krok.us-west-1.rds.amazonaws.com',
-    //     port: 3306,
+    //     host:'localhost',
     //     user:'root',
-    //     password:'lpiP7kP36BrJK4m8',
+    //     password:'',
     //     database:'takas'
     // }
+
+    database:{
+        host:'takas.cq957db5krok.us-west-1.rds.amazonaws.com',
+        port: 3306,
+        user:'root',
+        password:'lpiP7kP36BrJK4m8',
+        database:'takas'
+    }
 }
 
 
