@@ -1,21 +1,31 @@
 
 import React from 'react';
 import Navbar from './navbar';
-import Api from '../Api';
+//import Api from '../Api';
+import io from 'socket.io-client';
 
 class Body extends React.Component {
-    test = e => {
+    connect = e => {
         e.preventDefault();
-        this.fff();
+        this.connectSocket();
+
+    }
+    sendRoom = e => {
+        e.preventDefault();
+        this.socket.emit('SubastakasRoom', 100, { roomID: 'ronnySotillet' })
     }
 
-    fff = async () => {
-        try {
-            const data = await Api('/test');
+    connectSocket = async () => {
+        // try {
+        //     const data = await Api('/test');
+        //     console.log(data);
+        // } catch (e) {
+        //     console.log('error', e);
+        // }
+        this.socket = io();
+        this.socket.on('members', (data) => {
             console.log(data);
-        } catch (e) {
-            console.log('error', e);
-        }
+        })
         // fetch(proxyUrl)
         //     .then(blob => blob.json())
         //     .then(data => {
@@ -27,6 +37,7 @@ class Body extends React.Component {
         //         return e;
         //     });
     }
+
 
     render() {
         return (<div id="page-wrapper" className="gray-bg">
@@ -47,7 +58,10 @@ class Body extends React.Component {
                                 </div>
                             </div>
                             <div className="ibox-content">
-                                <button className="btn btn-w-m btn-primary" onClick={this.test}>Test</button>
+                                <button className="btn btn-w-m btn-primary" onClick={this.connect}>Connect</button>
+                            </div>
+                            <div className="ibox-content">
+                                <button className="btn btn-w-m btn-primary" onClick={this.sendRoom}>sendRoom</button>
                             </div>
                         </div>
                     </div>
