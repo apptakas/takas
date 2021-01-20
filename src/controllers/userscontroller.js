@@ -3190,10 +3190,10 @@ userController.ProcessRequestsTickets = async (req) => {
                     statusTicket=33;//RECHAZADO
                 }
 
-                if(req.FlagTTk==4){
+                // if(req.FlagTTk==4){
                   
-                    statusTicket=33;//RECHAZADO
-                }
+                //     statusTicket=33;//RECHAZADO
+                // }
 
             console.log(statusTicket);         
 

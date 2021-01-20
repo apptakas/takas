@@ -633,10 +633,35 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUser,idticket,statusTicket) 
                          'error': err
                      })
                  } else {
-                    
+                    if(statusTicket==33){
+                        pool.query(
+                            'DELETE FROM tombotikets WHERE id=?', 
+                                idticket
+                            ,
+                             (err, result) => {
+                                 console.log(err);
+                                // console.log(result);
+                                 if (err) {
+                                     resolve({
+                                         'error': err
+                                     })
+                                 } else {
+                                    if(statusTicket==33){
+                                        
+                                    }
+                                     resolve({
+                                         'result': result
+                                     })
+                                 }
+                
+                             }
+                         )
+
+                    }else{
                      resolve({
                          'result': result
                      })
+                    }
                  }
 
              }
