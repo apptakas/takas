@@ -5,6 +5,7 @@ module.exports = {
     //     password:'',
     //     database:'takas'
     // }
+
     database:{
         host     : process.env.RDS_HOSTNAME,
         user     : process.env.RDS_USERNAME,
@@ -12,6 +13,7 @@ module.exports = {
         port     : process.env.RDS_PORT
     }
 
+    
     // database:{
     //     // host:'takas.cq957db5krok.us-west-1.rds.amazonaws.com',
     //     host:'database-takas.cq957db5krok.us-west-1.rds.amazonaws.com',
