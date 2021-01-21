@@ -50,7 +50,7 @@ class Statics {
         if (this.roomsSubastakas[roomID] == undefined) { //* Es el primer miembro, se crea la sala
             //TODO: Buscar en la base de datos el tiempo restante;
             //!cambiar por el tiempo restante de la base de datos
-            var miliseconds = 3.6e+6; //? una hora;
+            var miliseconds = 360000; //? una hora;
             this.roomsSubastakas[roomID] = {
                 status: status,
                 members: [{
@@ -63,17 +63,16 @@ class Statics {
                 offerts: [],
                 bestOffert: null
             };
-
             //* Cerrar la sala cuando se acabe el tiempo
-            setTimeout(() => { //? El setTimeout ejecuta la funcion luego de que se acabe el tiempo
-                if (this.getDataStatusRoom(roomID) == 1) {
-                    if (this.updateStatusToRoom(roomID, 2)) {
-                        this.broadcastRoom(roomID, "SubastakasRoom", 103);
-                        //TODO: Guardar en la base de dato y luego elimna
-                        this.deleteRoom(roomID);
-                    }
-                }
-            }, miliseconds)
+            // setTimeout(() => { //? El setTimeout ejecuta la funcion luego de que se acabe el tiempo
+            //     if (this.getDataStatusRoom(roomID) == 1) {
+            //         if (this.updateStatusToRoom(roomID, 2)) {
+            //             this.broadcastRoom(roomID, "SubastakasRoom", 103);
+            //             // TODO: Guardar en la base de dato y luego elimna
+            //             this.deleteRoom(roomID);
+            //         }
+            //     }
+            //    }, miliseconds)
             return true;
         } else {
             if (!this.roomsSubastakas[roomID].members.some(item => item.idUser === uid)) {
@@ -153,10 +152,9 @@ class Statics {
     getDataMembersRoom(roomID) {
         var data = [];
         if (this.roomsSubastakas[roomID] != undefined) {
-            data = this.roomsSubastakas[roomID].members;
-            //// for (let element of this.roomsSubastakas[roomID].members) {
-            ////     data.push({ idUser: element.idUser })
-            //// }
+            for (let element of this.roomsSubastakas[roomID].members) {
+                data.push({ idUser: element.idUser, name: element.name, img: element.img, status: element.status })
+            }
         }
         return data;
     }
@@ -214,7 +212,11 @@ class Statics {
                 var member = this.roomsSubastakas[roomID].members.find(item => item.idUser === uid);
                 if (member != undefined) {
                     if (member.socket != undefined) {
-                        member.socket.emit(title, data)
+                        try {
+                            member.socket.emit(title, data);
+                        } catch (e) {
+                            console.log(e)
+                        }
                     }
                 }
             }
@@ -222,11 +224,15 @@ class Statics {
     }
 
     //* Enviar datos a todos los usuarios de una sala
-    broadcastRoom(roomID, title, code, data) {
+    broadcastRoom(roomID, title, data) {
         if (this.roomsSubastakas[roomID] != undefined) {
             this.roomsSubastakas[roomID].members.forEach(element => {
                 if (element.socket != undefined && element.status == 0) {
-                    element.socket.emit(title, code, data);//? Accede a cada socket y envia el mensaje.
+                    try {
+                        element.socket.emit(title, data); //? Accede a cada socket y envia el mensaje.
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
             })
         }

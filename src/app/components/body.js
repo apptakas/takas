@@ -23,7 +23,7 @@ class Body extends React.Component {
         //     console.log('error', e);
         // }
         this.socket = io();
-        this.socket.on('members', (data) => {
+        this.socket.on('SubastakasRoom', (data) => {
             console.log(data);
         })
         // fetch(proxyUrl)
