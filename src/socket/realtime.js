@@ -22,10 +22,10 @@ module.exports = function (server) {
                      */
                     //! Cambiar "socket.id" por "data.uid"
                     if (statics.addMemberToRoom(data.roomID, socket.id, socket, status)) {//* ¿Se agregó? 
-                        console.log(socket.id + ' se unió a la sala: ' + roomID);
+                        console.log(socket.id + ' se unió a la sala: ' + data.roomID);
                         var members = statics.getDataMembersRoom(data.roomID);
                         //TODO: Enviar los datos de esta sala al usuario (sin los miembros)
-                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', 100, members);
+                        //statics.broadcastRoom(data.roomID,'SubastakasRoom', 100, members);
                     }
                     break;
                 case 101: //* Crear Oferta
