@@ -21,12 +21,13 @@ module.exports = function (server) {
                      * @param name String -> nombre del usuario
                      */
                     //! Cambiar "socket.id" por "data.uid"
+
                     var aux = statics.addMemberToRoom(data.roomID, socket.id, socket, status);
                     if (aux) {//* ¿Se agregó? 
                         console.log(socket.id + ' se unió a la sala: ' + data.roomID);
                         var members = statics.getDataMembersRoom(data.roomID);
                         //TODO: Enviar los datos de esta sala al usuario (sin los miembros)
-                        statics.broadcastRoom(data.roomID, 'SubastakasRoom', members);
+
                     }
                     break;
                 case 101: //* Crear Oferta
