@@ -8,11 +8,11 @@
   "engines": {
     "node": "12.x.x"
   },
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon Takas",
-    "start": "node index.js",
+    "start": "node app.js",
     "deploy": "gcloud preview app deploy",
     "webpack": "webpack --mode development --watch"
   },
