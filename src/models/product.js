@@ -1128,7 +1128,7 @@ ProductModel.NewSubasTakasCKW = (SubastakasData,ImagesSubastakas,KeyWordsSubasta
                             if(KeyWordsSubastakas.length!=0){
                                 //console.log(SubastakasData);
                                 console.log(SubastakasData.length);
-                                createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,resut.insertId);
+                                createdkeywords = await keywords.newkeywords(KeyWordsSubastakas,SubastakasData.subcategory,result.insertId);
                             }
                         }
                         // if(KeyWordsProduct.length!=0){

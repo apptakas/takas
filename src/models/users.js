@@ -235,7 +235,7 @@ userModel.GloginUser = (userData, callback) => {
                         // })
                         //Ragistrar nuevo usuario
                         if (userData.tyc == true) {
-                            //console.log(userData.tyc);
+                            console.log(userData);
                             pool.query(
                                 'INSERT INTO users SET ?', userData,
                                 (err, result) => {
@@ -247,12 +247,13 @@ userModel.GloginUser = (userData, callback) => {
                                             'error': err
                                         })
                                     } else {
+                                        console.log(result);
                                         resolve({
                                             'newUser': true,
-                                            'Email': result[0].email,
-                                            'Fullname': result[0].fullname,
-                                            'PhoneNumber': result[0].phonenumber,
-                                            'ImgUrl': result[0].imgurl,
+                                            'Email': result.email,
+                                            'Fullname': result.fullname,
+                                            'PhoneNumber': result.phonenumber,
+                                            'ImgUrl': result.imgurl,
                                             'result': result
                                         })
                                     }
