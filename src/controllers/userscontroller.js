@@ -3620,11 +3620,14 @@ userController.NewSubasTakasCKW = async (req) => {
             };
             const topeimg=10;      
             const ImagesSubastakas = {};
+            let NoImg=false;
             //console.log(req.ImagesProduct.length);
             if(req.ImagesSubastakas.length!=0){
+               
                 for(var atr1 in req.ImagesSubastakas){
                     ImagesSubastakas[atr1] = req.ImagesSubastakas[atr1];     
                 };
+                NoImg=true;
             }
 
            
@@ -3656,12 +3659,12 @@ userController.NewSubasTakasCKW = async (req) => {
 
         // && lengthkw<=topeKW 
 
-        if(req.ImagesSubastakas.length<=topeimg ){//<
+        if(req.ImagesSubastakas.length<=topeimg && NoImg==true){//<
             response = await Product.NewSubasTakasCKW(SubastakasData,ImagesSubastakas,KeyWordsSubastakas);
             // response = await Product.NewProductCKW(ProductData,PreferecesProduct,ImagesProduct);
 
         }else{               
-            msgError = "Se ha superado el límite de imagenes ó palabras claves";
+            msgError = "Se ha superado el límite de imagenes ó no ingresó imagenes";
         }
         
         //console.log(msgError);
