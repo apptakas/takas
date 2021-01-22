@@ -3738,7 +3738,7 @@ userController.ListSubasTakas = async (req) => {
                 success: true,
                 status: '200',
                 data: response.result,
-                msg: 'Lista de productos'
+                msg: 'Lista de Subastakas'
                 //data: response
             }
         } else {
@@ -3747,7 +3747,7 @@ userController.ListSubasTakas = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: 'Error al Listar productos'
+                msg: 'Error al Listar Subastakas'
             }
         }
         //validar si esta llegado vacio

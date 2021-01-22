@@ -1,5 +1,515 @@
 define({ "api": [
   {
+    "type": "Object",
+    "url": "connection",
+    "title": "options\\n   * @api public\\n",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "ObjectConnection"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\r\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicRN"
+  },
+  {
     "type": "",
     "url": "private",
     "title": "",
@@ -5378,7 +5888,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"09/12/2020\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"20/12/2020 12:30:00\",\n            \"end\": \"21/12/2020 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": true,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 60,\n            \"datecreated\": \"0NaN-aN-aN aN:aN:aN\",\n            \"activityTime\": true,\n            \"TimeTotal\": -27000000,\n            \"TimeEnd\": -5095430,\n            \"flagInterested\": false,\n            \"started\": true,\n            \"finished\": false,\n            \"begin\": \"2021-01-22 12:30:00\",\n            \"end\": \"2021-01-22 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 60\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": true,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
           "type": "json"
         }
       ]

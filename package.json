@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "apidoc": {
     "title": "Custom apiDoc browser title",
-    "url": "https://takas-300716.uk.r.appspot.com"
+    "url": "Takas-env.eba-mtcrsjqu.us-west-1.elasticbeanstalk.com"
   },
   "engines": {
     "node": "12.14.1"
