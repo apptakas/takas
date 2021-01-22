@@ -217,7 +217,7 @@ userModel.GloginUser = (userData, callback) => {
                 userData.email
             ],
                 (err, result) => {
-                    console.log(err);
+                    //console.log(err)
                     //
                     if (result && Object.entries(result).length != 0) {
                         resolve({

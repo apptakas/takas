@@ -615,6 +615,7 @@ ProductModel.armaresult = (result) => {
                     let datecreatedt = new Date(element.datecreated);
                     let datecreated = date.format(datecreatedt, 'YYYY-MM-DD HH:mm:ss');
                     //console.log(element.typepublication);
+                   
                     if(element.typepublication==1){   
                         arr.push({
                             "idproduct": element.idproduct,
@@ -662,9 +663,29 @@ ProductModel.armaresult = (result) => {
                         if(interested.interested[0]!= undefined){
                             flagInterested=true;
                         }
+
+                        let fechaserver = new Date();
+                        let fechactual=date.format(fechaserver, 'YYYY-MM-DD HH:mm:ss');
+                        //DETERMINAR SI ES EL TIEMPO DE ACTIVIDAD
+                        let timeActive=false;
+                        let DiferenciafechasInicio=date.subtract(fechaserver, beginSubastakas).toMinutes();
+                        console.log("DiferenciafechasInicio: "+DiferenciafechasInicio );
+                        let DiferenciafechasFin=date.subtract(fechaserver, endSubastakas).toMinutes();
+                        console.log("DiferenciafechasFin: "+DiferenciafechasFin );
+                        let TimeTotal=date.subtract(beginSubastakas, endSubastakas).toMilliseconds();;
+                        let DiferenciafechasFin2=date.subtract(fechaserver, endSubastakas).toMilliseconds();
+
+                        if(DiferenciafechasInicio>=0 && DiferenciafechasFin<0){
+                            timeActive=true;
+                        }
+                        
+
                         arr.push({
                             "idproduct": element.idproduct,
-                            "datecreated":datecreated,
+                            "datecreated":datecreated,                            
+                            "activityTime":timeActive,
+                            "TimeTotal":TimeTotal,
+                            "TimeEnd":DiferenciafechasFin2,
                             "flagInterested":flagInterested,
                             "started":started,
                             "finished":finished,
