@@ -6,6 +6,7 @@ const pool = mysql.createPool(database);
 
 pool.getConnection((err,connection)=>{
     if(err){
+        console.log(err.code);
         if(err.code==='PROTOCOL_CONNECTION_LOST'){
             console.error('DATABASE CONNECTION WAS CLOSED');
         }
