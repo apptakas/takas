@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const {promisify} = require('util')
-const{database} =require('./keys');´
+const{database} =require('./keys');
 console.log(database);
 
 const pool = mysql.createPool(database);
