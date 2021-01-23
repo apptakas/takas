@@ -679,7 +679,7 @@ ProductModel.armaresult = (result) => {
                             timeActive=true;
                         }
                         
-
+//
                         arr.push({
                             "idproduct": element.idproduct,
                             "datecreated":datecreated,                            

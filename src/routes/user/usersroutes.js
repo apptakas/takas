@@ -4900,7 +4900,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
 router.post('/listsubastakas', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
-        
+        //
         const error = validationResult(req);
 
         if (error.array().length != 0) {
