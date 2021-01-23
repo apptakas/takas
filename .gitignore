@@ -1,8 +1,3 @@
 node_modules
 package-lock.json
-<<<<<<< HEAD
 src/config/*
-=======
-/src/config
-
->>>>>>> 7bbdce63db92775114c2ef8a3433c69a11c4c3cb
