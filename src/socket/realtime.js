@@ -1,4 +1,5 @@
 const StaticClass = require('./statics');
+const SocketController = require('../controllers/socketController');
 const statics = new StaticClass();
 
 module.exports = function (server) {
@@ -8,21 +9,24 @@ module.exports = function (server) {
     io.on('connection', (socket) => {
 
         console.log(socket.id);
-        socket.on('SubastakasRoom', function (code, data) { //? Siempre debe enviar roomID
+        socket.on('SubastakasRoom',  function (code, data) { //? Siempre debe enviar roomID
             //TODO: Validar que el estatus de la sala sea Open. (ver si esta en el rango)
             var status = 1;
             switch (code) {
                 case 100: //* Unirse a la sala
                     /** 
                      * ? Datos que se reciben
-                     * @param roomID String -> id de la sala
-                     * @param uid String
-                     * @param img String -> imagen de usuario
+                     * @param SubastaID String -> id de la subastakas
+                     * @param uid String -> id de l usuario
+                     * @param img String -> Url imagen de usuario
                      * @param name String -> nombre del usuario
                      */
                     //! Cambiar "socket.id" por "data.uid"
                     //console.log("code: "+code);
-                    var aux = statics.addMemberToRoom(data.roomID, socket.id, socket, status);
+                    //función para verificación si sala existe o creala
+                    // let response= await SocketController.CheckChatRoom(data);
+                    // console.log(response);
+                    var aux = statics.addMemberToRoom(data.roomID, socket.id, socket,data.name, data.img, status);
                     if (aux) {//* ¿Se agregó? 
                         console.log(socket.id + ' se unió a la sala: ' + data.roomID);
                         var members = statics.getDataMembersRoom(data.roomID);
@@ -99,6 +103,18 @@ module.exports = function (server) {
                     // if (room != null) {
                     //     statics.broadcastRoom(data.roomID, 'SubastakasRoom', room);
                     // }
+                    break;
+                    case 1000: //* Test Subastacas
+                    /** 
+                     * ? Datos que se reciben
+                     * @param SubastaID String -> id de la subastakas
+                     * @param uid String -> id de l usuario
+                     * @param img String -> Url imagen de usuario
+                     * @param name String -> nombre del usuario
+                     */
+                    console.log("code: "+code);
+                    console.log("data: "+data);
+                   
                     break;
                 default:
                     console.log(`No define code: ${code}`);

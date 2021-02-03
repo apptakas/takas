@@ -5,10 +5,10 @@ runtime: nodejs # or nodejs12
 env: flex
 
 env_variables:
-  SQL_USER: root
-  SQL_PASSWORD: lpiP7kP36BrJK4m8
-  SQL_DATABASE: takas
-  INSTANCE_CONNECTION_NAME: takas-300716:us-east1:takas
+  DB_USER: root
+  DB_PASS: lpiP7kP36BrJK4m8
+  DB_NAME: takas
+  CLOUDS_SQL_CONNECTION_NAME: takas-300716:us-east1:takas
 
 skip_files: 
   .env
