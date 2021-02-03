@@ -6,7 +6,7 @@
     "url": "Takas-env.eba-mtcrsjqu.us-west-1.elasticbeanstalk.com"
   },
   "engines": {
-    "node": "12.14.1"
+    "node": "12.X.X"
   },
   "main": "app.js",
   "scripts": {
