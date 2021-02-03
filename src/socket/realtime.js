@@ -21,7 +21,7 @@ module.exports = function (server) {
                      * @param name String -> nombre del usuario
                      */
                     //! Cambiar "socket.id" por "data.uid"
-
+                    //console.log("code: "+code);
                     var aux = statics.addMemberToRoom(data.roomID, socket.id, socket, status);
                     if (aux) {//* ¿Se agregó? 
                         console.log(socket.id + ' se unió a la sala: ' + data.roomID);

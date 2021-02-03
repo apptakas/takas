@@ -3725,6 +3725,7 @@ userController.ListSubasTakas = async (req) => {
             status: statuSubastakas
         };
         //console.log(ProductData.status);
+        //
         let response = await Product.ListSubasTakas(UserData,SubastakasData);
 
        console.log(response);
