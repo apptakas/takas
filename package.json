@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "apidoc": {
     "title": "Custom apiDoc browser title",
-    "url": "Takas-env.eba-mtcrsjqu.us-west-1.elasticbeanstalk.com"
+    "url": "https://takas-300716.uk.r.appspot.com"
   },
   "engines": {
     "node": "12.x.x"
@@ -52,7 +52,8 @@
     "sha1": "^1.1.1",
     "socket.io": "^3.0.3",
     "socket.io-client": "^3.1.0",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "ws": "^7.4.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

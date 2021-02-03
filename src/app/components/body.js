@@ -10,9 +10,13 @@ class Body extends React.Component {
         this.connectSocket();
 
     }
+    Test = e => {
+        e.preventDefault();
+        this.socket.emit('SubastakasRoom', 1000, { data:"prueba test"})
+    }
     sendRoom = e => {
         e.preventDefault();
-        this.socket.emit('SubastakasRoom', 100, { roomID: 'ronnySotillet' })
+        this.socket.emit('SubastakasRoom', 100, { SubastacasID: 1,userID:"ib5HcbDJq7ZbUGC3sZiJ9EMNZuQ2",name: "Anailys Rodríguez", urlImg:"https://lh3.googleusercontent.com/a-/AOh14GghAJLELlkIz090ubKjqqHdki33JMljFn5d3RHVF4Q=s96-c"  })
     }
 
     connectSocket = async () => {
@@ -23,7 +27,7 @@ class Body extends React.Component {
         //     console.log('error', e);
         // }
         this.socket = io();
-        this.socket.on('SubastakasRoom', (data) => {
+        this.socket.on('SubastakasRoom', (code,data) => {
             console.log(data);
         })
         // fetch(proxyUrl)
@@ -62,6 +66,9 @@ class Body extends React.Component {
                             </div>
                             <div className="ibox-content">
                                 <button className="btn btn-w-m btn-primary" onClick={this.sendRoom}>sendRoom</button>
+                            </div>
+                            <div className="ibox-content">
+                                <button className="btn btn-w-m btn-primary" onClick={this.Test}>Test</button>
                             </div>
                         </div>
                     </div>

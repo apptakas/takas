@@ -2223,7 +2223,7 @@ userController.ChangeStatusOffer = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-      //notifications(token,titulo,detalle,datanoti);
+      notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio
@@ -4077,7 +4077,7 @@ userController.GetChatRoomSubastakas = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-     //notifications(token,titulo,detalle,datanoti);
+     notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio
