@@ -9,6 +9,16 @@ env_variables:
   SQL_PASSWORD: lpiP7kP36BrJK4m8
   SQL_DATABASE: takas
   INSTANCE_CONNECTION_NAME: takas-300716:us-east1:takas
+
+skip_files: 
+  .env
+
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
   
 beta_settings:
   cloud_sql_instances: takas-300716:us-east1:takas
