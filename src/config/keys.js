@@ -38,9 +38,9 @@ var config = {
     // host: dbSocketAddr[0], // e.g. '127.0.0.1'
     // port: dbSocketAddr[1], // e.g. '3306'
 }
-
-if (process.env.CLOUDS_SQL_CONNECTION_NAME && process.env.NODE_ENV === 'production') {
-    config.socketPath = `${dbSocketPath}/${process.env.CLOUDS_SQL_CONNECTION_NAME}`;
+//&& process.env.NODE_ENV === 'production'
+if (process.env.CLOUD_SQL_CONNECTION_NAME ) {
+    config.socketPath = `${dbSocketPath}/${process.env.CLOUD_SQL_CONNECTION_NAME}`;
   }
 
   module.exports={
