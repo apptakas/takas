@@ -33,4 +33,4 @@ inbound_services:
   - warmup
 
 network:
-  session_affinity: false 
+  session_affinity: true 
