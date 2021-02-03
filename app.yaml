@@ -2,6 +2,7 @@
 runtime: nodejs12 # or nodejs10
 
 instance_class: F2
+env: flex
 
 env_variables:
   SQL_USER: root
@@ -20,6 +21,8 @@ handlers:
 
 inbound_services:
   - warmup
-
+  
+manual_scaling:
+instances: 1
 network:
   session_affinity: true 
