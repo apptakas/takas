@@ -29,7 +29,7 @@
 
 
 //const dbSocketAddr = process.env.DB_HOST.split(':');
-const dbSocketPath = process.env.DB_SOCKET_PATH || "/cloudsql/";
+const dbSocketPath = process.env.DB_SOCKET_PATH || "/cloudsql";
 
 var config = {
     user: process.env.DB_USER,
