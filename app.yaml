@@ -33,7 +33,6 @@ inbound_services:
   - warmup
 
 network:
-  forwarded_ports:
-    -65080
-  instance_tag:    websocket  
+  forwarded_ports: -65080
+  instance_tag: websocket  
   session_affinity: true 
