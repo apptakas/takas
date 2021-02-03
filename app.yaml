@@ -21,8 +21,6 @@ handlers:
 
 inbound_services:
   - warmup
-  
-manual_scaling:
-instances: 1
+
 network:
   session_affinity: true 
