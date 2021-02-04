@@ -596,8 +596,12 @@ tombotakasModel.MyTickets = (idfirebaseUser,Status) => {
      if (pool) {
          let ticketsReservados={};
          console.log(idfirebaseUser);
+         let consulta='SELECT tk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser="'+idfirebaseUser+'"  AND tk.status IN (30,31,32,33) ORDER BY tk.idtombotakas ASC'
+         if(Status!=null){
+            consulta= 'SELECT tk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser="'+idfirebaseUser+'" AND tk.status='+Status+' ORDER BY tk.idtombotakas ASC';
+         }
          pool.query(
-            'SELECT tk.id AS idTicket,tk.idtombotakas AS id,tk.iduser,tk.number,tk.dateapart,tk.datebuy,tk.status AS statusticket,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE tk.iduser="'+idfirebaseUser+'" ORDER BY tk.idtombotakas ASC', 
+            consulta, 
              async(err, result) => {
                  console.log(err);
                 // console.log(result);
@@ -650,13 +654,17 @@ tombotakasModel.RequestsTickets = (idfirebaseUser) => {
 };
 
 
-tombotakasModel.ProcessRequestsTickets = (idfirebaseUser,idticket,statusTicket) => {
-    return new Promise((resolve, reject) => {
+tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,idticket,statusTicket,idttk) => {
+    return new Promise(async(resolve, reject) => {
      if (pool) {
+         let Anfitrion= await tombotakasModel.VerificarAnfitrionTTK (idfirebaseUserTTK,idttk);
+         
+         if(Anfitrion.Anfitrion==true){        
          pool.query(
-            'UPDATE tombotikets SET status=? WHERE id=?', [
+            'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
                 statusTicket,
-                idticket
+                idticket,
+                idttk
             ],
              (err, result) => {
                  console.log(err);
@@ -666,43 +674,62 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUser,idticket,statusTicket) 
                          'error': err
                      })
                  } else {
-                    if(statusTicket==33){
-                        pool.query(
-                            'DELETE FROM tombotikets WHERE id=?', 
-                                idticket
-                            ,
-                             (err, result) => {
-                                 console.log(err);
-                                // console.log(result);
-                                 if (err) {
-                                     resolve({
-                                         'error': err
-                                     })
-                                 } else {
-                                    if(statusTicket==33){
-                                        
-                                    }
-                                     resolve({
-                                         'result': result
-                                     })
-                                 }
-                
-                             }
-                         )
-
-                    }else{
-                     resolve({
-                         'result': result
-                     })
-                    }
+                    resolve({
+                        'result': result
+                    })
                  }
 
              }
          )
+        } //fin del if
+        else{
+            resolve({
+                'error': 500,
+                'msgErr': "Ustede no es el anfitrión de la tombola"
+            })
+        }
          //return resultado;
      }
  })
 };
+
+
+
+tombotakasModel.VerificarAnfitrionTTK = (idfirebaseUserTTK,idttk) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            'SELECT COUNT(*) as Anfitrion FROM tombotakas WHERE iduser=? AND id=? ', [
+                idfirebaseUserTTK,
+                idttk
+            ],
+            (err, result) => {
+                              
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {    
+                    let A=false;
+                    if(result[0].Anfitrion==1){
+                        A=true;
+                    }
+
+                    resolve({
+                        'Anfitrion': A
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
 
 
 tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
@@ -710,7 +737,7 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
      if (pool) {
          let ticketsReservados={};
          pool.query(
-            'SELECT * FROM tombotakas WHERE id=?',  idTTK,
+            'SELECT ttk.id,ttk.iduser,ttk.name,ttk.datecreated,ttk.detailsevent,ttk.detailsaward,ttk.pinreference,ttk.datelot,ttk.money,ttk.price,ttk.detailspayments,ttk.result,ttk.status,tk.id as idTicket,tk.status as statustk FROM tombotakas AS ttk INNER JOIN tombotikets AS tk ON ttk.id=tk.idtombotakas WHERE ttk.id=? AND tk.status IN (30,31) ',  idTTK,
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
@@ -733,7 +760,7 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
                     }; 
                     //result["pertenece"] = pertenece;
                     result[0].pertenece = pertenece;
-                     ticketsReservados = await tombotakasModel.rTombotakas(result);
+                     ticketsReservados = await tombotakasModel.rTombotakas2(result);
                     
 
                      resolve({

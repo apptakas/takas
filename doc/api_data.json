@@ -6895,7 +6895,7 @@
             "type": "varchar",
             "optional": false,
             "field": "flagTTK",
-            "description": "<p>optional.</p>"
+            "description": "<p>optional. 0=Apartados, 1=Aceptadp, 2=Rechazado</p>"
           }
         ]
       }
@@ -6929,7 +6929,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 2,\n            \"pinTombotakas\": \"ibxJu2\",\n            \"timeremaining\": 28841.56545,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"2020-11-19\",\n            \"pinreferenceTTK\": \"ibxJu2\",\n            \"datelotTTK\": \"2020-11-25 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [\n                31,\n                40,\n                21,\n                1,\n                10,\n                32,\n                22,\n                2\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 31,\n                    \"status\": 4,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": 40,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": 21,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": 1,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 5,\n                    \"Number\": 10,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 6,\n                    \"Number\": 32,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 7,\n                    \"Number\": 22,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 8,\n                    \"Number\": 2,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de tickets\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 5,\n            \"pinTombotakas\": \"MwkeQM\",\n            \"timeremaining\": 101860.24755,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"2021-02-04\",\n            \"pinreferenceTTK\": \"MwkeQM\",\n            \"datelotTTK\": \"2020-11-25 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [\n                22\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 21,\n                    \"Number\": 22,\n                    \"status\": 4,\n                    \"NameUser\": \"Ronny Sotillet\",\n                    \"phonenumber\": null,\n                    \"email\": \"ronny.sotillet777@gmail.com\",\n                    \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\"\n                }\n            ]\n        }\n    ],\n    \"msgprocess\": \"Lista de los tickets Rechazados\",\n    \"msg\": \"Lista de tickets\"\n}",
           "type": "json"
         }
       ]
@@ -7212,7 +7212,7 @@
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "idfirebaseUser",
+            "field": "idfirebaseUserTTK",
             "description": "<p>required.</p>"
           },
           {
@@ -7220,6 +7220,13 @@
             "type": "int",
             "optional": false,
             "field": "idticket",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idttk",
             "description": "<p>required.</p>"
           },
           {
@@ -7261,7 +7268,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Ticket procesado exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"MsgStatus\": \"Ha aceptado la compra de éste ticket\",\n    \"msg\": \"Ticket procesado exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -7280,7 +7287,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar procesar ticket\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msdErro\": \"Ustede no es el anfitrión de la tombola\",\n    \"msg\": \"Error al intentar procesar ticket\"\n}",
           "type": "json"
         }
       ]
