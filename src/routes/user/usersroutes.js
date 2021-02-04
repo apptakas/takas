@@ -3814,13 +3814,13 @@ router.post('/mytombotakas', rutasProtegidas,[
     "success": true,
     "status": "200",
     "tickets": [
-        "01"
+        76,
+        75,
+        73,
+        72
     ],
-    "ticketsNoDispo": [
-        "00",
-        "21",
-        "31"
-    ],
+    "ticketsNoDispo": [],
+    "DetailsPayments": "Pueden consignar a la siguiente cuenta de ahorros 373797347426 Bancolombia ",
     "msg": "Los tickets disponibles fueron procesados con éxito"
 }
  *

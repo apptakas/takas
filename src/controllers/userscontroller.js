@@ -2963,6 +2963,7 @@ userController.ComprarApartarTickets = async (req) => {
                 status: '200',
                 tickets:ticketsr,
                 ticketsNoDispo:ticketsNoDispor,
+                DetailsPayments:response.detailspayments,
                 msg: 'Los tickets disponibles fueron procesados con éxito'
                 //data: response
             }

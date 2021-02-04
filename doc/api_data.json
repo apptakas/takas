@@ -6575,7 +6575,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"tickets\": [\n        \"01\"\n    ],\n    \"ticketsNoDispo\": [\n        \"00\",\n        \"21\",\n        \"31\"\n    ],\n    \"msg\": \"Los tickets disponibles fueron procesados con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"tickets\": [\n        76,\n        75,\n        73,\n        72\n    ],\n    \"ticketsNoDispo\": [],\n    \"DetailsPayments\": \"Pueden consignar a la siguiente cuenta de ahorros 373797347426 Bancolombia \",\n    \"msg\": \"Los tickets disponibles fueron procesados con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -7086,6 +7086,13 @@
             "type": "varchar",
             "optional": false,
             "field": "DetailsEventtk",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "DetailsPayments",
             "description": "<p>required.</p>"
           },
           {
