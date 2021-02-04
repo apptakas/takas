@@ -471,36 +471,6 @@
   },
   {
     "type": "",
-    "url": "public\\n",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "src/public/js/bundle.js",
-    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
-    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
-    "name": "PublicN"
-  },
-  {
-    "type": "",
-    "url": "public\\n",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "src/public/js/bundle.js",
-    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
-    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
-    "name": "PublicN"
-  },
-  {
-    "type": "",
-    "url": "public\\n",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "src/public/js/bundle.js",
-    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
-    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
-    "name": "PublicN"
-  },
-  {
-    "type": "",
     "url": "public\\r\\n",
     "title": "",
     "version": "0.0.0",
@@ -5426,6 +5396,110 @@
   },
   {
     "type": "post",
+    "url": "/subastakas/detailsoffer",
+    "title": "9 detailsoffer",
+    "name": "detailsoffer_-_Detalles_de_la_Oferta",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idFirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "typePublication",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idOferta",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Subastakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idoffer\": 16,\n        \"iduseroffer\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n        \"statusoffer\": 3,\n        \"idSala\": null,\n        \"idproduct\": 59,\n        \"namepublication\": \"pueba laptop 60\",\n        \"img\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n        ],\n        \"observation\": \"Arbolito de navidad de 2 metros de altura, viene con bambalinas\",\n        \"valorpublication\": \"1200000.0000\",\n        \"sumitemsoffer\": \"300000.0000\",\n        \"differenceoffer\": \"900000.0000\",\n        \"montoffert\": 99999.9999,\n        \"infavor\": true,\n        \"itemsoffer\": [\n            {\n                \"idpublication\": 5,\n                \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30\",\n                \"nameproduct\": \"Arbolito de navidad\",\n                \"status\": 3,\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30\",\n                \"marketvalue\": \"300000.0000\"\n            }\n        ]\n    },\n    \"msg\": \"Detalles de la oferta listado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Subastakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar listar detalles de la oferta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/subastakas/subastakasroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "post",
     "url": "/user/detailsubastakas",
     "title": "4 detailsubastakas",
     "name": "detailsubastakas_-_Detalle_de_la_Subastakas",
@@ -6004,6 +6078,124 @@
     },
     "version": "0.0.0",
     "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "post",
+    "url": "/subastakas/newoffer",
+    "title": "8 newoffer",
+    "name": "newoffer_-_Crear_Oferta",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idFirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idSubastakas",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "idsPublications",
+            "description": "<p>array Int required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "descriptionOffer",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "real",
+            "optional": false,
+            "field": "MontOffer",
+            "description": "<p>optional.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Subastakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idoferta\": 13,\n    \"msg\": \"Oferta creada exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Subastakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"error\":response.msg,\n    \"msg\": 'Error al intentar crear una Oferta'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/subastakas/subastakasroutes.js",
     "groupTitle": "Subastakas"
   },
   {
