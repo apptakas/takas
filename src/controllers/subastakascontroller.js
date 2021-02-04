@@ -487,8 +487,8 @@ SubastakasController.ChangeStatusOffer = async (req) => {
        
         console.log(OfferData);
         
-        //let response = await Offer.FindDatOffer(OfferData);
-       let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
+        //let response = await SubatakasModel.FindDatOffer(OfferData);
+       let response = await SubatakasModel.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
 
        //console.log(response);
       // console.log(response.sala);
@@ -1029,5 +1029,94 @@ SubastakasController.changeStatusNotifications = async (req) => {
 
 };
 
+
+//CAMBIAR EL ESTADO DE UNA OFERTA- OFFERS 
+SubastakasController.ChangeStatusOffer = async (req) => {
+    try {
+        let match=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let statusOffer=23;//ODERTA CANCELADA
+            let TitleNoti="cancelado una oferta";
+            if(req.FlagStatusOffer==1){
+                statusOffer=8;// OFERTA RECHAZADA
+                let TitleNoti="Han rechazado una oferta";
+            }
+            if(req.FlagStatusOffer==2){
+                statusOffer=7;// OFERTA ACEPTADA
+                let TitleNoti="Han Aceptado una oferta";
+                match=true;
+                //let response2 =  Offer.FindDatOffer(OfferData);
+                //console.log(response2);
+            }
+
+            OfferData = {
+                id: req.idOffer,
+                idUser: req.idUser,
+                status:statusOffer
+            };
+       
+        console.log(OfferData);
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                match:match,
+                // sala:sala,
+                msg: 'Cambio de estatus de una oferta ejecutdo exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar cambiar el estatus de una Oferta'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+     // notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 module.exports = SubastakasController;

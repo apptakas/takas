@@ -167,6 +167,70 @@ router.post('/detailsoffer', rutasProtegidas, [
         //console.log(response);
         return res.status(response.data.status).json(response.data)
     
-    }) 
+    })
+
+    /**
+ * @api {put} /subastakas/changestatusoffer 10 changestatusoffer
+ * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idOffer required.
+ * @apiParam {int} idUser required.
+ * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "match": true,
+    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
+router.put('/changestatusoffer', rutasProtegidas, [
+    check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('FlagStatusOffer', 'El FlagStatusOffer es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await subastakasController.ChangeStatusOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    })  
 
     module.exports = router;
