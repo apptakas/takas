@@ -212,7 +212,7 @@ tombotakasModel.comprarapartartickets = (idUser,idTombotaka,tickets,accionTTK,ho
                     hoy,
                     status
                 ],
-                (err, resut) => {
+                async(err, result) => {
                     //console.log(resut);
                     if (err) {
                         console.log(err);
@@ -220,9 +220,12 @@ tombotakasModel.comprarapartartickets = (idUser,idTombotaka,tickets,accionTTK,ho
                             'error': err
                         })
                     } else {
-                        
+                        // console.log("result");
+                        // console.log(result);
+                        let dp= await tombotakasModel.FindDetailspagoTombotakas(idTombotaka);
                         resolve({
-                            'result': resut
+                            'result': result,
+                            'detailspayments':dp.detailspayments
                         })                                       
                     }
 
@@ -236,7 +239,35 @@ tombotakasModel.comprarapartartickets = (idUser,idTombotaka,tickets,accionTTK,ho
  })
 };
 
-tombotakasModel.TicketsDispo = (idttk,ticket) => {
+tombotakasModel.FindDetailspagoTombotakas = (idttk) => {
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+               'SELECT detailspayments FROM tombotakas WHERE id=? ', 
+               [
+                   idttk
+               ],
+                (err, result) => {
+                    console.log(err);
+                   // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                       console.log("result");
+                       console.log(result);
+                        resolve({
+                            'detailspayments': result[0].detailspayments
+                        })
+                    }
+   
+                }
+            )
+            //return resultado;
+        }
+
+    });
 };
 
 tombotakasModel.TicketsDispo = (idttk,ticket) => {
