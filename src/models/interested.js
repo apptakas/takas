@@ -3,11 +3,14 @@ let InterestedModel = {};
 const date = require('date-and-time');
 
 InterestedModel.InterestedSubasTakas = (DataInterested,FlagInterested) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
      if (pool) {
-         let consulta="INSERT INTO interested SET status="+DataInterested.status+",idsubastakas="+DataInterested.idsubastakas+",iduser='"+DataInterested.iduser+"'";
-         if(FlagInterested==false){
-            consulta="UPDATE interested SET status="+DataInterested.status+" WHERE idsubastakas="+DataInterested.idsubastakas+" AND iduser='"+DataInterested.iduser+"'"
+        let Exist= await InterestedModel.VerificarExistInterested (DataInterested.iduser,DataInterested.idsubastakas);
+        let consulta="UPDATE interested SET status="+DataInterested.status+" WHERE idsubastakas="+DataInterested.idsubastakas+" AND iduser='"+DataInterested.iduser+"'"
+        
+         if(Exist.exist==false){
+            consulta="INSERT INTO interested SET status="+DataInterested.status+",idsubastakas="+DataInterested.idsubastakas+",iduser='"+DataInterested.iduser+"'";
+
          }
          console.log(consulta);
          pool.query(
@@ -31,6 +34,43 @@ InterestedModel.InterestedSubasTakas = (DataInterested,FlagInterested) => {
      }
  })
 };
+
+
+InterestedModel.VerificarExistInterested= (idfirebaseUserSTK,idSTK) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            'SELECT COUNT(*)AS exist FROM interested  WHERE WHERE iduser=? AND idsubastakas=? ', [
+                idfirebaseUserSTK,
+                idSTK
+            ],
+            (err, result) => {
+                              
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {    
+                    let E=false;
+                    if(result[0].exist==1){
+                        E=true;
+                    }
+
+                    resolve({
+                        'exist': E
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
 
 
 module.exports = InterestedModel;

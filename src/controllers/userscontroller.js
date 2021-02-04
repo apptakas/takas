@@ -3906,8 +3906,7 @@ userController.InterestedSubasTakas = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data: response.result[0],
-                images: response.images,
+                Interested:req.FlagInterested,
                 msg: msg
                 //data: response
             }

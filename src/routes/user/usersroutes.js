@@ -4788,7 +4788,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *        {
     "success": true,
     "status": "200",
     "data": [
@@ -4796,13 +4796,14 @@ router.post('/newsubastakasckw', rutasProtegidas,[
             "idproduct": 60,
             "datecreated": "0NaN-aN-aN aN:aN:aN",
             "activityTime": true,
-            "TimeTotal": -27000000,
-            "TimeEnd": -5095430,
+            "Anfitrion": false,
+            "TimeTotal": -718200000,
+            "TimeEnd": -624714916,
             "flagInterested": false,
             "started": true,
             "finished": false,
-            "begin": "2021-01-22 12:30:00",
-            "end": "2021-01-22 20:00:00",
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-11 20:00:00",
             "iduser": "idfirebaseU4534dsaxgg",
             "nuevo": false,
             "subcategory": 4,
@@ -4820,9 +4821,39 @@ router.post('/newsubastakasckw', rutasProtegidas,[
             "ProductImages": [
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
+        },
+        {
+            "idproduct": 59,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": false,
+            "TimeTotal": -509400000,
+            "TimeEnd": -415914838,
+            "flagInterested": false,
+            "started": true,
+            "finished": false,
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-09 10:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 60",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": true,
+            "CantidadOfertas": 10,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
         }
     ],
-    "msg": "Lista de productos"
+    "msg": "Lista de Subastakas"
 }
  *
  * @apiError UserNotFound The id of the Product was not found.
@@ -4882,34 +4913,67 @@ router.post('/listsubastakas', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *            {
+ *    {
     "success": true,
     "status": "200",
     "data": [
         {
-            "idproduct": 1,
-            "datecreated": "09/12/2020",
-            "begin": "0000-00-00 00:00:00",
-            "end": "0000-00-00 00:00:00",
+            "idproduct": 59,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": true,
+            "TimeTotal": -509400000,
+            "TimeEnd": -415754770,
+            "flagInterested": false,
+            "started": true,
+            "finished": false,
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-09 10:00:00",
             "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": true,
+            "nuevo": false,
             "subcategory": 4,
-            "name": "pueba laptop 2",
+            "name": "pueba laptop 60",
             "details": "Hp Procesador intel core i7",
             "typemoney": 2,
             "marketvalue": "1200000.0000",
             "typepublication": 3,
             "conditions": 1,
-            "size": null,
-            "weight": null,
+            "size": 1,
+            "weight": 1,
             "status": 0,
-            "editable": false,
+            "editable": true,
+            "CantidadOfertas": 10,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idproduct": 60,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": true,
+            "TimeTotal": -718200000,
+            "TimeEnd": -624554663,
+            "flagInterested": false,
+            "started": true,
+            "finished": false,
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-11 20:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 60",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": true,
             "CantidadOfertas": 0,
             "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
         }
@@ -5064,6 +5128,7 @@ router.post('/detailsubastakas', rutasProtegidas, [
  *   {
     "success": true,
     "status": "200",
+    "Interested": true,
     "msg": "Se ha registrado Me interesa"
 }
  *
@@ -5333,131 +5398,37 @@ router.post('/listodo', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *     {
     "success": true,
     "status": "200",
     "data": [
         {
-    "success": true,
-    "status": "200",
-    "data": [
-        {
-            "idproduct": 7,
-            "datecreated": "2020-12-09 14:11:39",
+            "idproduct": 59,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": false,
+            "TimeTotal": -509400000,
+            "TimeEnd": -405911210,
             "flagInterested": true,
-            "started": false,
+            "started": true,
             "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-09 10:00:00",
+            "iduser": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
             "nuevo": false,
             "subcategory": 4,
-            "name": "pueba laptop 2",
+            "name": "pueba laptop 60",
             "details": "Hp Procesador intel core i7",
             "typemoney": 2,
             "marketvalue": "1200000.0000",
             "typepublication": 3,
             "conditions": 1,
-            "size": null,
-            "weight": null,
+            "size": 1,
+            "weight": 1,
             "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
+            "editable": true,
+            "CantidadOfertas": 10,
             "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idproduct": 15,
-            "datecreated": "2020-12-11 13:26:28",
-            "flagInterested": false,
-            "started": false,
-            "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 4,
-            "name": "pueba laptop 23",
-            "details": "Hp Procesador intel core i7",
-            "typemoney": 2,
-            "marketvalue": "1200000.0000",
-            "typepublication": 3,
-            "conditions": 1,
-            "size": null,
-            "weight": null,
-            "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idproduct": 7,
-            "datecreated": "2020-12-09 14:11:39",
-            "flagInterested": true,
-            "started": false,
-            "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 4,
-            "name": "pueba laptop 2",
-            "details": "Hp Procesador intel core i7",
-            "typemoney": 2,
-            "marketvalue": "1200000.0000",
-            "typepublication": 3,
-            "conditions": 1,
-            "size": null,
-            "weight": null,
-            "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idproduct": 15,
-            "datecreated": "2020-12-11 13:26:28",
-            "flagInterested": false,
-            "started": false,
-            "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 4,
-            "name": "pueba laptop 23",
-            "details": "Hp Procesador intel core i7",
-            "typemoney": 2,
-            "marketvalue": "1200000.0000",
-            "typepublication": 3,
-            "conditions": 1,
-            "size": null,
-            "weight": null,
-            "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
         }
