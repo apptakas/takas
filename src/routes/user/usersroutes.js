@@ -3572,6 +3572,7 @@ router.post('/deletepublication', rutasProtegidas,[
  * @apiParam {varchar} idfirebaseUser unique required.
  * @apiParam {varchar} namettk  required.
  * @apiParam {varchar} DetailsEventtk required.
+ * @apiParam {varchar} DetailsPayments required.
  * @apiParam {varchar} DetailsAwardttk  required.
  * @apiParam {datetime} DateLottk  required.
  * @apiParam {int} moneyttk  required. 
@@ -3609,6 +3610,7 @@ router.post('/newtombotakas',rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
     check('namettk', 'El namettk es obligatorio').not().isEmpty().exists(),
     check('DetailsEventtk', 'El Detaille del evento  es obligatorio').not().isEmpty().exists(),
+    check('DetailsPayments', 'El detalle del pago es obligatorio').not().isEmpty().exists(),
     check('DetailsAwardttk', 'El detalle del premio es obligatorio').not().isEmpty().exists(),
     check('DateLottk', 'La fecha del sorteo es obligatoria').not().isEmpty().exists(),
     check('moneyttk', 'El moneyttk es obligatorio').not().isEmpty().exists(),

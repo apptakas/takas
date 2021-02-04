@@ -236,6 +236,8 @@ tombotakasModel.comprarapartartickets = (idUser,idTombotaka,tickets,accionTTK,ho
  })
 };
 
+tombotakasModel.TicketsDispo = (idttk,ticket) => {
+};
 
 tombotakasModel.TicketsDispo = (idttk,ticket) => {
     return new Promise((resolve, reject) => {

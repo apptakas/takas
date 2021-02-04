@@ -2753,6 +2753,7 @@ userController.NewTomboTakas = async (req) => {
                 name: req.namettk,
                 datecreated: hoy,
                 detailsevent: req.DetailsEventtk,
+                detailspayments: req.DetailsPayments,
                 detailsaward: req.DetailsAwardttk,
                 datelot: DateLottk,
                 pinreference:pin,
