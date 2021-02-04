@@ -4023,7 +4023,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
  * 
  *   
  * @apiParam {varchar} idfirebaseUser  required.
- * @apiParam {varchar} flagTTK  optional.
+ * @apiParam {varchar} flagTTK  optional. 0=Apartados, 1=Aceptadp, 2=Rechazado
  *
  * @apiSuccess {boolean} success of the Tombotakas.
  * @apiSuccess {int} status 200 of the Tombotakas.
@@ -4036,13 +4036,13 @@ router.post('/findtombotakaspin', rutasProtegidas,[
     "status": "200",
     "data": [
         {
-            "idTombotakas": 2,
-            "pinTombotakas": "ibxJu2",
-            "timeremaining": 28841.56545,
+            "idTombotakas": 5,
+            "pinTombotakas": "MwkeQM",
+            "timeremaining": 101860.24755,
             "nameTombotakas": "test Nueva Tombotakas",
             "statusTTK": 0,
-            "datecreatedTTK": "2020-11-19",
-            "pinreferenceTTK": "ibxJu2",
+            "datecreatedTTK": "2021-02-04",
+            "pinreferenceTTK": "MwkeQM",
             "datelotTTK": "2020-11-25 19:47",
             "moneyTTK": 1,
             "priceTTK": "10000.0000",
@@ -4052,91 +4052,22 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ],
             "numberticketsrs": [
-                31,
-                40,
-                21,
-                1,
-                10,
-                32,
-                22,
-                2
+                22
             ],
             "ticketsReservados": [
                 {
-                    "idNUmbre": 1,
-                    "Number": 31,
-                    "status": 4,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 2,
-                    "Number": 40,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 3,
-                    "Number": 21,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 4,
-                    "Number": 1,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 5,
-                    "Number": 10,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 6,
-                    "Number": 32,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 7,
+                    "idNUmbre": 21,
                     "Number": 22,
-                    "status": 1,
-                    "NameUser": "gusuario12",
+                    "status": 4,
+                    "NameUser": "Ronny Sotillet",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 8,
-                    "Number": 2,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                    "email": "ronny.sotillet777@gmail.com",
+                    "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c"
                 }
             ]
         }
     ],
+    "msgprocess": "Lista de los tickets Rechazados",
     "msg": "Lista de tickets"
 }
  *
@@ -4323,8 +4254,9 @@ router.post('/requeststickets', rutasProtegidas,[
  *                 "value": "application/json" 
  * 
  *   
- * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} idfirebaseUserTTK  required.
  * @apiParam {int} idticket  required.
+ * @apiParam {int} idttk  required.
  * @apiParam {int} FlagTTk  required 2=COMPRADO(VENDER) 4=RECHAZADO.
  * 
  *
@@ -4337,6 +4269,7 @@ router.post('/requeststickets', rutasProtegidas,[
 {
     "success": true,
     "status": "200",
+    "MsgStatus": "Ha aceptado la compra de éste ticket",
     "msg": "Ticket procesado exitosamente"
 }
  *
@@ -4347,6 +4280,7 @@ router.post('/requeststickets', rutasProtegidas,[
  *     {
     "success": false,
     "status": "500",
+    "msdErro": "Ustede no es el anfitrión de la tombola",
     "msg": "Error al intentar procesar ticket"
 }
  */
@@ -4354,8 +4288,9 @@ router.post('/requeststickets', rutasProtegidas,[
 
 //Procesar Solicitud de un ticket- 
 router.post('/processrequeststickets', rutasProtegidas,[
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('idticket', 'El idticket es obligatorio').not().isEmpty().exists(),
+    check('idfirebaseUserTTK', 'El id del usuario dueño de la tombola es obligatorio').not().isEmpty().exists(),
+    check('idticket', 'El id del ticket es obligatorio').not().isEmpty().exists(),
+    check('idttk', 'El id de la srotakas a donde pertenece el tiket es obligatorio').not().isEmpty().exists(),
     check('FlagTTk', 'El FlagTTk es obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
 
@@ -4516,6 +4451,29 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "msg": "Error al intentar buscar detalles de Tombotakas"
 }
  */
+
+ //DETALLE DE LA TOMBOTAKAS- 
+router.post('/detailstombotakas', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idTTK', 'El idTTK es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.DetailsTombotakas(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
 
 //Score
 /**
@@ -4709,27 +4667,7 @@ router.post('/solicitarmembresia', rutasProtegidas,[
 
 
 
-//DETALLE DE LA TOMBOTAKAS- 
-router.post('/detailstombotakas', rutasProtegidas,[
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('idTTK', 'El idTTK es obligatorio').not().isEmpty().exists()
-], async (req, res) => {
 
-    const error = validationResult(req);
-
-    if (error.array().length != 0) {
-        return res.status(422).json({ errores: error.array(), msg: 'Error' });
-    }
-
-    let response = await userController.DetailsTombotakas(req.body);
-
-    if (response.status == 'ko') {
-        return res.status(500).json({ error: 'Error' })
-    }
-    //console.log(response);
-    return res.status(response.data.status).json(response.data)
-
-})
 
 
 //////////////SUBASTAKEAR////////////////////

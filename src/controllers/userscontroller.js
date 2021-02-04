@@ -3053,12 +3053,19 @@ userController.MyTickets = async (req) => {
             // console.log(lengthkw);
             let idfirebaseUser=req.idfirebaseUser;
             let Status=null;
+            let MsgLista="Lista de todos los tickets";
             if(req.flagTTK!=null){
                 if(req.flagTTK==0){
-                    Status=27;
+                    Status=30;
+                    MsgLista="Lista de los tickets Apartados";
                 }
                 if(req.flagTTK==1){
-                    Status=28;
+                    Status=31;
+                    MsgLista="Lista de los tickets Aceptados";
+                }
+                if(req.flagTTK==2){
+                    Status=33;
+                    MsgLista="Lista de los tickets Rechazados";
                 }
 
             }
@@ -3084,6 +3091,7 @@ userController.MyTickets = async (req) => {
                 success: true,
                 status: '200',
                 data:response.result,
+                msgprocess:MsgLista,
                 msg: 'Lista de tickets'
                 //data: response
             }
@@ -3177,19 +3185,23 @@ userController.ProcessRequestsTickets = async (req) => {
          
             // console.log(req.ImagesProduct.length);
             // console.log(lengthkw);
-            let idfirebaseUser=req.idfirebaseUser;
+            let idfirebaseUserTTK=req.idfirebaseUserTTK;
             let idticket=req.idticket;
+            let idttk=req.idttk;
             //let FlagTTk=req.FlagTTk;
             console.log(req.FlagTTk);
             let statusTicket=30;
+            let MsgStatus="";
             // let Status=null;
             
                 if(req.FlagTTk==2){
                     statusTicket=31;//COMPRADO (VENDER )
+                    MsgStatus="Ha aceptado la compra de éste ticket";
                 }
                 if(req.FlagTTk==4){
                   
                     statusTicket=33;//RECHAZADO
+                    MsgStatus="Ha rechazado la compra de éste ticket";;
                 }
 
                 // if(req.FlagTTk==4){
@@ -3205,7 +3217,7 @@ userController.ProcessRequestsTickets = async (req) => {
 
         // && lengthkw<=topeKW 
 
-            response = await tombotakas.ProcessRequestsTickets(idfirebaseUser,idticket,statusTicket);
+            response = await tombotakas.ProcessRequestsTickets(idfirebaseUserTTK,idticket,statusTicket,idttk);
                     
         
         //console.log(msgError);
@@ -3218,6 +3230,7 @@ userController.ProcessRequestsTickets = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                MsgStatus:MsgStatus,
                 //data:response.result,
                 msg: 'Ticket procesado exitosamente'
                 //data: response
@@ -3228,7 +3241,8 @@ userController.ProcessRequestsTickets = async (req) => {
                 success: false,
                 status: '500',
                // data: response.error,
-               // data: msgError,
+               // data: msgErr,
+                msdErro:response.msgErr,
                 msg: 'Error al intentar procesar ticket'
             }
         }
