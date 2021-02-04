@@ -450,6 +450,7 @@ userModel.DataUserPublication = (idproduct, callback) => {
                         'error': err
                     })
                 } else {
+                   // console.log(result);
                     resolve({
                         'result': result
                     })
