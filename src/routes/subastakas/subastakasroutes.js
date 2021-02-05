@@ -56,7 +56,7 @@ const userController = require('../../controllers/userscontroller');
  **/
 
 //CREAR UNA OFERTA - PUBLICACIÓN
-router.post('/newoffer', rutasProtegidas, [
+router.post('/newoffersbtk', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('idSubastakas', 'El id de la subasta es obligatorio').not().isEmpty().exists(),
     check('idsPublications', 'El idsPublications es obligatorio').not().isEmpty().exists()

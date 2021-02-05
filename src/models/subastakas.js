@@ -68,11 +68,11 @@ subastakasModel.NewOffer = (OfferData, IdOfferData) => {
                                             let titulo = "Haz recibido una  oferta potencial para subastakear";
                                             let detalles = "¡En hora buena " + fullname + "! tú Subastakas  <<" + nameProducto + ">> tiene una oferta por valor comercial de " + CalValorOferta;
                                             // console.log("idUserPublication.tokenpush");
-                                            console.log(detalles);
+                                            //console.log(detalles);
                                             // //console.log(idUserPublication);
                                             // console.log("idUserPublication.tokenpush");
                                             //ENVIAR NOTIFICACIÓN
-                                            //respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
+                                           // respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
 
                                             ////////
 
@@ -82,7 +82,7 @@ subastakasModel.NewOffer = (OfferData, IdOfferData) => {
                                                 resolve({
                                                     'result': result,
                                                     'idOferta': idOferta,
-                                                    'idNotificacion': respCrearPush.result.insertId,
+                                                    // 'idNotificacion': respCrearPush.result.insertId,
                                                     'idrelation': idrelation,
                                                     'TypeNotification': TypeNotification,
                                                     'UserPublication': UserPublication,
@@ -91,9 +91,22 @@ subastakasModel.NewOffer = (OfferData, IdOfferData) => {
                                                     'detalles': detalles
                                                 })
                                             } else {
+                                                //al habiliar la notificación elimira el siguiete resolve y dejar este 'error': 'Error! al crear la notificación'
+
                                                 resolve({
-                                                    'error': 'Error! al crear la notificación'
+                                                    'result': result,
+                                                    'idOferta': idOferta,
+                                                    // 'idNotificacion': respCrearPush.result.insertId,
+                                                    'idrelation': idrelation,
+                                                    'TypeNotification': TypeNotification,
+                                                    'UserPublication': UserPublication,
+                                                    'tokenpush': tokenpush,
+                                                    'titulo': titulo,
+                                                    'detalles': detalles
                                                 })
+                                                // resolve({
+                                                //     'error': 'Error! al crear la notificación'
+                                                // })
                                             }  ///
                                             resolve({
                                                 'result': result
