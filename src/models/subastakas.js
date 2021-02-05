@@ -71,8 +71,8 @@ subastakasModel.NewOffer = (OfferData, IdOfferData) => {
                                             console.log(detalles);
                                             // //console.log(idUserPublication);
                                             // console.log("idUserPublication.tokenpush");
-
-                                            respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
+                                            //ENVIAR NOTIFICACIÓN
+                                            //respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
 
                                             ////////
 
