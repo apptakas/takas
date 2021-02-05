@@ -152,6 +152,73 @@ SubastakasController.NewOffer = async (req) => {
 };
 
 
+
+//DETALLES DE LA OFERTA - GENERAL 
+SubastakasController.DetailsOffer = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+        let UserConsulta= req.idFirebaseUser;
+
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+        if(req.typePublication==1){
+            OfferData = {                
+                id: req.idOferta,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==2){
+            OfferData = {
+                id: req.idOferta,
+                publication: req.typePublication
+            };
+        }if(req.typePublication==3){
+            OfferData = {
+                id: req.idOferta,
+                publication: req.typePublication
+            };
+        }
+        //console.log(userData.password);
+        let response = await Offer.DetailsOffer(OfferData,UserConsulta);
+
+       //console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result[0];
+            // console.log("response.result");
+            // console.log(response.result[0]);
+            // console.log("response.result");
+
+            data = {
+                success: true,
+                status: '200',
+                data: r,
+                msg: 'Detalles de la oferta listado exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar listar detalles de la oferta'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 //LISTAR OFERTAS - GENERAL 
 SubastakasController.ListOffer = async (req) => {
     try {
