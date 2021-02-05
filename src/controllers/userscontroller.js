@@ -2240,10 +2240,10 @@ userController.listChatRoomStatus = async (req) => {
         
             let statuSala= req.statuSalaChat;
             let idUder= req.idUder;
-            if(req.statuSalaChat=1){
+            if(req.statuSalaChat==1){
                 statuSala=24
             }
-            if(req.statuSalaChat=0){
+            if(req.statuSalaChat==0){
                 statuSala=25
             }
 
