@@ -159,7 +159,7 @@ router.post('/detailsoffersbtk', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }
-        let response = await subastakasController.DetailsOffer(req.body);
+        let response = await subastakasController.detailsoffersbtk(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
