@@ -4335,106 +4335,166 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "success": true,
     "status": "200",
     "data": {
-        "idTombotakas": 2,
-        "timeremaining": 25593.626933333333,
-        "pertenece": true,
-        "nameTombotakas": "test Nueva Tombotakas",
+        "idTombotakas": 1,
+        "pinTombotakas": "Sx3Ev1",
+        "pertenece": false,
+        "timeremaining": 37847.64008333333,
+        "nameTombotakas": "Botella de crema de whisky",
         "statusTTK": 0,
-        "datecreatedTTK": "19/11/2020",
-        "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-        "detailsAwardttk": "La imagen que voy a cargar en este momento",
-        "pinreferenceTTK": "ibxJu2",
-        "datelotTTK": "25/11/2020 19:47",
-        "moneyTTK": 1,
-        "priceTTK": "10000.0000",
+        "datecreatedTTK": "2020-12-16",
+        "detailseventTTK": "Juega con la lotería de boyacá, ticket sin pagar no juega",
+        "detailsAwardttk": "3 botellas de crema de whisky con su envase original",
+        "pinreferenceTTK": "Sx3Ev1",
+        "datelotTTK": "2021-01-09 14:46",
+        "moneyTTK": 0,
+        "priceTTK": "5000.0000",
         "resultTTK": null,
         "imgTTK": [
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5"
         ],
         "numberticketsrs": [
-            31,
-            40,
-            21,
-            1,
-            10,
-            32,
-            22,
-            2
+            8,
+            9,
+            15,
+            16,
+            17,
+            18,
+            23,
+            35,
+            47,
+            95,
+            96,
+            97,
+            98,
+            99
         ],
         "ticketsReservados": [
             {
-                "idNUmbre": 1,
-                "Number": 31,
-                "status": 4,
-                "NameUser": "gusuario12",
-                "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-            },
-            {
-                "idNUmbre": 2,
-                "Number": 40,
+                "idNUmbre": 4,
+                "Number": 8,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Ronny Sotillet",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "ronny.sotillet777@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c"
             },
             {
                 "idNUmbre": 3,
-                "Number": 21,
+                "Number": 9,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Ronny Sotillet",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "ronny.sotillet777@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c"
             },
             {
-                "idNUmbre": 4,
-                "Number": 1,
+                "idNUmbre": 10,
+                "Number": 15,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Kenneth Rodriguez",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
             },
             {
-                "idNUmbre": 5,
-                "Number": 10,
+                "idNUmbre": 9,
+                "Number": 16,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Kenneth Rodriguez",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-            },
-            {
-                "idNUmbre": 6,
-                "Number": 32,
-                "status": 1,
-                "NameUser": "gusuario12",
-                "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-            },
-            {
-                "idNUmbre": 7,
-                "Number": 22,
-                "status": 1,
-                "NameUser": "gusuario12",
-                "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
             },
             {
                 "idNUmbre": 8,
-                "Number": 2,
-                "status": 1,
-                "NameUser": "gusuario12",
+                "Number": 17,
+                "status": 2,
+                "NameUser": "Kenneth Rodriguez",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
+            },
+            {
+                "idNUmbre": 11,
+                "Number": 18,
+                "status": 1,
+                "NameUser": "Kenneth Rodriguez",
+                "phonenumber": null,
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
+            },
+            {
+                "idNUmbre": 5,
+                "Number": 23,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 12,
+                "Number": 35,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 13,
+                "Number": 47,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 15,
+                "Number": 95,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 16,
+                "Number": 96,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 14,
+                "Number": 97,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 17,
+                "Number": 98,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 18,
+                "Number": 99,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
             }
         ]
     },

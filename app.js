@@ -34,7 +34,7 @@ app.use(require('./src/routes'));
 ////app.use(require('./routes/delivery/usersdomiciliaryroutes'));
 app.use('/admin', require('./src/routes/admin/adminroutes'));
 app.use('/user', require('./src/routes/user/usersroutes'));
-app.use('/subastakaS', require('./src/routes/subastakas/subastakasroutes'));
+app.use('/subastakas', require('./src/routes/subastakas/subastakasroutes'));
 ////app.use('/subastakas',require('./src/routes/subastakas/subastakasroutes'));
 app.use('/notifications', require('./src/routes/notifications/notificationsroutes'));
 

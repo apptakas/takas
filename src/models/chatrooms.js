@@ -9,10 +9,14 @@ let chatroomsModel = {};
 
 //Crear una nueva Sala de chat
 chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,hoy,OfferData,Status) => {
-       return new Promise((resolve, reject) => {
+       return new Promise(async(resolve, reject) => {
         if (pool) {
-            console.log(OfferData);
-            console.log(hoy);
+            // console.log(OfferData);
+            // console.log(hoy);
+            let Existe= await chatroomsModel.SalaExist(IdSAla,userPublication,userOffer,idPublication,OfferData);
+            // console.log("Existe.Exist");
+            // console.log(Existe.Exist);
+            if(Existe.Exist==false){
             pool.query(
                 'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) VALUES ("'+IdSAla+'","'+userPublication+'","'+userOffer+'",'+idPublication+',"'+OfferData+'","'+hoy+'",'+Status+')',
                 (err, result) => {
@@ -24,7 +28,7 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
                             'error': err
                         })
                     } else {
-                        console.log(result);
+                        //console.log(result);
                         resolve({
                             'result': result
                         })
@@ -32,10 +36,61 @@ chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,ho
 
                 }
             )
+        }else{
+            
+            resolve({
+                'result': Existe.result,
+                'Exist': Existe.Exist,
+                'sala': Existe.idSala
+            })
+        }
             //return resultado;
         }
     })
 };
+
+chatroomsModel.SalaExist = (IdSAla,iduserpublication,iduseroffer,idpubliction,idoffer) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            'SELECT * FROM `chatrooms` WHERE  iduserpublication=? AND iduseroffer=? AND idpubliction=? AND idoffer=?', [
+                iduserpublication,
+                iduseroffer,
+                idpubliction,
+                idoffer
+            ],
+            (err, result) => {
+                              
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {    
+                    let E=false;
+                    let id=IdSAla;
+                    // console.log("result");
+                    // console.log(result);
+                    if(result.length!=0){
+                        E=true;
+                        id=result[0].id;
+                    }
+                    resolve({
+                        'Exist': E,
+                        'result': result,
+                        'idSala': id
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
 
 //Crear una nueva Sala de chat
 chatroomsModel.ExistChatRooms = (IdSAla) => {
@@ -516,7 +571,7 @@ chatroomsModel.CloseChatRoom = (ChatRoomData) => {
                             'error': err
                         })
                     } else {  
-                        console.log(result);                       
+                        //console.log(result);                       
                                              
                         resolve({
                             'result': result

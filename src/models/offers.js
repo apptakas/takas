@@ -516,7 +516,7 @@ OffersModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
             let idOferta = OfferData.id;
             let idUser = OfferData.idUser;
             let respCrearPush = {};
-            console.log(OfferData);
+            //console.log(OfferData);
             pool.query(
                 'UPDATE  offers SET  status= ? WHERE id= ?', [
                 OfferData.status,
@@ -538,7 +538,7 @@ OffersModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
 
                         //TOMAMOS DATOS DE LA OFERTA
                         idUserOferta = await UsersModel.DataUserOferta(idOferta);
-                        console.log(idUserOferta);
+                        //console.log(idUserOferta);
                         //CALCULAMOS VALOR DE LA OFERTA
                         ValorOferta = await OffersModel.CalculoValorOferta(idOferta);
                         //console.log(idUserOferta);
@@ -590,7 +590,7 @@ OffersModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
 
                         }
-
+                        
                         resolve({
                             'result': result,
                             'sala': FindDatOffer.idSala,
@@ -635,7 +635,7 @@ OffersModel.FindDatOffer = (OfferData, callback) => {
                         })
                     } else {
                         IdSAla = sha1(result[0].userOffer + result[0].userPublication + result[0].idPublication + hoy);
-                        console.log("IdSAla");
+                        //console.log("IdSAla");
                         // console.log(IdSAla);
                         // console.log(result[0].userOffer);
                         // console.log(result[0].userPublication);

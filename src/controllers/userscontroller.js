@@ -2172,7 +2172,6 @@ userController.ChangeStatusOffer = async (req) => {
                 status:statusOffer
             };
        
-        console.log(OfferData);
         
         //let response = await Offer.FindDatOffer(OfferData);
        let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
@@ -3302,7 +3301,7 @@ userController.DetailsTombotakas = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data:datar,
+                data:r,
                 msg: 'Detalle de Tombotakas encontrado exitosamente'
                 //data: response
             }

@@ -193,11 +193,12 @@ router.post('/detailsoffer', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *    {
+ *   {
     "success": true,
     "status": "200",
     "match": true,
-    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
+    "sala": "21b2460885e910ed4322f944e810ca9fa35d3105",
+    "msg": "Cambio de estatus de una oferta de subastakas se pocesó exitosamente"
 }
  *
  * @apiError UserNotFound The id of the Offers was not found.
@@ -212,7 +213,7 @@ router.post('/detailsoffer', rutasProtegidas, [
  **/
 
 //CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
-router.put('/changestatusoffer', rutasProtegidas, [
+router.put('/changestatusoffersbtk', rutasProtegidas, [
     check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
     check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
     check('FlagStatusOffer', 'El FlagStatusOffer es obligatorio').not().isEmpty().exists()
@@ -223,7 +224,7 @@ router.put('/changestatusoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }        
-        let response = await subastakasController.ChangeStatusOffer(req.body);
+        let response = await subastakasController.ChangeStatusOfferSbtk(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
