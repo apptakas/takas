@@ -2935,25 +2935,44 @@ router.put('/changestatusoffer', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idSala": "949bdc81078b49cd604b6622ddd762054ca8963a",
-            "datecreated": "28/10/2020",
-            "idPublicacion": 1,
-            "namePublication": "Estufa de 4 hornillas",
-            "valorComercial": "200000.0000",
+            "idSala": "43b8413e2dcbfddce50c8639d17f2916c8f15da0",
+            "datecreated": "04/02/2021",
+            "idPublicacion": 5,
+            "typepublication": 1,
+            "namePublication": "Arbolito de navidad",
+            "valorComercial": "300000.0000",
             "Userpublication": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
-            "nameUserPublication": "Ana",
-            "imgUserPublication": "https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d",
-            "idoferta": 7,
-            "UserOferta": "EVln0Vj6DNOtTXQVS2fN9P68Gl13",
-            "nameUserOferta": "ronny",
-            "imgUserOferta": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499",
+            "nameUserPublication": "Ronny Sotillet",
+            "imgUserPublication": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+            "idoferta": 3,
+            "UserOferta": "5FHP1unvc0PXHQlNCY7lid6774H2",
+            "nameUserOferta": "Kenneth Rodriguez",
+            "imgUserOferta": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c",
             "ProductImagesPublicacion": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722"
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30"
             ],
             "PreferencesPublicacion": [
-                1,
-                2
+                1
             ]
+        },
+        {
+            "idSala": "c14858c75f9b1c53d928ce2dc16af614100c2384",
+            "datecreated": "04/02/2021",
+            "idPublicacion": 59,
+            "typepublication": 3,
+            "namePublication": "pueba laptop 60",
+            "valorComercial": "1200000.0000",
+            "Userpublication": "idfirebaseU4534dsaxgg",
+            "nameUserPublication": "Carla Rodríguez Gil",
+            "imgUserPublication": null,
+            "idoferta": 14,
+            "UserOferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nameUserOferta": "Ronny Sotillet",
+            "imgUserOferta": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+            "ProductImagesPublicacion": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "PreferencesPublicacion": []
         }
     ],
     "msg": "Lista de salas de chat según status"
@@ -3020,38 +3039,36 @@ router.post('/listchatroomstatus', rutasProtegidas, [
     "success": true,
     "status": "200",
     "data": {
-        "idSala": "13cd8cceaa9b25a4cfbf364c585f89639ebd1aae",
+        "idSala": "c14858c75f9b1c53d928ce2dc16af614100c2384",
         "status": 24,
-        "datecreated": "03/11/2020",
-        "idPublicacion": 3,
-        "namePublication": "Reloj Alarma",
-        "ValorPublication": "12000.0000",
-        "Userpublication": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
-        "nameUserPublication": "Anailys Rodríguez",
+        "datecreated": "04/02/2021",
+        "idPublicacion": 59,
+        "typepublication": 3,
+        "namePublication": "pueba laptop 60",
+        "ValorPublication": "1200000.0000",
+        "Userpublication": "idfirebaseU4534dsaxgg",
+        "nameUserPublication": "Carla Rodríguez Gil",
         "imgUserPublication": null,
-        "idoferta": 180,
+        "idoferta": 14,
         "iduseroferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
         "UserOferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
-        "nameUserOferta": "Ana",
-        "imgUserOferta": "https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d",
-        "PreferencesPublicacion": [
-            2,
-            1
-        ],
+        "nameUserOferta": "Ronny Sotillet",
+        "imgUserOferta": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+        "PreferencesPublicacion": [],
         "aFavor": true,
         "Valorferta": "10000.0000",
-        "dieferencia": "2000.0000",
+        "dieferencia": "1190000.0000",
         "ItemOfer": [
             {
-                "idpublication": 4,
-                "nameproduct": "Blusas ",
-                "status": 4,
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A36%3A46.808593.jpg?alt=media&token=44c54278-2aae-451d-a307-d2f821b3286c",
+                "idpublication": 1,
+                "nameproduct": "Kit dental",
+                "status": 3,
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2014%3A53%3A04.710633.jpg?alt=media&token=536eeaba-ac5b-4b39-a2e0-0a170827cef0",
                 "marketvalue": "10000.0000"
             }
         ],
-        "isUserPubli": true,
-        "match": 3
+        "isUserPubli": false,
+        "match": 0
     },
     "msg": "Data completa de la sala de chat"
 }
