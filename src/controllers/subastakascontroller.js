@@ -460,7 +460,7 @@ SubastakasController.ListMyOffer = async (req) => {
 
 //
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFFERS 
-SubastakasController.ChangeStatusOffer = async (req) => {
+SubastakasController.ChangeStatusOfferSbtk = async (req) => {
     try {
         let match=false;
         let OfferData ={};
@@ -485,10 +485,11 @@ SubastakasController.ChangeStatusOffer = async (req) => {
                 status:statusOffer
             };
        
+        console.log("ChangeStatusOfferSbtk");
         console.log(OfferData);
         
         //let response = await SubatakasModel.FindDatOffer(OfferData);
-       let response = await SubatakasModel.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
+       let response = await SubatakasModel.ChangeStatusOfferSbtk(OfferData,req.FlagStatusOffer);
 
        //console.log(response);
       // console.log(response.sala);
@@ -500,13 +501,15 @@ SubastakasController.ChangeStatusOffer = async (req) => {
             r = response.result;
             if(response.sala){
                 sala=response.sala;
+                console.log("sala");
+                console.log(sala);
             }
             data = {
                 success: true,
                 status: '200',
                 match:match,
                 sala:sala,
-                msg: 'Cambio de estatus de una oferta ejecutdo exitosamente'
+                msg: 'Cambio de estatus de una oferta de subastakas se pocesó exitosamente'
                 //data: response
             }
         } else {
@@ -536,7 +539,7 @@ SubastakasController.ChangeStatusOffer = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-      notifications(token,titulo,detalle,datanoti);
+      //notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio

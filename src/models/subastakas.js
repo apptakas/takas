@@ -3,6 +3,7 @@ const ProductModel = require('../models/product.js');
 const chatroomsModel = require('../models/chatrooms.js');
 const notificationModel = require('../models/notifications.js');
 const UsersModel = require('../models/users.js');
+const subastakas = require('../models/subastakas.js');
 const sha1 = require('sha1');
 const date = require('date-and-time');
 let subastakasModel = {};
@@ -146,18 +147,20 @@ subastakasModel.CalculoValorOferta = (idOferta, callback) => {
 };
 
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
-subastakasModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
+subastakasModel.ChangeStatusOfferSbtk = (OfferData, FlagStatusOffer) => {
     //let resultado = {};
     return new Promise((resolve, reject) => {
         if (pool) {
             let FindDatOffer = {};
+            let RechazarOfertasDescartadas = {};
             let idUserPublication = {};
             let idUserOferta = {};
             let statusOffer = OfferData.status;
             let idOferta = OfferData.id;
             let idUser = OfferData.idUser;
             let respCrearPush = {};
-            console.log(OfferData);
+           console.log("OfferData");
+           console.log(OfferData);
             pool.query(
                 'UPDATE  offers SET  status= ? WHERE id= ?', [
                 OfferData.status,
@@ -171,7 +174,7 @@ subastakasModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
                         })
                     } else {
 
-                        //console.log("prueba");
+                        console.log("prueba Subastakas");
                         /////**********creamos notificación y preparamos datos para notificación push************//////////////
 
                         //idUserPublication= await UsersModel.DataUserPublication(idrelation);
@@ -179,7 +182,7 @@ subastakasModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
 
                         //TOMAMOS DATOS DE LA OFERTA
                         idUserOferta = await UsersModel.DataUserOferta(idOferta);
-                        console.log(idUserOferta);
+                       // console.log(idUserOferta);
                         //CALCULAMOS VALOR DE LA OFERTA
                         ValorOferta = await subastakasModel.CalculoValorOferta(idOferta);
                         //console.log(idUserOferta);
@@ -211,14 +214,20 @@ subastakasModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
                             //console.log(respCrearPush);
                             ///////////////////////////////////////////
                             FindDatOffer = await subastakasModel.FindDatOffer(OfferData);
+                            
+                            RechazarOfertasDescartadas = await subastakasModel.RechazarOfertasDescartadas(FindDatOffer.result[0].idpubliction,OfferData.id);
 
-                            //console.log(FindDatOffer);
+                            console.log("RechazarOfertasDescartadas");
+                            console.log(RechazarOfertasDescartadas);
+                            console.log("FindDatOffer");
+                            console.log(FindDatOffer);
                             //console.log(FindDatOffer.error);
                             if (FindDatOffer.error) {
                                 resolve({
-                                    'error': FindDatOffer.error
+                                    'error': FindDatOffer.error,
                                 })
                             }
+                            
 
                         } // if si es aceptada la oferta
                         //SI LA OFERTA ES RECHAZADA
@@ -231,10 +240,11 @@ subastakasModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
 
                         }
-
+                        // console.log("FindDatOffer.idSala");
+                        // console.log(FindDatOffer.idSala);
                         resolve({
                             'result': result,
-                            // 'sala': FindDatOffer.idSala,
+                            'sala': FindDatOffer.idSala,
                             'idNotificacion': respCrearPush.insertId,
                             'TypeNotification': TypeNotification,
                             'UserPublication': UserPublication,
@@ -247,6 +257,39 @@ subastakasModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
                     }
 
                 }
+            )
+            //return resultado;
+        }
+    })
+};
+
+//CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
+subastakasModel.RechazarOfertasDescartadas = (idSubastakas,idOffer) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            console.log("idSubastakas");
+            console.log("idOffer");
+            console.log(idSubastakas);
+            console.log(idOffer);
+            pool.query(
+                'UPDATE offers AS o SET o.status=8 WHERE o.idproduct=? AND o.id<>?', [
+                    idSubastakas,
+                    idOffer
+            ],
+                async (err, result) => {
+                    //console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else{
+                        resolve({
+                            'result': result,
+                        })
+                    }
+                    }
+
             )
             //return resultado;
         }
@@ -274,13 +317,14 @@ subastakasModel.FindDatOffer = (OfferData, callback) => {
                         })
                     } else {
                         IdSAla = sha1(result[0].userOffer + result[0].userPublication + result[0].idPublication + hoy);
-                        console.log("IdSAla");
+                        //console.log("IdSAla");
                         // console.log(IdSAla);
                         // console.log(result[0].userOffer);
                         // console.log(result[0].userPublication);
-                        
-                       // DataSalas = await chatroomsModel.newChatRooms(IdSAla, result[0].userOffer, result[0].userPublication, result[0].idPublication, hoy, OfferData.id, 24);
-                        //console.log("DataSalas");
+
+                       DataSalas = await chatroomsModel.newChatRooms(IdSAla, result[0].userOffer, result[0].userPublication, result[0].idPublication, hoy, OfferData.id, 24);
+                        // console.log("DataSalas");
+                        // console.log(DataSalas);
                         //console.log(DataSalas.error);
                         if (DataSalas.error) {
                             resolve({
@@ -288,10 +332,19 @@ subastakasModel.FindDatOffer = (OfferData, callback) => {
                             })
                         }
                         else {
-                            resolve({
-                                'result': result
-                                // 'idSala': IdSAla
-                            })
+                            if(DataSalas.Exist==true){
+                                resolve({
+                                    'result': DataSalas.result,
+                                    'idSala': DataSalas.sala
+                                })
+
+                            }
+                            else{
+                                resolve({
+                                    'result': result,
+                                    'idSala': IdSAla
+                                })
+                            }
                         }
                     }
 
