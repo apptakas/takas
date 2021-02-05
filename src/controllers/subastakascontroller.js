@@ -154,7 +154,7 @@ SubastakasController.NewOffer = async (req) => {
 
 
 //DETALLES DE LA OFERTA - GENERAL 
-SubastakasController.DetailsOffer = async (req) => {
+SubastakasController.detailsoffersbtk = async (req) => {
     try {
 
         let dt = new Date();//getMonth   getDate
@@ -182,7 +182,7 @@ SubastakasController.DetailsOffer = async (req) => {
             };
         }
         //console.log(userData.password);
-        let response = await Offer.DetailsOffer(OfferData,UserConsulta);
+        let response = await SubatakasModel.detailsoffersbtk(OfferData,UserConsulta);
 
        //console.log(response);
 
@@ -320,7 +320,7 @@ SubastakasController.detailsoffersbtk = async (req) => {
             };
         }
         //console.log(userData.password);
-        let response = await Offer.detailsoffersbtk(OfferData,UserConsulta);
+        let response = await SubatakasModel.detailsoffersbtk(OfferData,UserConsulta);
 
        //console.log(response);
 
