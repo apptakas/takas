@@ -170,8 +170,8 @@ router.post('/detailsoffer', rutasProtegidas, [
     })
 
     /**
- * @api {put} /subastakas/changestatusoffer 10 changestatusoffer
- * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @api {put} /subastakas/changestatusoffersbtk 10 changestatusoffersbtk
+ * @apiName changestatusoffersbtk - Cambio de estado de una oferta
  * @apiGroup Subastakas
  * 
  * 

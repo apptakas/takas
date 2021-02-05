@@ -2240,6 +2240,13 @@ userController.listChatRoomStatus = async (req) => {
         
             let statuSala= req.statuSalaChat;
             let idUder= req.idUder;
+            if(req.statuSalaChat=1){
+                statuSala=24
+            }
+            if(req.statuSalaChat=0){
+                statuSala=25
+            }
+
        
         //console.log(userData.password);
         let response = await ChatRooms.listChatRoomStatus(statuSala,idUder);
