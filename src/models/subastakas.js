@@ -368,5 +368,37 @@ subastakasModel.FindDatOffer = (OfferData, callback) => {
     })
 };
 
+//DETALLES DE LA OFERTA  - Obtenemos lista de detalles de una oferta sobre una publicación
+subastakasModel.detailsoffersbtk = (OfferData, UserConsulta) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let ListItemsOffer={};
+            pool.query(
+                'SELECT o.id,o.iduser,o.dateoffers,o.montoffert,o.idproduct,p.name as namePublication,o.idauction,o.observation,o.publication,o.status,u.fullname AS nameoffer,p.marketvalue,p.marketvalue as ValorPublication FROM offers AS o   INNER JOIN users AS u ON u.id=o.iduser   INNER JOIN product AS p ON p.`id`=o.idproduct  WHERE o.id= ? AND o.publication= ?', [
+                OfferData.id,
+                OfferData.publication],
+                async (err, result) => {
+
+                    if (err) {
+                        console.log(err);
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        //console.log(result);
+                        ListItemsOffer = await OffersModel.recorridOfertas(result);
+                        resolve({
+                            'result': ListItemsOffer
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
 
 module.exports = subastakasModel;

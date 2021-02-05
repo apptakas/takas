@@ -10,8 +10,8 @@ const userController = require('../../controllers/userscontroller');
 //app.express();
 
 /**
- * @api {post} /subastakas/newoffer 8 newoffer
- * @apiName newoffer - Crear Oferta
+ * @api {post} /subastakas/newoffersbtk 8 newoffersbtk
+ * @apiName newoffersbtk - Crear Oferta
  * @apiGroup Subastakas
  * 
  * 
@@ -80,8 +80,8 @@ router.post('/newoffersbtk', rutasProtegidas, [
     })
 
        /**
- * @api {post} /subastakas/detailsoffer 9 detailsoffer
- * @apiName detailsoffer - Detalles de la Oferta
+ * @api {post} /subastakas/detailsoffersbtk 9 detailsoffersbtk
+ * @apiName detailsoffersbtk - Detalles de la Oferta
  * @apiGroup Subastakas
  * 
  * 
@@ -148,7 +148,7 @@ router.post('/newoffersbtk', rutasProtegidas, [
  **/
 
 //DETALLE DE LA OFERTA - PUBLICACIÓN
-router.post('/detailsoffer', rutasProtegidas, [
+router.post('/detailsoffersbtk', rutasProtegidas, [
     check('idFirebaseUser', 'El idFirebaseUser es obligatorio').not().isEmpty().exists(),
     check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
     check('idOferta', 'El idOferta es obligatorio').not().isEmpty().exists()
@@ -159,7 +159,7 @@ router.post('/detailsoffer', rutasProtegidas, [
         if (error.array().length != 0) {
             return res.status(422).json({ errores: error.array(), msg: 'Error' });
         }
-        let response = await userController.DetailsOffer(req.body);
+        let response = await subastakasController.detailsoffersbtk(req.body);
     
         if (response.status == 'ko') {
             return res.status(500).json({ error: 'Error' })
