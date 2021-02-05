@@ -45,6 +45,7 @@ SubastakasController.NewOffer = async (req) => {
 
         let OfferData ={};
         //console.log(req);
+        console.log(req.MontOffer),
 
         OfferData = {
             iduser: req.idFirebaseUser,
@@ -130,7 +131,7 @@ SubastakasController.NewOffer = async (req) => {
         "click_action": "FLUTTER_NOTIFICATION_CLICK"
     };
         
-      notifications(token,titulo,detalle,datanoti);
+     // notifications(token,titulo,detalle,datanoti);
 
 
 
