@@ -387,7 +387,7 @@ subastakasModel.detailsoffersbtk = (OfferData, UserConsulta) => {
                         })
                     } else {
                         //console.log(result);
-                        ListItemsOffer = await OffersModel.recorridOfertas(result);
+                        ListItemsOffer = await subastakasModel.recorridOfertas(result);
                         resolve({
                             'result': ListItemsOffer
                         })
@@ -399,6 +399,174 @@ subastakasModel.detailsoffersbtk = (OfferData, UserConsulta) => {
         }
     })
 };
+
+
+subastakasModel.recorridOfertas = (result) => {
+
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+        let oferta = 0;
+        for (const element of result) {
+            if (oferta != element.id) {
+                arr.push(await subastakasModel.ListItemsOffers(element));
+                oferta = element.id;
+            }
+        }
+        resolve(arr)
+    }
+    )
+
+}
+
+
+subastakasModel.ListItemsOffers = (element) => {
+    return new Promise((resolve, reject) => {
+        let SumItemsOffer = 0;
+        let DiferenciaOffer = 0;
+        let Afavor = false;
+        let detalleProduct = {};
+        let img = {};
+        let sala = {};
+        pool.query(
+            'SELECT ops.idoffers,ops.idpublication AS idproduct,ip.url,ops.status,p.name,p.marketvalue,p.datecreated AS datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE idoffers=' + element.id,
+            async (err2, result2) => {
+                if (err2) {
+                    console.log(err2);
+                    resolve({
+                        'error': err2
+                    })
+                } else {
+                    //  console.log(result2); 
+                    //  console.log(result2.length);
+                    let ListItemsOffers = [];
+                    let idItems = 0;
+                    //let SumItemsOffer=0;
+                    if (result2.length > 0) {
+                        // console.log(SumItemsOffer);
+                        for (var atr2 in result2) {
+                            // "iduser": result2[0].iduser,
+                            let statuspo = 3;
+
+                            if (result2[atr2].status == 23) {
+                                statuspo = 0
+                            }
+                            if (result2[atr2].status == 8) {
+                                statuspo = 1
+                            }
+                            if (result2[atr2].status == 7) {
+                                statuspo = 2
+                            }
+                            if (result2[atr2].status == 6) {
+                                statuspo = 3
+                            }
+
+
+                            if (idItems != result2[atr2].idproduct) {
+
+                                idoffer = result2[atr2].id;
+                               
+                                    ListItemsOffers.push({
+                                        "idoffer": result2[atr2].id,
+                                        "idpublication": result2[atr2].idproduct,
+                                        "imgpublicacion": result2[atr2].url,
+                                        "nameproduct": result2[atr2].name,
+                                        "status": statuspo,
+                                        "img": result2[atr2].url,
+                                        "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
+                                    });
+
+                                idItems = result2[atr2].idproduct;
+                                SumItemsOffer = parseInt(SumItemsOffer) + parseInt(result2[atr2].marketvalue);
+                                // console.log(SumItemsOffer);
+                            }
+
+
+                        }; // fin for
+
+                        // duplicadOferta=result2[atr2].id;    
+                        // console.log("element.id");                 
+                        // console.log(element.id);                 
+                        // console.log("result2[atr2].idoffers");                 
+                        // console.log(result2[atr2].idoffers); 
+
+
+                        if (SumItemsOffer > element.ValorPublication) {
+                            DiferenciaOffer = SumItemsOffer - element.ValorPublication;
+                            Afavor = false;
+                        } else {
+                            DiferenciaOffer = element.ValorPublication - SumItemsOffer;
+                            Afavor = true;
+                        }
+
+                    };
+                    // console.log("result2");
+                    // console.log(result2);
+
+                    //console.log(ListItemsOffers);
+                    detalleProduct = await ProductModel.armaresult(result2);
+                    // console.log("detalleProduct");
+                    // console.log(detalleProduct);
+                    //let  idSala=null;
+                    img = await chatroomsModel.ListImagesProduct(element.idproduct);
+                    sala = await chatroomsModel.idSala(element.id);
+                    idSala = sala.idSala
+                    //console.log(sala);
+                    let statuso = 3;
+
+                    if (element.status == 23) {
+                        statuso = 0
+                    }
+                    if (element.status == 8) {
+                        statuso = 1
+                    }
+                    if (element.status == 7) {
+                        statuso = 2
+                    }
+                    if (element.status == 6) {
+                        statuso = 3
+                    }
+                    if(element.publication==3){
+                        resolve({
+                            "idoffer": element.id,
+                            "iduseroffer": element.iduser,
+                            "statusoffer": statuso,
+                            "idSala": idSala,
+                            "idproduct": element.idproduct,
+                            "namepublication": element.namePublication,
+                            "img": img.ImagesProduct,
+                            "observation": element.observation,
+                            "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
+                            "sumitemsoffer": Number.parseFloat(SumItemsOffer).toFixed(4),
+                            "differenceoffer": Number.parseFloat(DiferenciaOffer).toFixed(4),
+                            "montoffert":element.montoffert,
+                            "infavor": Afavor,
+                            "itemsoffer": ListItemsOffers
+                        });
+                }
+                else{
+                    resolve({
+                        "idoffer": element.id,
+                        "iduseroffer": element.iduser,
+                        "statusoffer": statuso,
+                        "idSala": idSala,
+                        "idproduct": element.idproduct,
+                        "namepublication": element.namePublication,
+                        "img": img.ImagesProduct,
+                        "observation": element.observation,
+                        "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
+                        "sumitemsoffer": Number.parseFloat(SumItemsOffer).toFixed(4),
+                        "differenceoffer": Number.parseFloat(DiferenciaOffer).toFixed(4),
+                        "infavor": Afavor,
+                        "itemsoffer": ListItemsOffers
+                    });
+                }
+                }
+
+            })
+    })
+}
+
+
 
 
 module.exports = subastakasModel;
