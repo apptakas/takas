@@ -45,7 +45,7 @@ SubastakasController.NewOffer = async (req) => {
 
         let OfferData ={};
         //console.log(req);
-        console.log(req.MontOffer),
+        console.log(req.MontOffer);
 
         OfferData = {
             iduser: req.idFirebaseUser,
@@ -111,25 +111,21 @@ SubastakasController.NewOffer = async (req) => {
             //                                         'tokenpush':tokenpush,
             //                                         'titulo':titulo,
             //                                         'detalles':detalles
-        let token=response.tokenpush;
-        let titulo=response.titulo;
-        let detalle=response.detalles;
-       //let descripción="Haz recibido una nueva oferta para la publicación de Gorrros de bebes.";
-    //   console.log("response.tokenpush");
-    //   console.log(response.tokenpush);
-    //    console.log(response);
-       let datanoti={
-        "title": response.titulo,
-        "body": response.detalles,
-        "idOffer":response.idOferta,
-        "idNotification":response.idNotificacion,
-        "idrelation":response.idrelation,
-        "TypeNotification":response.TypeNotification,
-        "UserPublication":response.UserPublication,
-        "type": 0,
-        "status": 0,
-        "click_action": "FLUTTER_NOTIFICATION_CLICK"
-    };
+    //     let token=response.tokenpush;
+    //     let titulo=response.titulo;
+    //     let detalle=response.detalles;
+    //    let datanoti={
+    //     "title": response.titulo,
+    //     "body": response.detalles,
+    //     "idOffer":response.idOferta,
+    //     "idNotification":response.idNotificacion,
+    //     "idrelation":response.idrelation,
+    //     "TypeNotification":response.TypeNotification,
+    //     "UserPublication":response.UserPublication,
+    //     "type": 0,
+    //     "status": 0,
+    //     "click_action": "FLUTTER_NOTIFICATION_CLICK"
+    // };
         
      // notifications(token,titulo,detalle,datanoti);
 
