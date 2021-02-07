@@ -386,7 +386,8 @@ subastakasModel.detailsoffersbtk = (OfferData, UserConsulta) => {
                             'error': err
                         })
                     } else {
-                        //console.log(result);
+                        console.log("result");
+                        console.log(result);
                         ListItemsOffer = await subastakasModel.recorridOfertas(result);
                         resolve({
                             'result': ListItemsOffer
@@ -499,7 +500,7 @@ subastakasModel.ListItemsOffers = (element) => {
                         }
 
                     };
-                    // console.log("result2");
+                     console.log("result2");
                     // console.log(result2);
 
                     //console.log(ListItemsOffers);
@@ -538,7 +539,7 @@ subastakasModel.ListItemsOffers = (element) => {
                             "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                             "sumitemsoffer": Number.parseFloat(SumItemsOffer).toFixed(4),
                             "differenceoffer": Number.parseFloat(DiferenciaOffer).toFixed(4),
-                            "montoffert":element.montoffert,
+                            "montoffert": Number.parseFloat(element.montoffert).toFixed(4),
                             "infavor": Afavor,
                             "itemsoffer": ListItemsOffers
                         });

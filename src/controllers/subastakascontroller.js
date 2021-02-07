@@ -35,7 +35,7 @@ let SubastakasController = {};
 
 //
 //CREAR OFERTAS A UNA SUBASTA -  
-SubastakasController.NewOffer = async (req) => {
+SubastakasController.newoffersbtk = async (req) => {
     try {
 
         let dt = new Date();//getMonth   getDate
