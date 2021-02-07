@@ -325,7 +325,7 @@ OffersModel.ListItemsOffers = (element) => {
                             "valorpublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                             "sumitemsoffer": Number.parseFloat(SumItemsOffer).toFixed(4),
                             "differenceoffer": Number.parseFloat(DiferenciaOffer).toFixed(4),
-                            "montoffert":element.montoffert,
+                            "montoffert":Number.parseFloat(element.montoffert).toFixed(4),
                             "infavor": Afavor,
                             "itemsoffer": ListItemsOffers
                         });
