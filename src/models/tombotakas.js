@@ -718,7 +718,7 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
         // 'SELECT ttk.id,ttk.iduser,ttk.name,ttk.datecreated,ttk.detailsevent,ttk.detailsaward,ttk.pinreference,ttk.datelot,ttk.money,ttk.price,ttk.detailspayments,ttk.result,ttk.status,tk.id as idTicket,tk.status as statustk FROM tombotakas AS ttk INNER JOIN tombotikets AS tk ON ttk.id=tk.idtombotakas WHERE ttk.id=? AND tk.status IN (30,31) ',  idTTK,
          //
          pool.query(
-            'SELECT * FROM tombotakas  WHERE id=? AND status IN[30,31]',  idTTK,
+            'SELECT * FROM tombotakas  WHERE id=? ',  idTTK,
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
@@ -774,7 +774,7 @@ tombotakasModel.LisTicketsDetalsTTK = (element,idTTK,pertenece) => {
         //'SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.id='+element.idTicket,
         
         pool.query(
-            'SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.idtombotakas='+element.id,
+            'SELECT t.id, t.idtombotakas,t.number, t.status,u.imgurl, u.fullname, u.phonenumber,u.email,u.datecreated,u.datebirth  FROM `tombotikets` AS t INNER JOIN users AS u ON t.`iduser`=u.`id` WHERE t.idtombotakas='+element.id+' AND t.status IN (30,31)',
             async(err2, result2) => {
                 if (err2) {
                     //console.log(err2);

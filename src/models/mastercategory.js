@@ -14,7 +14,7 @@ mastercategoryModel.ListCategory = (typePublication) => {
             let CatgySubCatg = {};
             //let Subcategory  ={};
             pool.query(
-                'SELECT id,namec,iconc FROM mastercategory where typepublication= ? order by id asc', [typePublication],
+                'SELECT id,namec,iconc FROM mastercategory where typepublication= ? order by namec asc', [typePublication],
                 async (err, result) => {
                     //console.log("/////////////");
                     //console.log(result.length);

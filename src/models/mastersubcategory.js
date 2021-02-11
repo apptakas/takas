@@ -8,7 +8,7 @@ MasterSubCategoryModel.ListSubCategory = (callback) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             pool.query(
-                'SELECT idsc,name,icon,category,sc.status, c.namec, c.typepublication FROM `mastersubcategory` AS sc INNER JOIN mastercategory AS c ON sc.category=c.id WHERE sc.status=1',
+                'SELECT  sc.idsc,sc.name,sc.icon,sc.category,sc.status, c.namec, c.typepublication FROM `mastersubcategory` AS sc INNER JOIN mastercategory AS c ON sc.category=c.id WHERE sc.status=1 ORDER BY sc.name ASC ',
                 (err, resut) => {
                     //console.log(resut);
                     if (err) {
