@@ -2052,7 +2052,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 11,\n            \"dateNotifications\": \"31/10/2020\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido un takasteo potencial\",\n            \"details\": \"¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000\",\n            \"idevento\": 145,\n            \"idrelation\": 3,\n            \"name\": \"Reloj Alarma\",\n            \"nameProducto\": 12000\n        },\n        {\n            \"idNotifications\": 10,\n            \"dateNotifications\": \"31/10/2020\"\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido un takasteo potencial\",\n            \"details\": \"¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000\",\n            \"idevento\": 144,\n            \"idrelation\": 3,\n            \"name\": \"Reloj Alarma\",\n            \"nameProducto\": 12000\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 131,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 18,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        },\n        {\n            \"idNotifications\": 130,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 17,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -5500,9 +5500,9 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/subastakas/detailsoffer",
-    "title": "9 detailsoffer",
-    "name": "detailsoffer_-_Detalles_de_la_Oferta",
+    "url": "/subastakas/detailsoffersbtk",
+    "title": "9 detailsoffersbtk",
+    "name": "detailsoffersbtk_-_Detalles_de_la_Oferta",
     "group": "Subastakas",
     "header": {
       "examples": [
@@ -6186,9 +6186,9 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/subastakas/newoffer",
-    "title": "8 newoffer",
-    "name": "newoffer_-_Crear_Oferta",
+    "url": "/subastakas/newoffersbtk",
+    "title": "8 newoffersbtk",
+    "name": "newoffersbtk_-_Crear_Oferta",
     "group": "Subastakas",
     "header": {
       "examples": [
