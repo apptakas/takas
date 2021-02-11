@@ -46,9 +46,10 @@ notificationModel.cearnotificacion = (TypeNotification,idrelation,UserPublicatio
 //LISTAR  NOTIFICACIONES DETALLADAS 
 notificationModel.listNotifications = (idUser) => {
     return new Promise((resolve, reject) => {
+        let Resultadofin={};
         pool.query(
-            "SELECT n.id AS idNotifications,DATE_FORMAT(n.datecreated, '%d/%m/%Y') AS dateNotifications,n.status AS statusNotifications,n.typenotifications, n.title,n.details,n.idevento,n.idrelation,p.name,p.marketvalue AS nameProducto FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE n.iduser ='"+idUser+"' ORDER BY n.datecreated DESC",
-            (err2, result2) => {
+            "SELECT n.id AS idNotifications,DATE_FORMAT(n.datecreated, '%d/%m/%Y') AS dateNotifications,n.status AS statusNotifications,n.typenotifications, n.title,n.details,n.idevento,n.idrelation,p.name AS nameProducto,p.marketvalue AS ValueProducto FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE n.iduser ='"+idUser+"' ORDER BY n.datecreated DESC",
+           async (err2, result2) => {
                  
                 //console.log(element.id);   
                 //console.log(element.namec);   
@@ -66,8 +67,9 @@ notificationModel.listNotifications = (idUser) => {
                     // };  
                     //console.log(element.idproduct);  
                    // console.log(ImagesProduct);
+                   Resultadofin= await notificationModel.armaresultNotification(result2);
                     resolve({                        
-                        'result': result2
+                        'result': Resultadofin
                     });
                 }  
                 
@@ -117,6 +119,46 @@ notificationModel.cantNotifications = (status,idUder) => {
             })
     })
 }
+
+notificationModel.armaresultNotification = (result) => {
+
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+        
+        
+        try{
+            let Precio=0;
+            
+            //console.log(result);
+            for (const element of result) {
+                 
+                Precio=Number.parseFloat(element.ValueProducto).toFixed(4);
+//SELECT n.id AS idNotifications,DATE_FORMAT(n.datecreated, '%d/%m/%Y') AS dateNotifications,n.status AS statusNotifications,n.typenotifications, n.title,n.details,n.idevento,n.idrelation,p.name AS nameProducto,p.marketvalue AS ValueProducto FROM notifications AS n INNER JOIN product AS p ON n.idrelation=p.id WHERE n.iduser ='"+idUser+"' ORDER BY n.datecreated DESC
+                arr.push({
+                            "idNotifications": element.idNotifications,
+                            "dateNotifications":element.dateNotifications,                            
+                            "statusNotifications":element.statusNotifications,
+                            "typenotifications":element.typenotifications,
+                            "title":element.title,
+                            "details":element.details,
+                            "idevento":element.idevento,
+                            "idrelation":element.idrelation,
+                            "nameProducto":element.nameProducto,
+                            "valueProducto":Precio
+                            
+                        });
+                   
+                
+                    }
+            resolve(arr)
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    )
+
+} 
 
 
 

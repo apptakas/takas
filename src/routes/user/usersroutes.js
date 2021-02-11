@@ -3259,28 +3259,28 @@ router.post('/matchofferchatroom', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idNotifications": 11,
-            "dateNotifications": "31/10/2020",
+            "idNotifications": 131,
+            "dateNotifications": "05/02/2021",
             "statusNotifications": 1,
             "typenotifications": 2,
-            "title": "Haz recibido un takasteo potencial",
-            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
-            "idevento": 145,
-            "idrelation": 3,
-            "name": "Reloj Alarma",
-            "nameProducto": 12000
+            "title": "Haz recibido una  oferta potencial para subastakear",
+            "details": "¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000",
+            "idevento": 18,
+            "idrelation": 1,
+            "nameProducto": "Kit dental",
+            "valueProducto": "10000.0000"
         },
         {
-            "idNotifications": 10,
-            "dateNotifications": "31/10/2020"",
+            "idNotifications": 130,
+            "dateNotifications": "05/02/2021",
             "statusNotifications": 1,
             "typenotifications": 2,
-            "title": "Haz recibido un takasteo potencial",
-            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
-            "idevento": 144,
-            "idrelation": 3,
-            "name": "Reloj Alarma",
-            "nameProducto": 12000
+            "title": "Haz recibido una  oferta potencial para subastakear",
+            "details": "¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000",
+            "idevento": 17,
+            "idrelation": 1,
+            "nameProducto": "Kit dental",
+            "valueProducto": "10000.0000"
         }
     ],
     "msg": "Lista detallada de notificaciones  con éxito"
