@@ -718,7 +718,7 @@ tombotakasModel.DetailsTombotakas = (idfirebaseUser,idTTK) => {
         // 'SELECT ttk.id,ttk.iduser,ttk.name,ttk.datecreated,ttk.detailsevent,ttk.detailsaward,ttk.pinreference,ttk.datelot,ttk.money,ttk.price,ttk.detailspayments,ttk.result,ttk.status,tk.id as idTicket,tk.status as statustk FROM tombotakas AS ttk INNER JOIN tombotikets AS tk ON ttk.id=tk.idtombotakas WHERE ttk.id=? AND tk.status IN (30,31) ',  idTTK,
          //
          pool.query(
-            'SELECT * FROM tombotakas  WHERE id=? ',  idTTK,
+            'SELECT * FROM tombotakas  WHERE id=? AND status IN[30,31]',  idTTK,
              async(err, result) => {
                  //console.log(err);
                 // console.log(result);
