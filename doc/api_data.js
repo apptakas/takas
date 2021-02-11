@@ -1904,6 +1904,96 @@ define({ "api": [
     "type": "post",
     "url": "/user/listnotifications",
     "title": "1 listnotifications",
+    "name": "listnotifications_-_Listar_los_datos_de_la_notificaciones",
+    "group": "Notifications",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Notifications.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Notifications.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Notifications.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 131,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 18,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        },\n        {\n            \"idNotifications\": 130,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 17,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Notifications was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar notificaciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Notifications"
+  },
+  {
+    "type": "post",
+    "url": "/user/listnotifications",
+    "title": "1 listnotifications",
     "name": "listnotifications_-_Listar_los_datos_de_la_sala_de_chat_por_idSala",
     "group": "Notifications",
     "header": {
@@ -1988,96 +2078,6 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/notifications/notificationsroutes.js",
-    "groupTitle": "Notifications"
-  },
-  {
-    "type": "post",
-    "url": "/user/listnotifications",
-    "title": "1 listnotifications",
-    "name": "listnotifications_-_Listar_los_datos_de_la_sala_de_chat_por_idSala",
-    "group": "Notifications",
-    "header": {
-      "examples": [
-        {
-          "title": "Content-Type:",
-          "content": "\"value\": \"application/json\"",
-          "type": "varchar"
-        },
-        {
-          "title": "access-token:",
-          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
-          "type": "varchar"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "idUser",
-            "description": "<p>required.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>of the Notifications.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "int",
-            "optional": false,
-            "field": "status",
-            "description": "<p>200 of the Notifications.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "msg",
-            "description": "<p>of the Notifications.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 131,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 18,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        },\n        {\n            \"idNotifications\": 130,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 17,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the Notifications was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar notificaciones\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/routes/user/usersroutes.js",
     "groupTitle": "Notifications"
   },
   {

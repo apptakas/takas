@@ -3232,9 +3232,9 @@ router.post('/matchofferchatroom', rutasProtegidas, [
 
 
 
-     /**
+/**
  * @api {post} /user/listnotifications 1 listnotifications
- * @apiName listnotifications - Listar los datos de la sala de chat por idSala
+ * @apiName listnotifications - Listar los datos de la notificaciones 
  * @apiGroup Notifications
  * 
  * 
