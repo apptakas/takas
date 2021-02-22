@@ -2536,7 +2536,7 @@ router.post('/newoffer', rutasProtegidas, [
 
 //CREAR UNA OFERTA - PUBLICACIÓN
 router.post('/listoffer', rutasProtegidas, [
-    check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
