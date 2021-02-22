@@ -294,7 +294,7 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                     PreferecesProduct[atr3],
                                     resut.insertId
                                 ],
-                                (err, resut) => {
+                                (err, resu2t) => {
                                     //console.log(resut);
                                     if (err) {
                                         resolve({
@@ -302,7 +302,8 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                         })
                                     } else {
                                         resolve({
-                                            'result': resut
+                                            'result': resu2t,
+                                            'id':resut.insertId
                                         })
                                     }
                 
@@ -446,7 +447,7 @@ ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
             let armaresult={};
             let consulta="";
             if(estatus!=0){
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication="+estatus;
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+estatus+" AND p.id=idproduct AND typepublication=1";
             }else{
                 consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct AND typepublication=1";
             }
