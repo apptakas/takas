@@ -294,7 +294,7 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                     PreferecesProduct[atr3],
                                     resut.insertId
                                 ],
-                                (err, resut) => {
+                                (err, resu2t) => {
                                     //console.log(resut);
                                     if (err) {
                                         resolve({
@@ -302,7 +302,8 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                         })
                                     } else {
                                         resolve({
-                                            'result': resut
+                                            'result': resu2t,
+                                            'id':resut.insertId
                                         })
                                     }
                 
