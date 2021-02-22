@@ -1261,9 +1261,10 @@ userController.ListMisProductos = async (req) => {
         const ProductData = {
             status: req.statusProduct
         };
-        if(req.statusProduct){
-            estatus=3;            
+        if(req.statusProduct!=null){
+                estatus=req.statusProduct;    
         }
+        
         //console.log(userData.password);
         let response = await Product.ListMisProductos(UserData,ProductData,estatus);
 
@@ -1949,11 +1950,19 @@ userController.DetailsOffer = async (req) => {
 
         let data = {};
         if (response && response.result) {
+
+            console.log("response.result.length");
+            console.log(response.result.length);
             let r = {};
+            if(response.result.length>0){
+            
             r = response.result[0];
             // console.log("response.result");
             // console.log(response.result[0]);
             // console.log("response.result");
+        }else{
+            r = [];
+        }
 
             data = {
                 success: true,

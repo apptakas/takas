@@ -712,7 +712,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                     } else {
                         console.log(result);
                         let TypeNotification=2;
-                        let idrelation=result[0].idpubliction;
+                        let idrelation=result[0].idproduct;
                         let idOferta=result[0].idoffer;
                         let offeru=result[0].iuserdoffer;
                         let publicationcoU=result[0].iduserpublication;
@@ -803,7 +803,6 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                             
                         }
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
-                        
                         let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,userNotification,titulo,detalles,idOferta);  
                         console.log(respCrearPush);
                         console.log(respCrearPush.result.insertId);
