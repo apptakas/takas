@@ -1565,9 +1565,9 @@ ProductModel.LisTodo = (SubasTakasData) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             let armaresult={};
-            console.log("SELECT DISTINCT RAND(id),id, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 ORDER BY datepublication DESC LIMIT 50");
+            console.log("SELECT DISTINCT RAND(id),id, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status IN (2,3,26) ORDER BY datepublication DESC LIMIT 50");
             pool.query(
-                "SELECT DISTINCT RAND(id),id as idproduct, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 ORDER BY datepublication DESC LIMIT 50",
+                "SELECT DISTINCT RAND(id),id as idproduct, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status IN (2,3,26) ORDER BY datepublication DESC LIMIT 50",
                 async(err, result) => {
                     //console.log(result);
                    
