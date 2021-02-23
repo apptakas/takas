@@ -712,6 +712,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                     } else {
                         console.log(result);
                         let TypeNotification=2;
+                        let idrelation2=result[0].idpubliction;
                         let idrelation=result[0].idproduct;
                         let idOferta=result[0].idoffer;
                         let offeru=result[0].iuserdoffer;
@@ -736,7 +737,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let iduserNoti="";
                         let NameUser="";
                         //DATOS DE LA PUBLICACIÓN    
-                        let  idUserPublication= await Users.DataUserPublication(idrelation);
+                        let  idUserPublication= await Users.DataUserPublication(idrelation2);
                         let nameProducto=idUserPublication.result[0].nameProducto;
                         let UserPublication=idUserPublication.result[0].UserPublication;
 
