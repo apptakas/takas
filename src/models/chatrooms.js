@@ -737,7 +737,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let iduserNoti="";
                         let NameUser="";
                         //DATOS DE LA PUBLICACIÓN    
-                        let  idUserPublication= await Users.DataUserPublication(publicationcoU);
+                        let  idUserPublication= await Users.DataUserPublication(idrelation2);
                         let nameProducto=idUserPublication.result[0].nameProducto;
                         let UserPublication=idUserPublication.result[0].UserPublication;
 
@@ -804,7 +804,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                             
                         }
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
-                        let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation,userNotification,titulo,detalles,idOferta);  
+                        let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation2,userNotification,titulo,detalles,idOferta);  
                         console.log(respCrearPush);
                         console.log(respCrearPush.result.insertId);
                         //console.log(tokenPush);
