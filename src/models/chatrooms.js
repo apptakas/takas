@@ -740,6 +740,8 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let  idUserPublication= await Users.DataUserPublication(idrelation2);
                         let nameProducto=idUserPublication.result[0].nameProducto;
                         let UserPublication=idUserPublication.result[0].UserPublication;
+                        let typepublication = idUserPublication.result[0].typepublication;
+
 
                         // VERIFICAR QUE LOS DOS USUARIOS ESTEN DE ACUERO - CONFIRMAR MATCH
                         if(isUserPubli==true){
@@ -804,9 +806,16 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                             
                         }
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
-                        let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation2,userNotification,titulo,detalles,idOferta);  
-                        console.log(respCrearPush);
-                        console.log(respCrearPush.result.insertId);
+                        // console.log("idUserPublication.tokenpush");
+                        let idNotificacion={};
+                        if(typepublication==1){
+                            let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation2,userNotification,titulo,detalles,idOferta);  
+                            console.log(respCrearPush);
+                            console.log(respCrearPush.result.insertId);
+                            idNotificacion=respCrearPush.result.insertId;
+                        } else{
+                            idNotificacion=null;
+                            }
                         //console.log(tokenPush);
                         ///////////////////////////////////////////
                                                 
@@ -817,7 +826,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                             'tokenPush':tokenPush,
                             'titulo':titulo,
                             'detalles':detalles,
-                            'idNotificacion':respCrearPush.result.insertId,
+                            'idNotificacion':idNotificacion,
                             'idOferta':idOferta,
                             'TypeNotification':TypeNotification,
                             'UserPublication':UserPublication,

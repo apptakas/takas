@@ -59,15 +59,20 @@ OffersModel.NewOffer = (OfferData, IdOfferData, callback) => {
                                             let fullname = idUserPublication.result[0].NameUser;
                                             let nameProducto = idUserPublication.result[0].nameProducto;
                                             let marketvalue = idUserPublication.result[0].marketvalue;
+                                            let typepublication = idUserPublication.result[0].typepublication;
                                             let titulo = "Haz recibido un takasteo potencial";
                                             let detalles = "¡En hora buena " + fullname + "! tú publicación  <<" + nameProducto + ">> tiene una oferta por valor comercial de " + CalValorOferta;
                                             // console.log("idUserPublication.tokenpush");
                                             console.log(detalles);
                                             // //console.log(idUserPublication);
                                             // console.log("idUserPublication.tokenpush");
-
+                                            let idNotificacion={};
+                                            if(typepublication==1){
                                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
-
+                                            idNotificacion=respCrearPush.result.insertId;
+                                        } else{
+                                                idNotificacion=null;
+                                            }
                                             ////////
 
                                             if (respCrearPush.result) {
@@ -76,7 +81,7 @@ OffersModel.NewOffer = (OfferData, IdOfferData, callback) => {
                                                 resolve({
                                                     'result': result,
                                                     'idOferta': idOferta,
-                                                    'idNotificacion': respCrearPush.result.insertId,
+                                                    'idNotificacion': idNotificacion,
                                                     'idrelation': idrelation,
                                                     'TypeNotification': TypeNotification,
                                                     'UserPublication': UserPublication,
