@@ -214,6 +214,8 @@ subastakasModel.ChangeStatusOfferSbtk = (OfferData, FlagStatusOffer) => {
                         let fullname = idUserOferta.result[0].NameUser;
                         let nameProducto = idUserPublication.result[0].nameProducto;
                         let marketvalue = idUserPublication.result[0].marketvalue;
+                        let typepublication = idUserPublication.result[0].typepublication;
+
                         let titulo = "";
                         let detalles = "";
 
@@ -223,8 +225,14 @@ subastakasModel.ChangeStatusOfferSbtk = (OfferData, FlagStatusOffer) => {
                                 titulo = "POSIBLE SUBASTAQUEO!";
                                 detalles = "¡Falta sólo un paso " + fullname + "! tú Oferta a la Subasta <<" + nameProducto + ">> ha sido Aceptada, habilitamos un chat para que acuerden los últimos detalles antes del match";
                             }
+                            let idNotificacion={};
+                            if(typepublication==1){
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
                             //console.log(respCrearPush);
+                            idNotificacion=respCrearPush.result.insertId;
+                        } else{
+                                idNotificacion=null;
+                            }
                             ///////////////////////////////////////////
                             FindDatOffer = await subastakasModel.FindDatOffer(OfferData);
                             
@@ -258,7 +266,7 @@ subastakasModel.ChangeStatusOfferSbtk = (OfferData, FlagStatusOffer) => {
                         resolve({
                             'result': result,
                             'sala': FindDatOffer.idSala,
-                            'idNotificacion': respCrearPush.insertId,
+                            'idNotificacion': idNotificacion,
                             'TypeNotification': TypeNotification,
                             'UserPublication': UserPublication,
                             'idOferta': idOferta,
