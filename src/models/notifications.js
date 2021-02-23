@@ -29,6 +29,7 @@ notificationModel.cearnotificacion = (TypeNotification,idrelation,UserPublicatio
                     // };  
                     //console.log(element.idproduct);  
                    // console.log(ImagesProduct);
+
                     resolve({                        
                         'result': result2
                     });
