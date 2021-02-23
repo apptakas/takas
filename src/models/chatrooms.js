@@ -737,7 +737,7 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
                         let iduserNoti="";
                         let NameUser="";
                         //DATOS DE LA PUBLICACIÓN    
-                        let  idUserPublication= await Users.DataUserPublication(idrelation2);
+                        let  idUserPublication= await Users.DataUserPublication(publicationcoU);
                         let nameProducto=idUserPublication.result[0].nameProducto;
                         let UserPublication=idUserPublication.result[0].UserPublication;
 
