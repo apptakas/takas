@@ -1,5 +1,4 @@
 const express = require('express');
-const aws = require('aws-sdk');
 const morgan = require('morgan');
 const path = require('path');
 const http = require('http');
