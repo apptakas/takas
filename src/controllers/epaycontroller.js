@@ -271,7 +271,207 @@ EpayController.deletetoken = async (req) => {
                 success: response.result.status,
                 status: '200', 
                // token:epayco.token,      
-                msg: 'Tarjeta Tokenizada'
+                msg: response.result.message
+            }          
+
+
+
+        } else {
+
+            data = {
+                success: false,
+                status: '500',
+                error:response.msg,
+                msg: response.result.message
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+EpayController.addnewtoken = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        let OfferData ={};
+        //console.log(req);
+        let iduser= req.idUser
+        let customer_info={
+            franchise : req.franchise,
+            token : req.token,
+            mask : req.mask,
+            customer_id: req.customer_id
+        }        
+        let response= await EpaycoModel.addnewtoken(epayco,iduser,customer_info);      
+
+        let data = {};
+        if (response.result.status) {
+            let r = {};
+           // r = response.Epayco;
+
+            data = {
+                success: response.result.status,
+                status: '200', 
+               // token:epayco.token,      
+                msg: response.result.message
+            }          
+
+
+
+        } else {
+
+            data = {
+                success: false,
+                status: '500',
+                error:response.msg,
+                msg: response.result.message
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
+EpayController.addnewtokenclient = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        let OfferData ={};
+        //console.log(req);
+        let iduser= req.idUser
+        let token= req.token
+              
+        let response= await EpaycoModel.addnewtokenclient(epayco,iduser,token);      
+
+        let data = {};
+        if (response.result.status) {
+            let r = {};
+           // r = response.Epayco;
+
+            data = {
+                success: response.result.status,
+                status: '200', 
+               // token:epayco.token,      
+                msg: response.result.message
+            }          
+
+
+
+        } else {
+
+            data = {
+                success: false,
+                status: '500',
+                error:response.msg,
+                msg: response.result.message
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+//planes
+EpayController.creatplans = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        let OfferData ={};
+        //console.log(req);
+        var plan_info = {
+            id_plan: req.id_plan,
+            name: req.name,
+            description: req.description,
+            amount: req.amount,
+            currency: req.currency,
+            interval: req.interval,
+            interval_count: req.interval_count,
+            trial_days: req.trial_days
+        }
+              
+        let response= await EpaycoModel.creatplans(epayco,plan_info);      
+
+        let data = {};
+        if (response.result.status) {
+            let r = {};
+           // r = response.Epayco;
+
+            data = {
+                success: response.result.status,
+                status: '200', 
+               // token:epayco.token,      
+                msg: "El plan ha sido creado exitosamente"
+            }          
+
+
+
+        } else {
+
+            data = {
+                success: false,
+                status: '500',
+                error:response.msg,
+                msg: response.result.message
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+EpayController.retieveplans = async (req) => {
+    try {
+
+        let dt = new Date();//getMonth   getDate
+
+        let now = new Date();
+        let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+        let OfferData ={};
+        
+        let id_plan= req.id_plan;
+        let response= await EpaycoModel.retieveplans(epayco,id_plan);      
+
+        let data = {};
+        if (response.result.status) {
+            let r = {};
+           // r = response.Epayco;
+
+            data = {
+                success: response.result.status,
+                status: '200', 
+                date: response.result.plan,
+               // token:epayco.token,      
+                msg: "El plan ha sido encontrado exitosamente"
             }          
 
 

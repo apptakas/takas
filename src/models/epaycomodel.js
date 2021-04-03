@@ -274,9 +274,9 @@ epaycoModel.deletetoken = (epayco, iduser, delete_customer_info) => {
             .catch(function (err) {
                 console.log("err: " + err);
             });
-            console.log("tokens");
-            console.log(tokens);
-            console.log("tokens");
+        console.log("tokens");
+        console.log(tokens);
+        console.log(tokens);
 
         if (pool) {
             pool.query(
@@ -313,5 +313,187 @@ epaycoModel.deletetoken = (epayco, iduser, delete_customer_info) => {
 
     })
 };
+
+epaycoModel.addnewtoken = (epayco, iduser, customer_info) => {
+    return new Promise(async (resolve, reject) => {
+
+        let AddNewtoken = {};
+        let UserData = await epaycoModel.FindCustomer(iduser);
+
+        var addDefaultCard_customer = {
+            franchise: customer_info.franchise,
+            token: customer_info.token,
+            mask: customer_info.mask,
+            customer_id: UserData.result.idclientepayco
+        }
+
+
+        let result = await epayco.customers.addDefaultCard(addDefaultCard_customer)
+            .then(function (customer) {
+                console.log(customer);
+                AddNewtoken = customer;
+            })
+            .catch(function (err) {
+                console.log("err: " + err);
+            });
+
+
+        console.log("AddNewtoken");
+        console.log(AddNewtoken);
+        console.log(AddNewtoken);
+
+        if (pool) {
+            pool.query(
+                'UPDATE  users SET  id=? WHERE id= ?', [
+                iduser,
+                iduser
+            ], (err, result2) => {
+                //console.log(err);
+                // console.log(result);
+                if (err) {
+                    console.log(err);
+                    resolve({
+                        'error': err
+                    })
+                } else {
+                    //console.log(result2);
+                    resolve({
+                        'result': AddNewtoken
+                    })
+                }
+            })
+            // resolve({
+            //     'result': tokens,
+            // })
+        } else {
+            resolve({
+                'error': "Error al conectar",
+            })
+
+        }
+
+
+
+        //return resultado;
+
+    })
+};
+
+epaycoModel.addnewtokenclient = (epayco, iduser, token) => {
+    return new Promise(async (resolve, reject) => {
+
+        let AddNewtoken = {};
+        let UserData = await epaycoModel.FindCustomer(iduser);
+
+        var add_customer_info = {
+            token_card: token,
+            customer_id: UserData.result.idclientepayco
+        }
+
+
+        let result = await epayco.customers.addNewToken(add_customer_info)
+            .then(function (customer) {
+                console.log(customer);
+                AddNewtoken = customer;
+            })
+            .catch(function (err) {
+                console.log("err: " + err);
+            });
+
+
+        console.log("AddNewtoken");
+        console.log(AddNewtoken);
+        console.log(AddNewtoken);
+
+        if (pool) {
+            pool.query(
+                'UPDATE  users SET  id=? WHERE id= ?', [
+                iduser,
+                iduser
+            ], (err, result2) => {
+                //console.log(err);
+                // console.log(result);
+                if (err) {
+                    console.log(err);
+                    resolve({
+                        'error': err
+                    })
+                } else {
+                    //console.log(result2);
+                    resolve({
+                        'result': AddNewtoken
+                    })
+                }
+            })
+            // resolve({
+            //     'result': tokens,
+            // })
+        } else {
+            resolve({
+                'error': "Error al conectar",
+            })
+
+        }
+
+
+
+        //return resultado;
+
+    })
+};
+
+epaycoModel.creatplans = (epayco, plan_info) => {
+    return new Promise(async (resolve, reject) => {
+
+        let createPlan = {};
+        let result = await epayco.plans.create(plan_info)
+            .then(function (plan) {
+                console.log(plan);
+                createPlan = plan;
+            })
+            .catch(function (err) {
+                console.log("err: " + err);
+            });
+
+
+        console.log("createPlan");
+        console.log(createPlan);
+        console.log(createPlan);
+        resolve({
+            'result': createPlan
+        })
+
+
+
+
+        //return resultado;
+
+    })
+};
+
+epaycoModel.retieveplans = (epayco, id_plan) => {
+    return new Promise(async (resolve, reject) => {
+
+        let retievePlan = {};
+        let result = await epayco.plans.get(id_plan)
+            .then(function (plan) {
+                console.log(plan);
+                retievePlan=plan;
+            })
+            .catch(function (err) {
+                console.log("err: " + err);
+            });
+
+        console.log("retievePlan");
+        console.log(retievePlan);
+        console.log(retievePlan);
+        resolve({
+            'result': retievePlan
+        })
+    })
+};
+
+
+
 
 module.exports = epaycoModel;
