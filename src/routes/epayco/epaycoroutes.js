@@ -551,7 +551,7 @@ router.post('/updateclient', rutasProtegidas, [
 *
 * @apiParam {int} idUser required.
 * @apiParam {varchar} franchise required.
-* @apiParam {vatchars} mask required.
+* @apiParam {varchars} mask required.
 * @apiParam {varchar} customer_id required.
 * 
 * @apiSuccess {boolean} success of the Offers.
@@ -614,8 +614,8 @@ router.post('/deletetoken', rutasProtegidas, [
 *
 * @apiParam {int} idUser required.
 * @apiParam {varchar} franchise required.
-* @apiParam {vatchar} token required.
-* @apiParam {vatchar} mask required.
+* @apiParam {varchar} token required.
+* @apiParam {varchar} mask required.
 * @apiParam {varchar} customer_id required.
 * 
 * @apiSuccess {boolean} success of the Offers.
@@ -678,7 +678,7 @@ router.post('/addnewtoken', rutasProtegidas, [
 *
 *
 * @apiParam {int} idUser required.
-* @apiParam {vatchar} token required.
+* @apiParam {varchar} token required.
 * 
 * @apiSuccess {boolean} success of the Offers.
 * @apiSuccess {int} status 200 of the Offers.
@@ -738,12 +738,12 @@ router.post('/addnewtokenclient', rutasProtegidas, [
 *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
 *
 *
-* @apiParam {vatchar} id_plan required.
-* @apiParam {vatchar} name required.
-* @apiParam {vatchar} description required.
+* @apiParam {varchar} id_plan required.
+* @apiParam {varchar} name required.
+* @apiParam {varchar} description required.
 * @apiParam {real} amount required.
-* @apiParam {vatchar} currency required.
-* @apiParam {vatchar} interval required.
+* @apiParam {varchar} currency required.
+* @apiParam {varchar} interval required.
 * @apiParam {int} interval_count required.
 * @apiParam {int} trial_days required.
 * 
@@ -809,7 +809,7 @@ router.post('/createplans', rutasProtegidas, [
 *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
 *
 *
-* @apiParam {vatchar} id_plan required.
+* @apiParam {varchar} id_plan required.
 * 
 * @apiSuccess {boolean} success of the Offers.
 * @apiSuccess {int} status 200 of the Offers.
@@ -868,8 +868,8 @@ router.post('/retieveplans', rutasProtegidas, [
 })
 
 /**
-* @api {post} /epayco/retieveplans 10 retieveplans
-* @apiName retieveplans - Recuperar plan
+* @api {post} /epayco/listplans 10 listplans
+* @apiName listplans - Recuperar plan
 * @apiGroup Epayco
 * 
 * 
@@ -879,7 +879,7 @@ router.post('/retieveplans', rutasProtegidas, [
 *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
 *
 *
-* @apiParam {vatchar} id_plan required.
+* @apiParam {varchar} id_plan required.
 * 
 * @apiSuccess {boolean} success of the Offers.
 * @apiSuccess {int} status 200 of the Offers.
@@ -890,20 +890,48 @@ router.post('/retieveplans', rutasProtegidas, [
 *   {
     "success": true,
     "status": "200",
-    "date": {
-        "_id": "pLexEx6S5TzcdqaYE",
-        "id_plan": "coursereact2",
-        "name": "Course react js2",
-        "description": "Course react and redux2",
-        "amount": 30000,
-        "currency": "cop",
-        "interval_count": 1,
-        "interval": "month",
-        "status": "active",
-        "trialDays": 30,
-        "created": "04/03/2021"
-    },
-    "msg": "El plan ha sido encontrado exitosamente"
+    "date": [
+        {
+            "_id": "LXzSRvAByyzgTtbGu",
+            "id_plan": "coursereact",
+            "name": "Course react js",
+            "description": "Course react and redux",
+            "amount": 30000,
+            "currency": "cop",
+            "interval_count": 1,
+            "interval": "month",
+            "status": "active",
+            "trialDays": 30,
+            "created": "03/31/2021"
+        },
+        {
+            "_id": "CRz48h9NwkperADd7",
+            "id_plan": "coursereactsygw",
+            "name": "Course react jssygw",
+            "description": "Course react and redux asjdbasdbhad",
+            "amount": 30000,
+            "currency": "cop",
+            "interval_count": 1,
+            "interval": "month",
+            "status": "active",
+            "trialDays": 30,
+            "created": "03/31/2021"
+        },
+        {
+            "_id": "pLexEx6S5TzcdqaYE",
+            "id_plan": "coursereact2",
+            "name": "Course react js2",
+            "description": "Course react and redux2",
+            "amount": 30000,
+            "currency": "cop",
+            "interval_count": 1,
+            "interval": "month",
+            "status": "active",
+            "trialDays": 30,
+            "created": "04/03/2021"
+        }
+    ],
+    "msg": "Lista de plan exitosa"
 }
 *
 * @apiError UserNotFound The id of the Offers was not found.
@@ -913,10 +941,65 @@ router.post('/retieveplans', rutasProtegidas, [
 *     {
     "success": false,
     "status": "500",
-    "msg": "Plan no encontrado"
+    "msg": "Lista de plan no encontrado"
 }
 **/
-router.post('/retieveplans', rutasProtegidas, [
+router.post('/listplans', rutasProtegidas, async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+    let response = await epayController.listplans(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);   
+
+
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+* @api {post} /epayco/removeplans 11 removeplans
+* @apiName removeplans - Recuperar plan
+* @apiGroup Epayco
+* 
+* 
+* @apiHeaderExample {varchar}Content-Type:
+*                 "value": "application/json" 
+* @apiHeaderExample {varchar} access-token:
+*                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+*
+*
+* @apiParam {varchar} id_plan required.
+* 
+* @apiSuccess {boolean} success of the Offers.
+* @apiSuccess {int} status 200 of the Offers.
+* @apiSuccess {string} msg   of the Offers.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+    "success": true,
+    "status": "200",
+    "msg": "Plan eliminado correctamente"
+}
+*
+* @apiError UserNotFound The id of the Offers was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar remover plan"
+}
+**/
+router.post('/removeplans', rutasProtegidas, [
     check('id_plan', 'El id_plan es obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
 
@@ -925,7 +1008,370 @@ router.post('/retieveplans', rutasProtegidas, [
     if (error.array().length != 0) {
         return res.status(422).json({ errores: error.array(), msg: 'Error' });
     }
-    let response = await epayController.retieveplans(req.body);
+    let response = await epayController.removeplans(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);   
+
+
+    return res.status(response.data.status).json(response.data)
+
+})
+  //////////SUSCRIPCIONES////////////////
+/**
+* @api {post} /epayco/createsuscription 12 createsuscription
+* @apiName createsuscription - Crear plan
+* @apiGroup Epayco
+* 
+* 
+* @apiHeaderExample {varchar}Content-Type:
+*                 "value": "application/json" 
+* @apiHeaderExample {varchar} access-token:
+*                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+*
+*
+* @apiParam {varchar} id_plan required.
+* @apiParam {varchar} customer required.
+* @apiParam {varchar} token_card required.
+* @apiParam {varchar} doc_type required.
+* @apiParam {varchar} doc_number required.
+* @apiParam {varchar} url_confirmation required.
+* @apiParam {varchar} method_confirmation required.
+* @apiParam {varchar} parameter oprional.
+* 
+* @apiSuccess {boolean} success of the Offers.
+* @apiSuccess {int} status 200 of the Offers.
+* @apiSuccess {string} msg   of the Offers.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+    "success": true,
+    "status": "200",
+    "Inicio": "03-04-2021",
+    "Fin": "03-11-2023",
+    "msg": "Suscripción creada"
+}
+*
+* @apiError UserNotFound The id of the Offers was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+    "success": false,
+    "status": "500",
+    "msg": "Datos erroneos o Plan no existente"
+}
+**/
+router.post('/createsuscription', rutasProtegidas, [
+    check('id_plan', 'El id_plan es obligatorio').not().isEmpty().exists(),
+    check('customer', 'El customer es obligatorio').not().isEmpty().exists(),
+    check('token_card', 'El token_card es obligatorio').not().isEmpty().exists(),
+    check('doc_type', 'El doc_type es obligatorio').not().isEmpty().exists(),
+    check('doc_number', 'El doc_number es obligatorio').not().isEmpty().exists() ,
+    check('url_confirmation', 'El url_confirmation es obligatorio').not().isEmpty().exists() ,
+    check('method_confirmation', 'El method_confirmation es obligatorio').not().isEmpty().exists() 
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+    let response = await epayController.createsuscription(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);   
+
+
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+* @api {post} /epayco/retievesuscription 13 retievesuscription
+* @apiName retievesuscription - Recuperar plan
+* @apiGroup Epayco
+* 
+* 
+* @apiHeaderExample {varchar}Content-Type:
+*                 "value": "application/json" 
+* @apiHeaderExample {varchar} access-token:
+*                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+*
+*
+* @apiParam {varchar} id_suscription required.
+* 
+* @apiSuccess {boolean} success of the Offers.
+* @apiSuccess {int} status 200 of the Offers.
+* @apiSuccess {string} msg   of the Offers.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+    "success": true,
+    "status": "200",
+    "data": {
+        "status": true,
+        "created": "03-04-2021",
+        "id": "fmAkAyDCCYmjepwcM",
+        "success": true,
+        "current_period_start": "03-04-2021",
+        "current_period_end": "03-11-2023",
+        "customer": "PS9ZmikjhAj9rZiDE",
+        "plan": {
+            "_id": "CRz48h9NwkperADd7",
+            "idClient": "coursereactsygw",
+            "name": "Course react jssygw",
+            "description": "Course react and redux asjdbasdbhad",
+            "amount": 30000,
+            "currency": "cop",
+            "interval": "month",
+            "interval_count": 1,
+            "status": "active",
+            "trialDays": 30
+        },
+        "status_plan": "inactive",
+        "type": "Find Subscription",
+        "object": "subscription"
+    },
+    "msg": "Suscripción encontrada exitosamente"
+}
+*
+* @apiError UserNotFound The id of the Offers was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+    "success": false,
+    "status": "500",
+    "msg": "Suscripción no encontrada"
+}
+**/
+router.post('/retievesuscription', rutasProtegidas, [
+    check('id_suscription', 'El id_suscription es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+    let response = await epayController.retievesuscription(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);   
+
+
+    return res.status(response.data.status).json(response.data)
+
+})
+
+
+/**
+* @api {post} /epayco/listsuscription 14 listsuscription
+* @apiName listsuscription - Listar Suscropciones
+* @apiGroup Epayco
+* 
+* 
+* @apiHeaderExample {varchar}Content-Type:
+*                 "value": "application/json" 
+* @apiHeaderExample {varchar} access-token:
+*                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+*
+*
+* @apiParam {varchar} id_plan required.
+* 
+* @apiSuccess {boolean} success of the Offers.
+* @apiSuccess {int} status 200 of the Offers.
+* @apiSuccess {string} msg   of the Offers.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+    "success": true,
+    "status": "200",
+    "date": [
+        {
+            "_id": "fmAkAyDCCYmjepwcM",
+            "idPlan": "coursereactsygw",
+            "periodStart": "2021-04-03T17:06:15.325Z",
+            "periodEnd": "03-11-2023",
+            "nextVerificationDate": "03-11-2023",
+            "status": "inactive",
+            "first": false,
+            "idCustomer": "PS9ZmikjhAj9rZiDE",
+            "tokenCard": "9THkSZsHvBnpgQhoD",
+            "ip": "192.168.0.3",
+            "url_confirmation": "https://ejemplo.com/confirmacion",
+            "method_confirmation": "POST",
+            "paymentAttempts": [],
+            "plan": {
+                "idClient": "coursereactsygw",
+                "name": "Course react jssygw",
+                "description": "Course react and redux asjdbasdbhad",
+                "amount": 30000,
+                "currency": "cop",
+                "interval": "month",
+                "interval_count": 1,
+                "status": "active",
+                "trialDays": 30
+            }
+        }
+    ],
+    "msg": "Lista de Suscripciones exitosa"
+}
+*
+* @apiError UserNotFound The id of the Offers was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar listar suscripciones"
+}
+**/
+router.post('/listsuscription', rutasProtegidas, async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+    let response = await epayController.listsuscription(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);   
+
+
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+* @api {post} /epayco/removesuscription 11 removesuscription
+* @apiName removesuscription - Rmover suscripción
+* @apiGroup Epayco
+* 
+* 
+* @apiHeaderExample {varchar}Content-Type:
+*                 "value": "application/json" 
+* @apiHeaderExample {varchar} access-token:
+*                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+*
+*
+* @apiParam {varchar} id_suscription required.
+* 
+* @apiSuccess {boolean} success of the Offers.
+* @apiSuccess {int} status 200 of the Offers.
+* @apiSuccess {string} msg   of the Offers.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+    "success": true,
+    "status": "200",
+    "msg": "La suscripción ha sido inactivada"
+}
+*
+* @apiError UserNotFound The id of the Offers was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+    "success": false,
+    "status": "500",
+    "error": "Suscripción no encontrada"
+}
+**/
+router.post('/removesuscription', rutasProtegidas, [
+    check('id_subscription', 'El id_subscription es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+    let response = await epayController.removesuscription(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);   
+
+
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+* @api {post} /epayco/pay 12 pay
+* @apiName pay - Pago
+* @apiGroup Epayco
+* 
+* 
+* @apiHeaderExample {varchar}Content-Type:
+*                 "value": "application/json" 
+* @apiHeaderExample {varchar} access-token:
+*                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+*
+*
+* @apiParam {varchar} id_plan required.
+* @apiParam {varchar} customer required.
+* @apiParam {varchar} token_card required.
+* @apiParam {varchar} doc_type required.
+* @apiParam {int} doc_number required.
+* @apiParam {varchar} ip required.
+* 
+* @apiSuccess {boolean} success of the Offers.
+* @apiSuccess {int} status 200 of the Offers.
+* @apiSuccess {string} msg   of the Offers.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*   {
+    "success": true,
+    "status": "200",
+    "msg": "La suscripción ha sido inactivada"
+}
+*
+* @apiError UserNotFound The id of the Offers was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+    "success": false,
+    "status": "500",
+    "error": "Cliente no encontrado",
+    "error": "No se logró validar el medio de pago relacionado con el cobro de la suscripción."
+}
+**/
+router.post('/pay', rutasProtegidas, [
+    check('id_plan', 'El id_plan es obligatorio').not().isEmpty().exists(),
+    check('customer', 'El customer es obligatorio').not().isEmpty().exists(),
+    check('token_card', 'El token_card es obligatorio').not().isEmpty().exists(),
+    check('doc_type', 'El doc_type es obligatorio').not().isEmpty().exists(),
+    check('doc_number', 'El doc_number es obligatorio').not().isEmpty().exists(),
+    check('ip', 'El ip es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+    let response = await epayController.pay(req.body);
 
     if (response.status == 'ko') {
         return res.status(500).json({ error: 'Error' })

@@ -493,7 +493,160 @@ epaycoModel.retieveplans = (epayco, id_plan) => {
     })
 };
 
+epaycoModel.listplans = (epayco) => {
+    return new Promise(async (resolve, reject) => {
+
+        let ListPlan = {};
+        let result = await epayco.plans.list()
+        .then(function(plans) {
+            console.log(plans);
+            ListPlan=plans;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });
+
+        console.log("ListPlan");
+        console.log(ListPlan);
+        console.log(ListPlan);
+        resolve({
+            'result': ListPlan
+        })
+    })
+};
+
+epaycoModel.removeplans = (epayco, id_plan) => {
+    return new Promise(async (resolve, reject) => {
+
+        let removePlans = {};
+        let result = await epayco.plans.delete(id_plan)
+        .then(function(plan) {
+            console.log(plan);
+            removePlans=plan;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });
+
+        console.log("removePlans");
+        console.log(removePlans);
+        console.log(removePlans);
+        resolve({
+            'result': removePlans
+        })
+    })
+};
+
+epaycoModel.createsuscription = (epayco, subscription_info) => {
+    return new Promise(async (resolve, reject) => {
+
+        let createSuscription = {};
+        let result = await epayco.subscriptions.create(subscription_info)
+        .then(function(subscription) {
+            console.log(subscription);
+            createSuscription=subscription;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });
 
 
+        console.log("createSuscription");
+        console.log(createSuscription);
+        console.log(createSuscription);
+        resolve({
+            'result': createSuscription
+        })
+        //return resultado;
+
+    })
+};
+
+epaycoModel.retievesuscription = (epayco, id_suscription) => {
+    return new Promise(async (resolve, reject) => {
+
+        let retieveSubscription = {};
+        let result = await epayco.subscriptions.get(id_suscription)
+        .then(function(subscription) {
+            console.log(subscription);
+            retieveSubscription=subscription;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });;
+
+        console.log("retieveSubscription");
+        console.log(retieveSubscription);
+        console.log(retieveSubscription);
+        resolve({
+            'result': retieveSubscription
+        })
+    })
+};
+
+epaycoModel.listsuscription = (epayco) => {
+    return new Promise(async (resolve, reject) => {
+
+        let ListSubscriptions = {};
+        let result = await epayco.subscriptions.list()
+        .then(function(subscriptions) {
+            console.log(subscriptions);
+            ListSubscriptions=subscriptions;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });
+
+        console.log("ListSubscriptions");
+        console.log(ListSubscriptions);
+        console.log(ListSubscriptions);
+        resolve({
+            'result': ListSubscriptions
+        })
+    })
+};
+
+
+epaycoModel.removesuscription = (epayco, id_subscription) => {
+    return new Promise(async (resolve, reject) => {
+
+        let removeSuscription = {};
+        let result = await epayco.subscriptions.cancel(id_subscription)
+        .then(function(subscription) {
+            console.log(subscription);
+            removeSuscription=subscription;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });
+        console.log("removeSuscription");
+        console.log(removeSuscription);
+        console.log(removeSuscription);
+        resolve({
+            'result': removeSuscription
+        })
+    })
+};
+
+epaycoModel.pay = (epayco, subscription_info) => {
+    return new Promise(async (resolve, reject) => {
+
+        let Pay = {};
+        let result = await epayco.subscriptions.charge(subscription_info)
+        .then(function(subscription) {
+            console.log(subscription);
+            Pay=subscription;
+        })
+        .catch(function(err) {
+            console.log("err: " + err);
+        });
+        console.log("Pay");
+        console.log(Pay);
+        console.log("Pay");
+        resolve({
+            'result': Pay
+        })
+    })
+};
 
 module.exports = epaycoModel;
