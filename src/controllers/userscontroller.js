@@ -42,6 +42,7 @@ userController.newUser = async (req) => {
             idcity: req.codCity,
             fullname: req.fullnameUser,
             email: req.emailUser,
+            memberships: 1,
             phonenumber: req.phonenumberUser,
             imgurl: req.urlimgUser,
             role: 2,
@@ -462,8 +463,6 @@ userController.UserExist = async (req) => {
         const userData = {
             id: req.idfirebaseUser
         };
-
-
         let resp = await User.UserExist(userData);
         console.log('resultado ', resp);
         let data = {};
@@ -475,6 +474,7 @@ userController.UserExist = async (req) => {
                 Email:resp.Email,
                 Fullname:resp.Fullname,
                 PhoneNumber:resp.PhoneNumber,
+                memberships:resp.memberships,
                 ImgUrl:resp.ImgUrl,
                 msg: 'Verificación si el usuario existe y si sus campos estan completos'
             }
@@ -2243,6 +2243,94 @@ userController.ChangeStatusOffer = async (req) => {
 
 };
 
+//MATCH DE UNA OFERTA- OFFERS 
+userController.MatchOffer = async (req) => {
+    try {
+        let match=req.match;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let statusOffer=23;//ODERTA CANCELADA
+            let TitleNoti="cancelado una oferta";
+            if(match!=true){
+                statusOffer=8;// OFERTA RECHAZADA
+                let TitleNoti="Han rechazado una oferta";
+            }
+            if(match==true){
+                statusOffer=7;// OFERTA ACEPTADA
+                let TitleNoti="Han Aceptado una oferta";
+                
+            }
+
+            OfferData = {
+                id: req.idOffer,
+                idUser: req.idUser,
+                match:match,
+                status:statusOffer
+            };
+       
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await Offer.MatchOffer(OfferData,match);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                match:match,
+                sala:sala,
+                msg: 'Cambio de estatus de una oferta ejecutdo exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar cambiar el estatus de una Oferta'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+      notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 //Listar los datos de la sala de chat segú status- TAKASTEAR 
 userController.listChatRoomStatus = async (req) => {
     try {
@@ -2447,6 +2535,101 @@ userController.MatchOfferChatRoom = async (req) => {
     }
 
 };
+
+userController.MatchOfferCR = async (req) => {
+    try {
+        let takasteo=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let status=25//SALA ACTIVA = 24 SALA CERRADA = 25
+
+            ChatRoomData = {
+                id: req.idSala,
+                idUser:req.idUser,                
+                match:req.match,
+                status:status
+            };
+       
+        //console.log(OfferData);
+
+        //let response = await Offer.FindDatOffer(OfferData);
+        let isUserPubli=false; //si es usasuario de la publicación
+        let pertenece =false; 
+        let confirMatch =false; 
+        let MsgMatch="";
+        let titulo2="";
+        let UserNotification2="";
+        let detalles2="";
+
+        ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+        let response=await ChatRooms.MatchOfferCR(ChatRoomData,isUserPubli,confirMatch,MsgMatch,titulo2,UserNotification2,detalles2);
+        //console.log(quien.result);        
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            
+            data = {
+                success: true,
+                status: '200',
+                idNotificacion:response.idNotificacion,
+                idOferta:response.idOferta,
+                TypeNotification:response.TypeNotification,
+                UserPublication:response.UserPublication,
+                takasteo:response.confirMatch,
+                msg: response.MsgMatch
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar hacer mach en la sala de chat'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenPush;
+        //console.log(token);
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+         console.log(datanoti);
+      notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 //Listar los datos de la sala de chat- TAKASTEAR 

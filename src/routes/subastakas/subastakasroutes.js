@@ -234,4 +234,70 @@ router.put('/changestatusoffersbtk', rutasProtegidas, [
     
     })  
 
+      /**
+ * @api {put} /user/matchoffercrsbtk 11 matchoffercrsbtk
+ * @apiName matchoffercrsbtk - Match de la oferta en la sala de chat
+ * @apiGroup Subastakas
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idUser required.
+ * @apiParam {int} idSala required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Chatrooms.
+ * @apiSuccess {int} status 200 of the Chatrooms.
+ * @apiSuccess {string} msg   of the Chatrooms.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "idNotificacion": 143,
+    "idOferta": 3,
+    "TypeNotification": 2,
+    "UserPublication": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+    "takasteo": true,
+    "msg": "¡TAKASTEO EXITOSO!"
+}
+ *
+ * @apiError UserNotFound The id of the Chatrooms was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar hacer mach en la sala de chat"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
+router.post('/matchoffercrsbtk', rutasProtegidas, [
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists(),
+    check('match', 'El match es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await subastakasController.MatchOfferCRsbtk(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)    
+    }) 
+
     module.exports = router;

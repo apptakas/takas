@@ -8,86 +8,86 @@ const date = require('date-and-time');
 let chatroomsModel = {};
 
 //Crear una nueva Sala de chat
-chatroomsModel.newChatRooms = (IdSAla,userOffer,userPublication,idPublication,hoy,OfferData,Status) => {
-       return new Promise(async(resolve, reject) => {
+chatroomsModel.newChatRooms = (IdSAla, userOffer, userPublication, idPublication, hoy, OfferData, Status) => {
+    return new Promise(async (resolve, reject) => {
         if (pool) {
             // console.log(OfferData);
             // console.log(hoy);
-            let Existe= await chatroomsModel.SalaExist(IdSAla,userPublication,userOffer,idPublication,OfferData);
+            let Existe = await chatroomsModel.SalaExist(IdSAla, userPublication, userOffer, idPublication, OfferData);
             // console.log("Existe.Exist");
             // console.log(Existe.Exist);
-            if(Existe.Exist==false){
-            pool.query(
-                'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) VALUES ("'+IdSAla+'","'+userPublication+'","'+userOffer+'",'+idPublication+',"'+OfferData+'","'+hoy+'",'+Status+')',
-                (err, result) => {
-                    //console.log(err);
-                   // console.log(result);
-                    if (err) {
-                        console.log(err);
-                        resolve({
-                            'error': err
-                        })
-                    } else {
-                        //console.log(result);
-                        resolve({
-                            'result': result
-                        })
-                    }
+            if (Existe.Exist == false) {
+                pool.query(
+                    'INSERT INTO chatrooms (id,iduserpublication,iduseroffer,idpubliction,idoffer,datecreated,status) VALUES ("' + IdSAla + '","' + userPublication + '","' + userOffer + '",' + idPublication + ',"' + OfferData + '","' + hoy + '",' + Status + ')',
+                    (err, result) => {
+                        //console.log(err);
+                        // console.log(result);
+                        if (err) {
+                            console.log(err);
+                            resolve({
+                                'error': err
+                            })
+                        } else {
+                            //console.log(result);
+                            resolve({
+                                'result': result
+                            })
+                        }
 
-                }
-            )
-        }else{
-            
-            resolve({
-                'result': Existe.result,
-                'Exist': Existe.Exist,
-                'sala': Existe.idSala
-            })
-        }
+                    }
+                )
+            } else {
+
+                resolve({
+                    'result': Existe.result,
+                    'Exist': Existe.Exist,
+                    'sala': Existe.idSala
+                })
+            }
             //return resultado;
         }
     })
 };
 
-chatroomsModel.SalaExist = (IdSAla,iduserpublication,iduseroffer,idpubliction,idoffer) => {
+chatroomsModel.SalaExist = (IdSAla, iduserpublication, iduseroffer, idpubliction, idoffer) => {
     return new Promise((resolve, reject) => {
-    if (pool) {
-        //let Puntuar={};
-        //console.log("SELECT * FROM product where id="+idPublication);
-        pool.query(
-            'SELECT * FROM `chatrooms` WHERE  iduserpublication=? AND iduseroffer=? AND idpubliction=? AND idoffer=?', [
+        if (pool) {
+            //let Puntuar={};
+            //console.log("SELECT * FROM product where id="+idPublication);
+            pool.query(
+                'SELECT * FROM `chatrooms` WHERE  iduserpublication=? AND iduseroffer=? AND idpubliction=? AND idoffer=?', [
                 iduserpublication,
                 iduseroffer,
                 idpubliction,
                 idoffer
             ],
-            (err, result) => {
-                              
-                
-                if (err) {
-                    resolve({
-                        'error': err
-                    })
-                } else {    
-                    let E=false;
-                    let id=IdSAla;
-                    // console.log("result");
-                    // console.log(result);
-                    if(result.length!=0){
-                        E=true;
-                        id=result[0].id;
-                    }
-                    resolve({
-                        'Exist': E,
-                        'result': result,
-                        'idSala': id
-                    })
-                }
+                (err, result) => {
 
-            }
-        )
-        //return resultado;
-    }
+
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        let E = false;
+                        let id = IdSAla;
+                        // console.log("result");
+                        // console.log(result);
+                        if (result.length != 0) {
+                            E = true;
+                            id = result[0].id;
+                        }
+                        resolve({
+                            'Exist': E,
+                            'result': result,
+                            'idSala': id
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
     })
 
 }
@@ -95,154 +95,154 @@ chatroomsModel.SalaExist = (IdSAla,iduserpublication,iduseroffer,idpubliction,id
 //Crear una nueva Sala de chat
 chatroomsModel.ExistChatRooms = (IdSAla) => {
     return new Promise((resolve, reject) => {
-     if (pool) {
-         pool.query(
-             'SELECT * FROM chatrooms WHERE id=?', IdSAla,
-             (err, result) => {
-                 //console.log(err);
-                // console.log(result);
-                 if (err) {
-                     resolve({
-                         'error': err
-                     })
-                 } else {
-                    //console.log(result);
-                     resolve({
-                         'result': result[0]
-                     })
-                 }
+        if (pool) {
+            pool.query(
+                'SELECT * FROM chatrooms WHERE id=?', IdSAla,
+                (err, result) => {
+                    //console.log(err);
+                    // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        //console.log(result);
+                        resolve({
+                            'result': result[0]
+                        })
+                    }
 
-             }
-         )
-         //return resultado;
-     }
- })
+                }
+            )
+            //return resultado;
+        }
+    })
 };
 
 
 //listDataChatRoom - Listar toda la información de la sala de chat
-chatroomsModel.listDataChatRoom = (idSala,idUser) => {
+chatroomsModel.listDataChatRoom = (idSala, idUser) => {
     return new Promise((resolve, reject) => {
-     if (pool) {
-        let armaresult={};
-         pool.query(
-             'SELECT cr.id AS idSala,cr.status,cr.iduserpublication,cr.iduseroffer,cr.matchpublication,cr.matchoffer,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.typepublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="'+idSala+'"',
-             async(err, result) => {
-                 //console.log(err);
-                // console.log(result);
-                 if (err) {
-                     resolve({
-                         'error': err
-                     })
-                 } else {
-                    armaresult = await chatroomsModel.armaresult3(result);  
+        if (pool) {
+            let armaresult = {};
+            pool.query(
+                'SELECT cr.id AS idSala,cr.status,cr.iduserpublication,cr.iduseroffer,cr.matchpublication,cr.matchoffer,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication,p.typepublication,p.marketvalue AS ValorPublication,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.id="' + idSala + '"',
+                async (err, result) => {
+                    //console.log(err);
+                    // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        armaresult = await chatroomsModel.armaresult3(result);
 
-                    //console.log(element);
-                let isUserPubli=false;
-                let match=0;
-                let matchpublication=result[0].matchpublication;
-                let matchoffer=result[0].matchoffer;
+                        //console.log(element);
+                        let isUserPubli = false;
+                        let match = 0;
+                        let matchpublication = result[0].matchpublication;
+                        let matchoffer = result[0].matchoffer;
 
-                if(result[0].iduserpublication==idUser){
-                    isUserPubli=true;
+                        if (result[0].iduserpublication == idUser) {
+                            isUserPubli = true;
+                        }
+                        if (result[0].iduseroffer == idUser) {
+                            isUserPubli = false;
+                        }
+                        console.log(isUserPubli);
+                        //NINGUN USUARIO HA HECHO MATCH
+                        if (matchpublication != 1 && matchoffer != 1) {
+                            match = 0;
+                        }
+                        //LOS DOS USUARIOS HAN HECHO MATCH
+                        if (matchpublication == 1 && matchoffer == 1) {
+                            match = 3;
+                        }
+                        console.log(isUserPubli);
+                        if (isUserPubli == true) {
+                            if (matchpublication == 1 && matchoffer != 1) {
+                                match = 1; //EL USUARIO HIZO MATCH
+                            }
+                            else if (matchoffer == 1 && matchpublication != 1) {
+                                match = 2;//EL OTRO USUARIO HIZO MATCH
+
+                            }
+                            console.log(match);
+                        }
+                        else {
+                            if (matchpublication != 1 && matchoffer == 1) {
+                                match = 1; //EL USUARIO HIZO MATCH
+                            }
+                            else if (matchoffer == 1 && matchpublication != 1) {
+                                match = 2;//EL OTRO USUARIO HIZO MATCH
+
+                            }
+                            console.log(match);
+                        }
+                        //match=false;
+
+                        // console.log("match");
+                        // console.log(match);
+                        // console.log("match");
+
+                        //armaresult['isUserPubli']=isUserPubli;
+                        //armaresult['match']=match;
+                        armaresult[0]['isUserPubli'] = isUserPubli;
+                        armaresult[0]['match'] = match;
+                        // console.log(armaresult);
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
+
                 }
-                if(result[0].iduseroffer==idUser){
-                    isUserPubli=false;
-                }
-                console.log(isUserPubli);
-                    //NINGUN USUARIO HA HECHO MATCH
-                    if(matchpublication!=1 && matchoffer!=1){
-                        match=0;
-                    }
-                    //LOS DOS USUARIOS HAN HECHO MATCH
-                    if(matchpublication==1 && matchoffer==1){
-                        match=3;
-                    }
-                    console.log(isUserPubli);
-                    if(isUserPubli==true){
-                        if(matchpublication==1 && matchoffer!=1){
-                            match=1; //EL USUARIO HIZO MATCH
-                        }
-                        else if(matchoffer==1 && matchpublication!=1){
-                             match=2;//EL OTRO USUARIO HIZO MATCH
-                            
-                        }
-                        console.log(match);
-                    }
-                    else{
-                        if(matchpublication!=1 && matchoffer==1){
-                            match=1; //EL USUARIO HIZO MATCH
-                        }
-                        else if(matchoffer==1 && matchpublication!=1){
-                                match=2;//EL OTRO USUARIO HIZO MATCH
-                            
-                        }
-                        console.log(match);
-                    }
-                    //match=false;
-
-                // console.log("match");
-                // console.log(match);
-                // console.log("match");
-
-                 //armaresult['isUserPubli']=isUserPubli;
-                 //armaresult['match']=match;
-                 armaresult[0]['isUserPubli'] = isUserPubli;
-                 armaresult[0]['match'] = match;
-                // console.log(armaresult);
-                     resolve({
-                         'result': armaresult
-                     })
-                 }
-
-             }
-         )
-         //return resultado;
-     }
- })
+            )
+            //return resultado;
+        }
+    })
 };
 
 chatroomsModel.armaresult3 = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
-        try{
-            let img={};
-            let prefe={};
+        try {
+            let img = {};
+            let prefe = {};
             //console.log(result);
             for (const element of result) {
-                img=await chatroomsModel.ListItemsOffers(element.idpubliction,element.ValorPublication);
-                prefe=await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
-                ItemOfer=await chatroomsModel.ListItemsOffers(element.idoffer,element.ValorPublication)
-                let Precio=Number.parseFloat(element.ValorPublication).toFixed(4);
+                img = await chatroomsModel.ListItemsOffers(element.idpubliction, element.ValorPublication);
+                prefe = await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
+                ItemOfer = await chatroomsModel.ListItemsOffers(element.idoffer, element.ValorPublication)
+                let Precio = Number.parseFloat(element.ValorPublication).toFixed(4);
 
                 let now = new Date();
-                let servidor=date.format(now, 'DD/MM/YYYY');
+                let servidor = date.format(now, 'DD/MM/YYYY');
                 //let registro=element.registro;
                 let registro = new Date(element.creacionSala);
                 let regis = date.format(registro, 'DD/MM/YYYY');
 
                 //console.log(now+" - "+registro);
 
-                let comprobar_fecha=date.isSameDay(now, registro); 
+                let comprobar_fecha = date.isSameDay(now, registro);
                 // console.log(comprobar_fecha+" - ");
                 // console.log("//////");
-                let nuevo=false;
-                if (registro == servidor){
-                    let nuevo=true;
-                }else{
-                    let nuevo=false;
+                let nuevo = false;
+                if (registro == servidor) {
+                    let nuevo = true;
+                } else {
+                    let nuevo = false;
                 }
 
-                  
+
 
 
                 arr.push({
-                    "idSala":element.idSala,
-                    "status":element.status,
-                    "datecreated":regis,
-                    "idPublicacion": element.idpubliction,  
-                    "typepublication":element.typepublication,                  
+                    "idSala": element.idSala,
+                    "status": element.status,
+                    "datecreated": regis,
+                    "idPublicacion": element.idpubliction,
+                    "typepublication": element.typepublication,
                     "namePublication": element.namePublication,
                     "ValorPublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                     "Userpublication": element.iduserpublication,
@@ -253,18 +253,18 @@ chatroomsModel.armaresult3 = (result) => {
                     "UserOferta": element.UserOferta,
                     "nameUserOferta": element.nameUserOferta,
                     "imgUserOferta": element.imgUserOferta,
-                    "ProductImagesPublicacion":img.ImagesProduct,
-                    "PreferencesPublicacion":prefe.Preferences,
-                    "aFavor":ItemOfer.aFavor,
-                    "Valorferta":Number.parseFloat(ItemOfer.Valorferta).toFixed(4),
+                    "ProductImagesPublicacion": img.ImagesProduct,
+                    "PreferencesPublicacion": prefe.Preferences,
+                    "aFavor": ItemOfer.aFavor,
+                    "Valorferta": Number.parseFloat(ItemOfer.Valorferta).toFixed(4),
                     "dieferencia": Number.parseFloat(ItemOfer.DiferenciaOffer).toFixed(4),
-                    "ItemOfer":ItemOfer.itemsoffer                    
+                    "ItemOfer": ItemOfer.itemsoffer
                 });
-                
+
             }
             resolve(arr)
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
@@ -277,42 +277,42 @@ chatroomsModel.armaresult = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
-        try{
-            let img={};
-            let prefe={};
+        try {
+            let img = {};
+            let prefe = {};
             //console.log(result);
             for (const element of result) {
-                img=await chatroomsModel.ListItemsOffers(element.idpubliction,element.ValorPublication);
-                prefe=await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
-                ItemOfer=await chatroomsModel.ListItemsOffers(element.idoffer,element.ValorPublication)
-                let Precio=Number.parseFloat(element.ValorPublication).toFixed(4);
+                img = await chatroomsModel.ListItemsOffers(element.idpubliction, element.ValorPublication);
+                prefe = await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
+                ItemOfer = await chatroomsModel.ListItemsOffers(element.idoffer, element.ValorPublication)
+                let Precio = Number.parseFloat(element.ValorPublication).toFixed(4);
 
                 let now = new Date();
-                let servidor=date.format(now, 'DD/MM/YYYY');
+                let servidor = date.format(now, 'DD/MM/YYYY');
                 //let registro=element.registro;
                 let registro = new Date(element.creacionSala);
                 let regis = date.format(registro, 'DD/MM/YYYY');
 
                 //console.log(now+" - "+registro);
 
-                let comprobar_fecha=date.isSameDay(now, registro); 
+                let comprobar_fecha = date.isSameDay(now, registro);
                 // console.log(comprobar_fecha+" - ");
                 // console.log("//////");
-                let nuevo=false;
-                if (registro == servidor){
-                    let nuevo=true;
-                }else{
-                    let nuevo=false;
+                let nuevo = false;
+                if (registro == servidor) {
+                    let nuevo = true;
+                } else {
+                    let nuevo = false;
                 }
 
-                  
+
 
 
                 arr.push({
-                    "idSala":element.idSala,
-                    "status":element.status,
-                    "datecreated":regis,
-                    "idPublicacion": element.idpubliction,                    
+                    "idSala": element.idSala,
+                    "status": element.status,
+                    "datecreated": regis,
+                    "idPublicacion": element.idpubliction,
                     "namePublication": element.namePublication,
                     "ValorPublication": Number.parseFloat(element.ValorPublication).toFixed(4),
                     "Userpublication": element.iduserpublication,
@@ -323,32 +323,32 @@ chatroomsModel.armaresult = (result) => {
                     "UserOferta": element.UserOferta,
                     "nameUserOferta": element.nameUserOferta,
                     "imgUserOferta": element.imgUserOferta,
-                    "ProductImagesPublicacion":img.ImagesProduct,
-                    "PreferencesPublicacion":prefe.Preferences,
-                    "aFavor":ItemOfer.aFavor,
-                    "Valorferta":Number.parseFloat(ItemOfer.Valorferta).toFixed(4),
+                    "ProductImagesPublicacion": img.ImagesProduct,
+                    "PreferencesPublicacion": prefe.Preferences,
+                    "aFavor": ItemOfer.aFavor,
+                    "Valorferta": Number.parseFloat(ItemOfer.Valorferta).toFixed(4),
                     "dieferencia": Number.parseFloat(ItemOfer.DiferenciaOffer).toFixed(4),
-                    "ItemOfer":ItemOfer.itemsoffer                    
+                    "ItemOfer": ItemOfer.itemsoffer
                 });
-                
+
             }
             resolve(arr)
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
     )
 
-} 
+}
 
 
 chatroomsModel.ListImagesProduct = (element) => {
     return new Promise((resolve, reject) => {
         pool.query(
-            'SELECT  url FROM imgproduct WHERE idproduct=? ',[element],
+            'SELECT  url FROM imgproduct WHERE idproduct=? ', [element],
             (err2, result2) => {
-                 
+
                 //console.log(element.id);   
                 //console.log(element.namec);   
                 //console.log(result2[1].preference);
@@ -356,21 +356,21 @@ chatroomsModel.ListImagesProduct = (element) => {
                     resolve({
                         'error': err2
                     })
-                } else {     
+                } else {
                     //console.log(result2); 
                     // console.log(result2.length);
-                    let ImagesProduct= []; 
-                    for(var atr2 in result2){
-                    ImagesProduct.push(result2[atr2].url); 
-                    };  
+                    let ImagesProduct = [];
+                    for (var atr2 in result2) {
+                        ImagesProduct.push(result2[atr2].url);
+                    };
                     //console.log(element.idproduct);  
-                   // console.log(ImagesProduct);
+                    // console.log(ImagesProduct);
                     resolve({
-                        
+
                         "ImagesProduct": ImagesProduct
                     });
-                }  
-                
+                }
+
                 //console.log(CatgySubCatg);
                 //CatgySubCatg.Subcategory=result2;
                 //console.log("//////SUBCATEGORÍA///////");
@@ -382,19 +382,19 @@ chatroomsModel.ListImagesProduct = (element) => {
 ////////
 chatroomsModel.idSala = (element) => {
     return new Promise((resolve, reject) => {
-        let idsala=null;
+        let idsala = null;
         pool.query(
-            'SELECT  id FROM chatrooms WHERE idoffer=? ',[element],
+            'SELECT  id FROM chatrooms WHERE idoffer=? ', [element],
             (err2, result2) => {
-                 
-               // console.log(result2);   
+
+                // console.log(result2);   
                 //console.log(element.namec);   
                 //console.log(result2[1].preference);
                 if (err2) {
                     resolve({
                         'Error': err2
                     })
-                } else {     
+                } else {
                     //console.log(result2); 
                     // console.log(result2.length);
                     // let ImagesProduct= []; 
@@ -402,19 +402,19 @@ chatroomsModel.idSala = (element) => {
                     // ImagesProduct.push(result2[atr2].url); 
                     // };  
                     //console.log(element.idproduct);  
-                   // console.log(ImagesProduct);
-                   if(result2[0]!=undefined){
-                    if(result2[0].id){
-                        idsala=result2[0].id;
-                       }
-                   }
-                   
+                    // console.log(ImagesProduct);
+                    if (result2[0] != undefined) {
+                        if (result2[0].id) {
+                            idsala = result2[0].id;
+                        }
+                    }
+
                     resolve({
-                        
+
                         "idSala": idsala
                     });
-                }  
-                
+                }
+
                 //console.log(CatgySubCatg);
                 //CatgySubCatg.Subcategory=result2;
                 //console.log("//////SUBCATEGORÍA///////");
@@ -426,31 +426,31 @@ chatroomsModel.idSala = (element) => {
 ////////
 
 //listChatRoomStatus - Listar salas de chat según status
-chatroomsModel.listChatRoomStatus = (statuSala,idUder) => {
+chatroomsModel.listChatRoomStatus = (statuSala, idUder) => {
     return new Promise((resolve, reject) => {
-     if (pool) {
-        let armaresult={};
-         pool.query(
-             'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication, p.typepublication,p.marketvalue AS valorComercial,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.status="'+statuSala+'" AND (cr.iduserpublication="'+idUder+'" OR cr.iduseroffer="'+idUder+'")',
-             async(err, result) => {
-                 //console.log(err);
-                // console.log(result);
-                 if (err) {
-                     resolve({
-                         'error': err
-                     })
-                 } else {
-                    armaresult = await chatroomsModel.armaresultStatus(result);  
-                     resolve({
-                         'result': armaresult
-                     })
-                 }
+        if (pool) {
+            let armaresult = {};
+            pool.query(
+                'SELECT cr.id AS idSala,cr.datecreated AS creacionSala,cr.idpubliction,p.name AS namePublication, p.typepublication,p.marketvalue AS valorComercial,cr.iduserpublication,u2.fullname AS nameUserPublication, u2.imgurl AS imgUserPublication ,cr.idoffer,cr.iduseroffer AS UserOferta,u.fullname AS nameUserOferta,u.imgurl AS imgUserOferta FROM chatrooms AS cr INNER JOIN users AS u ON cr.iduseroffer=u.id INNER JOIN users AS u2 ON cr.iduserpublication=u2.id INNER JOIN product AS p ON cr.idpubliction=p.id WHERE cr.status="' + statuSala + '" AND (cr.iduserpublication="' + idUder + '" OR cr.iduseroffer="' + idUder + '")',
+                async (err, result) => {
+                    //console.log(err);
+                    // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        armaresult = await chatroomsModel.armaresultStatus(result);
+                        resolve({
+                            'result': armaresult
+                        })
+                    }
 
-             }
-         )
-         //return resultado;
-     }
- })
+                }
+            )
+            //return resultado;
+        }
+    })
 };
 
 
@@ -459,38 +459,38 @@ chatroomsModel.armaresultStatus = (result) => {
 
     return new Promise(async (resolve, reject) => {
         let arr = [];
-        try{
-            let img={};
-            let prefe={};
+        try {
+            let img = {};
+            let prefe = {};
             //console.log(result);
             for (const element of result) {
-                img=await chatroomsModel.ListImagesProduct(element.idpubliction);
-                prefe=await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
+                img = await chatroomsModel.ListImagesProduct(element.idpubliction);
+                prefe = await chatroomsModel.ListPrefrencesProduct(element.idpubliction);
                 //ItemOfer=await chatroomsModel.ListItemsOffers(element.idoffer)
-                let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+                let Precio = Number.parseFloat(element.marketvalue).toFixed(4);
 
                 let now = new Date();
-                let servidor=date.format(now, 'DD/MM/YYYY');
+                let servidor = date.format(now, 'DD/MM/YYYY');
                 //let registro=element.registro;
                 let registro = new Date(element.creacionSala);
                 let regis = date.format(registro, 'DD/MM/YYYY');
 
                 //console.log(now+" - "+registro);
 
-                let comprobar_fecha=date.isSameDay(now, registro); 
+                let comprobar_fecha = date.isSameDay(now, registro);
                 // console.log(comprobar_fecha+" - ");
                 // console.log("//////");
-                let nuevo=false;
-                if (registro == servidor){
-                    let nuevo=true;
-                }else{
-                    let nuevo=false;
+                let nuevo = false;
+                if (registro == servidor) {
+                    let nuevo = true;
+                } else {
+                    let nuevo = false;
                 }
                 arr.push({
-                    "idSala":element.idSala,
-                    "datecreated":regis,
-                    "idPublicacion": element.idpubliction, 
-                    "typepublication":element.typepublication,                  
+                    "idSala": element.idSala,
+                    "datecreated": regis,
+                    "idPublicacion": element.idpubliction,
+                    "typepublication": element.typepublication,
                     "namePublication": element.namePublication,
                     "valorComercial": Number.parseFloat(element.valorComercial).toFixed(4),
                     "Userpublication": element.iduserpublication,
@@ -501,22 +501,22 @@ chatroomsModel.armaresultStatus = (result) => {
                     "UserOferta": element.UserOferta,
                     "nameUserOferta": element.nameUserOferta,
                     "imgUserOferta": element.imgUserOferta,
-                    "ProductImagesPublicacion":img.ImagesProduct,
-                    "PreferencesPublicacion":prefe.Preferences
+                    "ProductImagesPublicacion": img.ImagesProduct,
+                    "PreferencesPublicacion": prefe.Preferences
                     //"ItemOfer":ItemOfer
-                    
+
                 });
-                
+
             }
             resolve(arr)
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
     )
 
-} 
+}
 
 //////////////////
 
@@ -533,19 +533,19 @@ chatroomsModel.ListPrefrencesProduct = (element) => {
                     resolve({
                         'error': err2
                     })
-                } else {     
+                } else {
                     // console.log(result2); 
                     // console.log(result2.length);
-                    let preferences= []; 
-                    for(var atr2 in result2){
-                    preferences.push(result2[atr2].preference);
-                    };  
+                    let preferences = [];
+                    for (var atr2 in result2) {
+                        preferences.push(result2[atr2].preference);
+                    };
                     //console.log(preferences);
-                    resolve({                        
+                    resolve({
                         "Preferences": preferences
                     });
-                }  
-                
+                }
+
                 //console.log(CatgySubCatg);
                 //CatgySubCatg.Subcategory=result2;
                 //console.log("//////SUBCATEGORÍA///////");
@@ -557,66 +557,66 @@ chatroomsModel.ListPrefrencesProduct = (element) => {
 
 
 
-chatroomsModel.ListItemsOffers = (element,ValorPublication) => {
+chatroomsModel.ListItemsOffers = (element, ValorPublication) => {
     return new Promise((resolve, reject) => {
-        let SumItemsOffer=0;
-        let DiferenciaOffer=0;
-        let Afavor=false;
-        let detalleProduct={};
+        let SumItemsOffer = 0;
+        let DiferenciaOffer = 0;
+        let Afavor = false;
+        let detalleProduct = {};
         pool.query(
-            'SELECT ops.idoffers,ops.idpublication AS idproduct,ip.url,ops.status,p.name,p.marketvalue,p.datecreated AS datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE idoffers='+element,
-            async(err2, result2) => {
+            'SELECT ops.idoffers,ops.idpublication AS idproduct,ip.url,ops.status,p.name,p.marketvalue,p.datecreated AS datepublication,p.iduser,p.subcategory,p.name,p.details,p.typemoney,p.typepublication,p.status  FROM `offersproductservices` AS ops INNER JOIN product AS p ON ops.idpublication=p.id INNER JOIN imgproduct AS ip ON p.id=ip.idproduct WHERE idoffers=' + element,
+            async (err2, result2) => {
                 if (err2) {
                     console.log(err2);
                     resolve({
                         'error': err2
                     })
-                } else { 
-                //  console.log(result2); 
-                //  console.log(result2.length);
-                 let ListItemsOffers= []; 
-                 let idItems=0;
-                if(result2.length>0){
-                    for(var atr2 in result2){
-                    // "iduser": result2[0].iduser,
-                        if(idItems!=result2[atr2].idproduct){
-                            ListItemsOffers.push({
-                                "idoffer": result2[atr2].id,
-                                "idpublication": result2[atr2].idproduct,
-                                "nameproduct": result2[atr2].name,
-                                "status": result2[atr2].status,
-                                "img": result2[atr2].url,
-                                "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
-                            });
-                        
-                            idItems=result2[atr2].idproduct; 
-                            SumItemsOffer=parseInt(SumItemsOffer)+parseInt(result2[atr2].marketvalue);
-                        }                        
-                        
-                    }; 
-                    if(SumItemsOffer>ValorPublication){
-                         DiferenciaOffer= SumItemsOffer-ValorPublication;
-                         Afavor=false;
-                    }else{
-                        DiferenciaOffer= ValorPublication-SumItemsOffer;
-                        Afavor=true;
-                    }
-                    
-                }; 
-                // console.log("result2");
-                console.log(result2);
+                } else {
+                    //  console.log(result2); 
+                    //  console.log(result2.length);
+                    let ListItemsOffers = [];
+                    let idItems = 0;
+                    if (result2.length > 0) {
+                        for (var atr2 in result2) {
+                            // "iduser": result2[0].iduser,
+                            if (idItems != result2[atr2].idproduct) {
+                                ListItemsOffers.push({
+                                    "idoffer": result2[atr2].id,
+                                    "idpublication": result2[atr2].idproduct,
+                                    "nameproduct": result2[atr2].name,
+                                    "status": result2[atr2].status,
+                                    "img": result2[atr2].url,
+                                    "marketvalue": Number.parseFloat(result2[atr2].marketvalue).toFixed(4)
+                                });
 
-                //console.log(ListItemsOffers);
-                //detalleProduct = await ProductModel.armaresul(result2);  
-                 console.log("detalleProduct");
-                // console.log(detalleProduct);
-                resolve({ 
-                    "aFavor":Afavor,
-                    "Valorferta":SumItemsOffer,
-                    "DiferenciaOffer":DiferenciaOffer,   
-                    "itemsoffer": ListItemsOffers
-                });
-            }
+                                idItems = result2[atr2].idproduct;
+                                SumItemsOffer = parseInt(SumItemsOffer) + parseInt(result2[atr2].marketvalue);
+                            }
+
+                        };
+                        if (SumItemsOffer > ValorPublication) {
+                            DiferenciaOffer = SumItemsOffer - ValorPublication;
+                            Afavor = false;
+                        } else {
+                            DiferenciaOffer = ValorPublication - SumItemsOffer;
+                            Afavor = true;
+                        }
+
+                    };
+                    // console.log("result2");
+                    console.log(result2);
+
+                    //console.log(ListItemsOffers);
+                    //detalleProduct = await ProductModel.armaresul(result2);  
+                    console.log("detalleProduct");
+                    // console.log(detalleProduct);
+                    resolve({
+                        "aFavor": Afavor,
+                        "Valorferta": SumItemsOffer,
+                        "DiferenciaOffer": DiferenciaOffer,
+                        "itemsoffer": ListItemsOffers
+                    });
+                }
 
             })
     })
@@ -630,23 +630,23 @@ chatroomsModel.CloseChatRoom = (ChatRoomData) => {
         if (pool) {
             //let FindDatOffer={};
             pool.query(
-                'UPDATE  chatrooms SET  status= ? WHERE id= ?',[
-                    ChatRoomData.status,
-                    ChatRoomData.id
-                ],
-                async(err, result) => {
-                   // console.log(result);
+                'UPDATE  chatrooms SET  status= ? WHERE id= ?', [
+                ChatRoomData.status,
+                ChatRoomData.id
+            ],
+                async (err, result) => {
+                    // console.log(result);
                     if (err) {
                         console.log(err);
                         resolve({
                             'error': err
                         })
-                    } else {  
+                    } else {
                         //console.log(result);                       
-                                             
+
                         resolve({
                             'result': result
-                        })                        
+                        })
                     }
 
                 }
@@ -676,7 +676,7 @@ chatroomsModel.CloseChatRoom = (ChatRoomData) => {
 //                             'error': err
 //                         })
 //                     } else {                         
-                                             
+
 //                         resolve({
 //                             'result': result
 //                         })                        
@@ -695,143 +695,142 @@ chatroomsModel.CloseChatRoom = (ChatRoomData) => {
 // CAMBIAR DE ESTATUS LA PUBLICACIÓN
 //CAMBIAR DE ESTATUS LOS ITEMS DE LA OFERTA (LA PUBLICACIONES DE CONFORMAN LA OFERTA)
 ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
-chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatch,titulo,UserNotification,detalles) => {
+chatroomsModel.MatchOfferChatRoom = (ChatRoomData, isUserPubli, confirMatch, MsgMatch, titulo, UserNotification, detalles) => {
     return new Promise((resolve, reject) => {
         if (pool)
             //let titulo="";
-            
+
             pool.query(
-                'SELECT * FROM chatrooms WHERE (iduseroffer="'+ChatRoomData.idUser+'" OR iduserpublication="'+ChatRoomData.idUser+'") AND id="'+ChatRoomData.id+'" AND STATUS=24',
-                async(err, result) => {
+                'SELECT * FROM chatrooms WHERE (iduseroffer="' + ChatRoomData.idUser + '" OR iduserpublication="' + ChatRoomData.idUser + '") AND id="' + ChatRoomData.id + '" AND STATUS=24',
+                async (err, result) => {
                     //console.log(err);
-                    console.log('SELECT * FROM chatrooms WHERE (iduseroffer="'+ChatRoomData.idUser+'" OR iduserpublication="'+ChatRoomData.idUser+'") AND id="'+ChatRoomData.id+'" AND STATUS=24');
+                    console.log('SELECT * FROM chatrooms WHERE (iduseroffer="' + ChatRoomData.idUser + '" OR iduserpublication="' + ChatRoomData.idUser + '") AND id="' + ChatRoomData.id + '" AND STATUS=24');
                     if (err) {
                         resolve({
                             'error': err
                         })
                     } else {
                         console.log(result);
-                        let TypeNotification=2;
-                        let idrelation2=result[0].idpubliction;
-                        let idrelation=result[0].idproduct;
-                        let idOferta=result[0].idoffer;
-                        let offeru=result[0].iuserdoffer;
-                        let publicationcoU=result[0].iduserpublication;
+                        let TypeNotification = 2;
+                        let idrelation2 = result[0].idpubliction;
+                        let idrelation = result[0].idproduct;
+                        let idOferta = result[0].idoffer;
+                        let offeru = result[0].iuserdoffer;
+                        let publicationcoU = result[0].iduserpublication;
 
-                        if(publicationcoU==ChatRoomData.idUser){
-                            isUserPubli=true;
-                            pertenece=true;
+                        if (publicationcoU == ChatRoomData.idUser) {
+                            isUserPubli = true;
+                            pertenece = true;
                         }
 
-                        if(offeru==ChatRoomData.idUser){
-                            isUserPubli=false;
-                            pertenece=true;
+                        if (offeru == ChatRoomData.idUser) {
+                            isUserPubli = false;
+                            pertenece = true;
                         }
                         //console.log(isUserPubli);
 
                         //ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
-                        let response=await chatroomsModel.UpdateMatchChatRoom(ChatRoomData,isUserPubli,confirMatch,MsgMatch);
-                       
-                        let tokenPush="";
-                        let userNotification="";
-                        let iduserNoti="";
-                        let NameUser="";
+                        let response = await chatroomsModel.UpdateMatchChatRoom(ChatRoomData, isUserPubli, confirMatch, MsgMatch);
+
+                        let tokenPush = "";
+                        let userNotification = "";
+                        let iduserNoti = "";
+                        let NameUser = "";
                         //DATOS DE LA PUBLICACIÓN    
-                        let  idUserPublication= await Users.DataUserPublication(idrelation2);
-                        let nameProducto=idUserPublication.result[0].nameProducto;
-                        let UserPublication=idUserPublication.result[0].UserPublication;
+                        let idUserPublication = await Users.DataUserPublication(idrelation2);
+                        let nameProducto = idUserPublication.result[0].nameProducto;
+                        let UserPublication = idUserPublication.result[0].UserPublication;
                         let typepublication = idUserPublication.result[0].typepublication;
 
 
                         // VERIFICAR QUE LOS DOS USUARIOS ESTEN DE ACUERO - CONFIRMAR MATCH
-                        if(isUserPubli==true){
+                        if (isUserPubli == true) {
                             //VERIFICAMOS DE EL USUARIODE LA OFERTA TA HALLA HECHO UN MATCH O SI ESPERAMOS LA CONFIRMACIÓN
-                            if(result[0].matchoffer==true){
+                            if (result[0].matchoffer == true) {
                                 //CONFIRMADO POR EL USUARIO DE LA OFERTA
-                                confirMatch=true;
+                                confirMatch = true;
                             }
 
-                            let  idUserOferta= await Users.DataUserOferta(idOferta);
+                            let idUserOferta = await Users.DataUserOferta(idOferta);
                             //console.log(idUserOferta.result[0]);
-                            tokenPush=idUserOferta.result[0].tokenpush;
-                            userNotification=idUserOferta.result[0].UserOferta;
-                            NameUser=idUserOferta.result[0].NameUser;
-                            iduserNoti=idUserOferta.result[0].UserOferta;
+                            tokenPush = idUserOferta.result[0].tokenpush;
+                            userNotification = idUserOferta.result[0].UserOferta;
+                            NameUser = idUserOferta.result[0].NameUser;
+                            iduserNoti = idUserOferta.result[0].UserOferta;
 
-                        }else{
+                        } else {
                             //VERIFICAMOS DE EL USUARIODE LA PUBLICACIÓN TA HALLA HECHO UN MATCH O SI ESPERAMOS LA CONFIRMACIÓN
-                            if(result[0].matchpublication==true){
+                            if (result[0].matchpublication == true) {
                                 //CONFIRMADO POR EL USUARIO DE LA PUBLICACIÓN
-                                confirMatch=true;
+                                confirMatch = true;
                             }
 
-                           
+
                             //console.log(idUserPublication.result[0]);
-                            tokenPush=idUserPublication.result[0].tokenpush;
-                            userNotification=idUserPublication.result[0].UserPublication;
-                            NameUser=idUserPublication.result[0].NameUser;
-                            iduserNoti=idUserPublication.result[0].UserPublication;
+                            tokenPush = idUserPublication.result[0].tokenpush;
+                            userNotification = idUserPublication.result[0].UserPublication;
+                            NameUser = idUserPublication.result[0].NameUser;
+                            iduserNoti = idUserPublication.result[0].UserPublication;
                         }
 
-                        if(confirMatch==true){
-                            MsgMatch="¡TAKASTEO EXITOSO!";
+                        if (confirMatch == true) {
+                            MsgMatch = "¡TAKASTEO EXITOSO!";
                             // CAMBIAR DE ESTATUS LA PUBLICACIÓN
-                            let response2=await ProductModel.UpdateStatusPublication2(result[0].idpubliction);
+                            let response2 = await ProductModel.UpdateStatusPublication2(result[0].idpubliction);
                             //CAMBIAR DE ESTATUS LAS PUBLICACIONES DE LA OFERTA - ITEMS
-                            let response3=await ProductModel.UpdateStatusPublicationOffer2(result[0].idoffer);
+                            let response3 = await ProductModel.UpdateStatusPublicationOffer2(result[0].idoffer);
                             // CAMBIAR DE ESTATUS A LA SALA - CERRARLA  
                             let ChatRoomData = {
                                 id: result[0].id,
-                                status:25
+                                status: 25
                             };
-                            let response4=await chatroomsModel.CloseChatRoom(ChatRoomData);
+                            let response4 = await chatroomsModel.CloseChatRoom(ChatRoomData);
                             console.log(response4);
 
-                            titulo="¡FELICIADES TIENES UN TAKASTEO!";
-                            
-                            detalles="En TAKAS, "+NameUser+" nos alegra el Takasteo del  producto <<"+nameProducto+">>";
+                            titulo = "¡FELICIADES TIENES UN TAKASTEO!";
 
-                        }else
-                        {
-                            MsgMatch="¡ESPARAMOS LA CONFIRMACIÓN DEL MATCH PARA TAKASTEAR!";
+                            detalles = "En TAKAS, " + NameUser + " nos alegra el Takasteo del  producto <<" + nameProducto + ">>";
 
-                            if(isUserPubli==true){
-                                titulo="ESTÁS A UN PASO PARA TAKASTEO!";                            
-                                detalles=NameUser+", la publicación  <<"+nameProducto+">>, el producto que deseabas espera sólo por ti para ser takasteado ";
-                            }else{
+                        } else {
+                            MsgMatch = "¡ESPARAMOS LA CONFIRMACIÓN DEL MATCH PARA TAKASTEAR!";
 
-                                titulo="ESTÁS A UN PASO PARA TAKASTEO!";                            
-                                detalles=NameUser+", Tú publicación <<"+nameProducto+">> espera sólo por ti para ser takasteado ";
+                            if (isUserPubli == true) {
+                                titulo = "ESTÁS A UN PASO PARA TAKASTEO!";
+                                detalles = NameUser + ", la publicación  <<" + nameProducto + ">>, el producto que deseabas espera sólo por ti para ser takasteado ";
+                            } else {
+
+                                titulo = "ESTÁS A UN PASO PARA TAKASTEO!";
+                                detalles = NameUser + ", Tú publicación <<" + nameProducto + ">> espera sólo por ti para ser takasteado ";
                             }
-                            
+
                         }
                         ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
                         // console.log("idUserPublication.tokenpush");
-                        let idNotificacion={};
-                        if(typepublication==1){
-                            let respCrearPush = await notificationModel.cearnotificacion(TypeNotification,idrelation2,userNotification,titulo,detalles,idOferta);  
+                        let idNotificacion = {};
+                        if (typepublication == 1) {
+                            let respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation2, userNotification, titulo, detalles, idOferta);
                             console.log(respCrearPush);
                             console.log(respCrearPush.result.insertId);
-                            idNotificacion=respCrearPush.result.insertId;
-                        } else{
-                            idNotificacion=null;
-                            }
+                            idNotificacion = respCrearPush.result.insertId;
+                        } else {
+                            idNotificacion = null;
+                        }
                         //console.log(tokenPush);
                         ///////////////////////////////////////////
-                                                
+
                         resolve({
                             'result': result[0],
-                            'isUserPubli':isUserPubli,
-                            'confirMatch':confirMatch,
-                            'tokenPush':tokenPush,
-                            'titulo':titulo,
-                            'detalles':detalles,
-                            'idNotificacion':idNotificacion,
-                            'idOferta':idOferta,
-                            'TypeNotification':TypeNotification,
-                            'UserPublication':UserPublication,
-                            'idrelation':idrelation,
-                            'MsgMatch':MsgMatch
+                            'isUserPubli': isUserPubli,
+                            'confirMatch': confirMatch,
+                            'tokenPush': tokenPush,
+                            'titulo': titulo,
+                            'detalles': detalles,
+                            'idNotificacion': idNotificacion,
+                            'idOferta': idOferta,
+                            'TypeNotification': TypeNotification,
+                            'UserPublication': UserPublication,
+                            'idrelation': idrelation,
+                            'MsgMatch': MsgMatch
                         })
 
                     }
@@ -844,34 +843,329 @@ chatroomsModel.MatchOfferChatRoom= (ChatRoomData,isUserPubli,confirMatch,MsgMatc
 
 };
 
-
-//ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
-chatroomsModel.UpdateMatchChatRoom = (ChatRoomData,isUserPubli) => {
-    //let resultado = {};
+chatroomsModel.MatchOfferCR = (ChatRoomData, isUserPubli, confirMatch, MsgMatch, titulo, UserNotification, detalles) => {
     return new Promise((resolve, reject) => {
-        if (pool) {
-            //let FindDatOffer={};
-            let consulta="";
-            if(isUserPubli==true){
-                consulta="UPDATE  chatrooms SET  matchpublication=true WHERE id= ?";
-            }else{
-                consulta="UPDATE  chatrooms SET  matchoffer=true WHERE id= ?";
-            }
+        if (pool)
+            //let titulo="";
+
             pool.query(
-                consulta,[
-                    ChatRoomData.id
-                ],
-                async(err, result) => {
-                   // console.log(result);
+                'SELECT * FROM chatrooms WHERE (iduseroffer="' + ChatRoomData.idUser + '" OR iduserpublication="' + ChatRoomData.idUser + '") AND id="' + ChatRoomData.id + '" AND STATUS=24',
+                async (err, result) => {
+                    //console.log(err);
+                    console.log('SELECT * FROM chatrooms WHERE (iduseroffer="' + ChatRoomData.idUser + '" OR iduserpublication="' + ChatRoomData.idUser + '") AND id="' + ChatRoomData.id + '" AND STATUS=24');
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {                         
-                                             
+                    } else {
+                        //if(result.length)
+                        console.log("result.length");
+                        console.log(result.length);
+                        console.log("result.length");
+                        console.log(result);
+                        if (result.length != 0) {
+                            let TypeNotification = 2;
+                            let idrelation2 = result[0].idpubliction;
+                            let idrelation = result[0].idproduct;
+                            let idOferta = result[0].idoffer;
+                            let offeru = result[0].iuserdoffer;
+                            let publicationcoU = result[0].iduserpublication;
+
+                            if (publicationcoU == ChatRoomData.idUser) {
+                                isUserPubli = true;
+                                pertenece = true;
+                            }
+
+                            if (offeru == ChatRoomData.idUser) {
+                                isUserPubli = false;
+                                pertenece = true;
+                            }
+                            //console.log(isUserPubli);
+
+                            //ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
+                            let response = await chatroomsModel.UpdateMatchChatRoom(ChatRoomData, isUserPubli, confirMatch, MsgMatch);
+
+                            let tokenPush = "";
+                            let userNotification = "";
+                            let iduserNoti = "";
+                            let NameUser = "";
+                            //DATOS DE LA PUBLICACIÓN    
+                            let idUserPublication = await Users.DataUserPublication(idrelation2);
+                            let nameProducto = idUserPublication.result[0].nameProducto;
+                            let UserPublication = idUserPublication.result[0].UserPublication;
+                            let typepublication = idUserPublication.result[0].typepublication;
+
+
+                            let idUserOferta = await Users.DataUserOferta(idOferta);
+                            //console.log(idUserOferta.result[0]);
+                            tokenPush = idUserOferta.result[0].tokenpush;
+                            userNotification = idUserOferta.result[0].UserOferta;
+                            NameUser = idUserOferta.result[0].NameUser;
+                            iduserNoti = idUserOferta.result[0].UserOferta;
+
+
+                            confirMatch = ChatRoomData.match
+                            console.log("ChatRoomData.match");
+                            console.log(ChatRoomData.match);
+                            console.log("ChatRoomData.match");
+
+                            if (ChatRoomData.match == true) {
+                                MsgMatch = "¡TAKASTEO EXITOSO!";
+                                // CAMBIAR DE ESTATUS LA PUBLICACIÓN
+                                let response2 = await ProductModel.UpdateStatusPublication2(result[0].idpubliction);
+                                //CAMBIAR DE ESTATUS LAS PUBLICACIONES DE LA OFERTA - ITEMS
+                                let response3 = await ProductModel.UpdateStatusPublicationOffer2(result[0].idoffer);
+                                // CAMBIAR DE ESTATUS A LA SALA - CERRARLA  
+                                let ChatRoomData = {
+                                    id: result[0].id,
+                                    status: 25
+                                };
+                                let response4 = await chatroomsModel.CloseChatRoom(ChatRoomData);
+                                console.log(response4);
+
+                                titulo = "¡FELICIADES TIENES UN TAKASTEO!";
+
+                                detalles = "En TAKAS, " + NameUser + " nos alegra el Takasteo del  producto <<" + nameProducto + ">>";
+
+                            } else {
+                                MsgMatch = "¡Uff estuviste a punto de TAKASTEAR!";
+
+                                titulo = "HAZ RECHAZADO LA OFERTA!";
+                                detalles = NameUser + ", has rechazado la publicación  <<" + nameProducto + ">>";
+
+
+                            }
+                            ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
+                            // console.log("idUserPublication.tokenpush");
+                            let idNotificacion = {};
+                            if (typepublication == 1) {
+                                let respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation2, userNotification, titulo, detalles, idOferta);
+                                console.log(respCrearPush);
+                                console.log(respCrearPush.result.insertId);
+                                idNotificacion = respCrearPush.result.insertId;
+                            } else {
+                                idNotificacion = null;
+                            }
+                            //console.log(tokenPush);
+                            ///////////////////////////////////////////
+
+                            resolve({
+                                'result': result[0],
+                                'isUserPubli': isUserPubli,
+                                'confirMatch': confirMatch,
+                                'tokenPush': tokenPush,
+                                'titulo': titulo,
+                                'detalles': detalles,
+                                'idNotificacion': idNotificacion,
+                                'idOferta': idOferta,
+                                'TypeNotification': TypeNotification,
+                                'UserPublication': UserPublication,
+                                'idrelation': idrelation,
+                                'MsgMatch': MsgMatch
+                            })
+                        }else {
+                            resolve({
+                                'result': 0,
+                                'isUserPubli': 0,
+                                'confirMatch': 0,
+                                'tokenPush': 0,
+                                'titulo': 0,
+                                'detalles': 0,
+                                'idNotificacion': 0,
+                                'idOferta': 0,
+                                'TypeNotification': 0,
+                                'UserPublication': 0,
+                                'idrelation': 0,
+                                'MsgMatch': "Publicación no encontrada"
+                            })
+                        }
+
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+chatroomsModel.MatchOfferCRsbtk = (ChatRoomData, isUserPubli, confirMatch, MsgMatch, titulo, UserNotification, detalles) => {
+    return new Promise((resolve, reject) => {
+        if (pool)
+            //let titulo="";
+
+            pool.query(
+                'SELECT * FROM chatrooms WHERE (iduseroffer="' + ChatRoomData.idUser + '" OR iduserpublication="' + ChatRoomData.idUser + '") AND id="' + ChatRoomData.id + '" AND STATUS=24',
+                async (err, result) => {
+                    //console.log(err);
+                    console.log('SELECT * FROM chatrooms WHERE (iduseroffer="' + ChatRoomData.idUser + '" OR iduserpublication="' + ChatRoomData.idUser + '") AND id="' + ChatRoomData.id + '" AND STATUS=24');
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        console.log("result.length");
+                        console.log(result.length);
+                        console.log("result.length");
+                        console.log(result);
+                        if (result.length != 0) {
+                            let TypeNotification = 2;
+                            let idrelation2 = result[0].idpubliction;
+                            let idrelation = result[0].idproduct;
+                            let idOferta = result[0].idoffer;
+                            let offeru = result[0].iuserdoffer;
+                            let publicationcoU = result[0].iduserpublication;
+
+                            if (publicationcoU == ChatRoomData.idUser) {
+                                isUserPubli = true;
+                                pertenece = true;
+                            }
+
+                            if (offeru == ChatRoomData.idUser) {
+                                isUserPubli = false;
+                                pertenece = true;
+                            }
+                            //console.log(isUserPubli);
+
+                            //ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
+                            let response = await chatroomsModel.UpdateMatchChatRoom(ChatRoomData, isUserPubli, confirMatch, MsgMatch);
+
+                            let tokenPush = "";
+                            let userNotification = "";
+                            let iduserNoti = "";
+                            let NameUser = "";
+                            //DATOS DE LA PUBLICACIÓN    
+                            let idUserPublication = await Users.DataUserPublication(idrelation2);
+                            let nameProducto = idUserPublication.result[0].nameProducto;
+                            let UserPublication = idUserPublication.result[0].UserPublication;
+                            let typepublication = idUserPublication.result[0].typepublication;
+
+
+                            let idUserOferta = await Users.DataUserOferta(idOferta);
+                            //console.log(idUserOferta.result[0]);
+                            tokenPush = idUserOferta.result[0].tokenpush;
+                            userNotification = idUserOferta.result[0].UserOferta;
+                            NameUser = idUserOferta.result[0].NameUser;
+                            iduserNoti = idUserOferta.result[0].UserOferta;
+
+
+                            confirMatch = ChatRoomData.match
+                            console.log("ChatRoomData.match");
+                            console.log(ChatRoomData.match);
+                            console.log("ChatRoomData.match");
+
+                            if (ChatRoomData.match == true) {
+                                MsgMatch = "¡SUBASTAKASTEO EXITOSO!";
+                                // CAMBIAR DE ESTATUS LA PUBLICACIÓN
+                                let response2 = await ProductModel.UpdateStatusPublication2(result[0].idpubliction);
+                                //CAMBIAR DE ESTATUS LAS PUBLICACIONES DE LA OFERTA - ITEMS
+                                let response3 = await ProductModel.UpdateStatusPublicationOffer2(result[0].idoffer);
+                                // CAMBIAR DE ESTATUS A LA SALA - CERRARLA  
+                                let ChatRoomData = {
+                                    id: result[0].id,
+                                    status: 25
+                                };
+                                let response4 = await chatroomsModel.CloseChatRoom(ChatRoomData);
+                                console.log(response4);
+
+                                titulo = "¡FELICIADES TIENES UN SUBASTAKASTEO!";
+
+                                detalles = "En TAKAS, " + NameUser + " nos alegra el Subaskateo del  producto <<" + nameProducto + ">>";
+
+                            } else {
+                                MsgMatch = "¡Uff estuviste a punto de TAKASTEAR!";
+
+                                titulo = "HAZ RECHAZADO LA OFERTA!";
+                                detalles = NameUser + ", has rechazado la publicación  <<" + nameProducto + ">>";
+
+
+                            }
+                            ///CREAMOS Y ENVIAMOS TOTIFICACIÓN///
+                            // console.log("idUserPublication.tokenpush");
+                            let idNotificacion = {};
+                            if (typepublication == 1) {
+                                let respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation2, userNotification, titulo, detalles, idOferta);
+                                console.log(respCrearPush);
+                                console.log(respCrearPush.result.insertId);
+                                idNotificacion = respCrearPush.result.insertId;
+                            } else {
+                                idNotificacion = null;
+                            }
+                            //console.log(tokenPush);
+                            ///////////////////////////////////////////
+
+                            resolve({
+                                'result': result[0],
+                                'isUserPubli': isUserPubli,
+                                'confirMatch': confirMatch,
+                                'tokenPush': tokenPush,
+                                'titulo': titulo,
+                                'detalles': detalles,
+                                'idNotificacion': idNotificacion,
+                                'idOferta': idOferta,
+                                'TypeNotification': TypeNotification,
+                                'UserPublication': UserPublication,
+                                'idrelation': idrelation,
+                                'MsgMatch': MsgMatch
+                            })
+                        }
+                        else {
+                            resolve({
+                                'result': 0,
+                                'isUserPubli': 0,
+                                'confirMatch': 0,
+                                'tokenPush': 0,
+                                'titulo': 0,
+                                'detalles': 0,
+                                'idNotificacion': 0,
+                                'idOferta': 0,
+                                'TypeNotification': 0,
+                                'UserPublication': 0,
+                                'idrelation': 0,
+                                'MsgMatch': "Publicación no encontrada"
+                            })
+                        }
+
+                    }
+
+                }
+            )
+    }
+    )
+
+
+};
+
+
+
+//ACTUALIZAMOS EL MATCH EN LA TABLA DE SALAS DE CHAT
+chatroomsModel.UpdateMatchChatRoom = (ChatRoomData, isUserPubli) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            //let FindDatOffer={};
+            let consulta = "";
+            if (isUserPubli == true) {
+                consulta = "UPDATE  chatrooms SET  matchpublication=true WHERE id= ?";
+            } else {
+                consulta = "UPDATE  chatrooms SET  matchoffer=true WHERE id= ?";
+            }
+            pool.query(
+                consulta, [
+                ChatRoomData.id
+            ],
+                async (err, result) => {
+                    // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+
                         resolve({
                             'result': result
-                        })                        
+                        })
                     }
 
                 }
@@ -887,21 +1181,21 @@ ProductModel.UpdateStatusPublication2 = (idPubli) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             //let FindDatOffer={};
-            let  consulta="UPDATE  product SET  status=4 WHERE id="+idPubli;
-        
+            let consulta = "UPDATE  product SET  status=4 WHERE id=" + idPubli;
+
             pool.query(
                 consulta,
-                async(err, result) => {
+                async (err, result) => {
                     //console.log(result);
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {                         
-                                             
+                    } else {
+
                         resolve({
                             'result': result
-                        })                        
+                        })
                     }
 
                 }
@@ -918,23 +1212,23 @@ ProductModel.UpdateStatusPublicationOffer2 = (idOffer) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             //let FindDatOffer={};
-            let  consulta="SELECT o.id, ops.idpublication FROM offers AS o  INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers WHERE o.id="+idOffer;
-        
+            let consulta = "SELECT o.id, ops.idpublication FROM offers AS o  INNER JOIN offersproductservices AS ops ON o.id=ops.idoffers WHERE o.id=" + idOffer;
+
             pool.query(
                 consulta,
-                async(err, result) => {
+                async (err, result) => {
                     //console.log(result);
                     if (err) {
                         resolve({
                             'error': err
                         })
-                    } else {    
+                    } else {
                         ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
-                        let response=await ProductModel.RecorridoPublicationOffer2(result);                     
-                                             
+                        let response = await ProductModel.RecorridoPublicationOffer2(result);
+
                         resolve({
                             'result': result
-                        })                        
+                        })
                     }
 
                 }
@@ -945,14 +1239,14 @@ ProductModel.UpdateStatusPublicationOffer2 = (idOffer) => {
 };
 
 //UPDATE ITEMS DE PUBLICACIONES QUE PERTENECEN A UNA OFERTA 
-ProductModel.RecorridoPublicationOffer2 = async(element) => {
+ProductModel.RecorridoPublicationOffer2 = async (element) => {
 
-    if(element.length>0){
+    if (element.length > 0) {
         // console.log(SumItemsOffer);
-        for(var atr2 in element){
+        for (var atr2 in element) {
             // "iduser": element[0].iduser,
-            let response=await ProductModel.UpdateStatusPublication2(element[atr2].idpublication);               
-            
+            let response = await ProductModel.UpdateStatusPublication2(element[atr2].idpublication);
+
         }; // fin for                    
     }; //fin if
 

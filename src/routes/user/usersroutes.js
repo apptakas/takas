@@ -873,10 +873,11 @@ router.put('/tokenpush', rutasProtegidas, [
     "success": true,
     "status": "200",
     "UserExist": true,
-    "Email": "luis.perez@comfacundi.com.co",
-    "Fullname": "LUIS ALFONSO PEREZ GOMEZ",
-    "PhoneNumber": null,
-    "ImgUrl": "https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg",
+    "Email": "emailUser3@gmail.com",
+    "Fullname": "fullnameUser2",
+    "PhoneNumber": "298380983676",
+    "memberships": "Free",
+    "ImgUrl": "https://n9.cl/zxq61",
     "msg": "Verificación si el usuario existe y si sus campos estan completos"
 }
  *
@@ -2907,6 +2908,137 @@ router.put('/changestatusoffer', rutasProtegidas, [
     
     }) 
 
+
+        /**
+ * @api {put} /user/changestatusoffer 6 changestatusoffer
+ * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idOffer required.
+ * @apiParam {int} idUser required.
+ * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "match": true,
+    "sala": "6340c299f4d9eb3d797b6a54f779cf616d0b0cdb",
+    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
+router.put('/changestatusoffer', rutasProtegidas, [
+    check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('FlagStatusOffer', 'El FlagStatusOffer es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.ChangeStatusOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+        /**
+ * @api {put} /user/matchoffer 8 matchoffer
+ * @apiName matchoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idOffer required.
+ * @apiParam {int} idUser required.
+ * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "match": true,
+    "sala": "6340c299f4d9eb3d797b6a54f779cf616d0b0cdb",
+    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
+router.put('/matchoffer', rutasProtegidas, [
+    check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('MatchOffer', 'El Macht es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.MatchOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
 /**
  * @api {post} /user/listchatroomstatus 1 listchatroomstatus
  * @apiName listchatroomstatus - Listar los datos de la sala de chat según status
@@ -3230,7 +3362,71 @@ router.post('/matchofferchatroom', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)    
     }) 
 
+   /**
+ * @api {put} /user/matchoffercr 5 matchoffercr
+ * @apiName matchoffercr - Match de la oferta en la sala de chat
+ * @apiGroup Chatrooms
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idUser required.
+ * @apiParam {int} idSala required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Chatrooms.
+ * @apiSuccess {int} status 200 of the Chatrooms.
+ * @apiSuccess {string} msg   of the Chatrooms.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "idNotificacion": 143,
+    "idOferta": 3,
+    "TypeNotification": 2,
+    "UserPublication": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+    "takasteo": true,
+    "msg": "¡TAKASTEO EXITOSO!"
+}
+ *
+ * @apiError UserNotFound The id of the Chatrooms was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar hacer mach en la sala de chat"
+}
+ **/
 
+//CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
+router.post('/matchoffercr', rutasProtegidas, [
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists(),
+    check('match', 'El match es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.MatchOfferCR(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)    
+    }) 
 
 /**
  * @api {post} /user/listnotifications 1 listnotifications

@@ -166,7 +166,7 @@ userModel.PerfilUser = (idUser, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT u.fullname,u.email,u.phonenumber,u.datecreated,AVG(p.scorev) AS calfVendedor,AVG(p.scorec)AS calfClient FROM users AS u INNER JOIN product AS p ON u.id=p.iduser WHERE u.id="' + idUser + '" GROUP BY p.iduser',
+                'SELECT u.email,u.fullname,u.phonenumber,u.imgurl,u.datecreated,m.name AS memberships FROM users AS u INNER JOIN mastermemberships AS m  ON u.memberships=m.id WHERE u.id="' + idUser + '"',
                 (err, result) => {
                     //console.log(result);
                     if (result && Object.entries(result).length != 0) {
@@ -184,7 +184,9 @@ userModel.PerfilUser = (idUser, callback) => {
                             'result': {
                                 'NameUser': result[0].fullname,
                                 'EmailUser': result[0].email,
+                                'ImgUrl': result[0].imgurl,
                                 'PhonenumberUser': result[0].phonenumber,
+                                'memberships': result[0].memberships,
                                 'DatecreatedUser': regis,
                                 'Reputation Vendedor': calfVendedor,
                                 'Reputation Cliente': calfClient,
@@ -408,7 +410,7 @@ userModel.UserExist = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT * FROM `users`  where id= ?', [userData.id],
+                'SELECT u.email,u.fullname,u.phonenumber,u.imgurl,m.name AS memberships FROM users AS u INNER JOIN mastermemberships AS m  ON u.memberships=m.id WHERE u.id=?', [userData.id],
                 (err, result) => {
                     console.log(result);
                     if (err) {
@@ -421,6 +423,7 @@ userModel.UserExist = (userData, callback) => {
                             'Email': result[0].email,
                             'Fullname': result[0].fullname,
                             'PhoneNumber': result[0].phonenumber,
+                            'memberships': result[0].memberships,
                             'ImgUrl': result[0].imgurl
 
                         })

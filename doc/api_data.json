@@ -1072,6 +1072,1039 @@
   },
   {
     "type": "post",
+    "url": "/epayco/addnewtoken",
+    "title": "7 addnewtoken",
+    "name": "addnewtoken_-_Agregar_nuevo_token_a_tarjeta_existente",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "franchise",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "token",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "mask",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Reassignment card by default successful\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error reassigning default card\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/addnewtokenclient",
+    "title": "8 addnewtokenclient",
+    "name": "addnewtokenclient_-_Agregar_nuevo_token_a_Cliente_existente",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "token",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"El customer ya tiene el token asociado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"El customer ya tiene el token asociado\",\n    \"msg\": \"Token inexistente, o no perteneciente al comercio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/crearclient",
+    "title": "2 crearclient",
+    "name": "crearclient_-_Crear_cliente_en_Epayco",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n\"success\": true,\n\"status\": \"200\",\n\"msg\": \"Cliente Creado con Éxito.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar Crear al cliente. El token no se puede asociar al cliente, verifique que: el token existe, el cliente no esté asociado y que el token no este asociado a otro cliente .\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/createplans",
+    "title": "8 createplans",
+    "name": "createplans_-_Crear_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "name",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "description",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "real",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "currency",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "interval",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "interval_count",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "trial_days",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"El plan ha sido creado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Datos erroneos o plan ya existente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/deletetoken",
+    "title": "6 deletetoken",
+    "name": "deletetoken_-_Eliminar_Token",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "franchise",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "vatchars",
+            "optional": false,
+            "field": "mask",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Token removido\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error eliminando el token\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/listclient",
+    "title": "4 listclient",
+    "name": "listclient_-_Listar_clientes_creados_en_Epaycoq",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"id_customer\": \"PS9ZmikjhAj9rZiDE\",\n        \"name\": \"Joe\",\n        \"email\": \"joe@payco.co\",\n        \"phone\": \"3005234321\",\n        \"address\": \"Cr 4 # 55 36\",\n        \"created\": \"03/28/2021\",\n        \"cards\": [\n            {\n                \"token\": \"**********GYmzXG\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/24/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rLwcZZ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********ZRg8xt\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********EzGgxS\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********hPcrJ5\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********pXT4t2\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********bkWK9z\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********PWStny\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********682QuD\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********aRr5X8\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********eNbSST\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********oAFDTQ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********4cqCvB\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********qMFr6j\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rE3tBT\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/29/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********NPrJx3\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/29/2021\",\n                \"default\": true\n            }\n        ]\n    },\n    \"msg\": \"Lista de clientes con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar listar  clientes.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/recuperarclient",
+    "title": "3 recuperarclient",
+    "name": "recuperarclient_-_buscar_cliente_en_Epayco",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"id_customer\": \"PS9ZmikjhAj9rZiDE\",\n        \"name\": \"Joe\",\n        \"email\": \"joe@payco.co\",\n        \"phone\": \"3005234321\",\n        \"address\": \"Cr 4 # 55 36\",\n        \"created\": \"03/28/2021\",\n        \"cards\": [\n            {\n                \"token\": \"**********GYmzXG\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/24/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rLwcZZ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********ZRg8xt\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********EzGgxS\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********hPcrJ5\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********pXT4t2\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********bkWK9z\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********PWStny\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********682QuD\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********aRr5X8\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********eNbSST\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********oAFDTQ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********4cqCvB\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********qMFr6j\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rE3tBT\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/29/2021\",\n                \"default\": true\n            }\n        ]\n    },\n    \"msg\": \"Cliente encontrado con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar buscars al cliente.\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/retieveplans",
+    "title": "9 retieveplans",
+    "name": "retieveplans_-_Recuperar_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "vatchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"date\": {\n        \"_id\": \"pLexEx6S5TzcdqaYE\",\n        \"id_plan\": \"coursereact2\",\n        \"name\": \"Course react js2\",\n        \"description\": \"Course react and redux2\",\n        \"amount\": 30000,\n        \"currency\": \"cop\",\n        \"interval_count\": 1,\n        \"interval\": \"month\",\n        \"status\": \"active\",\n        \"trialDays\": 30,\n        \"created\": \"04/03/2021\"\n    },\n    \"msg\": \"El plan ha sido encontrado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Plan no encontrado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/tokenizacion",
+    "title": "1 tokenizacion",
+    "name": "tokenizacion_-_Tokenizar_tarjeta",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardNumber",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardExpYear",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardExpMonth",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardCVC",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n\"success\": true,\n\"status\": \"200\",\n\"msg\": \"Tarjeta Tokenizada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar tokenizar\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/updateclient",
+    "title": "5 updateclient",
+    "name": "updateclient_-_Actualizar_cliente_en_Epayco",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Cliente Actualizado con Éxito.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar acualizar al cliente. \n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
     "url": "/admin/cantmembershiprequests",
     "title": "4 cantmembershiprequests",
     "name": "cantmembershiprequests_-_Cantidad_de_Solicitudes_de_Membresías",

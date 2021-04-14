@@ -618,6 +618,115 @@ OffersModel.ChangeStatusOffer = (OfferData, FlagStatusOffer, callback) => {
 };
 
 
+OffersModel.MatchOffer = (OfferData, match) => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            let FindDatOffer = {};
+            let idUserPublication = {};
+            let idUserOferta = {};
+            let statusOffer = OfferData.status;
+            let idOferta = OfferData.id;
+            let idUser = OfferData.idUser;
+            let respCrearPush = {};
+            //console.log(OfferData);
+            pool.query(
+                'UPDATE  offers SET  status= ? WHERE id= ?', [
+                OfferData.status,
+                OfferData.id
+            ],
+                async (err, result) => {
+                    console.log(err);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+
+                        //console.log("prueba");
+                        /////**********creamos notificación y preparamos datos para notificación push************//////////////
+
+                        //idUserPublication= await UsersModel.DataUserPublication(idrelation);
+                        let TypeNotification = 2;
+                        
+
+                        //TOMAMOS DATOS DE LA OFERTA
+                        idUserOferta = await UsersModel.DataUserOferta(idOferta);
+                        //console.log(idUserOferta);
+                        //CALCULAMOS VALOR DE LA OFERTA
+                        ValorOferta = await OffersModel.CalculoValorOferta(idOferta);
+                        //console.log(idUserOferta);
+                        //console.log(ValorOferta);
+                        //ID DE LA PUBLICACIÓN EN RELACIÓN 
+                        let idrelation = idUserOferta.idproduct;
+                        //console.log(idUserOferta.idproduct);
+                        //DATOS DE LA PUBICACIÓN
+                        idUserPublication = await UsersModel.DataUserPublication(idrelation);
+                        //DATOS EN GENERAL PARA MENSAJES
+                        //ARMAMOS EL MENSAJE
+                        let CalValorOferta = ValorOferta.result[0].cvalorOferta;
+                        //let UserPublication=idUserPublication.result[0].UserPublication;
+                        let UserPublication = idUserOferta.result[0].UserOferta;
+                        let tokenpush = idUserOferta.result[0].tokenpush;
+                        let fullname = idUserOferta.result[0].NameUser;
+                        let nameProducto = idUserPublication.result[0].nameProducto;
+                        let marketvalue = idUserPublication.result[0].marketvalue;
+                        let titulo = "";
+                        let detalles = "";
+
+                        if(match==true){
+
+                            if (statusOffer == 7) {
+                                titulo = "FELICIDADES TAKASTEO!";
+                                detalles = "¡En hora buena " + fullname + "! tú Oferta a la publicación <<" + nameProducto + ">> ha sido Takasteada, habilitamos un chat para que acuerden los últimos detalles antes del match";
+                            }
+                            respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
+                            //console.log(respCrearPush);
+                            ///////////////////////////////////////////
+                            FindDatOffer = await OffersModel.FindDatOffer(OfferData);
+
+                            //console.log(FindDatOffer);
+                            //console.log(FindDatOffer.error);
+                            if (FindDatOffer.error) {
+                                resolve({
+                                    'error': FindDatOffer.error
+                                })
+                            }
+
+                        } // if si es aceptada la oferta
+                        //SI LA OFERTA ES RECHAZADA
+                        if (match != true) {
+
+                            if (statusOffer == 8) {
+                                titulo = "Oferta rechazada, sigue intentando y tendrás éxito!";
+                                detalles = "¡No te preocupes " + fullname + "! tú Oferta a la publicación <<" + nameProducto + ">> ha sido rechazada, puedes intentar con otros productos de interés para el dueño de la publicación";
+                            }
+                            respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
+
+                        }
+                        
+                        resolve({
+                            'result': result,
+                            'sala': FindDatOffer.idSala,
+                            'idNotificacion': respCrearPush.insertId,
+                            'TypeNotification': TypeNotification,
+                            'UserPublication': UserPublication,
+                            'idOferta': idOferta,
+                            'idrelation': idrelation,
+                            'tokenpush': tokenpush,
+                            'titulo': titulo,
+                            'detalles': detalles
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
 
 //CAMBIAR EL ESTADO DE UNA OFERTA- OFERTAS 
 OffersModel.FindDatOffer = (OfferData, callback) => {
