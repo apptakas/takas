@@ -911,9 +911,6 @@ router.post('/userexist', rutasProtegidas, [
 
 })
 
-
-
-
 /**
  * @api {get} /user/listypepreferences 1 Listypepreferences
  * @apiName Listypepreferences - Listar Preferencias de negociación que puede tener una publicación

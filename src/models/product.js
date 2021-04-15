@@ -1500,13 +1500,14 @@ ProductModel.VerificarPerteneceProduct = (userSTK,idSTK) => {
 
 ProductModel.ListMiSubasTakas = (UserData,SubastakasData) => {
     //let resultado = {};
+    //AND status="+SubastakasData.status+"
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct AND typepublication=3  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
