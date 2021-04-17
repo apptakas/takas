@@ -3543,11 +3543,6 @@ userController.ProcessRequestsTickets = async (req) => {
                     MsgStatus="Ha rechazado la compra de éste ticket";;
                 }
 
-                // if(req.FlagTTk==4){
-                  
-                //     statusTicket=33;//RECHAZADO
-                // }
-
             console.log(statusTicket);         
 
             let msgError="";            
@@ -3556,7 +3551,16 @@ userController.ProcessRequestsTickets = async (req) => {
 
         // && lengthkw<=topeKW 
 
-            response = await tombotakas.ProcessRequestsTickets(idfirebaseUserTTK,idticket,statusTicket,idttk);
+
+            const Tickets = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.Tickets.length!=0){               
+                for(var atr1 in req.Tickets){
+                    Tickets[atr1] = req.Tickets[atr1];     
+                };
+            }
+
+            response = await tombotakas.ProcessRequestsTickets(idfirebaseUserTTK,Tickets,statusTicket,idttk);
                     
         
         //console.log(msgError);
