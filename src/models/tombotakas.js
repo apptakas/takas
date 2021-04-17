@@ -645,6 +645,9 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,Tickets,statusTicket
          
          if(Anfitrion.Anfitrion==true){ 
             //Ciclo para recorrer la actualización de los estados de los tickets
+            console.log("Tickets");
+            console.log(Tickets);
+            console.log("Tickets");
             for(var atr1 in Tickets){
                 pool.query(
                     'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
@@ -659,16 +662,17 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,Tickets,statusTicket
                             resolve({
                                 'error': err
                             })
-                        } 
+                        } else{
+                            resolve({
+                                'result': result
+                            })
+                        }
+                        
 
                     }
                 )
             } //fin del for
-            if (result) {
-                resolve({
-                    'result': result
-                })
-            }
+            //if (result) 
         } //fin del if
         else{
             resolve({
@@ -1031,15 +1035,18 @@ tombotakasModel.rTombotakas3 = (result) => {
         let arr = [];
         let tombotakas=0;
         let img={};
-        console.log("result[0].id");
-        console.log(result[0].id);
-        console.log("result[0].id");
+        // console.log("result[0].id");
+        // console.log(result[0].id);
+        // console.log("result[0].id");
         for (const element of result) {
 
             console.log("element.id dentro del for");
             console.log(element.id);
             console.log("element.id dentro del for");
                 img=await tombotakasModel.ListImagesTombotakas2(element.id);
+                console.log("img");
+                console.log(img);
+                console.log("img");
                 arr.push(await tombotakasModel.LisTicketsReservados3(element,img));
         }
 
