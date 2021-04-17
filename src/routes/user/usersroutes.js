@@ -4316,6 +4316,107 @@ router.post('/mytickets', rutasProtegidas,[
 
 
 /**
+ * @api {post} /user/tombotakasgroup  10 tombotakasgroup
+ * @apiName  tombotakasgroup - Grupo de Tombotakas con mis tikets apartados
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} flagTTK  optional. 0=Apartados, 1=Aceptadp, 2=Rechazado
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "pinTombotakas": "Sx3Ev1",
+            "timeremaining": 138204.73436666667,
+            "nameTombotakas": "Botella de crema de whisky",
+            "statusTTK": 0,
+            "datecreatedTTK": "2020-12-16",
+            "detailseventTTK": "Juega con la lotería de boyacá, ticket sin pagar no juega",
+            "detailsAwardttk": "3 botellas de crema de whisky con su envase original",
+            "detailsPayments": null,
+            "datelotTTK": "2021-01-09 14:46",
+            "moneyTTK": 0,
+            "priceTTK": "5000.0000",
+            "imgTTK": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5"
+            ],
+            "numberticketsrs": [
+                2,
+                61,
+                62
+            ],
+            "ticketsReservados": [
+                {
+                    "idNUmbre": 1,
+                    "Number": 2,
+                    "status": 0
+                },
+                {
+                    "idNUmbre": 1,
+                    "Number": 61,
+                    "status": 0
+                },
+                {
+                    "idNUmbre": 1,
+                    "Number": 62,
+                    "status": 0
+                }
+            ]
+        }
+    ],
+    "msgprocess": "Lista de todos los tickets",
+    "msg": "Lista de tickets agrupados por tombotakas"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar tickets agrupados por Tombotakas"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/tombotakasgroup', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.TombotakasGroup(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
  * @api {post} /user/requeststickets  6 requeststickets
  * @apiName  requeststickets - Listar Solicitudes de compra de tickets
  * @apiGroup Tombotakas
@@ -4428,6 +4529,172 @@ router.post('/mytickets', rutasProtegidas,[
     "msg": "Error al intentar Listar solicitudes tickets"
 }
  */
+
+/**
+ * @api {post} /user/tombotakasgroupcreator  6.1 tombotakasgroupcreator
+ * @apiName  tombotakasgroupcreator -  Tombotakas Ticket reservados por clientes
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} flagTTK  optional. 0=Apartados, 1=Aceptadp, 2=Rechazado
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": {
+        "pinTombotakas": "Sx3Ev1",
+        "timeremaining": 138461.37155,
+        "nameTombotakas": "Botella de crema de whisky",
+        "statusTTK": 27,
+        "datecreatedTTK": "2020-12-16",
+        "detailseventTTK": "Juega con la lotería de boyacá, ticket sin pagar no juega",
+        "detailsAwardttk": "3 botellas de crema de whisky con su envase original",
+        "detailsPayments": null,
+        "datelotTTK": "2021-01-09 14:46",
+        "moneyTTK": 0,
+        "priceTTK": "5000.0000",
+        "imgTTK": [],
+        "Reservados": [
+            {
+                "Name": "Kenneth Rodriguez",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c",
+                "email": "kennet5h@gmail.com",
+                "ticketsReservados": [
+                    {
+                        "Number": 2,
+                        "status": 1
+                    },
+                    {
+                        "Number": 15,
+                        "status": 1
+                    },
+                    {
+                        "Number": 16,
+                        "status": 1
+                    },
+                    {
+                        "Number": 17,
+                        "status": 2
+                    },
+                    {
+                        "Number": 18,
+                        "status": 1
+                    },
+                    {
+                        "Number": 61,
+                        "status": 1
+                    },
+                    {
+                        "Number": 62,
+                        "status": 1
+                    }
+                ]
+            },
+            {
+                "Name": "Ronny Sotillet",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+                "email": "ronny.sotillet777@gmail.com",
+                "ticketsReservados": [
+                    {
+                        "Number": 8,
+                        "status": 1
+                    },
+                    {
+                        "Number": 9,
+                        "status": 1
+                    }
+                ]
+            },
+            {
+                "Name": "Maria Fernanda Posada Jaimes",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg",
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "ticketsReservados": [
+                    {
+                        "Number": 23,
+                        "status": 1
+                    },
+                    {
+                        "Number": 35,
+                        "status": 1
+                    },
+                    {
+                        "Number": 47,
+                        "status": 1
+                    },
+                    {
+                        "Number": 95,
+                        "status": 1
+                    },
+                    {
+                        "Number": 96,
+                        "status": 1
+                    },
+                    {
+                        "Number": 97,
+                        "status": 1
+                    },
+                    {
+                        "Number": 98,
+                        "status": 1
+                    },
+                    {
+                        "Number": 99,
+                        "status": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "msgprocess": "Lista de todos los tickets",
+    "msg": "Lista de tickets agrupados por Clientes"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar tickets agrupados por Clientes"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/tombotakasgroupcreator', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idtombola', 'El idtombola es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.TombotakasGroupCreator(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 
 //Listar Solicitudes- 

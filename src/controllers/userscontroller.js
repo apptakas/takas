@@ -3312,6 +3312,77 @@ userController.MyTickets = async (req) => {
 
 };
 
+//Lista de mis Tombotakas
+userController.TombotakasGroup = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            let Status=null;
+            let MsgLista="Lista de todos los tickets";
+            if(req.flagTTK!=null){
+                if(req.flagTTK==0){
+                    Status=30;
+                    MsgLista="Lista de los tickets Apartados";
+                }
+                if(req.flagTTK==1){
+                    Status=31;
+                    MsgLista="Lista de los tickets Aceptados";
+                }
+                if(req.flagTTK==2){
+                    Status=33;
+                    MsgLista="Lista de los tickets Rechazados";
+                }
+
+            }
+            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.TombotakasGroup(idfirebaseUser,Status);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msgprocess:MsgLista,
+                msg: 'Lista de tickets agrupados por tombotakas'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar tickets agrupados por Tombotakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 
 //Solicitudes de Tickets
 userController.RequestsTickets = async (req) => {
@@ -3375,6 +3446,76 @@ userController.RequestsTickets = async (req) => {
 
 };
 
+//Lista de mis Tombotakas
+userController.TombotakasGroupCreator = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            let idtombola=req.idtombola;
+            let Status=null;
+            let MsgLista="Lista de todos los tickets";
+            if(req.flagTTK!=null){
+                if(req.flagTTK==0){
+                    Status=30;
+                    MsgLista="Lista de los tickets Apartados";
+                }
+                if(req.flagTTK==1){
+                    Status=31;
+                    MsgLista="Lista de los tickets Aceptados";
+                }
+                if(req.flagTTK==2){
+                    Status=33;
+                    MsgLista="Lista de los tickets Rechazados";
+                }
+
+            }
+            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.TombotakasGroupCreator(idfirebaseUser,idtombola,Status);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msgprocess:MsgLista,
+                msg: 'Lista de tickets agrupados por Clientes'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar tickets agrupados por Clientes'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
 
 //Solicitudes de Tickets
 userController.ProcessRequestsTickets = async (req) => {
