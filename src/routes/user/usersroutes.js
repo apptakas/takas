@@ -3373,6 +3373,7 @@ router.post('/matchofferchatroom', rutasProtegidas, [
  *
  * @apiParam {int} idUser required.
  * @apiParam {int} idSala required.
+ * @apiParam {int} match required.
  * 
  * 
  * 

@@ -248,6 +248,7 @@ router.put('/changestatusoffersbtk', rutasProtegidas, [
  *
  * @apiParam {int} idUser required.
  * @apiParam {int} idSala required.
+ * @apiParam {booleam} match required.
  * 
  * 
  * 

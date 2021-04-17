@@ -1016,6 +1016,13 @@
             "optional": false,
             "field": "idSala",
             "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "match",
+            "description": "<p>required.</p>"
           }
         ]
       }
@@ -8181,6 +8188,13 @@
             "type": "int",
             "optional": false,
             "field": "idSala",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "booleam",
+            "optional": false,
+            "field": "match",
             "description": "<p>required.</p>"
           }
         ]
