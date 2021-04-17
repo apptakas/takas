@@ -2617,7 +2617,7 @@ userController.MatchOfferCR = async (req) => {
          };
         
          console.log(datanoti);
-      notifications(token,titulo,detalle,datanoti);
+         //notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
 
