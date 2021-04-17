@@ -4565,7 +4565,10 @@ router.post('/tombotakasgroup', rutasProtegidas,[
         "datelotTTK": "2021-01-09 14:46",
         "moneyTTK": 0,
         "priceTTK": "5000.0000",
-        "imgTTK": [],
+        "imgTTK": [
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5"
+        ],
         "Reservados": [
             {
                 "Name": "Kenneth Rodriguez",

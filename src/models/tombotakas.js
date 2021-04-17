@@ -649,6 +649,9 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,Tickets,statusTicket
             console.log(Tickets);
             console.log("Tickets");
             for(var atr1 in Tickets){
+                console.log("Tickets[atr1]");
+                console.log(Tickets[atr1]);
+                console.log("Tickets[atr1]");
                 pool.query(
                     'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
                         statusTicket,
@@ -657,7 +660,7 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,Tickets,statusTicket
                     ],
                     (err, result) => {
                         console.log(err);
-                        // console.log(result);
+                        console.log(result);
                         if (err) {
                             resolve({
                                 'error': err
@@ -876,6 +879,9 @@ tombotakasModel.LisTicketsDetalsTTK = (element,idTTK,pertenece) => {
 //////////////////////
 tombotakasModel.ListImagesTombotakas = (element) => {
     return new Promise((resolve, reject) => {
+        console.log("element.id");
+        console.log(element.id);
+        console.log("element.id");
         pool.query(
             'SELECT  url FROM imgtombotakas WHERE idtombotakas=? ',[element.id],
             (err2, result2) => {
@@ -911,6 +917,44 @@ tombotakasModel.ListImagesTombotakas = (element) => {
     })
 }
 ////////
+
+tombotakasModel.ListImagesTombotakasTC = (id) => {
+    return new Promise((resolve, reject) => {
+        
+        pool.query(
+            'SELECT  url FROM imgtombotakas WHERE idtombotakas=? ',id,
+            (err2, result2) => {
+                 
+                //console.log(element.id);   
+                //console.log(element.namec);   
+                //console.log(result2[1].preference);
+                if (err2) {
+                    resolve({
+                        'error': err2
+                    })
+                } else {     
+                    //console.log(result2); 
+                    // console.log(result2.length);
+                    let ImagesTTK= []; 
+                    for(var atr2 in result2){
+                    ImagesTTK.push(result2[atr2].url); 
+                    };  
+                    //console.log(element.idproduct);  
+                   // console.log(ImagesTTK);
+                    resolve({
+                        
+                        "ImagesTTK": ImagesTTK
+                    });
+                }  
+                
+                //console.log(CatgySubCatg);
+                //CatgySubCatg.Subcategory=result2;
+                //console.log("//////SUBCATEGORÍA///////");
+                // console.log(result2);
+
+            })
+    })
+}
 
 
 tombotakasModel.ListPublications = (consulta) => {
@@ -1199,6 +1243,9 @@ tombotakasModel.TombotakasGroupCreator = (idfirebaseUser,idtombola,Statustk) => 
          if(Statustk!=null){
             consulta= 'SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id="'+idtombola+'" AND ttk.status="'+Statustk+'" ORDER BY ttk.datecreated ASC';
          }
+         console.log("consulta");
+         console.log(consulta);
+         console.log("consulta");
          pool.query(
             consulta, 
              async(err, result) => {
@@ -1211,7 +1258,7 @@ tombotakasModel.TombotakasGroupCreator = (idfirebaseUser,idtombola,Statustk) => 
                  } else {
                      //console.log('result '+result[0]);
                      
-                    let img=await tombotakasModel.ListImagesTombotakas(result[0].id);
+                    let img=await tombotakasModel.ListImagesTombotakasTC(idtombola);
                     let datecreated = new Date(result[0].datecreated);
                     let dc = date.format(datecreated, 'YYYY-MM-DD');
                     let datelot = new Date(result[0].datelot);
