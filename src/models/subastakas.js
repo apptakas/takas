@@ -226,7 +226,7 @@ subastakasModel.ChangeStatusOfferSbtk = (OfferData, FlagStatusOffer) => {
                                 detalles = "¡Falta sólo un paso " + fullname + "! tú Oferta a la Subasta <<" + nameProducto + ">> ha sido Aceptada, habilitamos un chat para que acuerden los últimos detalles antes del match";
                             }
                             let idNotificacion={};
-                            if(typepublication==1){
+                            if(typepublication==3){
                             respCrearPush = await notificationModel.cearnotificacion(TypeNotification, idrelation, UserPublication, titulo, detalles, idOferta);
                             //console.log(respCrearPush);
                             idNotificacion=respCrearPush.result.insertId;
