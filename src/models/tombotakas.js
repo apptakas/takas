@@ -638,35 +638,41 @@ tombotakasModel.RequestsTickets = (idfirebaseUser) => {
 
 
 
-tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,idticket,statusTicket,idttk) => {
+tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,Tickets,statusTicket,idttk) => {
     return new Promise(async(resolve, reject) => {
      if (pool) {
          let Anfitrion= await tombotakasModel.VerificarAnfitrionTTK (idfirebaseUserTTK,idttk);
          
          if(Anfitrion.Anfitrion==true){ 
+            //Ciclo para recorrer la actualización de los estados de los tickets
+            console.log("Tickets");
+            console.log(Tickets);
+            console.log("Tickets");
+            for(var atr1 in Tickets){
+                pool.query(
+                    'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
+                        statusTicket,
+                        Tickets[atr1],
+                        idttk
+                    ],
+                    (err, result) => {
+                        console.log(err);
+                        // console.log(result);
+                        if (err) {
+                            resolve({
+                                'error': err
+                            })
+                        } else{
+                            resolve({
+                                'result': result
+                            })
+                        }
+                        
 
-            pool.query(
-                'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
-                    statusTicket,
-                    idticket,
-                    idttk
-                ],
-                (err, result) => {
-                    console.log(err);
-                    // console.log(result);
-                    if (err) {
-                        resolve({
-                            'error': err
-                        })
-                    } else {
-                        resolve({
-                            'result': result
-                        })
                     }
-
-                }
-            )
-
+                )
+            } //fin del for
+            //if (result) 
         } //fin del if
         else{
             resolve({
@@ -1009,7 +1015,7 @@ tombotakasModel.TombotakasGroup = (idfirebaseUser,Statustk) => {
                          'error': err
                      })
                  } else {
-                     console.log('result '+result);
+                     //console.log('result '+result);
                      ticketsReservados = await tombotakasModel.rTombotakas3(result);
                      resolve({
                          'result':ticketsReservados
@@ -1028,20 +1034,22 @@ tombotakasModel.rTombotakas3 = (result) => {
     return new Promise(async (resolve, reject) => {
         let arr = [];
         let tombotakas=0;
-        
-        let img=await tombotakasModel.ListImagesTombotakas2(result[0].id);
-
-       let temp=0;
+        let img={};
+        // console.log("result[0].id");
+        // console.log(result[0].id);
+        // console.log("result[0].id");
         for (const element of result) {
-            // if(tombotakas!=element.id){
-                //console.log("element.number "+element.number);
-                //if(temp==0 && temp!=element.id){
+
+            console.log("element.id dentro del for");
+            console.log(element.id);
+            console.log("element.id dentro del for");
+                img=await tombotakasModel.ListImagesTombotakas2(element.id);
+                console.log("img");
+                console.log(img);
+                console.log("img");
                 arr.push(await tombotakasModel.LisTicketsReservados3(element,img));
-                //tombotakas=element.id;
-                //temp=element.id;
-               // }
-            // }
         }
+
         resolve(arr)
     }
     )
