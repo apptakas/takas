@@ -4556,7 +4556,7 @@ router.post('/tombotakasgroup', rutasProtegidas,[
     "status": "200",
     "data": {
         "pinTombotakas": "Sx3Ev1",
-        "timeremaining": 138461.37155,
+        "timeremaining": 141356.95853333332,
         "nameTombotakas": "Botella de crema de whisky",
         "statusTTK": 27,
         "datecreatedTTK": "2020-12-16",
@@ -4577,30 +4577,37 @@ router.post('/tombotakasgroup', rutasProtegidas,[
                 "email": "kennet5h@gmail.com",
                 "ticketsReservados": [
                     {
+                        "id": 2,
                         "Number": 2,
                         "status": 1
                     },
                     {
+                        "id": 10,
                         "Number": 15,
                         "status": 1
                     },
                     {
+                        "id": 9,
                         "Number": 16,
                         "status": 1
                     },
                     {
+                        "id": 8,
                         "Number": 17,
                         "status": 2
                     },
                     {
+                        "id": 11,
                         "Number": 18,
                         "status": 1
                     },
                     {
+                        "id": 6,
                         "Number": 61,
                         "status": 1
                     },
                     {
+                        "id": 7,
                         "Number": 62,
                         "status": 1
                     }
@@ -4612,11 +4619,18 @@ router.post('/tombotakasgroup', rutasProtegidas,[
                 "email": "ronny.sotillet777@gmail.com",
                 "ticketsReservados": [
                     {
+                        "id": 4,
                         "Number": 8,
                         "status": 1
                     },
                     {
+                        "id": 3,
                         "Number": 9,
+                        "status": 1
+                    },
+                    {
+                        "id": 18,
+                        "Number": 99,
                         "status": 1
                     }
                 ]
@@ -4627,35 +4641,38 @@ router.post('/tombotakasgroup', rutasProtegidas,[
                 "email": "asistente.organizacional@comfacundi.com.co",
                 "ticketsReservados": [
                     {
+                        "id": 5,
                         "Number": 23,
                         "status": 1
                     },
                     {
+                        "id": 12,
                         "Number": 35,
                         "status": 1
                     },
                     {
+                        "id": 13,
                         "Number": 47,
                         "status": 1
                     },
                     {
+                        "id": 15,
                         "Number": 95,
                         "status": 1
                     },
                     {
+                        "id": 16,
                         "Number": 96,
                         "status": 1
                     },
                     {
+                        "id": 14,
                         "Number": 97,
                         "status": 1
                     },
                     {
+                        "id": 17,
                         "Number": 98,
-                        "status": 1
-                    },
-                    {
-                        "Number": 99,
                         "status": 1
                     }
                 ]
