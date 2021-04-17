@@ -669,9 +669,7 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,Tickets,statusTicket
                             resolve({
                                 'result': result
                             })
-                        }
-                        
-
+                        }  
                     }
                 )
             } //fin del for
@@ -1365,6 +1363,7 @@ tombotakasModel.LisTicketsReservadosCreator = (element) => {
                          img=result2[atr2].imgurl;
                          email=result2[atr2].email;
                         tickets.push({  
+                                "id":result2[atr2].idTK,
                                 "idNUmbre":result2[atr2].id,
                                 "Number":parseInt(result2[atr2].number),
                                 "status":statusticket                            
