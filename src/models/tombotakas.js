@@ -922,7 +922,7 @@ tombotakasModel.ListImagesTombotakasTC = (id) => {
     return new Promise((resolve, reject) => {
         
         pool.query(
-            'SELECT  url FROM imgtombotakas WHERE idtombotakas=? ',id,
+            'SELECT url FROM imgtombotakas WHERE idtombotakas=? ',id,
             (err2, result2) => {
                  
                 //console.log(element.id);   
@@ -1239,7 +1239,7 @@ tombotakasModel.TombotakasGroupCreator = (idfirebaseUser,idtombola,Statustk) => 
      if (pool) {
          //let ticketsReservados={};
          console.log(idfirebaseUser);
-         let consulta='SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id=1 AND ttk.status IN (27, 28) ORDER BY ttk.datecreated ASC';
+         let consulta='SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id="'+idtombola+'"z AND ttk.status IN (27, 28) ORDER BY ttk.datecreated ASC';
          if(Statustk!=null){
             consulta= 'SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id="'+idtombola+'" AND ttk.status="'+Statustk+'" ORDER BY ttk.datecreated ASC';
          }
@@ -1250,14 +1250,16 @@ tombotakasModel.TombotakasGroupCreator = (idfirebaseUser,idtombola,Statustk) => 
             consulta, 
              async(err, result) => {
                  console.log(err);
-                // console.log(result);
+                // 
                  if (err) {
                      resolve({
                          'error': err
                      })
                  } else {
                      //console.log('result '+result[0]);
-                     
+                     console.log("result");
+                     console.log(result);
+                     console.log("result");
                     let img=await tombotakasModel.ListImagesTombotakasTC(idtombola);
                     let datecreated = new Date(result[0].datecreated);
                     let dc = date.format(datecreated, 'YYYY-MM-DD');
