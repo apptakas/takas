@@ -922,7 +922,7 @@ tombotakasModel.ListImagesTombotakasTC = (id) => {
     return new Promise((resolve, reject) => {
         
         pool.query(
-            'SELECT  url FROM imgtombotakas WHERE idtombotakas=? ',id,
+            'SELECT url FROM imgtombotakas WHERE idtombotakas=? ',id,
             (err2, result2) => {
                  
                 //console.log(element.id);   
@@ -1250,14 +1250,16 @@ tombotakasModel.TombotakasGroupCreator = (idfirebaseUser,idtombola,Statustk) => 
             consulta, 
              async(err, result) => {
                  console.log(err);
-                // console.log(result);
+                // 
                  if (err) {
                      resolve({
                          'error': err
                      })
                  } else {
                      //console.log('result '+result[0]);
-                     
+                     console.log("result");
+                     console.log(result);
+                     console.log("result");
                     let img=await tombotakasModel.ListImagesTombotakasTC(idtombola);
                     let datecreated = new Date(result[0].datecreated);
                     let dc = date.format(datecreated, 'YYYY-MM-DD');
