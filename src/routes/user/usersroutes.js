@@ -4732,7 +4732,7 @@ router.post('/requeststickets', rutasProtegidas,[
  * 
  *   
  * @apiParam {varchar} idfirebaseUserTTK  required.
- * @apiParam {int} idticket  required.
+ * @apiParam {int} Tickets  required Array.
  * @apiParam {int} idttk  required.
  * @apiParam {int} FlagTTk  required 2=COMPRADO(VENDER) 4=RECHAZADO.
  * 
@@ -4766,7 +4766,7 @@ router.post('/requeststickets', rutasProtegidas,[
 //Procesar Solicitud de un ticket- 
 router.post('/processrequeststickets', rutasProtegidas,[
     check('idfirebaseUserTTK', 'El id del usuario dueño de la tombola es obligatorio').not().isEmpty().exists(),
-    check('idticket', 'El id del ticket es obligatorio').not().isEmpty().exists(),
+    check('Tickets', 'El Array de tickets es obligatorio').not().isEmpty().exists(),
     check('idttk', 'El id de la srotakas a donde pertenece el tiket es obligatorio').not().isEmpty().exists(),
     check('FlagTTk', 'El FlagTTk es obligatorio').not().isEmpty().exists()
 ], async (req, res) => {

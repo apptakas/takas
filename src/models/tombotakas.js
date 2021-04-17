@@ -643,28 +643,30 @@ tombotakasModel.ProcessRequestsTickets = (idfirebaseUserTTK,idticket,statusTicke
      if (pool) {
          let Anfitrion= await tombotakasModel.VerificarAnfitrionTTK (idfirebaseUserTTK,idttk);
          
-         if(Anfitrion.Anfitrion==true){        
-         pool.query(
-            'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
-                statusTicket,
-                idticket,
-                idttk
-            ],
-             (err, result) => {
-                 console.log(err);
-                // console.log(result);
-                 if (err) {
-                     resolve({
-                         'error': err
-                     })
-                 } else {
-                    resolve({
-                        'result': result
-                    })
-                 }
+         if(Anfitrion.Anfitrion==true){ 
 
-             }
-         )
+            pool.query(
+                'UPDATE tombotikets SET status=? WHERE id=? AND idtombotakas=? ', [
+                    statusTicket,
+                    idticket,
+                    idttk
+                ],
+                (err, result) => {
+                    console.log(err);
+                    // console.log(result);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': result
+                        })
+                    }
+
+                }
+            )
+
         } //fin del if
         else{
             resolve({
@@ -1053,7 +1055,7 @@ tombotakasModel.LisTicketsReservados3 = (element,img) => {
         
         let imgTBK={};
         pool.query(
-            'SELECT * FROM tombotikets AS tk INNER JOIN tombotakas AS tbk ON tk.idtombotakas=tbk.id  WHERE tk.iduser="0jI7OPgqHFev7tltXvlaYJEeb4G2" AND tbk.id=1',[
+            'SELECT * FROM tombotikets AS tk INNER JOIN tombotakas AS tbk ON tk.idtombotakas=tbk.id  WHERE tk.iduser=? AND tbk.id=?',[
                 element.customer,
                 element.id
             ],
