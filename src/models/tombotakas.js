@@ -1239,7 +1239,7 @@ tombotakasModel.TombotakasGroupCreator = (idfirebaseUser,idtombola,Statustk) => 
      if (pool) {
          //let ticketsReservados={};
          console.log(idfirebaseUser);
-         let consulta='SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id=1 AND ttk.status IN (27, 28) ORDER BY ttk.datecreated ASC';
+         let consulta='SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id="'+idtombola+'"z AND ttk.status IN (27, 28) ORDER BY ttk.datecreated ASC';
          if(Statustk!=null){
             consulta= 'SELECT DISTINCT(tk.iduser) AS customer,ttk.id ,ttk.datecreated,ttk.pinreference,ttk.datelot,ttk.money,ttk.name,ttk.detailsevent,ttk.detailsaward,ttk.price,ttk.detailspayments,ttk.price,ttk.status  FROM tombotikets AS tk INNER JOIN tombotakas AS ttk ON tk.idtombotakas=ttk.id WHERE ttk.iduser="'+idfirebaseUser+'" AND ttk.id="'+idtombola+'" AND ttk.status="'+Statustk+'" ORDER BY ttk.datecreated ASC';
          }
