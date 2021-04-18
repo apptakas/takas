@@ -351,15 +351,16 @@ router.post('/gautenticar', [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
+ * {
     "success": true,
     "status": "200",
     "data": {
-        "NameUser": "Anailys Rodríguez",
-        "EmailUser": "anailysrodriguez@gmail.com",
-        "PhonenumberUser": "3174723818",
-        "DatecreatedUser": "07/09/20",
-        "Reputation Vendedor": 4,
+        "NameUser": "abuela",
+        "EmailUser": "abuela7@gmail.com",
+        "ImgUrl": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FRS6rHsPwWxfTaIk92Y65c8pykbb2-2021-02-11%2017%3A13%3A30.145141.jpg?alt=media&token=813f69dd-b62a-460a-a14f-14e40a8da74e",
+        "PhonenumberUser": "340660995",
+        "memberships": "Free",
+        "DatecreatedUser": "11/02/21",
         "Reputation Cliente": 0
     },
     "msg": "Perfil de Usuario"
