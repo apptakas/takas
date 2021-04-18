@@ -10340,7 +10340,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"Anailys Rodríguez\",\n        \"EmailUser\": \"anailysrodriguez@gmail.com\",\n        \"PhonenumberUser\": \"3174723818\",\n        \"DatecreatedUser\": \"07/09/20\",\n        \"Reputation Vendedor\": 4,\n        \"Reputation Cliente\": 0\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"abuela\",\n        \"EmailUser\": \"abuela7@gmail.com\",\n        \"ImgUrl\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FRS6rHsPwWxfTaIk92Y65c8pykbb2-2021-02-11%2017%3A13%3A30.145141.jpg?alt=media&token=813f69dd-b62a-460a-a14f-14e40a8da74e\",\n        \"PhonenumberUser\": \"340660995\",\n        \"memberships\": \"Free\",\n        \"DatecreatedUser\": \"11/02/21\",\n        \"Reputation Cliente\": 0\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
           "type": "json"
         }
       ]
