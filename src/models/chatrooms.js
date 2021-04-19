@@ -956,7 +956,7 @@ chatroomsModel.MatchOfferCR = (ChatRoomData, isUserPubli, confirMatch, MsgMatch,
                                 'tokenPush': tokenPush,
                                 'titulo': titulo,
                                 'detalles': detalles,
-                                'idNotificacion': idNotificacion,
+                                //'idNotificacion': idNotificacion,
                                 'idOferta': idOferta,
                                 'TypeNotification': TypeNotification,
                                 'UserPublication': UserPublication,
@@ -1102,7 +1102,7 @@ chatroomsModel.MatchOfferCRsbtk = (ChatRoomData, isUserPubli, confirMatch, MsgMa
                                 'tokenPush': tokenPush,
                                 'titulo': titulo,
                                 'detalles': detalles,
-                                'idNotificacion': idNotificacion,
+                                //'idNotificacion': idNotificacion,
                                 'idOferta': idOferta,
                                 'TypeNotification': TypeNotification,
                                 'UserPublication': UserPublication,
@@ -1182,6 +1182,9 @@ ProductModel.UpdateStatusPublication2 = (idPubli) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             //let FindDatOffer={};
+            console.log("idPubli - UpdateStatusPublication2");
+            console.log(idPubli);
+            console.log("idPubli -UpdateStatusPublication2");
             let consulta = "UPDATE  product SET  status=4 WHERE id=" + idPubli;
 
             pool.query(
