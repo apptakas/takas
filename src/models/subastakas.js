@@ -266,7 +266,7 @@ subastakasModel.ChangeStatusOfferSbtk = (OfferData, FlagStatusOffer) => {
                         resolve({
                             'result': result,
                             'sala': FindDatOffer.idSala,
-                            'idNotificacion': idNotificacion,
+                            //'idNotificacion': idNotificacion,
                             'TypeNotification': TypeNotification,
                             'UserPublication': UserPublication,
                             'idOferta': idOferta,
