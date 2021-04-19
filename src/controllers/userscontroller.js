@@ -2555,7 +2555,7 @@ userController.MatchOfferCR = async (req) => {
         //let response = await Offer.FindDatOffer(OfferData);
         let isUserPubli=false; //si es usasuario de la publicación
         let pertenece =false; 
-        let confirMatch =false; 
+        let confirMatch =req.match; 
         let MsgMatch="";
         let titulo2="";
         let UserNotification2="";

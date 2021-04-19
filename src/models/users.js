@@ -188,8 +188,8 @@ userModel.PerfilUser = (idUser, callback) => {
                                 'PhonenumberUser': result[0].phonenumber,
                                 'memberships': result[0].memberships,
                                 'DatecreatedUser': regis,
-                                'Reputation Vendedor': calfVendedor,
-                                'Reputation Cliente': calfClient,
+                                'ReputationVendedor': calfVendedor,
+                                'ReputationCliente': calfClient,
                             }
                         })
                     } else {

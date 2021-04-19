@@ -1147,12 +1147,13 @@ chatroomsModel.UpdateMatchChatRoom = (ChatRoomData, isUserPubli) => {
             //let FindDatOffer={};
             let consulta = "";
             if (isUserPubli == true) {
-                consulta = "UPDATE  chatrooms SET  matchpublication=true WHERE id= ?";
+                consulta = "UPDATE  chatrooms SET status=25, matchpublication=? WHERE id= ?";
             } else {
-                consulta = "UPDATE  chatrooms SET  matchoffer=true WHERE id= ?";
+                consulta = "UPDATE  chatrooms SET  status=25, matchoffer=? WHERE id= ?";
             }
             pool.query(
                 consulta, [
+                ChatRoomData.match,
                 ChatRoomData.id
             ],
                 async (err, result) => {

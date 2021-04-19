@@ -10305,7 +10305,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "idfirebaseUser",
+            "field": "idFirebaseUser",
             "description": "<p>required.</p>"
           }
         ]

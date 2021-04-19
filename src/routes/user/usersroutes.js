@@ -343,7 +343,7 @@ router.post('/gautenticar', [
  *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
  *
  *
- * @apiParam {varchar}  idfirebaseUser  required.
+ * @apiParam {varchar}  idFirebaseUser  required.
  * 
  * @apiSuccess {boolean} success of the User.
  * @apiSuccess {int} status 200 of the User.
@@ -378,7 +378,7 @@ router.post('/gautenticar', [
  */
 //PERFIL DE USUARIO
 router.post('/perfiluser', rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebaseUser el obligatorio').not().isEmpty().exists()
+    check('idFirebaseUser', 'El idFirebaseUser el obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
 
 //console.log(req.body);
