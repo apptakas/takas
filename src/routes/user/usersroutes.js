@@ -343,7 +343,7 @@ router.post('/gautenticar', [
  *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
  *
  *
- * @apiParam {varchar}  idfirebaseUser  required.
+ * @apiParam {varchar}  idFirebaseUser  required.
  * 
  * @apiSuccess {boolean} success of the User.
  * @apiSuccess {int} status 200 of the User.
@@ -351,15 +351,16 @@ router.post('/gautenticar', [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
+ * {
     "success": true,
     "status": "200",
     "data": {
-        "NameUser": "Anailys Rodríguez",
-        "EmailUser": "anailysrodriguez@gmail.com",
-        "PhonenumberUser": "3174723818",
-        "DatecreatedUser": "07/09/20",
-        "Reputation Vendedor": 4,
+        "NameUser": "abuela",
+        "EmailUser": "abuela7@gmail.com",
+        "ImgUrl": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FRS6rHsPwWxfTaIk92Y65c8pykbb2-2021-02-11%2017%3A13%3A30.145141.jpg?alt=media&token=813f69dd-b62a-460a-a14f-14e40a8da74e",
+        "PhonenumberUser": "340660995",
+        "memberships": "Free",
+        "DatecreatedUser": "11/02/21",
         "Reputation Cliente": 0
     },
     "msg": "Perfil de Usuario"
@@ -377,7 +378,7 @@ router.post('/gautenticar', [
  */
 //PERFIL DE USUARIO
 router.post('/perfiluser', rutasProtegidas, [
-    check('idfirebaseUser', 'El idfirebaseUser el obligatorio').not().isEmpty().exists()
+    check('idFirebaseUser', 'El idFirebaseUser el obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
 
 //console.log(req.body);
@@ -873,10 +874,11 @@ router.put('/tokenpush', rutasProtegidas, [
     "success": true,
     "status": "200",
     "UserExist": true,
-    "Email": "luis.perez@comfacundi.com.co",
-    "Fullname": "LUIS ALFONSO PEREZ GOMEZ",
-    "PhoneNumber": null,
-    "ImgUrl": "https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg",
+    "Email": "emailUser3@gmail.com",
+    "Fullname": "fullnameUser2",
+    "PhoneNumber": "298380983676",
+    "memberships": "Free",
+    "ImgUrl": "https://n9.cl/zxq61",
     "msg": "Verificación si el usuario existe y si sus campos estan completos"
 }
  *
@@ -909,9 +911,6 @@ router.post('/userexist', rutasProtegidas, [
     return res.status(response.data.status).json(response.data)
 
 })
-
-
-
 
 /**
  * @api {get} /user/listypepreferences 1 Listypepreferences
@@ -2536,7 +2535,7 @@ router.post('/newoffer', rutasProtegidas, [
 
 //CREAR UNA OFERTA - PUBLICACIÓN
 router.post('/listoffer', rutasProtegidas, [
-    check('typePublication', 'El idPublication es obligatorio').not().isEmpty().exists(),
+    check('typePublication', 'El typePublication es obligatorio').not().isEmpty().exists(),
     check('idPublication', 'El idPublication es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
     
@@ -2907,6 +2906,137 @@ router.put('/changestatusoffer', rutasProtegidas, [
     
     }) 
 
+
+        /**
+ * @api {put} /user/changestatusoffer 6 changestatusoffer
+ * @apiName changestatusoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idOffer required.
+ * @apiParam {int} idUser required.
+ * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "match": true,
+    "sala": "6340c299f4d9eb3d797b6a54f779cf616d0b0cdb",
+    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
+router.put('/changestatusoffer', rutasProtegidas, [
+    check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('FlagStatusOffer', 'El FlagStatusOffer es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.ChangeStatusOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+        /**
+ * @api {put} /user/matchoffer 8 matchoffer
+ * @apiName matchoffer - Cambio de estado de una oferta
+ * @apiGroup Offers
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idOffer required.
+ * @apiParam {int} idUser required.
+ * @apiParam {int} FlagStatusOffer required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Offers.
+ * @apiSuccess {int} status 200 of the Offers.
+ * @apiSuccess {string} msg   of the Offers.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "match": true,
+    "sala": "6340c299f4d9eb3d797b6a54f779cf616d0b0cdb",
+    "msg": "Cambio de estatus de una oferta ejecutdos exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the Offers was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al intentar cambiar el estatus de una Oferta"
+}
+ **/
+
+//CAMBIO DE ESTATUS DE UNA PFERTA - OFFERS
+router.put('/matchoffer', rutasProtegidas, [
+    check('idOffer', 'El idsPublications es obligatorio').not().isEmpty().exists(),
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('MatchOffer', 'El Macht es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
+
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.MatchOffer(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)
+    
+    }) 
+
+
 /**
  * @api {post} /user/listchatroomstatus 1 listchatroomstatus
  * @apiName listchatroomstatus - Listar los datos de la sala de chat según status
@@ -2935,25 +3065,44 @@ router.put('/changestatusoffer', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idSala": "949bdc81078b49cd604b6622ddd762054ca8963a",
-            "datecreated": "28/10/2020",
-            "idPublicacion": 1,
-            "namePublication": "Estufa de 4 hornillas",
-            "valorComercial": "200000.0000",
+            "idSala": "43b8413e2dcbfddce50c8639d17f2916c8f15da0",
+            "datecreated": "04/02/2021",
+            "idPublicacion": 5,
+            "typepublication": 1,
+            "namePublication": "Arbolito de navidad",
+            "valorComercial": "300000.0000",
             "Userpublication": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
-            "nameUserPublication": "Ana",
-            "imgUserPublication": "https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d",
-            "idoferta": 7,
-            "UserOferta": "EVln0Vj6DNOtTXQVS2fN9P68Gl13",
-            "nameUserOferta": "ronny",
-            "imgUserOferta": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499",
+            "nameUserPublication": "Ronny Sotillet",
+            "imgUserPublication": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+            "idoferta": 3,
+            "UserOferta": "5FHP1unvc0PXHQlNCY7lid6774H2",
+            "nameUserOferta": "Kenneth Rodriguez",
+            "imgUserOferta": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c",
             "ProductImagesPublicacion": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722"
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30"
             ],
             "PreferencesPublicacion": [
-                1,
-                2
+                1
             ]
+        },
+        {
+            "idSala": "c14858c75f9b1c53d928ce2dc16af614100c2384",
+            "datecreated": "04/02/2021",
+            "idPublicacion": 59,
+            "typepublication": 3,
+            "namePublication": "pueba laptop 60",
+            "valorComercial": "1200000.0000",
+            "Userpublication": "idfirebaseU4534dsaxgg",
+            "nameUserPublication": "Carla Rodríguez Gil",
+            "imgUserPublication": null,
+            "idoferta": 14,
+            "UserOferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+            "nameUserOferta": "Ronny Sotillet",
+            "imgUserOferta": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+            "ProductImagesPublicacion": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ],
+            "PreferencesPublicacion": []
         }
     ],
     "msg": "Lista de salas de chat según status"
@@ -3020,38 +3169,36 @@ router.post('/listchatroomstatus', rutasProtegidas, [
     "success": true,
     "status": "200",
     "data": {
-        "idSala": "13cd8cceaa9b25a4cfbf364c585f89639ebd1aae",
+        "idSala": "c14858c75f9b1c53d928ce2dc16af614100c2384",
         "status": 24,
-        "datecreated": "03/11/2020",
-        "idPublicacion": 3,
-        "namePublication": "Reloj Alarma",
-        "ValorPublication": "12000.0000",
-        "Userpublication": "zSiRYTbNbpW5vOQ6K6XpxvpKu2v1",
-        "nameUserPublication": "Anailys Rodríguez",
+        "datecreated": "04/02/2021",
+        "idPublicacion": 59,
+        "typepublication": 3,
+        "namePublication": "pueba laptop 60",
+        "ValorPublication": "1200000.0000",
+        "Userpublication": "idfirebaseU4534dsaxgg",
+        "nameUserPublication": "Carla Rodríguez Gil",
         "imgUserPublication": null,
-        "idoferta": 180,
+        "idoferta": 14,
         "iduseroferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
         "UserOferta": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
-        "nameUserOferta": "Ana",
-        "imgUserOferta": "https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d",
-        "PreferencesPublicacion": [
-            2,
-            1
-        ],
+        "nameUserOferta": "Ronny Sotillet",
+        "imgUserOferta": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+        "PreferencesPublicacion": [],
         "aFavor": true,
         "Valorferta": "10000.0000",
-        "dieferencia": "2000.0000",
+        "dieferencia": "1190000.0000",
         "ItemOfer": [
             {
-                "idpublication": 4,
-                "nameproduct": "Blusas ",
-                "status": 4,
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A36%3A46.808593.jpg?alt=media&token=44c54278-2aae-451d-a307-d2f821b3286c",
+                "idpublication": 1,
+                "nameproduct": "Kit dental",
+                "status": 3,
+                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2014%3A53%3A04.710633.jpg?alt=media&token=536eeaba-ac5b-4b39-a2e0-0a170827cef0",
                 "marketvalue": "10000.0000"
             }
         ],
-        "isUserPubli": true,
-        "match": 3
+        "isUserPubli": false,
+        "match": 0
     },
     "msg": "Data completa de la sala de chat"
 }
@@ -3213,11 +3360,76 @@ router.post('/matchofferchatroom', rutasProtegidas, [
         return res.status(response.data.status).json(response.data)    
     }) 
 
+   /**
+ * @api {put} /user/matchoffercr 5 matchoffercr
+ * @apiName matchoffercr - Match de la oferta en la sala de chat
+ * @apiGroup Chatrooms
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                 {"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" }
+ *
+ *
+ * @apiParam {int} idUser required.
+ * @apiParam {int} idSala required.
+ * @apiParam {int} match required.
+ * 
+ * 
+ * 
+ * @apiSuccess {boolean} success of the Chatrooms.
+ * @apiSuccess {int} status 200 of the Chatrooms.
+ * @apiSuccess {string} msg   of the Chatrooms.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+    "success": true,
+    "status": "200",
+    "idNotificacion": 143,
+    "idOferta": 3,
+    "TypeNotification": 2,
+    "UserPublication": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
+    "takasteo": true,
+    "msg": "¡TAKASTEO EXITOSO!"
+}
+ *
+ * @apiError UserNotFound The id of the Chatrooms was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar hacer mach en la sala de chat"
+}
+ **/
 
+//CAMBIO DE ESTATUS DE UNA SALA DE CHAT - TAKASTEAR
+router.post('/matchoffercr', rutasProtegidas, [
+    check('idUser', 'El idUser es obligatorio').not().isEmpty().exists(),
+    check('idSala', 'El idSala es obligatorio').not().isEmpty().exists(),
+    check('match', 'El match es obligatorio').not().isEmpty().exists()
+    ],async (req, res) => {
+    
+        const error = validationResult(req);
 
-     /**
+        if (error.array().length != 0) {
+            return res.status(422).json({ errores: error.array(), msg: 'Error' });
+        }        
+        let response = await userController.MatchOfferCR(req.body);
+    
+        if (response.status == 'ko') {
+            return res.status(500).json({ error: 'Error' })
+        }
+        //console.log(response);
+        return res.status(response.data.status).json(response.data)    
+    }) 
+
+/**
  * @api {post} /user/listnotifications 1 listnotifications
- * @apiName listnotifications - Listar los datos de la sala de chat por idSala
+ * @apiName listnotifications - Listar los datos de la notificaciones 
  * @apiGroup Notifications
  * 
  * 
@@ -3242,28 +3454,28 @@ router.post('/matchofferchatroom', rutasProtegidas, [
     "status": "200",
     "data": [
         {
-            "idNotifications": 11,
-            "dateNotifications": "31/10/2020",
+            "idNotifications": 131,
+            "dateNotifications": "05/02/2021",
             "statusNotifications": 1,
             "typenotifications": 2,
-            "title": "Haz recibido un takasteo potencial",
-            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
-            "idevento": 145,
-            "idrelation": 3,
-            "name": "Reloj Alarma",
-            "nameProducto": 12000
+            "title": "Haz recibido una  oferta potencial para subastakear",
+            "details": "¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000",
+            "idevento": 18,
+            "idrelation": 1,
+            "nameProducto": "Kit dental",
+            "valueProducto": "10000.0000"
         },
         {
-            "idNotifications": 10,
-            "dateNotifications": "31/10/2020"",
+            "idNotifications": 130,
+            "dateNotifications": "05/02/2021",
             "statusNotifications": 1,
             "typenotifications": 2,
-            "title": "Haz recibido un takasteo potencial",
-            "details": "¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000",
-            "idevento": 144,
-            "idrelation": 3,
-            "name": "Reloj Alarma",
-            "nameProducto": 12000
+            "title": "Haz recibido una  oferta potencial para subastakear",
+            "details": "¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000",
+            "idevento": 17,
+            "idrelation": 1,
+            "nameProducto": "Kit dental",
+            "valueProducto": "10000.0000"
         }
     ],
     "msg": "Lista detallada de notificaciones  con éxito"
@@ -3572,6 +3784,7 @@ router.post('/deletepublication', rutasProtegidas,[
  * @apiParam {varchar} idfirebaseUser unique required.
  * @apiParam {varchar} namettk  required.
  * @apiParam {varchar} DetailsEventtk required.
+ * @apiParam {varchar} DetailsPayments required.
  * @apiParam {varchar} DetailsAwardttk  required.
  * @apiParam {datetime} DateLottk  required.
  * @apiParam {int} moneyttk  required. 
@@ -3609,6 +3822,7 @@ router.post('/newtombotakas',rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebase es obligatorio').not().isEmpty().exists(),
     check('namettk', 'El namettk es obligatorio').not().isEmpty().exists(),
     check('DetailsEventtk', 'El Detaille del evento  es obligatorio').not().isEmpty().exists(),
+    check('DetailsPayments', 'El detalle del pago es obligatorio').not().isEmpty().exists(),
     check('DetailsAwardttk', 'El detalle del premio es obligatorio').not().isEmpty().exists(),
     check('DateLottk', 'La fecha del sorteo es obligatoria').not().isEmpty().exists(),
     check('moneyttk', 'El moneyttk es obligatorio').not().isEmpty().exists(),
@@ -3812,13 +4026,13 @@ router.post('/mytombotakas', rutasProtegidas,[
     "success": true,
     "status": "200",
     "tickets": [
-        "01"
+        76,
+        75,
+        73,
+        72
     ],
-    "ticketsNoDispo": [
-        "00",
-        "21",
-        "31"
-    ],
+    "ticketsNoDispo": [],
+    "DetailsPayments": "Pueden consignar a la siguiente cuenta de ahorros 373797347426 Bancolombia ",
     "msg": "Los tickets disponibles fueron procesados con éxito"
 }
  *
@@ -4021,7 +4235,7 @@ router.post('/findtombotakaspin', rutasProtegidas,[
  * 
  *   
  * @apiParam {varchar} idfirebaseUser  required.
- * @apiParam {varchar} flagTTK  optional.
+ * @apiParam {varchar} flagTTK  optional. 0=Apartados, 1=Aceptadp, 2=Rechazado
  *
  * @apiSuccess {boolean} success of the Tombotakas.
  * @apiSuccess {int} status 200 of the Tombotakas.
@@ -4034,13 +4248,13 @@ router.post('/findtombotakaspin', rutasProtegidas,[
     "status": "200",
     "data": [
         {
-            "idTombotakas": 2,
-            "pinTombotakas": "ibxJu2",
-            "timeremaining": 28841.56545,
+            "idTombotakas": 5,
+            "pinTombotakas": "MwkeQM",
+            "timeremaining": 101860.24755,
             "nameTombotakas": "test Nueva Tombotakas",
             "statusTTK": 0,
-            "datecreatedTTK": "2020-11-19",
-            "pinreferenceTTK": "ibxJu2",
+            "datecreatedTTK": "2021-02-04",
+            "pinreferenceTTK": "MwkeQM",
             "datelotTTK": "2020-11-25 19:47",
             "moneyTTK": 1,
             "priceTTK": "10000.0000",
@@ -4050,91 +4264,22 @@ router.post('/findtombotakaspin', rutasProtegidas,[
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ],
             "numberticketsrs": [
-                31,
-                40,
-                21,
-                1,
-                10,
-                32,
-                22,
-                2
+                22
             ],
             "ticketsReservados": [
                 {
-                    "idNUmbre": 1,
-                    "Number": 31,
-                    "status": 4,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 2,
-                    "Number": 40,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 3,
-                    "Number": 21,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 4,
-                    "Number": 1,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 5,
-                    "Number": 10,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 6,
-                    "Number": 32,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 7,
+                    "idNUmbre": 21,
                     "Number": 22,
-                    "status": 1,
-                    "NameUser": "gusuario12",
+                    "status": 4,
+                    "NameUser": "Ronny Sotillet",
                     "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-                },
-                {
-                    "idNUmbre": 8,
-                    "Number": 2,
-                    "status": 1,
-                    "NameUser": "gusuario12",
-                    "phonenumber": null,
-                    "email": "emailUser12@gmail.com",
-                    "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                    "email": "ronny.sotillet777@gmail.com",
+                    "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c"
                 }
             ]
         }
     ],
+    "msgprocess": "Lista de los tickets Rechazados",
     "msg": "Lista de tickets"
 }
  *
@@ -4171,6 +4316,107 @@ router.post('/mytickets', rutasProtegidas,[
 
 })
 
+
+/**
+ * @api {post} /user/tombotakasgroup  10 tombotakasgroup
+ * @apiName  tombotakasgroup - Grupo de Tombotakas con mis tikets apartados
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} flagTTK  optional. 0=Apartados, 1=Aceptadp, 2=Rechazado
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "pinTombotakas": "Sx3Ev1",
+            "timeremaining": 138204.73436666667,
+            "nameTombotakas": "Botella de crema de whisky",
+            "statusTTK": 0,
+            "datecreatedTTK": "2020-12-16",
+            "detailseventTTK": "Juega con la lotería de boyacá, ticket sin pagar no juega",
+            "detailsAwardttk": "3 botellas de crema de whisky con su envase original",
+            "detailsPayments": null,
+            "datelotTTK": "2021-01-09 14:46",
+            "moneyTTK": 0,
+            "priceTTK": "5000.0000",
+            "imgTTK": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5"
+            ],
+            "numberticketsrs": [
+                2,
+                61,
+                62
+            ],
+            "ticketsReservados": [
+                {
+                    "idNUmbre": 1,
+                    "Number": 2,
+                    "status": 0
+                },
+                {
+                    "idNUmbre": 1,
+                    "Number": 61,
+                    "status": 0
+                },
+                {
+                    "idNUmbre": 1,
+                    "Number": 62,
+                    "status": 0
+                }
+            ]
+        }
+    ],
+    "msgprocess": "Lista de todos los tickets",
+    "msg": "Lista de tickets agrupados por tombotakas"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar tickets agrupados por Tombotakas"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/tombotakasgroup', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.TombotakasGroup(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 /**
  * @api {post} /user/requeststickets  6 requeststickets
@@ -4286,6 +4532,192 @@ router.post('/mytickets', rutasProtegidas,[
 }
  */
 
+/**
+ * @api {post} /user/tombotakasgroupcreator  6.1 tombotakasgroupcreator
+ * @apiName  tombotakasgroupcreator -  Tombotakas Ticket reservados por clientes
+ * @apiGroup Tombotakas
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} idfirebaseUser  required.
+ * @apiParam {varchar} flagTTK  optional. 0=Apartados, 1=Aceptadp, 2=Rechazado
+ *
+ * @apiSuccess {boolean} success of the Tombotakas.
+ * @apiSuccess {int} status 200 of the Tombotakas.
+ * @apiSuccess {string} msg   of the Tombotakas.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "data": {
+        "pinTombotakas": "Sx3Ev1",
+        "timeremaining": 141356.95853333332,
+        "nameTombotakas": "Botella de crema de whisky",
+        "statusTTK": 27,
+        "datecreatedTTK": "2020-12-16",
+        "detailseventTTK": "Juega con la lotería de boyacá, ticket sin pagar no juega",
+        "detailsAwardttk": "3 botellas de crema de whisky con su envase original",
+        "detailsPayments": null,
+        "datelotTTK": "2021-01-09 14:46",
+        "moneyTTK": 0,
+        "priceTTK": "5000.0000",
+        "imgTTK": [
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5"
+        ],
+        "Reservados": [
+            {
+                "Name": "Kenneth Rodriguez",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c",
+                "email": "kennet5h@gmail.com",
+                "ticketsReservados": [
+                    {
+                        "id": 2,
+                        "Number": 2,
+                        "status": 1
+                    },
+                    {
+                        "id": 10,
+                        "Number": 15,
+                        "status": 1
+                    },
+                    {
+                        "id": 9,
+                        "Number": 16,
+                        "status": 1
+                    },
+                    {
+                        "id": 8,
+                        "Number": 17,
+                        "status": 2
+                    },
+                    {
+                        "id": 11,
+                        "Number": 18,
+                        "status": 1
+                    },
+                    {
+                        "id": 6,
+                        "Number": 61,
+                        "status": 1
+                    },
+                    {
+                        "id": 7,
+                        "Number": 62,
+                        "status": 1
+                    }
+                ]
+            },
+            {
+                "Name": "Ronny Sotillet",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c",
+                "email": "ronny.sotillet777@gmail.com",
+                "ticketsReservados": [
+                    {
+                        "id": 4,
+                        "Number": 8,
+                        "status": 1
+                    },
+                    {
+                        "id": 3,
+                        "Number": 9,
+                        "status": 1
+                    },
+                    {
+                        "id": 18,
+                        "Number": 99,
+                        "status": 1
+                    }
+                ]
+            },
+            {
+                "Name": "Maria Fernanda Posada Jaimes",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg",
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "ticketsReservados": [
+                    {
+                        "id": 5,
+                        "Number": 23,
+                        "status": 1
+                    },
+                    {
+                        "id": 12,
+                        "Number": 35,
+                        "status": 1
+                    },
+                    {
+                        "id": 13,
+                        "Number": 47,
+                        "status": 1
+                    },
+                    {
+                        "id": 15,
+                        "Number": 95,
+                        "status": 1
+                    },
+                    {
+                        "id": 16,
+                        "Number": 96,
+                        "status": 1
+                    },
+                    {
+                        "id": 14,
+                        "Number": 97,
+                        "status": 1
+                    },
+                    {
+                        "id": 17,
+                        "Number": 98,
+                        "status": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "msgprocess": "Lista de todos los tickets",
+    "msg": "Lista de tickets agrupados por Clientes"
+}
+ *
+ * @apiError UserNotFound The id of the Tombotakas was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar Listar tickets agrupados por Clientes"
+}
+ */
+
+
+//Crear Tombotakas- 
+router.post('/tombotakasgroupcreator', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idtombola', 'El idtombola es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.TombotakasGroupCreator(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
 
 //Listar Solicitudes- 
 router.post('/requeststickets', rutasProtegidas,[
@@ -4321,8 +4753,9 @@ router.post('/requeststickets', rutasProtegidas,[
  *                 "value": "application/json" 
  * 
  *   
- * @apiParam {varchar} idfirebaseUser  required.
- * @apiParam {int} idticket  required.
+ * @apiParam {varchar} idfirebaseUserTTK  required.
+ * @apiParam {int} Tickets  required Array.
+ * @apiParam {int} idttk  required.
  * @apiParam {int} FlagTTk  required 2=COMPRADO(VENDER) 4=RECHAZADO.
  * 
  *
@@ -4335,6 +4768,7 @@ router.post('/requeststickets', rutasProtegidas,[
 {
     "success": true,
     "status": "200",
+    "MsgStatus": "Ha aceptado la compra de éste ticket",
     "msg": "Ticket procesado exitosamente"
 }
  *
@@ -4345,6 +4779,7 @@ router.post('/requeststickets', rutasProtegidas,[
  *     {
     "success": false,
     "status": "500",
+    "msdErro": "Ustede no es el anfitrión de la tombola",
     "msg": "Error al intentar procesar ticket"
 }
  */
@@ -4352,8 +4787,9 @@ router.post('/requeststickets', rutasProtegidas,[
 
 //Procesar Solicitud de un ticket- 
 router.post('/processrequeststickets', rutasProtegidas,[
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('idticket', 'El idticket es obligatorio').not().isEmpty().exists(),
+    check('idfirebaseUserTTK', 'El id del usuario dueño de la tombola es obligatorio').not().isEmpty().exists(),
+    check('Tickets', 'El Array de tickets es obligatorio').not().isEmpty().exists(),
+    check('idttk', 'El id de la srotakas a donde pertenece el tiket es obligatorio').not().isEmpty().exists(),
     check('FlagTTk', 'El FlagTTk es obligatorio').not().isEmpty().exists()
 ], async (req, res) => {
 
@@ -4398,106 +4834,166 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "success": true,
     "status": "200",
     "data": {
-        "idTombotakas": 2,
-        "timeremaining": 25593.626933333333,
-        "pertenece": true,
-        "nameTombotakas": "test Nueva Tombotakas",
+        "idTombotakas": 1,
+        "pinTombotakas": "Sx3Ev1",
+        "pertenece": false,
+        "timeremaining": 37847.64008333333,
+        "nameTombotakas": "Botella de crema de whisky",
         "statusTTK": 0,
-        "datecreatedTTK": "19/11/2020",
-        "detailseventTTK": "Para canche 25/11/20 8:00 pm",
-        "detailsAwardttk": "La imagen que voy a cargar en este momento",
-        "pinreferenceTTK": "ibxJu2",
-        "datelotTTK": "25/11/2020 19:47",
-        "moneyTTK": 1,
-        "priceTTK": "10000.0000",
+        "datecreatedTTK": "2020-12-16",
+        "detailseventTTK": "Juega con la lotería de boyacá, ticket sin pagar no juega",
+        "detailsAwardttk": "3 botellas de crema de whisky con su envase original",
+        "pinreferenceTTK": "Sx3Ev1",
+        "datelotTTK": "2021-01-09 14:46",
+        "moneyTTK": 0,
+        "priceTTK": "5000.0000",
         "resultTTK": null,
         "imgTTK": [
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2",
+            "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5"
         ],
         "numberticketsrs": [
-            31,
-            40,
-            21,
-            1,
-            10,
-            32,
-            22,
-            2
+            8,
+            9,
+            15,
+            16,
+            17,
+            18,
+            23,
+            35,
+            47,
+            95,
+            96,
+            97,
+            98,
+            99
         ],
         "ticketsReservados": [
             {
-                "idNUmbre": 1,
-                "Number": 31,
-                "status": 4,
-                "NameUser": "gusuario12",
-                "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-            },
-            {
-                "idNUmbre": 2,
-                "Number": 40,
+                "idNUmbre": 4,
+                "Number": 8,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Ronny Sotillet",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "ronny.sotillet777@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c"
             },
             {
                 "idNUmbre": 3,
-                "Number": 21,
+                "Number": 9,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Ronny Sotillet",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "ronny.sotillet777@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c"
             },
             {
-                "idNUmbre": 4,
-                "Number": 1,
+                "idNUmbre": 10,
+                "Number": 15,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Kenneth Rodriguez",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
             },
             {
-                "idNUmbre": 5,
-                "Number": 10,
+                "idNUmbre": 9,
+                "Number": 16,
                 "status": 1,
-                "NameUser": "gusuario12",
+                "NameUser": "Kenneth Rodriguez",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-            },
-            {
-                "idNUmbre": 6,
-                "Number": 32,
-                "status": 1,
-                "NameUser": "gusuario12",
-                "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
-            },
-            {
-                "idNUmbre": 7,
-                "Number": 22,
-                "status": 1,
-                "NameUser": "gusuario12",
-                "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
             },
             {
                 "idNUmbre": 8,
-                "Number": 2,
-                "status": 1,
-                "NameUser": "gusuario12",
+                "Number": 17,
+                "status": 2,
+                "NameUser": "Kenneth Rodriguez",
                 "phonenumber": null,
-                "email": "emailUser12@gmail.com",
-                "img": "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499"
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
+            },
+            {
+                "idNUmbre": 11,
+                "Number": 18,
+                "status": 1,
+                "NameUser": "Kenneth Rodriguez",
+                "phonenumber": null,
+                "email": "kennet5h@gmail.com",
+                "img": "https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c"
+            },
+            {
+                "idNUmbre": 5,
+                "Number": 23,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 12,
+                "Number": 35,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 13,
+                "Number": 47,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 15,
+                "Number": 95,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 16,
+                "Number": 96,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 14,
+                "Number": 97,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 17,
+                "Number": 98,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
+            },
+            {
+                "idNUmbre": 18,
+                "Number": 99,
+                "status": 1,
+                "NameUser": "Maria Fernanda Posada Jaimes",
+                "phonenumber": null,
+                "email": "asistente.organizacional@comfacundi.com.co",
+                "img": "https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg"
             }
         ]
     },
@@ -4514,6 +5010,29 @@ router.post('/processrequeststickets', rutasProtegidas,[
     "msg": "Error al intentar buscar detalles de Tombotakas"
 }
  */
+
+ //DETALLE DE LA TOMBOTAKAS- 
+router.post('/detailstombotakas', rutasProtegidas,[
+    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
+    check('idTTK', 'El idTTK es obligatorio').not().isEmpty().exists()
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await userController.DetailsTombotakas(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
 
 //Score
 /**
@@ -4707,27 +5226,7 @@ router.post('/solicitarmembresia', rutasProtegidas,[
 
 
 
-//DETALLE DE LA TOMBOTAKAS- 
-router.post('/detailstombotakas', rutasProtegidas,[
-    check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists(),
-    check('idTTK', 'El idTTK es obligatorio').not().isEmpty().exists()
-], async (req, res) => {
 
-    const error = validationResult(req);
-
-    if (error.array().length != 0) {
-        return res.status(422).json({ errores: error.array(), msg: 'Error' });
-    }
-
-    let response = await userController.DetailsTombotakas(req.body);
-
-    if (response.status == 'ko') {
-        return res.status(500).json({ error: 'Error' })
-    }
-    //console.log(response);
-    return res.status(response.data.status).json(response.data)
-
-})
 
 
 //////////////SUBASTAKEAR////////////////////
@@ -4848,42 +5347,72 @@ router.post('/newsubastakasckw', rutasProtegidas,[
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *        {
     "success": true,
     "status": "200",
     "data": [
         {
-            "idproduct": 1,
-            "datecreated": "09/12/2020",
-            "flagInterested": true,
-            "started": false,
+            "idproduct": 60,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": false,
+            "TimeTotal": -718200000,
+            "TimeEnd": -624714916,
+            "flagInterested": false,
+            "started": true,
             "finished": false,
-            "begin": "20/12/2020 12:30:00",
-            "end": "21/12/2020 20:00:00",
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-11 20:00:00",
             "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": true,
+            "nuevo": false,
             "subcategory": 4,
-            "name": "pueba laptop 2",
+            "name": "pueba laptop 60",
             "details": "Hp Procesador intel core i7",
             "typemoney": 2,
             "marketvalue": "1200000.0000",
             "typepublication": 3,
             "conditions": 1,
-            "size": null,
-            "weight": null,
+            "size": 1,
+            "weight": 1,
             "status": 0,
-            "editable": false,
+            "editable": true,
             "CantidadOfertas": 0,
             "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idproduct": 59,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": false,
+            "TimeTotal": -509400000,
+            "TimeEnd": -415914838,
+            "flagInterested": false,
+            "started": true,
+            "finished": false,
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-09 10:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 60",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": true,
+            "CantidadOfertas": 10,
+            "ProductImages": [
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
         }
     ],
-    "msg": "Lista de productos"
+    "msg": "Lista de Subastakas"
 }
  *
  * @apiError UserNotFound The id of the Product was not found.
@@ -4901,7 +5430,7 @@ router.post('/newsubastakasckw', rutasProtegidas,[
 router.post('/listsubastakas', rutasProtegidas, [
     check('idfirebaseUser', 'El idfirebaseUser es obligatorio').not().isEmpty().exists()
     ],async (req, res) => {
-        
+        //
         const error = validationResult(req);
 
         if (error.array().length != 0) {
@@ -4943,34 +5472,67 @@ router.post('/listsubastakas', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *            {
+ *    {
     "success": true,
     "status": "200",
     "data": [
         {
-            "idproduct": 1,
-            "datecreated": "09/12/2020",
-            "begin": "0000-00-00 00:00:00",
-            "end": "0000-00-00 00:00:00",
+            "idproduct": 59,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": true,
+            "TimeTotal": -509400000,
+            "TimeEnd": -415754770,
+            "flagInterested": false,
+            "started": true,
+            "finished": false,
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-09 10:00:00",
             "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": true,
+            "nuevo": false,
             "subcategory": 4,
-            "name": "pueba laptop 2",
+            "name": "pueba laptop 60",
             "details": "Hp Procesador intel core i7",
             "typemoney": 2,
             "marketvalue": "1200000.0000",
             "typepublication": 3,
             "conditions": 1,
-            "size": null,
-            "weight": null,
+            "size": 1,
+            "weight": 1,
             "status": 0,
-            "editable": false,
+            "editable": true,
+            "CantidadOfertas": 10,
+            "ProductImages": [
+                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
+            ]
+        },
+        {
+            "idproduct": 60,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": true,
+            "TimeTotal": -718200000,
+            "TimeEnd": -624554663,
+            "flagInterested": false,
+            "started": true,
+            "finished": false,
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-11 20:00:00",
+            "iduser": "idfirebaseU4534dsaxgg",
+            "nuevo": false,
+            "subcategory": 4,
+            "name": "pueba laptop 60",
+            "details": "Hp Procesador intel core i7",
+            "typemoney": 2,
+            "marketvalue": "1200000.0000",
+            "typepublication": 3,
+            "conditions": 1,
+            "size": 1,
+            "weight": 1,
+            "status": 0,
+            "editable": true,
             "CantidadOfertas": 0,
             "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
         }
@@ -5125,6 +5687,7 @@ router.post('/detailsubastakas', rutasProtegidas, [
  *   {
     "success": true,
     "status": "200",
+    "Interested": true,
     "msg": "Se ha registrado Me interesa"
 }
  *
@@ -5394,131 +5957,37 @@ router.post('/listodo', rutasProtegidas, [
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *             {
+ *     {
     "success": true,
     "status": "200",
     "data": [
         {
-    "success": true,
-    "status": "200",
-    "data": [
-        {
-            "idproduct": 7,
-            "datecreated": "2020-12-09 14:11:39",
+            "idproduct": 59,
+            "datecreated": "0NaN-aN-aN aN:aN:aN",
+            "activityTime": true,
+            "Anfitrion": false,
+            "TimeTotal": -509400000,
+            "TimeEnd": -405911210,
             "flagInterested": true,
-            "started": false,
+            "started": true,
             "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
+            "begin": "2021-02-03 12:30:00",
+            "end": "2021-02-09 10:00:00",
+            "iduser": "8e7PQpRV7ic4jcCuaMm5DDIIOOv2",
             "nuevo": false,
             "subcategory": 4,
-            "name": "pueba laptop 2",
+            "name": "pueba laptop 60",
             "details": "Hp Procesador intel core i7",
             "typemoney": 2,
             "marketvalue": "1200000.0000",
             "typepublication": 3,
             "conditions": 1,
-            "size": null,
-            "weight": null,
+            "size": 1,
+            "weight": 1,
             "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
+            "editable": true,
+            "CantidadOfertas": 10,
             "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idproduct": 15,
-            "datecreated": "2020-12-11 13:26:28",
-            "flagInterested": false,
-            "started": false,
-            "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 4,
-            "name": "pueba laptop 23",
-            "details": "Hp Procesador intel core i7",
-            "typemoney": 2,
-            "marketvalue": "1200000.0000",
-            "typepublication": 3,
-            "conditions": 1,
-            "size": null,
-            "weight": null,
-            "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idproduct": 7,
-            "datecreated": "2020-12-09 14:11:39",
-            "flagInterested": true,
-            "started": false,
-            "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 4,
-            "name": "pueba laptop 2",
-            "details": "Hp Procesador intel core i7",
-            "typemoney": 2,
-            "marketvalue": "1200000.0000",
-            "typepublication": 3,
-            "conditions": 1,
-            "size": null,
-            "weight": null,
-            "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
-            ]
-        },
-        {
-            "idproduct": 15,
-            "datecreated": "2020-12-11 13:26:28",
-            "flagInterested": false,
-            "started": false,
-            "finished": false,
-            "begin": "2020-12-20 12:30:00",
-            "end": "2020-12-21 20:00:00",
-            "iduser": "idfirebaseU4534dsaxgg",
-            "nuevo": false,
-            "subcategory": 4,
-            "name": "pueba laptop 23",
-            "details": "Hp Procesador intel core i7",
-            "typemoney": 2,
-            "marketvalue": "1200000.0000",
-            "typepublication": 3,
-            "conditions": 1,
-            "size": null,
-            "weight": null,
-            "status": 0,
-            "editable": false,
-            "CantidadOfertas": 0,
-            "ProductImages": [
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
-                "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc",
                 "https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc"
             ]
         }

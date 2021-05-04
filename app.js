@@ -1,5 +1,4 @@
 const express = require('express');
-const aws = require('aws-sdk');
 const morgan = require('morgan');
 const path = require('path');
 const http = require('http');
@@ -12,6 +11,7 @@ const server = http.createServer(app);
 
 //* Socket
 realtime(server);
+
 
 
 //* Settings
@@ -33,6 +33,8 @@ app.use(require('./src/routes'));
 ////app.use(require('./routes/delivery/usersdomiciliaryroutes'));
 app.use('/admin', require('./src/routes/admin/adminroutes'));
 app.use('/user', require('./src/routes/user/usersroutes'));
+app.use('/subastakas', require('./src/routes/subastakas/subastakasroutes'));
+app.use('/epayco', require('./src/routes/epayco/epaycoroutes'));
 ////app.use('/subastakas',require('./src/routes/subastakas/subastakasroutes'));
 app.use('/notifications', require('./src/routes/notifications/notificationsroutes'));
 

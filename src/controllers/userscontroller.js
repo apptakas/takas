@@ -42,6 +42,7 @@ userController.newUser = async (req) => {
             idcity: req.codCity,
             fullname: req.fullnameUser,
             email: req.emailUser,
+            memberships: 1,
             phonenumber: req.phonenumberUser,
             imgurl: req.urlimgUser,
             role: 2,
@@ -462,8 +463,6 @@ userController.UserExist = async (req) => {
         const userData = {
             id: req.idfirebaseUser
         };
-
-
         let resp = await User.UserExist(userData);
         console.log('resultado ', resp);
         let data = {};
@@ -475,6 +474,7 @@ userController.UserExist = async (req) => {
                 Email:resp.Email,
                 Fullname:resp.Fullname,
                 PhoneNumber:resp.PhoneNumber,
+                memberships:resp.memberships,
                 ImgUrl:resp.ImgUrl,
                 msg: 'Verificación si el usuario existe y si sus campos estan completos'
             }
@@ -1261,9 +1261,10 @@ userController.ListMisProductos = async (req) => {
         const ProductData = {
             status: req.statusProduct
         };
-        if(req.statusProduct){
-            estatus=3;            
+        if(req.statusProduct!=null){
+                estatus=req.statusProduct;    
         }
+        
         //console.log(userData.password);
         let response = await Product.ListMisProductos(UserData,ProductData,estatus);
 
@@ -1949,11 +1950,19 @@ userController.DetailsOffer = async (req) => {
 
         let data = {};
         if (response && response.result) {
+
+            console.log("response.result.length");
+            console.log(response.result.length);
             let r = {};
+            if(response.result.length>0){
+            
             r = response.result[0];
             // console.log("response.result");
             // console.log(response.result[0]);
             // console.log("response.result");
+        }else{
+            r = [];
+        }
 
             data = {
                 success: true,
@@ -2172,7 +2181,6 @@ userController.ChangeStatusOffer = async (req) => {
                 status:statusOffer
             };
        
-        console.log(OfferData);
         
         //let response = await Offer.FindDatOffer(OfferData);
        let response = await Offer.ChangeStatusOffer(OfferData,req.FlagStatusOffer);
@@ -2223,7 +2231,7 @@ userController.ChangeStatusOffer = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-      //notifications(token,titulo,detalle,datanoti);
+      notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio
@@ -2235,12 +2243,107 @@ userController.ChangeStatusOffer = async (req) => {
 
 };
 
+//MATCH DE UNA OFERTA- OFFERS 
+userController.MatchOffer = async (req) => {
+    try {
+        let match=req.match;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let statusOffer=23;//ODERTA CANCELADA
+            let TitleNoti="cancelado una oferta";
+            if(match!=true){
+                statusOffer=8;// OFERTA RECHAZADA
+                let TitleNoti="Han rechazado una oferta";
+            }
+            if(match==true){
+                statusOffer=7;// OFERTA ACEPTADA
+                let TitleNoti="Han Aceptado una oferta";
+                
+            }
+
+            OfferData = {
+                id: req.idOffer,
+                idUser: req.idUser,
+                match:match,
+                status:statusOffer
+            };
+       
+        
+        //let response = await Offer.FindDatOffer(OfferData);
+       let response = await Offer.MatchOffer(OfferData,match);
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            data = {
+                success: true,
+                status: '200',
+                match:match,
+                sala:sala,
+                msg: 'Cambio de estatus de una oferta ejecutdo exitosamente'
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar cambiar el estatus de una Oferta'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenpush;
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+      notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+
 //Listar los datos de la sala de chat segú status- TAKASTEAR 
 userController.listChatRoomStatus = async (req) => {
     try {
         
             let statuSala= req.statuSalaChat;
             let idUder= req.idUder;
+            if(req.statuSalaChat==1){
+                statuSala=24
+            }
+            if(req.statuSalaChat==0){
+                statuSala=25
+            }
+
        
         //console.log(userData.password);
         let response = await ChatRooms.listChatRoomStatus(statuSala,idUder);
@@ -2432,6 +2535,101 @@ userController.MatchOfferChatRoom = async (req) => {
     }
 
 };
+
+userController.MatchOfferCR = async (req) => {
+    try {
+        let takasteo=false;
+        let OfferData ={};
+       // console.log(req.typeQuestion);
+            let status=25//SALA ACTIVA = 24 SALA CERRADA = 25
+
+            ChatRoomData = {
+                id: req.idSala,
+                idUser:req.idUser,                
+                match:req.match,
+                status:status
+            };
+       
+        //console.log(OfferData);
+
+        //let response = await Offer.FindDatOffer(OfferData);
+        let isUserPubli=false; //si es usasuario de la publicación
+        let pertenece =false; 
+        let confirMatch =req.match; 
+        let MsgMatch="";
+        let titulo2="";
+        let UserNotification2="";
+        let detalles2="";
+
+        ///DETERMINAR DE QUE USUARIO ES LA ACCIÓN DEL MATCH 
+        let response=await ChatRooms.MatchOfferCR(ChatRoomData,isUserPubli,confirMatch,MsgMatch,titulo2,UserNotification2,detalles2);
+        //console.log(quien.result);        
+
+       //console.log(response);
+      // console.log(response.sala);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            let sala='';
+            r = response.result;
+            if(response.sala){
+                sala=response.sala;
+            }
+            
+            data = {
+                success: true,
+                status: '200',
+                idNotificacion:response.idNotificacion,
+                idOferta:response.idOferta,
+                TypeNotification:response.TypeNotification,
+                UserPublication:response.UserPublication,
+                takasteo:response.confirMatch,
+                msg: response.MsgMatch
+                //data: response
+            }
+        } else {
+
+           console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al intentar hacer mach en la sala de chat'
+            }
+        }
+
+        //////////ENVIAMOS NOTIFICACIÓN////////////
+        let token=response.tokenPush;
+        //console.log(token);
+        let titulo=response.titulo;
+        let detalle=response.detalles;
+        let datanoti={
+            "title": response.titulo,
+            "body": response.detalles,
+            "idOffer":response.idOferta,
+            "idNotification":response.idNotificacion,
+            "idrelation":response.idrelation,
+            "TypeNotification":response.TypeNotification,
+            "UserPublication":response.UserPublication,
+            "type": 0,
+            "status": 0,
+            "click_action": "FLUTTER_NOTIFICATION_CLICK"
+         };
+        
+         console.log(datanoti);
+         //notifications(token,titulo,detalle,datanoti);
+        /////////////////////
+
+
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 //Listar los datos de la sala de chat- TAKASTEAR 
@@ -2753,6 +2951,7 @@ userController.NewTomboTakas = async (req) => {
                 name: req.namettk,
                 datecreated: hoy,
                 detailsevent: req.DetailsEventtk,
+                detailspayments: req.DetailsPayments,
                 detailsaward: req.DetailsAwardttk,
                 datelot: DateLottk,
                 pinreference:pin,
@@ -2962,6 +3161,7 @@ userController.ComprarApartarTickets = async (req) => {
                 status: '200',
                 tickets:ticketsr,
                 ticketsNoDispo:ticketsNoDispor,
+                DetailsPayments:response.detailspayments,
                 msg: 'Los tickets disponibles fueron procesados con éxito'
                 //data: response
             }
@@ -3051,12 +3251,19 @@ userController.MyTickets = async (req) => {
             // console.log(lengthkw);
             let idfirebaseUser=req.idfirebaseUser;
             let Status=null;
+            let MsgLista="Lista de todos los tickets";
             if(req.flagTTK!=null){
                 if(req.flagTTK==0){
-                    Status=27;
+                    Status=30;
+                    MsgLista="Lista de los tickets Apartados";
                 }
                 if(req.flagTTK==1){
-                    Status=28;
+                    Status=31;
+                    MsgLista="Lista de los tickets Aceptados";
+                }
+                if(req.flagTTK==2){
+                    Status=33;
+                    MsgLista="Lista de los tickets Rechazados";
                 }
 
             }
@@ -3082,6 +3289,7 @@ userController.MyTickets = async (req) => {
                 success: true,
                 status: '200',
                 data:response.result,
+                msgprocess:MsgLista,
                 msg: 'Lista de tickets'
                 //data: response
             }
@@ -3103,6 +3311,77 @@ userController.MyTickets = async (req) => {
     }
 
 };
+
+//Lista de mis Tombotakas
+userController.TombotakasGroup = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUser=req.idfirebaseUser;
+            let Status=null;
+            let MsgLista="Lista de todos los tickets";
+            if(req.flagTTK!=null){
+                if(req.flagTTK==0){
+                    Status=30;
+                    MsgLista="Lista de los tickets Apartados";
+                }
+                if(req.flagTTK==1){
+                    Status=31;
+                    MsgLista="Lista de los tickets Aceptados";
+                }
+                if(req.flagTTK==2){
+                    Status=33;
+                    MsgLista="Lista de los tickets Rechazados";
+                }
+
+            }
+            
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+            response = await tombotakas.TombotakasGroup(idfirebaseUser,Status);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data:response.result,
+                msgprocess:MsgLista,
+                msg: 'Lista de tickets agrupados por tombotakas'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar tickets agrupados por Tombotakas'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 
 //Solicitudes de Tickets
@@ -3167,35 +3446,33 @@ userController.RequestsTickets = async (req) => {
 
 };
 
-
-//Solicitudes de Tickets
-userController.ProcessRequestsTickets = async (req) => {
+//Lista de mis Tombotakas
+userController.TombotakasGroupCreator = async (req) => {
     //existe este usuario? 
     try {       
          
             // console.log(req.ImagesProduct.length);
             // console.log(lengthkw);
             let idfirebaseUser=req.idfirebaseUser;
-            let idticket=req.idticket;
-            //let FlagTTk=req.FlagTTk;
-            console.log(req.FlagTTk);
-            let statusTicket=30;
-            // let Status=null;
+            let idtombola=req.idtombola;
+            let Status=null;
+            let MsgLista="Lista de todos los tickets";
+            if(req.flagTTK!=null){
+                if(req.flagTTK==0){
+                    Status=30;
+                    MsgLista="Lista de los tickets Apartados";
+                }
+                if(req.flagTTK==1){
+                    Status=31;
+                    MsgLista="Lista de los tickets Aceptados";
+                }
+                if(req.flagTTK==2){
+                    Status=33;
+                    MsgLista="Lista de los tickets Rechazados";
+                }
+
+            }
             
-                if(req.FlagTTk==2){
-                    statusTicket=31;//COMPRADO (VENDER )
-                }
-                if(req.FlagTTk==4){
-                  
-                    statusTicket=33;//RECHAZADO
-                }
-
-                // if(req.FlagTTk==4){
-                  
-                //     statusTicket=33;//RECHAZADO
-                // }
-
-            console.log(statusTicket);         
 
             let msgError="";            
 
@@ -3203,7 +3480,7 @@ userController.ProcessRequestsTickets = async (req) => {
 
         // && lengthkw<=topeKW 
 
-            response = await tombotakas.ProcessRequestsTickets(idfirebaseUser,idticket,statusTicket);
+            response = await tombotakas.TombotakasGroupCreator(idfirebaseUser,idtombola,Status);
                     
         
         //console.log(msgError);
@@ -3216,6 +3493,87 @@ userController.ProcessRequestsTickets = async (req) => {
             data = {
                 success: true,
                 status: '200',
+                data:response.result,
+                msgprocess:MsgLista,
+                msg: 'Lista de tickets agrupados por Clientes'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar Listar tickets agrupados por Clientes'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Solicitudes de Tickets
+userController.ProcessRequestsTickets = async (req) => {
+    //existe este usuario? 
+    try {       
+         
+            // console.log(req.ImagesProduct.length);
+            // console.log(lengthkw);
+            let idfirebaseUserTTK=req.idfirebaseUserTTK;
+            let idticket=req.idticket;
+            let idttk=req.idttk;
+            //let FlagTTk=req.FlagTTk;
+            console.log(req.FlagTTk);
+            let statusTicket=30;
+            let MsgStatus="";
+            // let Status=null;
+            
+                if(req.FlagTTk==2){
+                    statusTicket=31;//COMPRADO (VENDER )
+                    MsgStatus="Ha aceptado la compra de éste ticket";
+                }
+                if(req.FlagTTk==4){
+                  
+                    statusTicket=33;//RECHAZADO
+                    MsgStatus="Ha rechazado la compra de éste ticket";;
+                }
+
+            console.log(statusTicket);         
+
+            let msgError="";            
+
+             let response ={};
+
+        // && lengthkw<=topeKW 
+
+
+            const Tickets = {};
+            //console.log(req.ImagesProduct.length);
+            if(req.Tickets.length!=0){               
+                for(var atr1 in req.Tickets){
+                    Tickets[atr1] = req.Tickets[atr1];     
+                };
+            }
+
+            response = await tombotakas.ProcessRequestsTickets(idfirebaseUserTTK,Tickets,statusTicket,idttk);
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                MsgStatus:MsgStatus,
                 //data:response.result,
                 msg: 'Ticket procesado exitosamente'
                 //data: response
@@ -3226,7 +3584,8 @@ userController.ProcessRequestsTickets = async (req) => {
                 success: false,
                 status: '500',
                // data: response.error,
-               // data: msgError,
+               // data: msgErr,
+                msdErro:response.msgErr,
                 msg: 'Error al intentar procesar ticket'
             }
         }
@@ -3286,7 +3645,7 @@ userController.DetailsTombotakas = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data:datar,
+                data:r,
                 msg: 'Detalle de Tombotakas encontrado exitosamente'
                 //data: response
             }
@@ -3725,6 +4084,7 @@ userController.ListSubasTakas = async (req) => {
             status: statuSubastakas
         };
         //console.log(ProductData.status);
+        //
         let response = await Product.ListSubasTakas(UserData,SubastakasData);
 
        console.log(response);
@@ -3738,7 +4098,7 @@ userController.ListSubasTakas = async (req) => {
                 success: true,
                 status: '200',
                 data: response.result,
-                msg: 'Lista de productos'
+                msg: 'Lista de Subastakas'
                 //data: response
             }
         } else {
@@ -3747,7 +4107,7 @@ userController.ListSubasTakas = async (req) => {
             data = {
                 success: false,
                 status: '500',
-                msg: 'Error al Listar productos'
+                msg: 'Error al Listar Subastakas'
             }
         }
         //validar si esta llegado vacio
@@ -3889,8 +4249,7 @@ userController.InterestedSubasTakas = async (req) => {
             data = {
                 success: true,
                 status: '200',
-                data: response.result[0],
-                images: response.images,
+                Interested:req.FlagInterested,
                 msg: msg
                 //data: response
             }
@@ -4076,7 +4435,7 @@ userController.GetChatRoomSubastakas = async (req) => {
             "click_action": "FLUTTER_NOTIFICATION_CLICK"
          };
         
-     //notifications(token,titulo,detalle,datanoti);
+     notifications(token,titulo,detalle,datanoti);
         /////////////////////
 
         //validar si esta llegado vacio

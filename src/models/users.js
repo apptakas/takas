@@ -166,7 +166,7 @@ userModel.PerfilUser = (idUser, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT u.fullname,u.email,u.phonenumber,u.datecreated,AVG(p.scorev) AS calfVendedor,AVG(p.scorec)AS calfClient FROM users AS u INNER JOIN product AS p ON u.id=p.iduser WHERE u.id="' + idUser + '" GROUP BY p.iduser',
+                'SELECT u.email,u.fullname,u.phonenumber,u.imgurl,u.datecreated,m.name AS memberships FROM users AS u INNER JOIN mastermemberships AS m  ON u.memberships=m.id WHERE u.id="' + idUser + '"',
                 (err, result) => {
                     //console.log(result);
                     if (result && Object.entries(result).length != 0) {
@@ -184,10 +184,12 @@ userModel.PerfilUser = (idUser, callback) => {
                             'result': {
                                 'NameUser': result[0].fullname,
                                 'EmailUser': result[0].email,
+                                'ImgUrl': result[0].imgurl,
                                 'PhonenumberUser': result[0].phonenumber,
+                                'memberships': result[0].memberships,
                                 'DatecreatedUser': regis,
-                                'Reputation Vendedor': calfVendedor,
-                                'Reputation Cliente': calfClient,
+                                'ReputationVendedor': calfVendedor,
+                                'ReputationCliente': calfClient,
                             }
                         })
                     } else {
@@ -217,7 +219,7 @@ userModel.GloginUser = (userData, callback) => {
                 userData.email
             ],
                 (err, result) => {
-
+                    //console.log(err)
                     //
                     if (result && Object.entries(result).length != 0) {
                         resolve({
@@ -408,7 +410,7 @@ userModel.UserExist = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT * FROM `users`  where id= ?', [userData.id],
+                'SELECT u.email,u.fullname,u.phonenumber,u.imgurl,m.name AS memberships FROM users AS u INNER JOIN mastermemberships AS m  ON u.memberships=m.id WHERE u.id=?', [userData.id],
                 (err, result) => {
                     console.log(result);
                     if (err) {
@@ -421,6 +423,7 @@ userModel.UserExist = (userData, callback) => {
                             'Email': result[0].email,
                             'Fullname': result[0].fullname,
                             'PhoneNumber': result[0].phonenumber,
+                            'memberships': result[0].memberships,
                             'ImgUrl': result[0].imgurl
 
                         })
@@ -442,7 +445,7 @@ userModel.DataUserPublication = (idproduct, callback) => {
         if (pool)
             console.log("idproduct " + idproduct);
         pool.query(
-            'SELECT u.id AS UserPublication,u.tokenpush,u.email, u.fullname as NameUser,p.`name` AS nameProducto,p.`marketvalue`,p.status FROM `users` AS u INNER JOIN `product` AS p ON u.`id`=p.`iduser` WHERE p.`id`=' + idproduct,
+            'SELECT u.id AS UserPublication,u.tokenpush,u.email, u.fullname as NameUser,p.`name` AS nameProducto,p.`marketvalue`,p.typepublication,p.status FROM `users` AS u INNER JOIN `product` AS p ON u.`id`=p.`iduser` WHERE p.`id`=' + idproduct,
             (err, result) => {
                 console.log(err);
                 if (err) {
@@ -450,6 +453,8 @@ userModel.DataUserPublication = (idproduct, callback) => {
                         'error': err
                     })
                 } else {
+                    console.log("result DataUserPublication");
+                    console.log(result);
                     resolve({
                         'result': result
                     })

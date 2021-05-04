@@ -1,5 +1,485 @@
 define({ "api": [
   {
+    "type": "Object",
+    "url": "connection",
+    "title": "options\\n   * @api public\\n",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "ObjectConnection"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "private\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PrivateN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicN"
+  },
+  {
+    "type": "",
+    "url": "public\\r\\n",
+    "title": "",
+    "version": "0.0.0",
+    "filename": "src/public/js/bundle.js",
+    "group": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "groupTitle": "C:\\Users\\User\\Documents\\Projects\\takas\\src\\public\\js\\bundle.js",
+    "name": "PublicRN"
+  },
+  {
     "type": "",
     "url": "private",
     "title": "",
@@ -278,7 +758,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idSala\": \"949bdc81078b49cd604b6622ddd762054ca8963a\",\n            \"datecreated\": \"28/10/2020\",\n            \"idPublicacion\": 1,\n            \"namePublication\": \"Estufa de 4 hornillas\",\n            \"valorComercial\": \"200000.0000\",\n            \"Userpublication\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n            \"nameUserPublication\": \"Ana\",\n            \"imgUserPublication\": \"https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d\",\n            \"idoferta\": 7,\n            \"UserOferta\": \"EVln0Vj6DNOtTXQVS2fN9P68Gl13\",\n            \"nameUserOferta\": \"ronny\",\n            \"imgUserOferta\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\",\n            \"ProductImagesPublicacion\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A31%3A56.674044.jpg?alt=media&token=0665a846-5f05-4ebc-8a34-bad46b7d6722\"\n            ],\n            \"PreferencesPublicacion\": [\n                1,\n                2\n            ]\n        }\n    ],\n    \"msg\": \"Lista de salas de chat según status\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idSala\": \"43b8413e2dcbfddce50c8639d17f2916c8f15da0\",\n            \"datecreated\": \"04/02/2021\",\n            \"idPublicacion\": 5,\n            \"typepublication\": 1,\n            \"namePublication\": \"Arbolito de navidad\",\n            \"valorComercial\": \"300000.0000\",\n            \"Userpublication\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n            \"nameUserPublication\": \"Ronny Sotillet\",\n            \"imgUserPublication\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\",\n            \"idoferta\": 3,\n            \"UserOferta\": \"5FHP1unvc0PXHQlNCY7lid6774H2\",\n            \"nameUserOferta\": \"Kenneth Rodriguez\",\n            \"imgUserOferta\": \"https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c\",\n            \"ProductImagesPublicacion\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30\"\n            ],\n            \"PreferencesPublicacion\": [\n                1\n            ]\n        },\n        {\n            \"idSala\": \"c14858c75f9b1c53d928ce2dc16af614100c2384\",\n            \"datecreated\": \"04/02/2021\",\n            \"idPublicacion\": 59,\n            \"typepublication\": 3,\n            \"namePublication\": \"pueba laptop 60\",\n            \"valorComercial\": \"1200000.0000\",\n            \"Userpublication\": \"idfirebaseU4534dsaxgg\",\n            \"nameUserPublication\": \"Carla Rodríguez Gil\",\n            \"imgUserPublication\": null,\n            \"idoferta\": 14,\n            \"UserOferta\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n            \"nameUserOferta\": \"Ronny Sotillet\",\n            \"imgUserOferta\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\",\n            \"ProductImagesPublicacion\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"PreferencesPublicacion\": []\n        }\n    ],\n    \"msg\": \"Lista de salas de chat según status\"\n}",
           "type": "json"
         }
       ]
@@ -375,7 +855,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idSala\": \"13cd8cceaa9b25a4cfbf364c585f89639ebd1aae\",\n        \"status\": 24,\n        \"datecreated\": \"03/11/2020\",\n        \"idPublicacion\": 3,\n        \"namePublication\": \"Reloj Alarma\",\n        \"ValorPublication\": \"12000.0000\",\n        \"Userpublication\": \"zSiRYTbNbpW5vOQ6K6XpxvpKu2v1\",\n        \"nameUserPublication\": \"Anailys Rodríguez\",\n        \"imgUserPublication\": null,\n        \"idoferta\": 180,\n        \"iduseroferta\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n        \"UserOferta\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n        \"nameUserOferta\": \"Ana\",\n        \"imgUserOferta\": \"https://scontent.fbog9-1.fna.fbcdn.net/v/t1.0-9/123087363_10224035495334302_417571382738385553_o.jpg?_nc_cat=103&ccb=2&_nc_sid=09cbfe&_nc_ohc=VGrhqTFkWmwAX-Zxk-R&_nc_ht=scontent.fbog9-1.fna&oh=a65b30d\",\n        \"PreferencesPublicacion\": [\n            2,\n            1\n        ],\n        \"aFavor\": true,\n        \"Valorferta\": \"10000.0000\",\n        \"dieferencia\": \"2000.0000\",\n        \"ItemOfer\": [\n            {\n                \"idpublication\": 4,\n                \"nameproduct\": \"Blusas \",\n                \"status\": 4,\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A36%3A46.808593.jpg?alt=media&token=44c54278-2aae-451d-a307-d2f821b3286c\",\n                \"marketvalue\": \"10000.0000\"\n            }\n        ],\n        \"isUserPubli\": true,\n        \"match\": 3\n    },\n    \"msg\": \"Data completa de la sala de chat\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idSala\": \"c14858c75f9b1c53d928ce2dc16af614100c2384\",\n        \"status\": 24,\n        \"datecreated\": \"04/02/2021\",\n        \"idPublicacion\": 59,\n        \"typepublication\": 3,\n        \"namePublication\": \"pueba laptop 60\",\n        \"ValorPublication\": \"1200000.0000\",\n        \"Userpublication\": \"idfirebaseU4534dsaxgg\",\n        \"nameUserPublication\": \"Carla Rodríguez Gil\",\n        \"imgUserPublication\": null,\n        \"idoferta\": 14,\n        \"iduseroferta\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n        \"UserOferta\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n        \"nameUserOferta\": \"Ronny Sotillet\",\n        \"imgUserOferta\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\",\n        \"PreferencesPublicacion\": [],\n        \"aFavor\": true,\n        \"Valorferta\": \"10000.0000\",\n        \"dieferencia\": \"1190000.0000\",\n        \"ItemOfer\": [\n            {\n                \"idpublication\": 1,\n                \"nameproduct\": \"Kit dental\",\n                \"status\": 3,\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2014%3A53%3A04.710633.jpg?alt=media&token=536eeaba-ac5b-4b39-a2e0-0a170827cef0\",\n                \"marketvalue\": \"10000.0000\"\n            }\n        ],\n        \"isUserPubli\": false,\n        \"match\": 0\n    },\n    \"msg\": \"Data completa de la sala de chat\"\n}",
           "type": "json"
         }
       ]
@@ -501,6 +981,110 @@ define({ "api": [
     "groupTitle": "Chatrooms"
   },
   {
+    "type": "put",
+    "url": "/user/matchoffercr",
+    "title": "5 matchoffercr",
+    "name": "matchoffercr_-_Match_de_la_oferta_en_la_sala_de_chat",
+    "group": "Chatrooms",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idSala",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "match",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Chatrooms.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idNotificacion\": 143,\n    \"idOferta\": 3,\n    \"TypeNotification\": 2,\n    \"UserPublication\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n    \"takasteo\": true,\n    \"msg\": \"¡TAKASTEO EXITOSO!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Chatrooms was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar hacer mach en la sala de chat\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Chatrooms"
+  },
+  {
     "type": "post",
     "url": "/user/listcities",
     "title": "1 listcities",
@@ -589,6 +1173,1753 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "src/routes/user/usersroutes.js",
     "groupTitle": "Cities"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/addnewtoken",
+    "title": "7 addnewtoken",
+    "name": "addnewtoken_-_Agregar_nuevo_token_a_tarjeta_existente",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "franchise",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "token",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "mask",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Reassignment card by default successful\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error reassigning default card\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/addnewtokenclient",
+    "title": "8 addnewtokenclient",
+    "name": "addnewtokenclient_-_Agregar_nuevo_token_a_Cliente_existente",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "token",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"El customer ya tiene el token asociado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"El customer ya tiene el token asociado\",\n    \"msg\": \"Token inexistente, o no perteneciente al comercio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/crearclient",
+    "title": "2 crearclient",
+    "name": "crearclient_-_Crear_cliente_en_Epayco",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n\"success\": true,\n\"status\": \"200\",\n\"msg\": \"Cliente Creado con Éxito.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar Crear al cliente. El token no se puede asociar al cliente, verifique que: el token existe, el cliente no esté asociado y que el token no este asociado a otro cliente .\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/createplans",
+    "title": "8 createplans",
+    "name": "createplans_-_Crear_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "name",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "description",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "real",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "currency",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "interval",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "interval_count",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "trial_days",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"El plan ha sido creado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Datos erroneos o plan ya existente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/createsuscription",
+    "title": "12 createsuscription",
+    "name": "createsuscription_-_Crear_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "customer",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "token_card",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "doc_type",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "doc_number",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "url_confirmation",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "method_confirmation",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "parameter",
+            "description": "<p>oprional.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"Inicio\": \"03-04-2021\",\n    \"Fin\": \"03-11-2023\",\n    \"msg\": \"Suscripción creada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Datos erroneos o Plan no existente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/deletetoken",
+    "title": "6 deletetoken",
+    "name": "deletetoken_-_Eliminar_Token",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "franchise",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchars",
+            "optional": false,
+            "field": "mask",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Token removido\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error eliminando el token\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/listclient",
+    "title": "4 listclient",
+    "name": "listclient_-_Listar_clientes_creados_en_Epaycoq",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"id_customer\": \"PS9ZmikjhAj9rZiDE\",\n        \"name\": \"Joe\",\n        \"email\": \"joe@payco.co\",\n        \"phone\": \"3005234321\",\n        \"address\": \"Cr 4 # 55 36\",\n        \"created\": \"03/28/2021\",\n        \"cards\": [\n            {\n                \"token\": \"**********GYmzXG\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/24/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rLwcZZ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********ZRg8xt\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********EzGgxS\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********hPcrJ5\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********pXT4t2\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********bkWK9z\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********PWStny\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********682QuD\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********aRr5X8\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********eNbSST\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********oAFDTQ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********4cqCvB\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********qMFr6j\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rE3tBT\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/29/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********NPrJx3\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/29/2021\",\n                \"default\": true\n            }\n        ]\n    },\n    \"msg\": \"Lista de clientes con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar listar  clientes.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/listplans",
+    "title": "10 listplans",
+    "name": "listplans_-_Recuperar_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"date\": [\n        {\n            \"_id\": \"LXzSRvAByyzgTtbGu\",\n            \"id_plan\": \"coursereact\",\n            \"name\": \"Course react js\",\n            \"description\": \"Course react and redux\",\n            \"amount\": 30000,\n            \"currency\": \"cop\",\n            \"interval_count\": 1,\n            \"interval\": \"month\",\n            \"status\": \"active\",\n            \"trialDays\": 30,\n            \"created\": \"03/31/2021\"\n        },\n        {\n            \"_id\": \"CRz48h9NwkperADd7\",\n            \"id_plan\": \"coursereactsygw\",\n            \"name\": \"Course react jssygw\",\n            \"description\": \"Course react and redux asjdbasdbhad\",\n            \"amount\": 30000,\n            \"currency\": \"cop\",\n            \"interval_count\": 1,\n            \"interval\": \"month\",\n            \"status\": \"active\",\n            \"trialDays\": 30,\n            \"created\": \"03/31/2021\"\n        },\n        {\n            \"_id\": \"pLexEx6S5TzcdqaYE\",\n            \"id_plan\": \"coursereact2\",\n            \"name\": \"Course react js2\",\n            \"description\": \"Course react and redux2\",\n            \"amount\": 30000,\n            \"currency\": \"cop\",\n            \"interval_count\": 1,\n            \"interval\": \"month\",\n            \"status\": \"active\",\n            \"trialDays\": 30,\n            \"created\": \"04/03/2021\"\n        }\n    ],\n    \"msg\": \"Lista de plan exitosa\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Lista de plan no encontrado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/listsuscription",
+    "title": "14 listsuscription",
+    "name": "listsuscription_-_Listar_Suscropciones",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"date\": [\n        {\n            \"_id\": \"fmAkAyDCCYmjepwcM\",\n            \"idPlan\": \"coursereactsygw\",\n            \"periodStart\": \"2021-04-03T17:06:15.325Z\",\n            \"periodEnd\": \"03-11-2023\",\n            \"nextVerificationDate\": \"03-11-2023\",\n            \"status\": \"inactive\",\n            \"first\": false,\n            \"idCustomer\": \"PS9ZmikjhAj9rZiDE\",\n            \"tokenCard\": \"9THkSZsHvBnpgQhoD\",\n            \"ip\": \"192.168.0.3\",\n            \"url_confirmation\": \"https://ejemplo.com/confirmacion\",\n            \"method_confirmation\": \"POST\",\n            \"paymentAttempts\": [],\n            \"plan\": {\n                \"idClient\": \"coursereactsygw\",\n                \"name\": \"Course react jssygw\",\n                \"description\": \"Course react and redux asjdbasdbhad\",\n                \"amount\": 30000,\n                \"currency\": \"cop\",\n                \"interval\": \"month\",\n                \"interval_count\": 1,\n                \"status\": \"active\",\n                \"trialDays\": 30\n            }\n        }\n    ],\n    \"msg\": \"Lista de Suscripciones exitosa\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar listar suscripciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/pay",
+    "title": "12 pay",
+    "name": "pay_-_Pago",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "customer",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "token_card",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "doc_type",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "doc_number",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "ip",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"La suscripción ha sido inactivada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"error\": \"Cliente no encontrado\",\n    \"error\": \"No se logró validar el medio de pago relacionado con el cobro de la suscripción.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/recuperarclient",
+    "title": "3 recuperarclient",
+    "name": "recuperarclient_-_buscar_cliente_en_Epayco",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"id_customer\": \"PS9ZmikjhAj9rZiDE\",\n        \"name\": \"Joe\",\n        \"email\": \"joe@payco.co\",\n        \"phone\": \"3005234321\",\n        \"address\": \"Cr 4 # 55 36\",\n        \"created\": \"03/28/2021\",\n        \"cards\": [\n            {\n                \"token\": \"**********GYmzXG\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/24/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rLwcZZ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********ZRg8xt\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********EzGgxS\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********hPcrJ5\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********pXT4t2\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********bkWK9z\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********PWStny\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********682QuD\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********aRr5X8\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********eNbSST\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/25/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********oAFDTQ\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********4cqCvB\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********qMFr6j\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/26/2021\",\n                \"default\": false\n            },\n            {\n                \"token\": \"**********rE3tBT\",\n                \"franchise\": \"VISA\",\n                \"mask\": \"457562******0326\",\n                \"created\": \"03/29/2021\",\n                \"default\": true\n            }\n        ]\n    },\n    \"msg\": \"Cliente encontrado con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar buscars al cliente.\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/removeplans",
+    "title": "11 removeplans",
+    "name": "removeplans_-_Recuperar_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Plan eliminado correctamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar remover plan\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/removesuscription",
+    "title": "11 removesuscription",
+    "name": "removesuscription_-_Rmover_suscripción",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_suscription",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"La suscripción ha sido inactivada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"error\": \"Suscripción no encontrada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/retieveplans",
+    "title": "9 retieveplans",
+    "name": "retieveplans_-_Recuperar_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_plan",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"date\": {\n        \"_id\": \"pLexEx6S5TzcdqaYE\",\n        \"id_plan\": \"coursereact2\",\n        \"name\": \"Course react js2\",\n        \"description\": \"Course react and redux2\",\n        \"amount\": 30000,\n        \"currency\": \"cop\",\n        \"interval_count\": 1,\n        \"interval\": \"month\",\n        \"status\": \"active\",\n        \"trialDays\": 30,\n        \"created\": \"04/03/2021\"\n    },\n    \"msg\": \"El plan ha sido encontrado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Plan no encontrado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/retievesuscription",
+    "title": "13 retievesuscription",
+    "name": "retievesuscription_-_Recuperar_plan",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "id_suscription",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"status\": true,\n        \"created\": \"03-04-2021\",\n        \"id\": \"fmAkAyDCCYmjepwcM\",\n        \"success\": true,\n        \"current_period_start\": \"03-04-2021\",\n        \"current_period_end\": \"03-11-2023\",\n        \"customer\": \"PS9ZmikjhAj9rZiDE\",\n        \"plan\": {\n            \"_id\": \"CRz48h9NwkperADd7\",\n            \"idClient\": \"coursereactsygw\",\n            \"name\": \"Course react jssygw\",\n            \"description\": \"Course react and redux asjdbasdbhad\",\n            \"amount\": 30000,\n            \"currency\": \"cop\",\n            \"interval\": \"month\",\n            \"interval_count\": 1,\n            \"status\": \"active\",\n            \"trialDays\": 30\n        },\n        \"status_plan\": \"inactive\",\n        \"type\": \"Find Subscription\",\n        \"object\": \"subscription\"\n    },\n    \"msg\": \"Suscripción encontrada exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Suscripción no encontrada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/tokenizacion",
+    "title": "1 tokenizacion",
+    "name": "tokenizacion_-_Tokenizar_tarjeta",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardNumber",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardExpYear",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardExpMonth",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "CardCVC",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n\"success\": true,\n\"status\": \"200\",\n\"msg\": \"Tarjeta Tokenizada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar tokenizar\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
+  },
+  {
+    "type": "post",
+    "url": "/epayco/updateclient",
+    "title": "5 updateclient",
+    "name": "updateclient_-_Actualizar_cliente_en_Epayco",
+    "group": "Epayco",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Cliente Actualizado con Éxito.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n\"success\": false,\n\"status\": \"500\",\n\"msg\": \"Error al intentar acualizar al cliente. \n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/epayco/epaycoroutes.js",
+    "groupTitle": "Epayco"
   },
   {
     "type": "post",
@@ -1424,6 +3755,96 @@ define({ "api": [
     "type": "post",
     "url": "/user/listnotifications",
     "title": "1 listnotifications",
+    "name": "listnotifications_-_Listar_los_datos_de_la_notificaciones",
+    "group": "Notifications",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Notifications.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Notifications.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Notifications.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 131,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 18,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        },\n        {\n            \"idNotifications\": 130,\n            \"dateNotifications\": \"05/02/2021\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido una  oferta potencial para subastakear\",\n            \"details\": \"¡En hora buena anailys rodriguez! tú Subastakas  <<Kit dental>> tiene una oferta por valor comercial de 10000\",\n            \"idevento\": 17,\n            \"idrelation\": 1,\n            \"nameProducto\": \"Kit dental\",\n            \"valueProducto\": \"10000.0000\"\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Notifications was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar notificaciones\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Notifications"
+  },
+  {
+    "type": "post",
+    "url": "/user/listnotifications",
+    "title": "1 listnotifications",
     "name": "listnotifications_-_Listar_los_datos_de_la_sala_de_chat_por_idSala",
     "group": "Notifications",
     "header": {
@@ -1508,96 +3929,6 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/notifications/notificationsroutes.js",
-    "groupTitle": "Notifications"
-  },
-  {
-    "type": "post",
-    "url": "/user/listnotifications",
-    "title": "1 listnotifications",
-    "name": "listnotifications_-_Listar_los_datos_de_la_sala_de_chat_por_idSala",
-    "group": "Notifications",
-    "header": {
-      "examples": [
-        {
-          "title": "Content-Type:",
-          "content": "\"value\": \"application/json\"",
-          "type": "varchar"
-        },
-        {
-          "title": "access-token:",
-          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
-          "type": "varchar"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "varchar",
-            "optional": false,
-            "field": "idUser",
-            "description": "<p>required.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>of the Notifications.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "int",
-            "optional": false,
-            "field": "status",
-            "description": "<p>200 of the Notifications.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "msg",
-            "description": "<p>of the Notifications.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n     {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idNotifications\": 11,\n            \"dateNotifications\": \"31/10/2020\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido un takasteo potencial\",\n            \"details\": \"¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000\",\n            \"idevento\": 145,\n            \"idrelation\": 3,\n            \"name\": \"Reloj Alarma\",\n            \"nameProducto\": 12000\n        },\n        {\n            \"idNotifications\": 10,\n            \"dateNotifications\": \"31/10/2020\"\",\n            \"statusNotifications\": 1,\n            \"typenotifications\": 2,\n            \"title\": \"Haz recibido un takasteo potencial\",\n            \"details\": \"¡En hora buena Anailys Rodríguez! tú publicación  <<Reloj Alarma>> tiene un takasteo potencial con un valor comercial de 130000\",\n            \"idevento\": 144,\n            \"idrelation\": 3,\n            \"name\": \"Reloj Alarma\",\n            \"nameProducto\": 12000\n        }\n    ],\n    \"msg\": \"Lista detallada de notificaciones  con éxito\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the Notifications was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar notificaciones\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/routes/user/usersroutes.js",
     "groupTitle": "Notifications"
   },
   {
@@ -1786,6 +4117,110 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar obtener Cantidad de Ofertas a una publicación\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Offers"
+  },
+  {
+    "type": "put",
+    "url": "/user/changestatusoffer",
+    "title": "6 changestatusoffer",
+    "name": "changestatusoffer_-_Cambio_de_estado_de_una_oferta",
+    "group": "Offers",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idOffer",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "FlagStatusOffer",
+            "description": "<p>required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"match\": true,\n    \"sala\": \"6340c299f4d9eb3d797b6a54f779cf616d0b0cdb\",\n    \"msg\": \"Cambio de estatus de una oferta ejecutdos exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
           "type": "json"
         }
       ]
@@ -2285,6 +4720,110 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar listar Oferta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Offers"
+  },
+  {
+    "type": "put",
+    "url": "/user/matchoffer",
+    "title": "8 matchoffer",
+    "name": "matchoffer_-_Cambio_de_estado_de_una_oferta",
+    "group": "Offers",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idOffer",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "FlagStatusOffer",
+            "description": "<p>required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"match\": true,\n    \"sala\": \"6340c299f4d9eb3d797b6a54f779cf616d0b0cdb\",\n    \"msg\": \"Cambio de estatus de una oferta ejecutdos exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
           "type": "json"
         }
       ]
@@ -4915,6 +7454,214 @@ define({ "api": [
     "groupTitle": "SubCategory"
   },
   {
+    "type": "put",
+    "url": "/subastakas/changestatusoffersbtk",
+    "title": "10 changestatusoffersbtk",
+    "name": "changestatusoffersbtk_-_Cambio_de_estado_de_una_oferta",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idOffer",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "FlagStatusOffer",
+            "description": "<p>required. CANCELAR = 0, RECHAZAR = 1, ACEPTAR = 2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Offers.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Offers.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"match\": true,\n    \"sala\": \"21b2460885e910ed4322f944e810ca9fa35d3105\",\n    \"msg\": \"Cambio de estatus de una oferta de subastakas se pocesó exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Offers was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar cambiar el estatus de una Oferta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/subastakas/subastakasroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "post",
+    "url": "/subastakas/detailsoffersbtk",
+    "title": "9 detailsoffersbtk",
+    "name": "detailsoffersbtk_-_Detalles_de_la_Oferta",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idFirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "typePublication",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idOferta",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Subastakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idoffer\": 16,\n        \"iduseroffer\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n        \"statusoffer\": 3,\n        \"idSala\": null,\n        \"idproduct\": 59,\n        \"namepublication\": \"pueba laptop 60\",\n        \"img\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n        ],\n        \"observation\": \"Arbolito de navidad de 2 metros de altura, viene con bambalinas\",\n        \"valorpublication\": \"1200000.0000\",\n        \"sumitemsoffer\": \"300000.0000\",\n        \"differenceoffer\": \"900000.0000\",\n        \"montoffert\": 99999.9999,\n        \"infavor\": true,\n        \"itemsoffer\": [\n            {\n                \"idpublication\": 5,\n                \"imgpublicacion\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30\",\n                \"nameproduct\": \"Arbolito de navidad\",\n                \"status\": 3,\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A44%3A07.558491.jpg?alt=media&token=fb665fb2-3da3-4c98-bf51-b791839fbc30\",\n                \"marketvalue\": \"300000.0000\"\n            }\n        ]\n    },\n    \"msg\": \"Detalles de la oferta listado exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Subastakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al intentar listar detalles de la oferta\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/subastakas/subastakasroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
     "type": "post",
     "url": "/user/detailsubastakas",
     "title": "4 detailsubastakas",
@@ -5087,7 +7834,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Se ha registrado Me interesa\"\n}",
+          "content": "    HTTP/1.1 200 OK\n  {\n    \"success\": true,\n    \"status\": \"200\",\n    \"Interested\": true,\n    \"msg\": \"Se ha registrado Me interesa\"\n}",
           "type": "json"
         }
       ]
@@ -5184,7 +7931,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n           {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"09/12/2020\",\n            \"begin\": \"0000-00-00 00:00:00\",\n            \"end\": \"0000-00-00 00:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": true,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de mis subastakas\"\n}",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 59,\n            \"datecreated\": \"0NaN-aN-aN aN:aN:aN\",\n            \"activityTime\": true,\n            \"Anfitrion\": true,\n            \"TimeTotal\": -509400000,\n            \"TimeEnd\": -415754770,\n            \"flagInterested\": false,\n            \"started\": true,\n            \"finished\": false,\n            \"begin\": \"2021-02-03 12:30:00\",\n            \"end\": \"2021-02-09 10:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 60\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": true,\n            \"CantidadOfertas\": 10,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 60,\n            \"datecreated\": \"0NaN-aN-aN aN:aN:aN\",\n            \"activityTime\": true,\n            \"Anfitrion\": true,\n            \"TimeTotal\": -718200000,\n            \"TimeEnd\": -624554663,\n            \"flagInterested\": false,\n            \"started\": true,\n            \"finished\": false,\n            \"begin\": \"2021-02-03 12:30:00\",\n            \"end\": \"2021-02-11 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 60\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": true,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de mis subastakas\"\n}",
           "type": "json"
         }
       ]
@@ -5378,7 +8125,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 1,\n            \"datecreated\": \"09/12/2020\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"20/12/2020 12:30:00\",\n            \"end\": \"21/12/2020 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": true,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de productos\"\n}",
+          "content": "    HTTP/1.1 200 OK\n       {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 60,\n            \"datecreated\": \"0NaN-aN-aN aN:aN:aN\",\n            \"activityTime\": true,\n            \"Anfitrion\": false,\n            \"TimeTotal\": -718200000,\n            \"TimeEnd\": -624714916,\n            \"flagInterested\": false,\n            \"started\": true,\n            \"finished\": false,\n            \"begin\": \"2021-02-03 12:30:00\",\n            \"end\": \"2021-02-11 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 60\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": true,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 59,\n            \"datecreated\": \"0NaN-aN-aN aN:aN:aN\",\n            \"activityTime\": true,\n            \"Anfitrion\": false,\n            \"TimeTotal\": -509400000,\n            \"TimeEnd\": -415914838,\n            \"flagInterested\": false,\n            \"started\": true,\n            \"finished\": false,\n            \"begin\": \"2021-02-03 12:30:00\",\n            \"end\": \"2021-02-09 10:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 60\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": true,\n            \"CantidadOfertas\": 10,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Subastakas\"\n}",
           "type": "json"
         }
       ]
@@ -5404,6 +8151,110 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "put",
+    "url": "/user/matchoffercrsbtk",
+    "title": "11 matchoffercrsbtk",
+    "name": "matchoffercrsbtk_-_Match_de_la_oferta_en_la_sala_de_chat",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idSala",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "booleam",
+            "optional": false,
+            "field": "match",
+            "description": "<p>required.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Chatrooms.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Chatrooms.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n   {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idNotificacion\": 143,\n    \"idOferta\": 3,\n    \"TypeNotification\": 2,\n    \"UserPublication\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n    \"takasteo\": true,\n    \"msg\": \"¡TAKASTEO EXITOSO!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Chatrooms was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar hacer mach en la sala de chat\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/subastakas/subastakasroutes.js",
     "groupTitle": "Subastakas"
   },
   {
@@ -5468,7 +8319,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 7,\n            \"datecreated\": \"2020-12-09 14:11:39\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 15,\n            \"datecreated\": \"2020-12-11 13:26:28\",\n            \"flagInterested\": false,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 7,\n            \"datecreated\": \"2020-12-09 14:11:39\",\n            \"flagInterested\": true,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 2\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        },\n        {\n            \"idproduct\": 15,\n            \"datecreated\": \"2020-12-11 13:26:28\",\n            \"flagInterested\": false,\n            \"started\": false,\n            \"finished\": false,\n            \"begin\": \"2020-12-20 12:30:00\",\n            \"end\": \"2020-12-21 20:00:00\",\n            \"iduser\": \"idfirebaseU4534dsaxgg\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 23\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": null,\n            \"weight\": null,\n            \"status\": 0,\n            \"editable\": false,\n            \"CantidadOfertas\": 0,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Subastakas marcadas como interesantes\"\n}",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idproduct\": 59,\n            \"datecreated\": \"0NaN-aN-aN aN:aN:aN\",\n            \"activityTime\": true,\n            \"Anfitrion\": false,\n            \"TimeTotal\": -509400000,\n            \"TimeEnd\": -405911210,\n            \"flagInterested\": true,\n            \"started\": true,\n            \"finished\": false,\n            \"begin\": \"2021-02-03 12:30:00\",\n            \"end\": \"2021-02-09 10:00:00\",\n            \"iduser\": \"8e7PQpRV7ic4jcCuaMm5DDIIOOv2\",\n            \"nuevo\": false,\n            \"subcategory\": 4,\n            \"name\": \"pueba laptop 60\",\n            \"details\": \"Hp Procesador intel core i7\",\n            \"typemoney\": 2,\n            \"marketvalue\": \"1200000.0000\",\n            \"typepublication\": 3,\n            \"conditions\": 1,\n            \"size\": 1,\n            \"weight\": 1,\n            \"status\": 0,\n            \"editable\": true,\n            \"CantidadOfertas\": 10,\n            \"ProductImages\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ]\n        }\n    ],\n    \"msg\": \"Lista de Subastakas marcadas como interesantes\"\n}",
           "type": "json"
         }
       ]
@@ -5494,6 +8345,124 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Subastakas"
+  },
+  {
+    "type": "post",
+    "url": "/subastakas/newoffersbtk",
+    "title": "8 newoffersbtk",
+    "name": "newoffersbtk_-_Crear_Oferta",
+    "group": "Subastakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{\"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\" }",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idFirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idSubastakas",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "idsPublications",
+            "description": "<p>array Int required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "descriptionOffer",
+            "description": "<p>optional.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "real",
+            "optional": false,
+            "field": "MontOffer",
+            "description": "<p>optional.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Subastakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Subastakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n            {\n    \"success\": true,\n    \"status\": \"200\",\n    \"idoferta\": 13,\n    \"msg\": \"Oferta creada exitosamente\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Subastakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"error\":response.msg,\n    \"msg\": 'Error al intentar crear una Oferta'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/subastakas/subastakasroutes.js",
     "groupTitle": "Subastakas"
   },
   {
@@ -5769,7 +8738,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"tickets\": [\n        \"01\"\n    ],\n    \"ticketsNoDispo\": [\n        \"00\",\n        \"21\",\n        \"31\"\n    ],\n    \"msg\": \"Los tickets disponibles fueron procesados con éxito\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"tickets\": [\n        76,\n        75,\n        73,\n        72\n    ],\n    \"ticketsNoDispo\": [],\n    \"DetailsPayments\": \"Pueden consignar a la siguiente cuenta de ahorros 373797347426 Bancolombia \",\n    \"msg\": \"Los tickets disponibles fueron procesados con éxito\"\n}",
           "type": "json"
         }
       ]
@@ -5861,7 +8830,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idTombotakas\": 2,\n        \"timeremaining\": 25593.626933333333,\n        \"pertenece\": true,\n        \"nameTombotakas\": \"test Nueva Tombotakas\",\n        \"statusTTK\": 0,\n        \"datecreatedTTK\": \"19/11/2020\",\n        \"detailseventTTK\": \"Para canche 25/11/20 8:00 pm\",\n        \"detailsAwardttk\": \"La imagen que voy a cargar en este momento\",\n        \"pinreferenceTTK\": \"ibxJu2\",\n        \"datelotTTK\": \"25/11/2020 19:47\",\n        \"moneyTTK\": 1,\n        \"priceTTK\": \"10000.0000\",\n        \"resultTTK\": null,\n        \"imgTTK\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n        ],\n        \"numberticketsrs\": [\n            31,\n            40,\n            21,\n            1,\n            10,\n            32,\n            22,\n            2\n        ],\n        \"ticketsReservados\": [\n            {\n                \"idNUmbre\": 1,\n                \"Number\": 31,\n                \"status\": 4,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 2,\n                \"Number\": 40,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 3,\n                \"Number\": 21,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 4,\n                \"Number\": 1,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 5,\n                \"Number\": 10,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 6,\n                \"Number\": 32,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 7,\n                \"Number\": 22,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            },\n            {\n                \"idNUmbre\": 8,\n                \"Number\": 2,\n                \"status\": 1,\n                \"NameUser\": \"gusuario12\",\n                \"phonenumber\": null,\n                \"email\": \"emailUser12@gmail.com\",\n                \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n            }\n        ]\n    },\n    \"msg\": \"Detalle de Tombotakas encontrado exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"idTombotakas\": 1,\n        \"pinTombotakas\": \"Sx3Ev1\",\n        \"pertenece\": false,\n        \"timeremaining\": 37847.64008333333,\n        \"nameTombotakas\": \"Botella de crema de whisky\",\n        \"statusTTK\": 0,\n        \"datecreatedTTK\": \"2020-12-16\",\n        \"detailseventTTK\": \"Juega con la lotería de boyacá, ticket sin pagar no juega\",\n        \"detailsAwardttk\": \"3 botellas de crema de whisky con su envase original\",\n        \"pinreferenceTTK\": \"Sx3Ev1\",\n        \"datelotTTK\": \"2021-01-09 14:46\",\n        \"moneyTTK\": 0,\n        \"priceTTK\": \"5000.0000\",\n        \"resultTTK\": null,\n        \"imgTTK\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5\"\n        ],\n        \"numberticketsrs\": [\n            8,\n            9,\n            15,\n            16,\n            17,\n            18,\n            23,\n            35,\n            47,\n            95,\n            96,\n            97,\n            98,\n            99\n        ],\n        \"ticketsReservados\": [\n            {\n                \"idNUmbre\": 4,\n                \"Number\": 8,\n                \"status\": 1,\n                \"NameUser\": \"Ronny Sotillet\",\n                \"phonenumber\": null,\n                \"email\": \"ronny.sotillet777@gmail.com\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\"\n            },\n            {\n                \"idNUmbre\": 3,\n                \"Number\": 9,\n                \"status\": 1,\n                \"NameUser\": \"Ronny Sotillet\",\n                \"phonenumber\": null,\n                \"email\": \"ronny.sotillet777@gmail.com\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\"\n            },\n            {\n                \"idNUmbre\": 10,\n                \"Number\": 15,\n                \"status\": 1,\n                \"NameUser\": \"Kenneth Rodriguez\",\n                \"phonenumber\": null,\n                \"email\": \"kennet5h@gmail.com\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c\"\n            },\n            {\n                \"idNUmbre\": 9,\n                \"Number\": 16,\n                \"status\": 1,\n                \"NameUser\": \"Kenneth Rodriguez\",\n                \"phonenumber\": null,\n                \"email\": \"kennet5h@gmail.com\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c\"\n            },\n            {\n                \"idNUmbre\": 8,\n                \"Number\": 17,\n                \"status\": 2,\n                \"NameUser\": \"Kenneth Rodriguez\",\n                \"phonenumber\": null,\n                \"email\": \"kennet5h@gmail.com\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c\"\n            },\n            {\n                \"idNUmbre\": 11,\n                \"Number\": 18,\n                \"status\": 1,\n                \"NameUser\": \"Kenneth Rodriguez\",\n                \"phonenumber\": null,\n                \"email\": \"kennet5h@gmail.com\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c\"\n            },\n            {\n                \"idNUmbre\": 5,\n                \"Number\": 23,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 12,\n                \"Number\": 35,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 13,\n                \"Number\": 47,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 15,\n                \"Number\": 95,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 16,\n                \"Number\": 96,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 14,\n                \"Number\": 97,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 17,\n                \"Number\": 98,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            },\n            {\n                \"idNUmbre\": 18,\n                \"Number\": 99,\n                \"status\": 1,\n                \"NameUser\": \"Maria Fernanda Posada Jaimes\",\n                \"phonenumber\": null,\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\"\n            }\n        ]\n    },\n    \"msg\": \"Detalle de Tombotakas encontrado exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -6089,7 +9058,7 @@ define({ "api": [
             "type": "varchar",
             "optional": false,
             "field": "flagTTK",
-            "description": "<p>optional.</p>"
+            "description": "<p>optional. 0=Apartados, 1=Aceptadp, 2=Rechazado</p>"
           }
         ]
       }
@@ -6123,7 +9092,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 2,\n            \"pinTombotakas\": \"ibxJu2\",\n            \"timeremaining\": 28841.56545,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"2020-11-19\",\n            \"pinreferenceTTK\": \"ibxJu2\",\n            \"datelotTTK\": \"2020-11-25 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [\n                31,\n                40,\n                21,\n                1,\n                10,\n                32,\n                22,\n                2\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 31,\n                    \"status\": 4,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 2,\n                    \"Number\": 40,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 3,\n                    \"Number\": 21,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 4,\n                    \"Number\": 1,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 5,\n                    \"Number\": 10,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 6,\n                    \"Number\": 32,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 7,\n                    \"Number\": 22,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                },\n                {\n                    \"idNUmbre\": 8,\n                    \"Number\": 2,\n                    \"status\": 1,\n                    \"NameUser\": \"gusuario12\",\n                    \"phonenumber\": null,\n                    \"email\": \"emailUser12@gmail.com\",\n                    \"img\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FEVln0Vj6DNOtTXQVS2fN9P68Gl13-2020-10-23%2014%3A30%3A07.496425.jpg?alt=media&token=62aeb4a7-a7fc-444d-9b3e-9550d216d499\"\n                }\n            ]\n        }\n    ],\n    \"msg\": \"Lista de tickets\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"idTombotakas\": 5,\n            \"pinTombotakas\": \"MwkeQM\",\n            \"timeremaining\": 101860.24755,\n            \"nameTombotakas\": \"test Nueva Tombotakas\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"2021-02-04\",\n            \"pinreferenceTTK\": \"MwkeQM\",\n            \"datelotTTK\": \"2020-11-25 19:47\",\n            \"moneyTTK\": 1,\n            \"priceTTK\": \"10000.0000\",\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-10-23%2014%3A38%3A52.408985.jpg?alt=media&token=391bfb84-ac9f-4353-9384-f57b5117bdbc\"\n            ],\n            \"numberticketsrs\": [\n                22\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 21,\n                    \"Number\": 22,\n                    \"status\": 4,\n                    \"NameUser\": \"Ronny Sotillet\",\n                    \"phonenumber\": null,\n                    \"email\": \"ronny.sotillet777@gmail.com\",\n                    \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\"\n                }\n            ]\n        }\n    ],\n    \"msgprocess\": \"Lista de los tickets Rechazados\",\n    \"msg\": \"Lista de tickets\"\n}",
           "type": "json"
         }
       ]
@@ -6286,6 +9255,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
+            "field": "DetailsPayments",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
             "field": "DetailsAwardttk",
             "description": "<p>required.</p>"
           },
@@ -6399,14 +9375,21 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "idfirebaseUser",
+            "field": "idfirebaseUserTTK",
             "description": "<p>required.</p>"
           },
           {
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "idticket",
+            "field": "Tickets",
+            "description": "<p>required Array.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "idttk",
             "description": "<p>required.</p>"
           },
           {
@@ -6448,7 +9431,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"msg\": \"Ticket procesado exitosamente\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"MsgStatus\": \"Ha aceptado la compra de éste ticket\",\n    \"msg\": \"Ticket procesado exitosamente\"\n}",
           "type": "json"
         }
       ]
@@ -6467,7 +9450,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar procesar ticket\"\n}",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msdErro\": \"Ustede no es el anfitrión de la tombola\",\n    \"msg\": \"Error al intentar procesar ticket\"\n}",
           "type": "json"
         }
       ]
@@ -6553,6 +9536,190 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar solicitudes tickets\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/tombotakasgroup",
+    "title": "10 tombotakasgroup",
+    "name": "tombotakasgroup_-_Grupo_de_Tombotakas_con_mis_tikets_apartados",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "flagTTK",
+            "description": "<p>optional. 0=Apartados, 1=Aceptadp, 2=Rechazado</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"pinTombotakas\": \"Sx3Ev1\",\n            \"timeremaining\": 138204.73436666667,\n            \"nameTombotakas\": \"Botella de crema de whisky\",\n            \"statusTTK\": 0,\n            \"datecreatedTTK\": \"2020-12-16\",\n            \"detailseventTTK\": \"Juega con la lotería de boyacá, ticket sin pagar no juega\",\n            \"detailsAwardttk\": \"3 botellas de crema de whisky con su envase original\",\n            \"detailsPayments\": null,\n            \"datelotTTK\": \"2021-01-09 14:46\",\n            \"moneyTTK\": 0,\n            \"priceTTK\": \"5000.0000\",\n            \"imgTTK\": [\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2\",\n                \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5\"\n            ],\n            \"numberticketsrs\": [\n                2,\n                61,\n                62\n            ],\n            \"ticketsReservados\": [\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 2,\n                    \"status\": 0\n                },\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 61,\n                    \"status\": 0\n                },\n                {\n                    \"idNUmbre\": 1,\n                    \"Number\": 62,\n                    \"status\": 0\n                }\n            ]\n        }\n    ],\n    \"msgprocess\": \"Lista de todos los tickets\",\n    \"msg\": \"Lista de tickets agrupados por tombotakas\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar tickets agrupados por Tombotakas\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user/usersroutes.js",
+    "groupTitle": "Tombotakas"
+  },
+  {
+    "type": "post",
+    "url": "/user/tombotakasgroupcreator",
+    "title": "6.1 tombotakasgroupcreator",
+    "name": "tombotakasgroupcreator_-_Tombotakas_Ticket_reservados_por_clientes",
+    "group": "Tombotakas",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "idfirebaseUser",
+            "description": "<p>required.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "varchar",
+            "optional": false,
+            "field": "flagTTK",
+            "description": "<p>optional. 0=Apartados, 1=Aceptadp, 2=Rechazado</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the Tombotakas.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the Tombotakas.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"pinTombotakas\": \"Sx3Ev1\",\n        \"timeremaining\": 141356.95853333332,\n        \"nameTombotakas\": \"Botella de crema de whisky\",\n        \"statusTTK\": 27,\n        \"datecreatedTTK\": \"2020-12-16\",\n        \"detailseventTTK\": \"Juega con la lotería de boyacá, ticket sin pagar no juega\",\n        \"detailsAwardttk\": \"3 botellas de crema de whisky con su envase original\",\n        \"detailsPayments\": null,\n        \"datelotTTK\": \"2021-01-09 14:46\",\n        \"moneyTTK\": 0,\n        \"priceTTK\": \"5000.0000\",\n        \"imgTTK\": [\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2FzSiRYTbNbpW5vOQ6K6XpxvpKu2v1-2020-12-15%2015%3A02%3A12.241018.jpg?alt=media&token=d3c864f6-ff3c-44f8-b1f9-35ef1903b4d2\",\n            \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/products%2F8e7PQpRV7ic4jcCuaMm5DDIIOOv2-2020-12-16%2014%3A48%3A11.734597.jpg?alt=media&token=9303b9b7-e007-4011-9af3-4842159ea2b5\"\n        ],\n        \"Reservados\": [\n            {\n                \"Name\": \"Kenneth Rodriguez\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GgSoPi6j7En1ynttbZGGLI0MIuugPr83Z2UAsBG-w=s96-c\",\n                \"email\": \"kennet5h@gmail.com\",\n                \"ticketsReservados\": [\n                    {\n                        \"id\": 2,\n                        \"Number\": 2,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 10,\n                        \"Number\": 15,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 9,\n                        \"Number\": 16,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 8,\n                        \"Number\": 17,\n                        \"status\": 2\n                    },\n                    {\n                        \"id\": 11,\n                        \"Number\": 18,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 6,\n                        \"Number\": 61,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 7,\n                        \"Number\": 62,\n                        \"status\": 1\n                    }\n                ]\n            },\n            {\n                \"Name\": \"Ronny Sotillet\",\n                \"img\": \"https://lh3.googleusercontent.com/a-/AOh14GijzFS1dFSbNMN-anBXC7E8cjZeXBNbtgFx4nGuN-0=s96-c\",\n                \"email\": \"ronny.sotillet777@gmail.com\",\n                \"ticketsReservados\": [\n                    {\n                        \"id\": 4,\n                        \"Number\": 8,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 3,\n                        \"Number\": 9,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 18,\n                        \"Number\": 99,\n                        \"status\": 1\n                    }\n                ]\n            },\n            {\n                \"Name\": \"Maria Fernanda Posada Jaimes\",\n                \"img\": \"https://lh6.googleusercontent.com/-1446ykyfZMY/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclQfbWnfwhL30c_xdiNJu_g8GHwmQ/s96-c/photo.jpg\",\n                \"email\": \"asistente.organizacional@comfacundi.com.co\",\n                \"ticketsReservados\": [\n                    {\n                        \"id\": 5,\n                        \"Number\": 23,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 12,\n                        \"Number\": 35,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 13,\n                        \"Number\": 47,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 15,\n                        \"Number\": 95,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 16,\n                        \"Number\": 96,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 14,\n                        \"Number\": 97,\n                        \"status\": 1\n                    },\n                    {\n                        \"id\": 17,\n                        \"Number\": 98,\n                        \"status\": 1\n                    }\n                ]\n            }\n        ]\n    },\n    \"msgprocess\": \"Lista de todos los tickets\",\n    \"msg\": \"Lista de tickets agrupados por Clientes\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Tombotakas was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\": \"500\",\n    \"msg\": \"Error al intentar Listar tickets agrupados por Clientes\"\n}",
           "type": "json"
         }
       ]
@@ -7138,7 +10305,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "varchar",
             "optional": false,
-            "field": "idfirebaseUser",
+            "field": "idFirebaseUser",
             "description": "<p>required.</p>"
           }
         ]
@@ -7173,7 +10340,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"Anailys Rodríguez\",\n        \"EmailUser\": \"anailysrodriguez@gmail.com\",\n        \"PhonenumberUser\": \"3174723818\",\n        \"DatecreatedUser\": \"07/09/20\",\n        \"Reputation Vendedor\": 4,\n        \"Reputation Cliente\": 0\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": {\n        \"NameUser\": \"abuela\",\n        \"EmailUser\": \"abuela7@gmail.com\",\n        \"ImgUrl\": \"https://firebasestorage.googleapis.com/v0/b/takas-a720c.appspot.com/o/profile%2FRS6rHsPwWxfTaIk92Y65c8pykbb2-2021-02-11%2017%3A13%3A30.145141.jpg?alt=media&token=813f69dd-b62a-460a-a14f-14e40a8da74e\",\n        \"PhonenumberUser\": \"340660995\",\n        \"memberships\": \"Free\",\n        \"DatecreatedUser\": \"11/02/21\",\n        \"Reputation Cliente\": 0\n    },\n    \"msg\": \"Perfil de Usuario\"\n}",
           "type": "json"
         }
       ]
@@ -7550,7 +10717,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"UserExist\": true,\n    \"Email\": \"luis.perez@comfacundi.com.co\",\n    \"Fullname\": \"LUIS ALFONSO PEREZ GOMEZ\",\n    \"PhoneNumber\": null,\n    \"ImgUrl\": \"https://lh6.googleusercontent.com/-5IIzw5Zatz8/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclhKf5AT5aSATqsw5odC3ZhrtASPA/s96-c/photo.jpg\",\n    \"msg\": \"Verificación si el usuario existe y si sus campos estan completos\"\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"status\": \"200\",\n    \"UserExist\": true,\n    \"Email\": \"emailUser3@gmail.com\",\n    \"Fullname\": \"fullnameUser2\",\n    \"PhoneNumber\": \"298380983676\",\n    \"memberships\": \"Free\",\n    \"ImgUrl\": \"https://n9.cl/zxq61\",\n    \"msg\": \"Verificación si el usuario existe y si sus campos estan completos\"\n}",
           "type": "json"
         }
       ]

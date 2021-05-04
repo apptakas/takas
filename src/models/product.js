@@ -294,7 +294,7 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                     PreferecesProduct[atr3],
                                     resut.insertId
                                 ],
-                                (err, resut) => {
+                                (err, resu2t) => {
                                     //console.log(resut);
                                     if (err) {
                                         resolve({
@@ -302,7 +302,8 @@ ProductModel.NewProductCKW = (ProductData,PreferecesProduct,ImagesProduct,KeyWor
                                         })
                                     } else {
                                         resolve({
-                                            'result': resut
+                                            'result': resu2t,
+                                            'id':resut.insertId
                                         })
                                     }
                 
@@ -445,8 +446,8 @@ ProductModel.ListMisProductos = (UserData,ProductData,estatus,callback) => {
 
             let armaresult={};
             let consulta="";
-            if(estatus==1){
-                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+ProductData.status+" AND p.id=idproduct AND typepublication=1 ";
+            if(estatus!=0){
+                consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND status="+estatus+" AND p.id=idproduct AND typepublication=1";
             }else{
                 consulta="SELECT DISTINCT idproduct,datepublication,iduser,name,details,typemoney,marketvalue,subcategory,typepublication,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct  WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct AND typepublication=1";
             }
@@ -615,6 +616,7 @@ ProductModel.armaresult = (result) => {
                     let datecreatedt = new Date(element.datecreated);
                     let datecreated = date.format(datecreatedt, 'YYYY-MM-DD HH:mm:ss');
                     //console.log(element.typepublication);
+                   
                     if(element.typepublication==1){   
                         arr.push({
                             "idproduct": element.idproduct,
@@ -662,9 +664,29 @@ ProductModel.armaresult = (result) => {
                         if(interested.interested[0]!= undefined){
                             flagInterested=true;
                         }
+
+                        let fechaserver = new Date();
+                        let fechactual=date.format(fechaserver, 'YYYY-MM-DD HH:mm:ss');
+                        //DETERMINAR SI ES EL TIEMPO DE ACTIVIDAD
+                        let timeActive=false;
+                        let DiferenciafechasInicio=date.subtract(fechaserver, beginSubastakas).toMinutes();
+                        console.log("DiferenciafechasInicio: "+DiferenciafechasInicio );
+                        let DiferenciafechasFin=date.subtract(fechaserver, endSubastakas).toMinutes();
+                        console.log("DiferenciafechasFin: "+DiferenciafechasFin );
+                        let TimeTotal=date.subtract(beginSubastakas, endSubastakas).toMilliseconds();;
+                        let DiferenciafechasFin2=date.subtract(fechaserver, endSubastakas).toMilliseconds();
+
+                        if(DiferenciafechasInicio>=0 && DiferenciafechasFin<0){
+                            timeActive=true;
+                        }
+                        
+//
                         arr.push({
                             "idproduct": element.idproduct,
-                            "datecreated":datecreated,
+                            "datecreated":datecreated,                            
+                            "activityTime":timeActive,
+                            "TimeTotal":TimeTotal,
+                            "TimeEnd":DiferenciafechasFin2,
                             "flagInterested":flagInterested,
                             "started":started,
                             "finished":finished,
@@ -1190,7 +1212,7 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
                             'error': err
                         })
                     } else {   
-                        armaresult = await ProductModel.armaresult(result);  
+                        armaresult = await ProductModel.armaresult2(result,UserData.iduser);  
                         resolve({
                             'result': armaresult
                         })
@@ -1203,17 +1225,289 @@ ProductModel.ListSubasTakas = (UserData,SubastakasData) => {
     })
 };
 ///
+//Arma el resultado de la subasta y determina propiedad
+ProductModel.armaresult2 = (result,iduser) => {
 
+    return new Promise(async (resolve, reject) => {
+        let arr = [];
+        
+        
+        try{
+            
+            let img={};
+            let prefe={};
+            let interested={};
+            let CantidadOfertas=0;
+            let idproducs=0;
+            let Anfitrion={};
+            let Pertenece={}
+            //console.log(result);
+            for (const element of result) {
+                //console.log(element.idproduct+" - "+idproducs);
+                if(element.idproduct!=idproducs){
+                    //console.log("idproducs - "+element.idproduct);
+                    idproducs=element.idproduct;
+                    img=await ProductModel.ListImagesProduct(element);
+                    prefe=await ProductModel.ListPrefrencesProduct(element);
+                    CantidadOfertas=await ProductModel.CantidadOfertas(element);
+                    
+                    let Precio=Number.parseFloat(element.marketvalue).toFixed(4);
+
+                    let now = new Date();
+                    let servidor=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+                    //let registro=element.registro;
+                    let registro = new Date(element.datepublication);
+                    let regis = date.format(registro, 'YYYY-MM-DD HH:mm:ss');
+
+                    //console.log(now+" - "+registro);
+
+                    let comprobar_fecha=date.isSameDay(now, registro); 
+                    // console.log(comprobar_fecha+" - ");
+                    // console.log("//////");
+                    console.log(element.conditions);
+                    let nuevo=false;
+                    if (element.conditions==9){
+                         nuevo=true;
+                    }
+                    console.log(nuevo);
+
+                    let FlagProduct=element.status;
+                    let statusProduct=0; //Publicación activa
+                    let Editable=true; //Publicación activa
+                    if(FlagProduct==4){
+                        statusProduct=1; // Publicación Takasteada
+                    }
+                    if(FlagProduct==5){
+                        statusProduct=2;//Publicación Elimidada ó Deshabilitada
+                    }
+                    if(FlagProduct==26){
+                        statusProduct=3;//Publicación Editada
+                    
+                    }
+                    Anfitrion= await ProductModel.VerificarAnfitrionSubasta(iduser,element.idproduct,);
+                    Pertenece= await ProductModel.VerificarPerteneceProduct(iduser,element.idproduct,);
+                    
+                    console.log("Anfitrion");
+                    console.log(Anfitrion);
+                    let rp = await ProductModel.FindProductCKW(element.iduser,element.idproduct);
+                   // console.log(rp);
+                    //console.log(horaServidor);
+                    //console.log(rp.result);
+                    let datepublication = new Date(rp.result.datepublication);
+                    //console.log(datepublication);
+                    ////fecha de creación de producto
+                    let fechacp = date.format(datepublication, 'YYYY-MM-DD HH:mm:ss');
+                    //console.log(now);
+                    let Diferenciafechas=date.subtract(now, datepublication).toMinutes();
+
+                    if(Diferenciafechas>20){
+                        Editable=false;
+                    }
+
+                    //Transformar
+                    let datecreatedt = new Date(element.datecreated);
+                    let datecreated = date.format(datecreatedt, 'YYYY-MM-DD HH:mm:ss');
+                    //console.log(element.typepublication);
+                   
+                    if(element.typepublication==1){   
+                        arr.push({
+                            "idproduct": element.idproduct,
+                            "datecreated":datecreated,
+                            "activityTime":null,
+                            "Anfitrion":null,
+                            "TimeTotal":null,
+                            "TimeEnd":null,
+                            "flagInterested":null,
+                            "started":null,
+                            "finished":null,
+                            "begin":null,
+                            "end":null,
+                            "iduser": element.iduser,
+                            "Pertenece":Pertenece.Anfitrion,
+                            "nuevo":nuevo,
+                            "subcategory": element.subcategory,
+                            "name": element.name,
+                            "details": element.details,
+                            "typemoney": element.typemoney,
+                            "marketvalue": Precio,
+                            "typepublication": element.typepublication,
+                            "conditions": element.conditions,
+                            "size": element.size,
+                            "weight": element.weight,
+                            "status": statusProduct,
+                            "editable": Editable,
+                            "CantidadOfertas":CantidadOfertas.CantOfertas,
+                            "ProductImages":img.ImagesProduct,
+                            "Preferences":prefe.Preferences
+                            
+                        });
+                    }
+                    if(element.typepublication==3){ 
+                        let now2 = new Date();
+                        let servidor2=date.format(now, 'YYYY-MM-DD HH:mm:ss');  
+                        let beginSubastakas = new Date(element.datebeginst);
+                        let begin=date.format(beginSubastakas, 'YYYY-MM-DD HH:mm:ss');
+                        let endSubastakas = new Date(element.dateendst);
+                        let end=date.format(endSubastakas, 'YYYY-MM-DD HH:mm:ss');
+                        let valStarted=date.subtract(now2,beginSubastakas).toMinutes();
+                        console.log("valStarted: "+valStarted);
+                        let started=false;
+                        if(valStarted > 0){
+                            started=true;
+                        }
+                        let finished=false;
+                        let valFinished=date.subtract(now2,endSubastakas).toMinutes();
+                        if(valFinished > 0){
+                            finished=true;
+                        }
+                        interested=await ProductModel.interestedSubastacas(element);
+                        console.log("interested: "+interested.interested[0]);
+                        let flagInterested=false;
+                        if(interested.interested[0]!= undefined){
+                            flagInterested=true;
+                        }
+
+                        let fechaserver = new Date();
+                        let fechactual=date.format(fechaserver, 'YYYY-MM-DD HH:mm:ss');
+                        //DETERMINAR SI ES EL TIEMPO DE ACTIVIDAD
+                        let timeActive=false;
+                        let DiferenciafechasInicio=date.subtract(fechaserver, beginSubastakas).toMinutes();
+                        console.log("DiferenciafechasInicio: "+DiferenciafechasInicio );
+                        let DiferenciafechasFin=date.subtract(fechaserver, endSubastakas).toMinutes();
+                        console.log("DiferenciafechasFin: "+DiferenciafechasFin );
+                        let TimeTotal=date.subtract(beginSubastakas, endSubastakas).toMilliseconds();;
+                        let DiferenciafechasFin2=date.subtract(fechaserver, endSubastakas).toMilliseconds();
+
+                        if(DiferenciafechasInicio>=0 && DiferenciafechasFin<0){
+                            timeActive=true;
+                        }
+                        
+//
+                        arr.push({
+                            "idproduct": element.idproduct,
+                            "datecreated":datecreated,                            
+                            "activityTime":timeActive,
+                            "Anfitrion":Anfitrion.Anfitrion,
+                            "TimeTotal":TimeTotal,
+                            "TimeEnd":DiferenciafechasFin2,
+                            "flagInterested":flagInterested,
+                            "started":started,
+                            "finished":finished,
+                            "begin":begin,
+                            "end":end,
+                            "iduser": element.iduser,
+                            "nuevo": nuevo,
+                            "subcategory": element.subcategory,
+                            "name": element.name,
+                            "details": element.details,
+                            "typemoney": element.typemoney,
+                            "marketvalue": Precio,
+                            "typepublication": element.typepublication,
+                            "conditions": element.conditions,
+                            "size": element.size,
+                            "weight": element.weight,
+                            "status": statusProduct,
+                            "editable": Editable,
+                            "CantidadOfertas":CantidadOfertas.CantOfertas,
+                            "ProductImages":img.ImagesProduct
+                            
+                        });
+                    }
+                   
+                }
+            }//fin for 
+            resolve(arr)
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    )
+
+} 
+
+ProductModel.VerificarAnfitrionSubasta = (userSTK,idSTK) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            'SELECT COUNT(*) as Anfitrion FROM product  WHERE typepublication=3 AND  iduser=? AND id=? ', [
+                userSTK,
+                idSTK
+            ],
+            (err, result) => {
+                              
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {    
+                    let A=false;
+                    if(result[0].Anfitrion==1){
+                        A=true;
+                    }
+
+                    resolve({
+                        'Anfitrion': A
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
+
+ProductModel.VerificarPerteneceProduct = (userSTK,idSTK) => {
+    return new Promise((resolve, reject) => {
+    if (pool) {
+        //let Puntuar={};
+        //console.log("SELECT * FROM product where id="+idPublication);
+        pool.query(
+            'SELECT COUNT(*) as Anfitrion FROM product  WHERE typepublication=1 AND  iduser=? AND id=? ', [
+                userSTK,
+                idSTK
+            ],
+            (err, result) => {
+                              
+                
+                if (err) {
+                    resolve({
+                        'error': err
+                    })
+                } else {    
+                    let A=false;
+                    if(result[0].Anfitrion==1){
+                        A=true;
+                    }
+
+                    resolve({
+                        'Anfitrion': A
+                    })
+                }
+
+            }
+        )
+        //return resultado;
+    }
+    })
+
+}
 
 ProductModel.ListMiSubasTakas = (UserData,SubastakasData) => {
     //let resultado = {};
+    //AND status="+SubastakasData.status+"
     //console.log('SELECT * FROM  product AS p INNER JOIN imgproduct ON p.id=idproduct  WHERE iduser= "'+UserData.iduser+'" AND status='+SubastakasData.status);
     return new Promise((resolve, reject) => {
         if (pool) {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND status="+SubastakasData.status+" AND p.id=idproduct AND typepublication=3  LIMIT 50",
+                "SELECT DISTINCT idproduct, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p INNER JOIN  imgproduct AS i ON p.id=idproduct WHERE iduser='"+UserData.iduser+"' AND p.id=idproduct AND typepublication=3  LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -1222,7 +1516,7 @@ ProductModel.ListMiSubasTakas = (UserData,SubastakasData) => {
                             'error': err
                         })
                     } else {   
-                        armaresult = await ProductModel.armaresult(result);  
+                        armaresult = await ProductModel.armaresult2(result,UserData.iduser); 
                         resolve({
                             'result': armaresult
                         })
@@ -1272,9 +1566,9 @@ ProductModel.LisTodo = (SubasTakasData) => {
     return new Promise((resolve, reject) => {
         if (pool) {
             let armaresult={};
-            console.log("SELECT DISTINCT RAND(id),id, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 ORDER BY datepublication DESC LIMIT 50");
+            console.log("SELECT DISTINCT RAND(id),id, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status IN (2,3,26) ORDER BY datepublication DESC LIMIT 50");
             pool.query(
-                "SELECT DISTINCT RAND(id),id as idproduct, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status<>4 ORDER BY datepublication DESC LIMIT 50",
+                "SELECT DISTINCT RAND(id),id as idproduct, p.datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,status FROM product AS p WHERE iduser<>'"+SubasTakasData.iduser+"' AND status IN (2,3,26) ORDER BY datepublication DESC LIMIT 50",
                 async(err, result) => {
                     //console.log(result);
                    
@@ -1283,7 +1577,7 @@ ProductModel.LisTodo = (SubasTakasData) => {
                             'error': err
                         })
                     } else {     
-                        armaresult = await ProductModel.armaresulT(result);  
+                        armaresult = await ProductModel.armaresult2(result,SubasTakasData.iduser); 
                         resolve({
                             'result': armaresult
                         })
@@ -1466,7 +1760,7 @@ ProductModel.MInterestedSubasTakas = (UserData,SubastakasData) => {
 
             let armaresult={};
             pool.query(
-                "SELECT DISTINCT idproduct,i.id, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,i.iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,p.status  FROM interested AS i INNER JOIN product AS p ON i.idsubastakas=p.id  INNER JOIN  imgproduct AS im ON p.id=idproduct WHERE i.iduser='"+UserData.iduser+"' AND p.status<>4 AND p.id=idproduct AND typepublication=3 AND i.status=1 LIMIT 50",
+                "SELECT DISTINCT idproduct,idproduct,i.id, datepublication ,DATE_FORMAT(datepublication, '%d/%m/%Y %H:%i:%s') AS datecreated,i.iduser,name,details,datebeginst,dateendst,typemoney,marketvalue,subcategory,typepublication,p.conditions,p.size,p.weight,p.status  FROM interested AS i INNER JOIN product AS p ON i.idsubastakas=p.id  INNER JOIN  imgproduct AS im ON p.id=idproduct WHERE i.iduser='"+UserData.iduser+"' AND p.status<>4 AND p.id=idproduct AND typepublication=3 AND i.status=1 LIMIT 50",
                 async(err, result) => {
                     //console.log(result);                  
                    
@@ -1475,7 +1769,7 @@ ProductModel.MInterestedSubasTakas = (UserData,SubastakasData) => {
                             'error': err
                         })
                     } else {   
-                        armaresult = await ProductModel.armaresult(result);  
+                        armaresult = await ProductModel.armaresult2(result,UserData.iduser);
                         resolve({
                             'result': armaresult
                         })
