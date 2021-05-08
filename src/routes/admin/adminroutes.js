@@ -4,10 +4,11 @@ const jwt = require('jsonwebtoken');
 const rutasProtegidas = require('../../lib/rutasprotegidas');
 const notifications = require('../../lib/notifications.js');
 const config = require('../../config/config');
+const {isLoggedIn} = require('../../lib/auth');
 const { check, validationResult } = require('express-validator');
 const AdminController = require('../../controllers/admincontroller');
 
-
+var sess; 
 //let AdminController = {};
 
 router.get('/prueba', function (req, res) {
@@ -47,6 +48,213 @@ router.post('/autenticar', (req, res) => {
     }
 });
 
+//Crear códogo de registro nuevo usuario
+/**
+ * @api {post} /admin/createcode  1.1 createcode
+ * @apiName  createcode - Crear código de registro de nuevo usuario
+ * @apiGroup NewUser
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} IdUserCreator  required..
+ * @apiParam {int} Privilegio  required..
+ 
+ *
+ * @apiSuccess {boolean} success of the PQRs.
+ * @apiSuccess {int} status 200 of the PQRs.
+ * @apiSuccess {string} msg   of the PQRs.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "code": "DYLUxwrHQvWssN5x9",
+    "msg": "Código creado exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the PQRs was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar crear una código de registro"
+}
+ */
+
+//CREAR CÓDIGO PARA REISTRO DE NUEVO USUARIO
+router.post('/createcode', rutasProtegidas,[
+    check('IdUserCreator', 'El ID del usuario creador del código es obligatorio').not().isEmpty().exists(),
+    check('Privilegio', 'El privilegio es obligatorio').not().isEmpty().exists()
+  ], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await AdminController.CreateCode(req.body);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+//Crear  nuevo usuario administrativo
+/**
+ * @api {post} /admin/newadminuser  1.2 newadminuser
+ * @apiName  newadminuser - Crear nuevo usuario administrativo
+ * @apiGroup NewUser
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * 
+ *   
+ * @apiParam {varchar} codeAdmin  required..
+ * @apiParam {varchar} userAdmin  required.
+ * @apiParam {varchar} emailAdmin required.
+ * @apiParam {varchar} passwordAdmin  required.
+ * @apiParam {varchar} numberPhoneAdmin  required.
+ * @apiParam {varchar} imgUrlAdmin  optional.
+ 
+ *
+ * @apiSuccess {boolean} success of the PQRs.
+ * @apiSuccess {int} status 200 of the PQRs.
+ * @apiSuccess {string} msg   of the PQRs.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "msg": "Usuario Administrativo creado exitosamente"
+}
+ *
+ * @apiError UserNotFound The id of the PQRs was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status": "500",
+    "msg": "Error al intentar crear Nuevo usuario"
+}
+ */
+
+//CREAR CÓDIGO PARA REISTRO DE NUEVO USUARIO
+router.post('/newadminuser',[
+    check('codeAdmin', 'El ID del codeAdmin creador del código es obligatorio').not().isEmpty().exists(),
+    check('userAdmin', 'El userAdmin es obligatorio').not().isEmpty().exists(),
+    check('emailAdmin', 'El emailAdmin es obligatorio').not().isEmpty().exists(),
+    check('passwordAdmin', 'El passwordAdmin es obligatorio').not().isEmpty().exists(),
+    check('numberPhoneAdmin', 'El numberPhoneAdmin es obligatorio').not().isEmpty().exists()
+  ], async (req, res) => {
+
+    sess=req.session;
+    const error = validationResult(req);
+
+    if (error.array().length != 0) {
+        return res.status(422).json({ errores: error.array(), msg: 'Error' });
+    }
+
+    let response = await AdminController.NewAdminUser(req.body,sess);
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    console.log("sess");
+    console.log(sess);
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
+
+/**
+ * @api {post} /admin/loginadminuser  1.3 loginadminuser
+ * @apiName  loginadminuser - Login usuario administrativo
+ * @apiGroup NewUser
+ * 
+ *      
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token 
+ *                 "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MTE4NTk3NjUsImV4cCI6MTYxNDQ1MTc2NX0.Mn0SRK9PFH67fT-3r24IdaT4VqeFhT7OHC7reMldLgo" 
+ *
+ * 
+ *   
+ * @apiParam {varchar} User unique required.
+ * @apiParam {varchar} passwordUser  required .
+ * 
+ *
+ * @apiSuccess {boolean} success of the User.
+ * @apiSuccess {int} status 200 of the User.
+ * @apiSuccess {string} msg   of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "success": true,
+    "status": "200",
+    "idUser": "H0ex4LYkUlqqcVJ2m",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MjA1MDA2OTIsImV4cCI",
+    "msg": "Usuario logueado con éxito"
+}
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+                success: false,
+                status: '500',
+                msgerr: 'response.error.sqlMessage',
+                codeerr: 'response.error.code',
+                noerr: 'response.error.errno'
+        }
+ */
+
+        router.post('/loginadminuser',[
+             check('userAdmin', 'El userAdmin es obligatorio').not().isEmpty().exists(),
+             check('PasswordAdmin', ' La contraseña es obligatoria').not().isEmpty().exists()
+         
+         ], async (req, res) => {
+        
+            //console.log(req.session.auth);
+         
+             const error = validationResult(req);
+         
+             if (error.array().length != 0) {
+                 return res.status(422).json({ errores: error.array(), msg: 'Error' });
+             }
+             sess=req.session;
+             // console.log("Members");
+             // res.send({'string':'Anailys','proyecto':'QUICKK','number':1,'boolean':true});
+             let response = await AdminController.LoginAdminUser(req.body,sess);
+         
+             if (response.status == 'ko') {
+                 return res.status(500).json({ error: 'Error' })
+             }
+        
+             //sess=req.session;
+            //req.session.auth=true;
+            console.log(req.session);
+        
+             //console.log(response);
+             return res.status(response.data.status).json(response.data)
+         })
 
 //Respuesta pqrs
 /**

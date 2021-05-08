@@ -4,6 +4,12 @@ const path = require('path');
 const http = require('http');
 const realtime = require("./src/socket/realtime");
 
+const passport = require('passport');
+const session = require('express-session');
+const flash = require('connect-flash');
+const MySQLStore = require('express-mysql-session')(session); //agregamos esta linea
+const {database} = require('./src/config/keys');
+
 //* Initialization
 const port = 1111;
 const app = express();
@@ -27,6 +33,26 @@ app.set('view engine', 'ejs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || '7opz&&#YNZotjUj67', 
+    resave: false, 
+    store: new MySQLStore(database),
+    saveUninitialized: true
+
+}))
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Global Variables
+app.use((req,res,next)=>{
+    app.locals.user=req.user;
+    app.locals.error = req.flash('error');
+    app.locals.success = req.flash('success');
+    app.locals.warning = req.flash('warning');
+    next();
+});
 
 //* Routes 
 app.use(require('./src/routes'));
