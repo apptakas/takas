@@ -3643,6 +3643,83 @@
     "groupTitle": "NewUser"
   },
   {
+    "type": "get",
+    "url": "/user/listprivilege",
+    "title": "1.0 listprivilege",
+    "name": "listprivilege_-_Listar_Tipo_de_Privilegios",
+    "group": "NewUser",
+    "header": {
+      "examples": [
+        {
+          "title": "Content-Type:",
+          "content": "\"value\": \"application/json\"",
+          "type": "varchar"
+        },
+        {
+          "title": "access-token:",
+          "content": "{ \"value\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY\"",
+          "type": "varchar"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>of the TypePublication.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>200 of the TypePublication.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>of the TypePublication.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n    {\n    \"success\": true,\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"privilege\": \"Admin\",\n            \"status\": 1\n        },\n        {\n            \"id\": 2,\n            \"privilege\": \"Aux\",\n            \"status\": 1\n        },\n        {\n            \"id\": 3,\n            \"privilege\": \"PQRS\",\n            \"status\": 1\n        }\n    ],\n    \"msg\": \"Lista de Tipo de Privilegios\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The id of the Category was not found.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n    \"success\": false,\n    \"status\":: \"500\",\n    \"msg\": \"Error al Listar Tipo de Privilegios\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/admin/adminroutes.js",
+    "groupTitle": "NewUser"
+  },
+  {
     "type": "post",
     "url": "/admin/loginadminuser",
     "title": "1.3 loginadminuser",

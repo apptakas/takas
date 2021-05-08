@@ -11,24 +11,70 @@ const AdminController = require('../../controllers/admincontroller');
 var sess; 
 //let AdminController = {};
 
-router.get('/prueba', function (req, res) {
-    //res.send('Inicio');
-    let data={
-        "title": "test",
-        "body": "mi descripcion",
-        "type": 0,
-        "status": 0,
-        "id": "hello",
-        "click_action": "FLUTTER_NOTIFICATION_CLICK"
-    };
-    let token="efTmlTE3uzA:APA91bFSLY9NlzIS0xeRjx0OoCsJdH3NQGI7E-yrU6OAx2VRqQeDd2WZR9CEzWg_BPlGf1H_nIO15L-GYmqHs3l4tc_8wgJf1l3RBTj7BxppuBQr8EYz43O6W3IPFCcRT4rUbV50UwFJ";
-    let titulo="Notificaciones Takas";
-    let detalle="Pruebas con primeras Notificaciones Takas";
-    //notifications(token,titulo,detalle,data);
-    
-    res.send('Inicio');
+/**
+ * @api {get} /user/listprivilege 1.0 listprivilege
+ * @apiName listprivilege - Listar Tipo de Privilegios
+ * @apiGroup NewUser
+ * 
+ * 
+ * @apiHeaderExample {varchar}Content-Type:
+ *                 "value": "application/json" 
+ * @apiHeaderExample {varchar} access-token:
+ *                { "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZ25vcmVFeHBpcmF0aW9uIjp0cnVlLCJpYXQiOjE2MDEwNDkzNjIsImV4cCI6MTYwMTEzNTc2Mn0.-UiJBviqct6ZD-IIa29VeKuaIfd783YXSrPIuveiSkY" 
+ *
+ *
+ * @apiSuccess {boolean} success of the TypePublication.
+ * @apiSuccess {int} status 200 of the TypePublication.
+ * @apiSuccess {string} msg   of the TypePublication.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+    "success": true,
+    "status": "200",
+    "data": [
+        {
+            "id": 1,
+            "privilege": "Admin",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "privilege": "Aux",
+            "status": 1
+        },
+        {
+            "id": 3,
+            "privilege": "PQRS",
+            "status": 1
+        }
+    ],
+    "msg": "Lista de Tipo de Privilegios"
+}
+ *
+ * @apiError UserNotFound The id of the Category was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+    "success": false,
+    "status":: "500",
+    "msg": "Error al Listar Tipo de Privilegios"
+}
+ */
+//Listar tipos de privilegios
+router.get('/listprivilege', rutasProtegidas, async (req, res) => {
 
-});
+
+    let response = await AdminController.ListPrivilege();
+
+    if (response.status == 'ko') {
+        return res.status(500).json({ error: 'Error' })
+    }
+    //console.log(response);
+    return res.status(response.data.status).json(response.data)
+
+})
 
 
 router.post('/autenticar', (req, res) => {

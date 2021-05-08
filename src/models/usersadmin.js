@@ -175,6 +175,34 @@ userAdminModel.LoginAdminUser = (userData) => {
 
 };
 
+//ListPrivilege
+userAdminModel.ListPrivilege = () => {
+    //let resultado = {};
+    return new Promise((resolve, reject) => {
+        if (pool) {
+            pool.query(
+                'SELECT * FROM privileges WHERE status=1 ', 
+                (err, resut) => {
+                    //console.log(resut);
+                    if (err) {
+                        resolve({
+                            'error': err
+                        })
+                    } else {
+                        resolve({
+                            'result': resut
+                        })
+                    }
+
+                }
+            )
+            //return resultado;
+        }
+    })
+};
+
+
+
 
 
 

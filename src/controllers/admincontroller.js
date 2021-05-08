@@ -20,6 +20,46 @@ const { report } = require('../routes/index.js');
 let AdminController = {};
 
 
+//Listar tipos de privilagios
+AdminController.ListPrivilege = async () => {
+    //existe este usuario? 
+    try {
+
+        //console.log(userData.password);
+        let response = await UserAdmin.ListPrivilege();
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Tipo de Privilegios'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Tipo de Privilegios'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 //Create Code
 AdminController.CreateCode = async (req) => {
     //existe este usuario? 
