@@ -108,6 +108,10 @@ userController.UpdatePerfil = async (req) => {
         let now = new Date();
         let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
         let idUser= req.idfirebaseUser;
+        let memberships=1;
+        if(req.membershipsUser!=null){
+            let memberships=req.membershipsUser;
+        }
         const userData = {
             // idcity: req.codCity,
             fullname: req.fullnameUser,
@@ -120,7 +124,7 @@ userController.UpdatePerfil = async (req) => {
             datecreated: hoy,
             country:req.countryUser,
             department:req.departmentUser,
-            memberships:req.membershipsUser,
+            memberships:1, //memberships
             address: req.dirUser,
             // tyc: req.tycUser,
             // versiontyc: req.versionTYC,
@@ -242,6 +246,7 @@ userController.GAutenticar = async (req) => {
             fullname: req.fullnameUser,
             imgurl: req.imgUser,
             tyc: req.tycUser,
+            memberships: 1,
             role: 2
         };
         //console.log(userData.password);
