@@ -1,5 +1,6 @@
 const PQRsModel = require('../models/pqrs.js');
 const User = require('../models/users.js');
+const UserAdmin = require('../models/usersadmin.js');
 const Product = require('../models/product.js');
 const tombotakas = require('../models/tombotakas.js');
 
@@ -17,6 +18,295 @@ const { report } = require('../routes/index.js');
 
 
 let AdminController = {};
+
+
+//Listar tipos de privilagios
+AdminController.ListPrivilege = async () => {
+    //existe este usuario? 
+    try {
+
+        //console.log(userData.password);
+        let response = await UserAdmin.ListPrivilege();
+
+        console.log(response);
+
+        let data = {};
+        if (response && response.result) {
+            let r = {};
+            r = response.result;
+
+            data = {
+                success: true,
+                status: '200',
+                data: response.result,
+                msg: 'Lista de Tipo de Privilegios'
+                //data: response
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msg: 'Error al Listar Tipo de Privilegios'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//Create Code
+AdminController.CreateCode = async (req) => {
+    //existe este usuario? 
+    try {       
+            let status=0;
+           
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+            /*GENERAR PIN DE REFERENCIA*/
+            let pin="";
+            let pinexistr={};
+            let pinexist=1;
+            //let pinexist=true;
+            while (pinexist>0 ) {
+                pin= securePin.generateStringSync(17, securePin.defaultCharset);
+                pinexistr= await UserAdmin.PinExist(pin);
+                pinexist=pinexistr.result;
+                console.log("pinexist");
+                console.log(pinexist);
+            }
+
+
+            let DataCode={
+                code:pin,
+                usercreator: req.IdUserCreator,
+                privilege: req.Privilegio
+            }
+           
+
+            console.log(DataCode);                     
+
+            let msgError="";            
+
+             let response ={};
+
+             response = await UserAdmin.CreateCode(DataCode);
+            
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        let datar = [];
+        if (response.result) {
+            let r = {};
+            r = response.result;
+            //console.log(response.result);
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
+
+
+            data = {
+                success: true,
+                status: '200',
+                //data:datar,
+                code:pin,
+                msg: 'Código creado exitosamente'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar crear una código de registro'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//NewAdminUser
+AdminController.NewAdminUser = async (req,sess) => {
+    //existe este usuario? 
+    try {       
+            let status=0;           
+
+            let now = new Date();
+            let hoy=date.format(now, 'YYYY-MM-DD HH:mm:ss');
+
+            /*COMPROBAR CODIGO*/
+            let codigo="";
+            
+            codigo= await UserAdmin.CheckCode(req.codeAdmin);
+
+            console.log(codigo);
+             
+            //crear Token
+            const payload = {
+                ignoreExpiration: true
+            };
+
+            var token = jwt.sign(payload, config.llave, {
+                expiresIn: 60 * 60 * 720
+            });
+        //fin de creación de tonken
+            let DataUserAdmin={
+                //code:req.codeAdmin,
+                user:req.userAdmin,
+                email:req.emailAdmin,
+                password:sha1(req.passwordAdmin),
+                phonenumber:req.numberPhoneAdmin,
+                token:token,
+                status:1
+            }
+           
+
+           // console.log(DataUserAdmin);                     
+
+            let msgError="";            
+
+             let response ={};
+            if(codigo.result==1){
+                let idCode=req.codeAdmin;
+                response = await UserAdmin.NewAdminUser(DataUserAdmin,idCode); 
+                 
+            
+            }else{
+                response= {};
+            }
+                        
+                    
+        
+        //console.log(msgError);
+
+        let data = {};
+        let datar = [];
+        if (response.result) {
+            //crear variables de sessión
+            sess.auth = true;
+            sess.IdUser = req.codeAdmin;
+            sess.user = req.userAdmin;
+            sess.mail = req.emailAdmin;
+            sess.jwt  = token;
+            sess.admin = true;
+
+
+            let r = {};
+            r = response.result;
+            //console.log(response.result);
+            if(response.result.length>0){
+                datar=response.result[0]
+            }
+
+
+            data = {
+                success: true,
+                status: '200',
+                //data:datar,
+                msg: 'Usuario Administrativo creado exitosamente'
+                //data: response
+            }
+        } else {
+            //console.log(response);
+            data = {
+                success: false,
+                status: '500',
+               // data: response.error,
+               // data: msgError,
+                msg: 'Error al intentar crear Nuevo usuario'
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
+//LoginAdminUser - LOGIN USUARIO
+AdminController.LoginAdminUser = async (req,sess) => {
+    //existe este usuario? 
+    try {
+       const userData = {
+            user: req.userAdmin,
+            password:sha1(req.PasswordAdmin)
+        };
+        console.log(userData);
+        let response = await UserAdmin.LoginAdminUser(userData);
+
+        let data = {};
+        if (response && response.result) {
+            if(response.result.length>0){
+                console.log(response.result);
+                //crear variables de sessión
+                sess.auth          = true;
+                sess.IdUser        = response.result[0].code;
+                sess.user          = response.result[0].user;
+                sess.mail          = response.result[0].email;
+                sess.jwt           = response.result[0].token;
+                sess.imagen        = response.result[0].imgurl;
+                sess.privilege     = response.result[0].privilege;
+            }
+         //fin del cración de variables de sesión
+            //crear token
+            let r = {};
+            r = response.result;
+            
+           if(response.result.length>0){
+                data = {
+                    success: true,
+                    status: '200',
+                    idUser: response.result[0].code,
+                    token:response.result[0].token,
+                    msg: 'Usuario logueado con éxito'
+                    //data: response
+                }
+            }else{
+                data = {
+                    success: true,
+                    status: '200',
+                    msg: 'Usuario y password no coinsiden'
+                    //data: response
+                }
+            }
+        } else {
+
+            console.log(response);
+            data = {
+                success: false,
+                status: '500',
+                msgerr: response.error.sqlMessage,
+                codeerr: response.error.code,
+                noerr: response.error.errno
+            }
+        }
+        //validar si esta llegado vacio
+        return { status: 'ok', data: data };
+    } catch (e) {
+        console.log(e);
+        return { status: 'ko' };
+    }
+
+};
+
 
 //ResponsePQRs
 AdminController.ResponsePQRs = async (req) => {
