@@ -238,7 +238,6 @@ router.get('/datos', rutasProtegidas, (req, res) => {
  */
 router.post('/autenticar', [
     check('idfirebaseUser', 'El idfirebase el obligatorio').not().isEmpty().exists(),
-    check('passwordUser', 'El passworduser el obligatorio').not().isEmpty().exists(),
     check('emailUser', 'El emailuser el obligatorio').isEmail().exists()
 ], async (req, res) => {
 

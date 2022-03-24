@@ -133,9 +133,8 @@ userModel.loginUser = (userData, callback) => {
     return new Promise((resolve, reject) => {
         if (pool)
             pool.query(
-                'SELECT * FROM users where `id`=? AND `password`=? AND email=?', [
+                'SELECT * FROM users where `id`=? AND email=?', [
                 userData.id,
-                userData.password,
                 userData.email
             ],
                 (err, result) => {

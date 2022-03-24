@@ -189,7 +189,7 @@ userController.Autenticar = async (req) => {
         const userData = {
             id: req.idfirebaseUser,
             email: req.emailUser,
-            password: sha1(req.passwordUser),
+            //password: sha1(req.passwordUser),
             role: 2
         };
         //console.log(userData.password);
